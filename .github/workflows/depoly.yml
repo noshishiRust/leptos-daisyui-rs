@@ -36,13 +36,21 @@ jobs:
         working-directory: demo
         run: npm ci
 
-      - name: Build Leptos app (static site)
+      - name: Build Leptos
         working-directory: demo
         run: |
-          trunk build --release
+          trunk build --release --public-url "${GITHUB_REPOSITORY#*/}"
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./demo/dist
+          enablement: true
+  
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '.demo/dist'
+  
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v3
