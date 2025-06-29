@@ -1,9 +1,12 @@
 [package]
 name = "leptos-daisyui-rs"
-version = "0.1.0"
+description = "daisyUI Components for Leptos"
+version = "0.0.1"
 edition = "2024"
+license = "MIT"
+authors = ["noshishiRust <nopenoshishi@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/noshishiRust/leptos-daisyui-rs"
 
 [dependencies]
 leptos = { version = "0.8" }
-
-log = "0.4.27"

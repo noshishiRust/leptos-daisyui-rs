@@ -1,6 +1,11 @@
 # daisyUI Components for Leptos
 
-This crate is a daisyUI components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components.
+This crate is a daisyUI 5 components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components.
+
+> 🚧 **Work in Progress**  
+This project is currently under active development.  
+The design and usage are still evolving, and breaking changes can be expected.  
+Feedback is welcome!
 
 ## Implementation Status
 
