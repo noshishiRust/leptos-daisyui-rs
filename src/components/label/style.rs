@@ -1,0 +1,1 @@
+// Label component doesn't need style enums as it uses simple CSS classes
