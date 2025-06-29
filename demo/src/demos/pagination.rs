@@ -1,0 +1,605 @@
+use leptos::prelude::*;
+use leptos_daisyui_rs::components::*;
+
+#[component]
+pub fn PaginationDemo() -> impl IntoView {
+    let current_page = RwSignal::new(3);
+    let total_pages = 10;
+
+    view! {
+        <div class="space-y-6">
+            <h1 class="text-3xl font-bold">"Pagination"</h1>
+            <p class="text-base-content/70">
+                "Pagination component is used for displaying page numbers and navigation controls"
+            </p>
+
+            <div class="space-y-4">
+                <h2 class="text-xl font-semibold">"Basic Pagination"</h2>
+                <div class="join">
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "«"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "Page 22"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "»"
+                    </Button>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Numbered Pagination"</h2>
+                <div class="join">
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "1"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "2"
+                    </Button>
+                    <Button
+                        class="join-item btn-active"
+                        color=Signal::derive(|| ButtonColor::Primary)
+                    >
+                        "3"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "4"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "5"
+                    </Button>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Pagination with Disabled States"</h2>
+                <div class="join">
+                    <Button
+                        class="join-item"
+                        style=Signal::derive(|| ButtonStyle::Outline)
+                        disabled=Signal::derive(|| true)
+                    >
+                        "«"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "Page 1 of 10"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "»"
+                    </Button>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Pagination Sizes"</h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Extra Small"</p>
+                        <div class="join">
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Xs)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                size=Signal::derive(|| ButtonSize::Xs)
+                                color=Signal::derive(|| ButtonColor::Primary)
+                            >
+                                "2"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Xs)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "3"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Xs)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "4"
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Small"</p>
+                        <div class="join">
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Sm)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                size=Signal::derive(|| ButtonSize::Sm)
+                                color=Signal::derive(|| ButtonColor::Primary)
+                            >
+                                "2"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Sm)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "3"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Sm)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "4"
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Large"</p>
+                        <div class="join">
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Lg)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                size=Signal::derive(|| ButtonSize::Lg)
+                                color=Signal::derive(|| ButtonColor::Primary)
+                            >
+                                "2"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Lg)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "3"
+                            </Button>
+                            <Button
+                                class="join-item"
+                                size=Signal::derive(|| ButtonSize::Lg)
+                                style=Signal::derive(|| ButtonStyle::Outline)
+                            >
+                                "4"
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Responsive Pagination"</h2>
+                <div class="join">
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "First"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "Prev"
+                    </Button>
+                    <Button
+                        class="join-item hidden sm:inline-flex"
+                        style=Signal::derive(|| ButtonStyle::Outline)
+                    >
+                        "1"
+                    </Button>
+                    <Button
+                        class="join-item hidden sm:inline-flex"
+                        style=Signal::derive(|| ButtonStyle::Outline)
+                    >
+                        "2"
+                    </Button>
+                    <Button
+                        class="join-item btn-active"
+                        color=Signal::derive(|| ButtonColor::Primary)
+                    >
+                        "3"
+                    </Button>
+                    <Button
+                        class="join-item hidden sm:inline-flex"
+                        style=Signal::derive(|| ButtonStyle::Outline)
+                    >
+                        "4"
+                    </Button>
+                    <Button
+                        class="join-item hidden sm:inline-flex"
+                        style=Signal::derive(|| ButtonStyle::Outline)
+                    >
+                        "5"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "Next"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "Last"
+                    </Button>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Interactive Pagination"</h2>
+                <Card class="bg-base-100 shadow-xl">
+                    <CardBody>
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="card-title">"Product List"</h2>
+                            <div class="text-sm text-base-content/70">
+                                "Showing " {move || (current_page.get() - 1) * 10 + 1} " to "
+                                {move || current_page.get() * 10} " of 100 results"
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            {(1..=10)
+                                .map(|i| {
+                                    let product_number = move || (current_page.get() - 1) * 10 + i;
+                                    view! {
+                                        <div class="p-3 bg-base-200 rounded-lg flex justify-between items-center">
+                                            <span>"Product #" {product_number}</span>
+                                            <Badge
+                                                color=Signal::derive(|| BadgeColor::Primary)
+                                                size=Signal::derive(|| BadgeSize::Sm)
+                                            >
+                                                "In Stock"
+                                            </Badge>
+                                        </div>
+                                    }
+                                })
+                                .collect::<Vec<_>>()}
+                        </div>
+
+                        <div class="flex justify-center mt-6">
+                            <div class="join">
+                                <Button
+                                    class="join-item"
+                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    disabled=Signal::derive(move || current_page.get() == 1)
+                                    on:click=move |_| {
+                                        if current_page.get() > 1 {
+                                            current_page.update(|p| *p -= 1);
+                                        }
+                                    }
+                                >
+                                    "Previous"
+                                </Button>
+
+                                {(1..=total_pages)
+                                    .map(|page| {
+                                        view! {
+                                            <Button
+                                                class=if current_page.get() == page {
+                                                    "join-item btn-active"
+                                                } else {
+                                                    "join-item"
+                                                }
+                                                color=Signal::derive(move || {
+                                                    if current_page.get() == page {
+                                                        ButtonColor::Primary
+                                                    } else {
+                                                        ButtonColor::Neutral
+                                                    }
+                                                })
+                                                style=Signal::derive(move || {
+                                                    if current_page.get() == page {
+                                                        ButtonStyle::default()
+                                                    } else {
+                                                        ButtonStyle::Outline
+                                                    }
+                                                })
+                                                on:click=move |_| current_page.set(page)
+                                            >
+                                                {page.to_string()}
+                                            </Button>
+                                        }
+                                    })
+                                    .collect::<Vec<_>>()}
+
+                                <Button
+                                    class="join-item"
+                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    disabled=Signal::derive(move || {
+                                        current_page.get() == total_pages
+                                    })
+                                    on:click=move |_| {
+                                        if current_page.get() < total_pages {
+                                            current_page.update(|p| *p += 1);
+                                        }
+                                    }
+                                >
+                                    "Next"
+                                </Button>
+                            </div>
+                        </div>
+                    </CardBody>
+                </Card>
+
+                <h2 class="text-xl font-semibold">"Pagination with Ellipsis"</h2>
+                <div class="join">
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "1"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "2"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "3"
+                    </Button>
+                    <Button class="join-item btn-disabled" disabled=Signal::derive(|| true)>
+                        "..."
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "97"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "98"
+                    </Button>
+                    <Button
+                        class="join-item btn-active"
+                        color=Signal::derive(|| ButtonColor::Primary)
+                    >
+                        "99"
+                    </Button>
+                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                        "100"
+                    </Button>
+                </div>
+
+                <h2 class="text-xl font-semibold">"Table with Pagination"</h2>
+                <Card class="bg-base-100 shadow-xl">
+                    <CardBody>
+                        <h2 class="card-title">"User Management"</h2>
+
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th>"ID"</th>
+                                        <th>"Name"</th>
+                                        <th>"Email"</th>
+                                        <th>"Role"</th>
+                                        <th>"Actions"</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {(1..=5)
+                                        .map(|i| {
+                                            let user_id = move || (current_page.get() - 1) * 5 + i;
+                                            let names = [
+                                                "Alice Johnson",
+                                                "Bob Smith",
+                                                "Carol Brown",
+                                                "David Wilson",
+                                                "Eva Davis",
+                                            ];
+                                            let name = names
+                                                .get((i - 1) % names.len())
+                                                .unwrap_or(&"Unknown");
+                                            view! {
+                                                <tr>
+                                                    <td>{user_id}</td>
+                                                    <td>{*name}</td>
+                                                    <td>
+                                                        {format!(
+                                                            "{}@example.com",
+                                                            name
+                                                                .split_whitespace()
+                                                                .next()
+                                                                .unwrap_or("user")
+                                                                .to_lowercase(),
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        <Badge
+                                                            color=Signal::derive(move || {
+                                                                if i % 3 == 0 {
+                                                                    BadgeColor::Primary
+                                                                } else if i % 2 == 0 {
+                                                                    BadgeColor::Secondary
+                                                                } else {
+                                                                    BadgeColor::Accent
+                                                                }
+                                                            })
+                                                            size=Signal::derive(|| BadgeSize::Sm)
+                                                        >
+                                                            {if i % 3 == 0 {
+                                                                "Admin"
+                                                            } else if i % 2 == 0 {
+                                                                "Editor"
+                                                            } else {
+                                                                "User"
+                                                            }}
+                                                        </Badge>
+                                                    </td>
+                                                    <td>
+                                                        <div class="flex gap-1">
+                                                            <Button
+                                                                size=Signal::derive(|| ButtonSize::Xs)
+                                                                style=Signal::derive(|| ButtonStyle::Ghost)
+                                                            >
+                                                                "Edit"
+                                                            </Button>
+                                                            <Button
+                                                                size=Signal::derive(|| ButtonSize::Xs)
+                                                                color=Signal::derive(|| ButtonColor::Error)
+                                                                style=Signal::derive(|| ButtonStyle::Ghost)
+                                                            >
+                                                                "Delete"
+                                                            </Button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        })
+                                        .collect::<Vec<_>>()}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="text-sm text-base-content/70">
+                                "Showing " {move || (current_page.get() - 1) * 5 + 1} " to "
+                                {move || current_page.get() * 5} " of 50 entries"
+                            </div>
+
+                            <div class="join">
+                                <Button
+                                    class="join-item"
+                                    size=Signal::derive(|| ButtonSize::Sm)
+                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    disabled=Signal::derive(move || current_page.get() == 1)
+                                    on:click=move |_| {
+                                        if current_page.get() > 1 {
+                                            current_page.update(|p| *p -= 1);
+                                        }
+                                    }
+                                >
+                                    "‹"
+                                </Button>
+
+                                {(1..=total_pages)
+                                    .filter(|&page| {
+                                        let current = current_page.get();
+                                        page == 1 || page == total_pages
+                                            || (page >= current - 1 && page <= current + 1)
+                                    })
+                                    .enumerate()
+                                    .map(|(idx, page)| {
+                                        let prev_page = if idx > 0 {
+                                            (1..=total_pages)
+                                                .filter(|&p| {
+                                                    let current = current_page.get();
+                                                    p == 1 || p == total_pages
+                                                        || (p >= current - 1 && p <= current + 1)
+                                                })
+                                                .nth(idx - 1)
+                                                .unwrap_or(1)
+                                        } else {
+                                            1
+                                        };
+
+                                        view! {
+                                            <>
+                                                {if page > prev_page + 1 && idx > 0 {
+                                                    Some(
+                                                        view! {
+                                                            <Button
+                                                                class="join-item btn-disabled"
+                                                                size=Signal::derive(|| ButtonSize::Sm)
+                                                                disabled=Signal::derive(|| true)
+                                                            >
+                                                                "..."
+                                                            </Button>
+                                                        },
+                                                    )
+                                                } else {
+                                                    None
+                                                }}
+                                                <Button
+                                                    class=if current_page.get() == page {
+                                                        "join-item btn-active"
+                                                    } else {
+                                                        "join-item"
+                                                    }
+                                                    size=Signal::derive(|| ButtonSize::Sm)
+                                                    color=Signal::derive(move || {
+                                                        if current_page.get() == page {
+                                                            ButtonColor::Primary
+                                                        } else {
+                                                            ButtonColor::Neutral
+                                                        }
+                                                    })
+                                                    style=Signal::derive(move || {
+                                                        if current_page.get() == page {
+                                                            ButtonStyle::default()
+                                                        } else {
+                                                            ButtonStyle::Outline
+                                                        }
+                                                    })
+                                                    on:click=move |_| current_page.set(page)
+                                                >
+                                                    {page.to_string()}
+                                                </Button>
+                                            </>
+                                        }
+                                    })
+                                    .collect::<Vec<_>>()}
+
+                                <Button
+                                    class="join-item"
+                                    size=Signal::derive(|| ButtonSize::Sm)
+                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    disabled=Signal::derive(move || {
+                                        current_page.get() == total_pages
+                                    })
+                                    on:click=move |_| {
+                                        if current_page.get() < total_pages {
+                                            current_page.update(|p| *p += 1);
+                                        }
+                                    }
+                                >
+                                    "›"
+                                </Button>
+                            </div>
+                        </div>
+                    </CardBody>
+                </Card>
+
+                <h2 class="text-xl font-semibold">"Colored Pagination"</h2>
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Primary"</p>
+                        <div class="join">
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                color=Signal::derive(|| ButtonColor::Primary)
+                            >
+                                "2"
+                            </Button>
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "3"
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Secondary"</p>
+                        <div class="join">
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                color=Signal::derive(|| ButtonColor::Secondary)
+                            >
+                                "2"
+                            </Button>
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "3"
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-sm font-medium mb-2">"Accent"</p>
+                        <div class="join">
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "1"
+                            </Button>
+                            <Button
+                                class="join-item btn-active"
+                                color=Signal::derive(|| ButtonColor::Accent)
+                            >
+                                "2"
+                            </Button>
+                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                                "3"
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
