@@ -4,13 +4,13 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: write
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    environment: demo
+    permissions:
+        contents: write
+        pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,10 +39,14 @@ jobs:
       - name: Build Leptos app (static site)
         working-directory: demo
         run: |
-          trunk build --release --public-url "${GITHUB_REPOSITORY#*/}"
+          trunk build --release
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./demo/dist
+      - name: Deploy
+        uses: amondnet/vercel-action@v25
+        with: 
+            vercel-token: ${{ secrets.VERCEL_TOKEN }}
+            vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+            vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+            vercel-args: "--prod"
+            working-directory: demo/dist
+            vercel-project-name: thaw
