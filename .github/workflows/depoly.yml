@@ -27,6 +27,7 @@ jobs:
 
       - name: Install Node.js
         uses: actions/setup-node@v4
+        working-directory: demo
         with:
           node-version: 22
           cache: 'npm'
