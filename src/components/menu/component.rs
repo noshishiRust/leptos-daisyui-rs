@@ -1,7 +1,7 @@
 use super::style::{MenuDirection, MenuSize};
 use crate::merge_classes;
 use leptos::{
-    html::{H2, Li, Ul},
+    html::{Li, Ul, H2},
     prelude::*,
 };
 
@@ -67,7 +67,7 @@ pub fn MenuItem(
         selected
             .get()
             .as_ref()
-            .map_or(false, |s| s == &value.get_untracked())
+            .is_some_and(|s| s == &value.get_untracked())
     };
 
     view! {

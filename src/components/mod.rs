@@ -129,7 +129,7 @@ impl ClassAttributes {
         ClassAttributes { values: Vec::new() }
     }
 
-    pub fn add(mut self, class: impl Into<ClassAttribute>) -> Self {
+    pub fn add_class(mut self, class: impl Into<ClassAttribute>) -> Self {
         self.values.push(class.into());
 
         self
@@ -157,6 +157,12 @@ impl ClassAttributes {
             })
             .collect::<Vec<String>>()
             .join(" ")
+    }
+}
+
+impl Default for ClassAttributes {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -201,7 +207,7 @@ macro_rules! merge_classes {
     ($($name:expr),+) => {
         {
             use $crate::components::ClassAttributes;
-            ClassAttributes::new()$(.add($name))+.to_class()
+            ClassAttributes::new()$(.add_class($name))+.to_class()
         }
     };
 }
