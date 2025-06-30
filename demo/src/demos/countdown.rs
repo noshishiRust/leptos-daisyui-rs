@@ -150,9 +150,9 @@ pub fn CountdownDemo() -> impl IntoView {
                                 </div>
                             </div>
                             <div class="card-actions justify-center mt-4">
-                                <Button color=Signal::derive(|| ButtonColor::Accent)>
-                                    "Notify Me"
-                                </Button>
+                                <Button color=Signal::derive(|| {
+                                    ButtonColor::Accent
+                                })>"Notify Me"</Button>
                             </div>
                         </CardBody>
                     </Card>
@@ -182,9 +182,9 @@ pub fn CountdownDemo() -> impl IntoView {
                                 </div>
                             </div>
                             <div class="card-actions justify-center mt-4">
-                                <Button color=Signal::derive(|| ButtonColor::Warning)>
-                                    "Shop Now"
-                                </Button>
+                                <Button color=Signal::derive(|| {
+                                    ButtonColor::Warning
+                                })>"Shop Now"</Button>
                             </div>
                         </CardBody>
                     </Card>
@@ -196,12 +196,16 @@ pub fn CountdownDemo() -> impl IntoView {
                         <div class="text-center">
                             <div class="flex items-center justify-center gap-2 mb-4">
                                 <div class="w-3 h-3 bg-error rounded-full animate-pulse"></div>
-                                <span class="text-lg font-semibold">"LIVE EVENT STARTING SOON"</span>
+                                <span class="text-lg font-semibold">
+                                    "LIVE EVENT STARTING SOON"
+                                </span>
                             </div>
-                            
+
                             <h3 class="text-2xl font-bold mb-2">"Web Development Masterclass"</h3>
-                            <p class="text-base-content/70 mb-6">"Join us for an intensive 3-hour coding session"</p>
-                            
+                            <p class="text-base-content/70 mb-6">
+                                "Join us for an intensive 3-hour coding session"
+                            </p>
+
                             <div class="grid grid-flow-col gap-4 text-center auto-cols-max justify-center">
                                 <div class="flex flex-col p-4 bg-error rounded-box text-error-content">
                                     <span class="countdown font-mono text-4xl">
@@ -222,14 +226,14 @@ pub fn CountdownDemo() -> impl IntoView {
                                     "sec"
                                 </div>
                             </div>
-                            
+
                             <div class="mt-6 flex gap-2 justify-center">
-                                <Button color=Signal::derive(|| ButtonColor::Primary)>
-                                    "Join Live Stream"
-                                </Button>
-                                <Button style=Signal::derive(|| ButtonStyle::Outline)>
-                                    "Set Reminder"
-                                </Button>
+                                <Button color=Signal::derive(|| {
+                                    ButtonColor::Primary
+                                })>"Join Live Stream"</Button>
+                                <Button style=Signal::derive(|| {
+                                    ButtonStyle::Outline
+                                })>"Set Reminder"</Button>
                             </div>
                         </div>
                     </CardBody>
@@ -241,7 +245,7 @@ pub fn CountdownDemo() -> impl IntoView {
                         <div class="text-6xl mb-4">"🎂"</div>
                         <h2 class="card-title justify-center text-2xl">"Sarah's Birthday"</h2>
                         <p class="opacity-90 mb-6">"The big day is almost here!"</p>
-                        
+
                         <div class="grid grid-flow-col gap-3 text-center auto-cols-max justify-center">
                             <div class="flex flex-col p-3 bg-white/20 rounded-box backdrop-blur">
                                 <span class="countdown font-mono text-3xl">
@@ -262,7 +266,7 @@ pub fn CountdownDemo() -> impl IntoView {
                                 "min"
                             </div>
                         </div>
-                        
+
                         <div class="card-actions justify-center mt-6">
                             <Button class="bg-white text-purple-600 hover:bg-gray-100">
                                 "Plan Surprise"

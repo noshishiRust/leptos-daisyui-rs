@@ -22,12 +22,14 @@ pub fn ChatDemo() -> impl IntoView {
                 <div class="chat chat-start">
                     <div class="chat-image avatar">
                         <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS chat bubble component" src="https://picsum.photos/40/40?random=1" />
+                            <img
+                                alt="Tailwind CSS chat bubble component"
+                                src="https://picsum.photos/40/40?random=1"
+                            />
                         </div>
                     </div>
                     <div class="chat-header">
-                        "Obi-Wan Kenobi"
-                        <time class="text-xs opacity-50">"12:45"</time>
+                        "Obi-Wan Kenobi" <time class="text-xs opacity-50">"12:45"</time>
                     </div>
                     <div class="chat-bubble">"You were the Chosen One!"</div>
                     <div class="chat-footer opacity-50">"Delivered"</div>
@@ -35,12 +37,14 @@ pub fn ChatDemo() -> impl IntoView {
                 <div class="chat chat-end">
                     <div class="chat-image avatar">
                         <div class="w-10 rounded-full">
-                            <img alt="Tailwind CSS chat bubble component" src="https://picsum.photos/40/40?random=2" />
+                            <img
+                                alt="Tailwind CSS chat bubble component"
+                                src="https://picsum.photos/40/40?random=2"
+                            />
                         </div>
                     </div>
                     <div class="chat-header">
-                        "Anakin"
-                        <time class="text-xs opacity-50">"12:46"</time>
+                        "Anakin" <time class="text-xs opacity-50">"12:46"</time>
                     </div>
                     <div class="chat-bubble">"I hate you!"</div>
                     <div class="chat-footer opacity-50">"Seen at 12:46"</div>
@@ -81,8 +85,7 @@ pub fn ChatDemo() -> impl IntoView {
                             </div>
                         </div>
                         <div class="chat-header">
-                            "Alice"
-                            <time class="text-xs opacity-50">"2 hours ago"</time>
+                            "Alice" <time class="text-xs opacity-50">"2 hours ago"</time>
                         </div>
                         <div class="chat-bubble">"Hey! How are you doing?"</div>
                     </div>
@@ -94,10 +97,11 @@ pub fn ChatDemo() -> impl IntoView {
                             </div>
                         </div>
                         <div class="chat-header">
-                            "Bob"
-                            <time class="text-xs opacity-50">"2 hours ago"</time>
+                            "Bob" <time class="text-xs opacity-50">"2 hours ago"</time>
                         </div>
-                        <div class="chat-bubble chat-bubble-primary">"I'm doing great! Just working on some Leptos components."</div>
+                        <div class="chat-bubble chat-bubble-primary">
+                            "I'm doing great! Just working on some Leptos components."
+                        </div>
                     </div>
 
                     <div class="chat chat-start">
@@ -115,7 +119,9 @@ pub fn ChatDemo() -> impl IntoView {
                                 <img src="https://picsum.photos/40/40?random=4" alt="User 2" />
                             </div>
                         </div>
-                        <div class="chat-bubble chat-bubble-primary">"Yes! The leptos-daisyui-rs library is fantastic. The components are so easy to use."</div>
+                        <div class="chat-bubble chat-bubble-primary">
+                            "Yes! The leptos-daisyui-rs library is fantastic. The components are so easy to use."
+                        </div>
                     </div>
 
                     <div class="chat chat-start">
@@ -124,7 +130,9 @@ pub fn ChatDemo() -> impl IntoView {
                                 <img src="https://picsum.photos/40/40?random=3" alt="User 1" />
                             </div>
                         </div>
-                        <div class="chat-bubble">"I should check that out. Thanks for the recommendation!"</div>
+                        <div class="chat-bubble">
+                            "I should check that out. Thanks for the recommendation!"
+                        </div>
                         <div class="chat-footer opacity-50">"Delivered"</div>
                     </div>
 
@@ -134,7 +142,9 @@ pub fn ChatDemo() -> impl IntoView {
                                 <img src="https://picsum.photos/40/40?random=4" alt="User 2" />
                             </div>
                         </div>
-                        <div class="chat-bubble chat-bubble-success">"You definitely should! Happy coding! 🚀"</div>
+                        <div class="chat-bubble chat-bubble-success">
+                            "You definitely should! Happy coding! 🚀"
+                        </div>
                         <div class="chat-footer opacity-50">"Seen"</div>
                     </div>
                 </div>

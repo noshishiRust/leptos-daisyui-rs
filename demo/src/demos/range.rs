@@ -36,23 +36,53 @@ pub fn RangeDemo() -> impl IntoView {
                     </div>
                     <div>
                         <label class="text-sm">"Primary"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-primary" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-primary"
+                        />
                     </div>
                     <div>
                         <label class="text-sm">"Secondary"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-secondary" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-secondary"
+                        />
                     </div>
                     <div>
                         <label class="text-sm">"Accent"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-accent" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-accent"
+                        />
                     </div>
                     <div>
                         <label class="text-sm">"Success"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-success" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-success"
+                        />
                     </div>
                     <div>
                         <label class="text-sm">"Warning"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-warning" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-warning"
+                        />
                     </div>
                     <div>
                         <label class="text-sm">"Info"</label>
@@ -60,7 +90,13 @@ pub fn RangeDemo() -> impl IntoView {
                     </div>
                     <div>
                         <label class="text-sm">"Error"</label>
-                        <input type="range" min="0" max="100" value="50" class="range range-error" />
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="range range-error"
+                        />
                     </div>
                 </div>
 
@@ -88,14 +124,16 @@ pub fn RangeDemo() -> impl IntoView {
                 <div class="space-y-4">
                     <div>
                         <label class="label">
-                            <span class="label-text">"Volume: " {move || (value1.get() as f64).round() as i32} "%"</span>
+                            <span class="label-text">
+                                "Volume: " {move || (value1.get() as f64).round() as i32} "%"
+                            </span>
                         </label>
-                        <input 
-                            type="range" 
-                            min="0" 
-                            max="100" 
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
                             value=move || value1.get()
-                            class="range range-primary" 
+                            class="range range-primary"
                             on:input=move |ev| {
                                 let value = event_target_value(&ev).parse::<f64>().unwrap_or(0.0);
                                 set_value1.set(value);
@@ -105,14 +143,16 @@ pub fn RangeDemo() -> impl IntoView {
 
                     <div>
                         <label class="label">
-                            <span class="label-text">"Brightness: " {move || (value2.get() as f64).round() as i32} "%"</span>
+                            <span class="label-text">
+                                "Brightness: " {move || (value2.get() as f64).round() as i32} "%"
+                            </span>
                         </label>
-                        <input 
-                            type="range" 
-                            min="0" 
-                            max="100" 
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
                             value=move || value2.get()
-                            class="range range-secondary" 
+                            class="range range-secondary"
                             on:input=move |ev| {
                                 let value = event_target_value(&ev).parse::<f64>().unwrap_or(0.0);
                                 set_value2.set(value);
@@ -122,14 +162,16 @@ pub fn RangeDemo() -> impl IntoView {
 
                     <div>
                         <label class="label">
-                            <span class="label-text">"Temperature: " {move || (value3.get() as f64).round() as i32} "°"</span>
+                            <span class="label-text">
+                                "Temperature: " {move || (value3.get() as f64).round() as i32} "°"
+                            </span>
                         </label>
-                        <input 
-                            type="range" 
-                            min="0" 
-                            max="100" 
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
                             value=move || value3.get()
-                            class="range range-accent" 
+                            class="range range-accent"
                             on:input=move |ev| {
                                 let value = event_target_value(&ev).parse::<f64>().unwrap_or(0.0);
                                 set_value3.set(value);
@@ -144,7 +186,14 @@ pub fn RangeDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Custom Step Range"</h2>
                 <div>
                     <label class="text-sm">"Step by 10"</label>
-                    <input type="range" min="0" max="100" value="30" class="range range-primary" step="10" />
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="30"
+                        class="range range-primary"
+                        step="10"
+                    />
                     <div class="w-full flex justify-between text-xs px-2">
                         <span>"0"</span>
                         <span>"25"</span>
@@ -164,21 +213,39 @@ pub fn RangeDemo() -> impl IntoView {
                                     <span class="label-text">"Master Volume"</span>
                                     <span class="label-text-alt">"75%"</span>
                                 </label>
-                                <input type="range" min="0" max="100" value="75" class="range range-primary" />
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="100"
+                                    value="75"
+                                    class="range range-primary"
+                                />
                             </div>
                             <div class="form-control">
                                 <label class="label">
                                     <span class="label-text">"Bass"</span>
                                     <span class="label-text-alt">"50%"</span>
                                 </label>
-                                <input type="range" min="0" max="100" value="50" class="range range-secondary" />
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="100"
+                                    value="50"
+                                    class="range range-secondary"
+                                />
                             </div>
                             <div class="form-control">
                                 <label class="label">
                                     <span class="label-text">"Treble"</span>
                                     <span class="label-text-alt">"60%"</span>
                                 </label>
-                                <input type="range" min="0" max="100" value="60" class="range range-accent" />
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="100"
+                                    value="60"
+                                    class="range range-accent"
+                                />
                             </div>
                         </div>
                         <div class="card-actions justify-end mt-4">

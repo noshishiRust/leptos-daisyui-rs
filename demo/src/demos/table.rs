@@ -74,61 +74,78 @@ pub fn TableDemo() -> impl IntoView {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.into_iter().enumerate().map(|(index, (name, email, role, status))| {
-                                view! {
-                                    <tr class="hover">
-                                        <td>
-                                            <div class="flex items-center gap-3">
-                                                <div class="avatar">
-                                                    <div class="mask mask-squircle w-12 h-12">
-                                                        <img src=format!("https://picsum.photos/48/48?random={}", index + 1) alt="Avatar" />
+                            {users
+                                .into_iter()
+                                .enumerate()
+                                .map(|(index, (name, email, role, status))| {
+                                    view! {
+                                        <tr class="hover">
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="avatar">
+                                                        <div class="mask mask-squircle w-12 h-12">
+                                                            <img
+                                                                src=format!(
+                                                                    "https://picsum.photos/48/48?random={}",
+                                                                    index + 1,
+                                                                )
+                                                                alt="Avatar"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="font-bold">{name}</div>
+                                                        <div class="text-sm opacity-50">"United States"</div>
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <div class="font-bold">{name}</div>
-                                                    <div class="text-sm opacity-50">"United States"</div>
+                                            </td>
+                                            <td>{email}</td>
+                                            <td>
+                                                <Badge
+                                                    color=Signal::derive(move || match role {
+                                                        "Admin" => BadgeColor::Primary,
+                                                        "Moderator" => BadgeColor::Secondary,
+                                                        _ => BadgeColor::Neutral,
+                                                    })
+                                                    size=Signal::derive(|| BadgeSize::Sm)
+                                                >
+                                                    {role}
+                                                </Badge>
+                                            </td>
+                                            <td>
+                                                <Badge
+                                                    color=Signal::derive(move || match status {
+                                                        "Active" => BadgeColor::Success,
+                                                        "Inactive" => BadgeColor::Error,
+                                                        "Pending" => BadgeColor::Warning,
+                                                        _ => BadgeColor::Neutral,
+                                                    })
+                                                    size=Signal::derive(|| BadgeSize::Sm)
+                                                >
+                                                    {status}
+                                                </Badge>
+                                            </td>
+                                            <td>
+                                                <div class="flex gap-1">
+                                                    <Button
+                                                        size=Signal::derive(|| ButtonSize::Xs)
+                                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                                    >
+                                                        "Edit"
+                                                    </Button>
+                                                    <Button
+                                                        size=Signal::derive(|| ButtonSize::Xs)
+                                                        color=Signal::derive(|| ButtonColor::Error)
+                                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                                    >
+                                                        "Delete"
+                                                    </Button>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>{email}</td>
-                                        <td>
-                                            <Badge 
-                                                color=Signal::derive(move || match role {
-                                                    "Admin" => BadgeColor::Primary,
-                                                    "Moderator" => BadgeColor::Secondary,
-                                                    _ => BadgeColor::Neutral,
-                                                })
-                                                size=Signal::derive(|| BadgeSize::Sm)
-                                            >
-                                                {role}
-                                            </Badge>
-                                        </td>
-                                        <td>
-                                            <Badge 
-                                                color=Signal::derive(move || match status {
-                                                    "Active" => BadgeColor::Success,
-                                                    "Inactive" => BadgeColor::Error,
-                                                    "Pending" => BadgeColor::Warning,
-                                                    _ => BadgeColor::Neutral,
-                                                })
-                                                size=Signal::derive(|| BadgeSize::Sm)
-                                            >
-                                                {status}
-                                            </Badge>
-                                        </td>
-                                        <td>
-                                            <div class="flex gap-1">
-                                                <Button size=Signal::derive(|| ButtonSize::Xs) style=Signal::derive(|| ButtonStyle::Ghost)>
-                                                    "Edit"
-                                                </Button>
-                                                <Button size=Signal::derive(|| ButtonSize::Xs) color=Signal::derive(|| ButtonColor::Error) style=Signal::derive(|| ButtonStyle::Ghost)>
-                                                    "Delete"
-                                                </Button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            }).collect::<Vec<_>>()}
+                                            </td>
+                                        </tr>
+                                    }
+                                })
+                                .collect::<Vec<_>>()}
                         </tbody>
                     </table>
                 </div>
@@ -239,7 +256,10 @@ pub fn TableDemo() -> impl IntoView {
                                     <div class="flex items-center gap-3">
                                         <div class="avatar">
                                             <div class="mask mask-squircle w-12 h-12">
-                                                <img src="https://picsum.photos/48/48?random=10" alt="Avatar" />
+                                                <img
+                                                    src="https://picsum.photos/48/48?random=10"
+                                                    alt="Avatar"
+                                                />
                                             </div>
                                         </div>
                                         <div>
@@ -249,15 +269,20 @@ pub fn TableDemo() -> impl IntoView {
                                     </div>
                                 </td>
                                 <td>
-                                    "Desktop Support Technician"
-                                    <br/>
-                                    <Badge color=Signal::derive(|| BadgeColor::Neutral) size=Signal::derive(|| BadgeSize::Sm)>
+                                    "Desktop Support Technician" <br />
+                                    <Badge
+                                        color=Signal::derive(|| BadgeColor::Neutral)
+                                        size=Signal::derive(|| BadgeSize::Sm)
+                                    >
                                         "Desktop Support Technician"
                                     </Badge>
                                 </td>
                                 <td>"Purple"</td>
                                 <th>
-                                    <Button size=Signal::derive(|| ButtonSize::Xs) style=Signal::derive(|| ButtonStyle::Ghost)>
+                                    <Button
+                                        size=Signal::derive(|| ButtonSize::Xs)
+                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                    >
                                         "details"
                                     </Button>
                                 </th>
@@ -272,7 +297,10 @@ pub fn TableDemo() -> impl IntoView {
                                     <div class="flex items-center gap-3">
                                         <div class="avatar">
                                             <div class="mask mask-squircle w-12 h-12">
-                                                <img src="https://picsum.photos/48/48?random=11" alt="Avatar" />
+                                                <img
+                                                    src="https://picsum.photos/48/48?random=11"
+                                                    alt="Avatar"
+                                                />
                                             </div>
                                         </div>
                                         <div>
@@ -282,15 +310,20 @@ pub fn TableDemo() -> impl IntoView {
                                     </div>
                                 </td>
                                 <td>
-                                    "Tax Accountant"
-                                    <br/>
-                                    <Badge color=Signal::derive(|| BadgeColor::Neutral) size=Signal::derive(|| BadgeSize::Sm)>
+                                    "Tax Accountant" <br />
+                                    <Badge
+                                        color=Signal::derive(|| BadgeColor::Neutral)
+                                        size=Signal::derive(|| BadgeSize::Sm)
+                                    >
                                         "Tax Accountant"
                                     </Badge>
                                 </td>
                                 <td>"Red"</td>
                                 <th>
-                                    <Button size=Signal::derive(|| ButtonSize::Xs) style=Signal::derive(|| ButtonStyle::Ghost)>
+                                    <Button
+                                        size=Signal::derive(|| ButtonSize::Xs)
+                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                    >
                                         "details"
                                     </Button>
                                 </th>
