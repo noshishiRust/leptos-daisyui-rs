@@ -30,7 +30,7 @@ jobs:
           targets: wasm32-unknown-unknown
 
       - name: Install leptosfmt
-        run: cargo check install leptosfmt
+        run: cargo install leptosfmt
 
       - name: Run check
         run: cargo check
