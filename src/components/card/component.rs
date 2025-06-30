@@ -1,4 +1,4 @@
-use super::style::{CardStyle, CardSize};
+use super::style::{CardSize, CardStyle};
 use crate::merge_classes;
 use leptos::prelude::*;
 
@@ -28,18 +28,12 @@ pub fn Card(
 }
 
 #[component]
-pub fn CardBody(
-    #[prop(optional, into)] class: &'static str,
-    children: Children,
-) -> impl IntoView {
+pub fn CardBody(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
     view! { <div class=merge_classes!("card-body", class)>{children()}</div> }
 }
 
 #[component]
-pub fn CardTitle(
-    #[prop(optional, into)] class: &'static str,
-    children: Children,
-) -> impl IntoView {
+pub fn CardTitle(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
     view! { <h2 class=merge_classes!("card-title", class)>{children()}</h2> }
 }
 

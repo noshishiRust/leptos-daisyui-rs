@@ -1,6 +1,9 @@
 use super::style::DockSize;
 use crate::merge_classes;
-use leptos::{html::{Div, Button, Span}, prelude::*};
+use leptos::{
+    html::{Button, Div, Span},
+    prelude::*,
+};
 
 #[component]
 pub fn Dock(

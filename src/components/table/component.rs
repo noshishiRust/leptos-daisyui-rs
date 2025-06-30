@@ -1,6 +1,9 @@
 use super::style::TableSize;
 use crate::merge_classes;
-use leptos::{html::{Table as HtmlTable, Thead, Tbody, Tfoot, Tr, Th, Td}, prelude::*};
+use leptos::{
+    html::{Table as HtmlTable, Tbody, Td, Tfoot, Th, Thead, Tr},
+    prelude::*,
+};
 
 #[component]
 pub fn Table(

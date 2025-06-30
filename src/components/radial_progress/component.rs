@@ -12,9 +12,8 @@ pub fn RadialProgress(
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
-    let progress_style = move || {
-        format!("--value:{}; --thickness:{};", value.get(), thickness.get())
-    };
+    let progress_style =
+        move || format!("--value:{}; --thickness:{};", value.get(), thickness.get());
 
     view! {
         <div

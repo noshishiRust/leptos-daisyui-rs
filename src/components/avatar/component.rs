@@ -2,6 +2,10 @@ use super::style::AvatarModifier;
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
+/// Avatar component that displays user profile images or icons.
+///
+/// Add `@source inline("avatar avatar-group avatar-online avatar-offline avatar-placeholder");`
+/// to input.css`
 #[component]
 pub fn Avatar(
     #[prop(optional, into)] modifier: Signal<AvatarModifier>,

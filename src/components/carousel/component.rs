@@ -1,4 +1,4 @@
-use super::style::{CarouselModifier, CarouselDirection};
+use super::style::{CarouselDirection, CarouselModifier};
 use crate::merge_classes;
 use leptos::prelude::*;
 

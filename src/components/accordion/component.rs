@@ -2,6 +2,10 @@ use super::style::AccordionModifier;
 use crate::merge_classes;
 use leptos::{html::Input, prelude::*};
 
+/// Accordion component that allows for collapsible content sections.
+///
+///  Add `@source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
+///  to input.css
 #[component]
 pub fn Accordion(
     #[prop(optional)] name: Option<&'static str>,

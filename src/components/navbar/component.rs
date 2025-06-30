@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Div, Nav}, prelude::*};
+use leptos::{
+    html::{Div, Nav},
+    prelude::*,
+};
 
 #[component]
 pub fn Navbar(

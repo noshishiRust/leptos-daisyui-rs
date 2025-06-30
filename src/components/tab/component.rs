@@ -1,6 +1,9 @@
 use super::style::{TabSize, TabVariant};
 use crate::merge_classes;
-use leptos::{html::{Div, A, Input}, prelude::*};
+use leptos::{
+    html::{A, Div, Input},
+    prelude::*,
+};
 
 #[component]
 pub fn Tabs(

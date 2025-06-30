@@ -1,6 +1,9 @@
 use super::style::PaginationSize;
 use crate::merge_classes;
-use leptos::{html::{Div, Button, Input}, prelude::*};
+use leptos::{
+    html::{Button, Div, Input},
+    prelude::*,
+};
 
 #[component]
 pub fn Pagination(

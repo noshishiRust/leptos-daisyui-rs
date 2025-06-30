@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Figure, Div}, prelude::*};
+use leptos::{
+    html::{Div, Figure},
+    prelude::*,
+};
 
 #[component]
 pub fn Diff(

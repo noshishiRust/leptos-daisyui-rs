@@ -2,6 +2,10 @@ use super::style::{AlertColor, AlertDirection, AlertStyle};
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
+/// Alert component that displays important messages or notifications.
+///
+/// Add `@source inline("alert alert-outline alert-dash alert-soft alert-info alert-success alert-warning alert-error alert-vertical alert-horizontal");`
+/// to input.css
 #[component]
 pub fn Alert(
     #[prop(optional, into)] style: Signal<AlertStyle>,

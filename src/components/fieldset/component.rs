@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Fieldset, Legend, P}, prelude::*};
+use leptos::{
+    html::{Fieldset, Legend, P},
+    prelude::*,
+};
 
 #[component]
 pub fn FieldSet(

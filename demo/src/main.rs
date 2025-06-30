@@ -1,4 +1,5 @@
 mod demos;
+use demos::*;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
@@ -7,7 +8,6 @@ use leptos_router::{
     hooks::use_location,
     path,
 };
-use demos::*;
 
 fn main() {
     console_error_panic_hook::set_once();

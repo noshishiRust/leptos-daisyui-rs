@@ -1,6 +1,9 @@
-use super::style::{FooterPlacement, FooterDirection};
+use super::style::{FooterDirection, FooterPlacement};
 use crate::merge_classes;
-use leptos::{html::{Footer as HtmlFooter, Div}, prelude::*};
+use leptos::{
+    html::{Div, Footer as HtmlFooter},
+    prelude::*,
+};
 
 #[component]
 pub fn Footer(

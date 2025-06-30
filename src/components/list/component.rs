@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Ul, Li}, prelude::*};
+use leptos::{
+    html::{Li, Ul},
+    prelude::*,
+};
 
 #[component]
 pub fn List(

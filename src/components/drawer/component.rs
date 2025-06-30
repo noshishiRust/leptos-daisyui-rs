@@ -1,6 +1,9 @@
 use super::style::DrawerPlacement;
 use crate::merge_classes;
-use leptos::{html::{Div, Input}, prelude::*};
+use leptos::{
+    html::{Div, Input},
+    prelude::*,
+};
 
 #[component]
 pub fn Drawer(

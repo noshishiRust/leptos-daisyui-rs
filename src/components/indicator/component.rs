@@ -1,6 +1,9 @@
 use super::style::IndicatorPlacement;
 use crate::merge_classes;
-use leptos::{html::{Div, Span}, prelude::*};
+use leptos::{
+    html::{Div, Span},
+    prelude::*,
+};
 
 #[component]
 pub fn Indicator(

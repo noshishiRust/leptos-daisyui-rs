@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Label as HtmlLabel, Span}, prelude::*};
+use leptos::{
+    html::{Label as HtmlLabel, Span},
+    prelude::*,
+};
 
 #[component]
 pub fn Label(

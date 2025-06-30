@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::{Dialog, Div, Form}, prelude::*};
+use leptos::{
+    html::{Dialog, Div, Form},
+    prelude::*,
+};
 
 #[component]
 pub fn Modal(

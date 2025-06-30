@@ -1,4 +1,4 @@
-use super::style::{FileInputStyle, FileInputColor, FileInputSize};
+use super::style::{FileInputColor, FileInputSize, FileInputStyle};
 use crate::merge_classes;
 use leptos::{html::Input, prelude::*};
 

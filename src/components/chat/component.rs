@@ -1,4 +1,4 @@
-use super::style::{ChatPlacement, ChatBubbleColor};
+use super::style::{ChatBubbleColor, ChatPlacement};
 use crate::merge_classes;
 use leptos::prelude::*;
 
@@ -18,10 +18,7 @@ pub fn Chat(
 }
 
 #[component]
-pub fn ChatImage(
-    #[prop(optional, into)] class: &'static str,
-    children: Children,
-) -> impl IntoView {
+pub fn ChatImage(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
     view! { <div class=merge_classes!("chat-image", class)>{children()}</div> }
 }
 
