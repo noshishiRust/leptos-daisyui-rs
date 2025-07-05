@@ -7,13 +7,33 @@ use leptos::{
 #[component]
 pub fn Modal(
     #[prop(optional, into)] open: Signal<bool>,
+    #[prop(optional, into)] backdrop: Signal<bool>,
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Dialog>,
     children: Children,
 ) -> impl IntoView {
+    Effect::new(move || {
+        let Some(node) = node_ref.get() else { return };
+
+        if open.get() {
+            let _ = node.show_modal();
+        } else {
+            let _ = node.close();
+        }
+    });
+
     view! {
-        <dialog node_ref=node_ref class=merge_classes!("modal", class) class:modal-open=open>
+        <dialog
+            aria_modal=move || open.get()
+            aria-label="Modal"
+            node_ref=node_ref
+            class=move || merge_classes!("modal", class)
+            class:modal-open=open
+        >
             {children()}
+            {move || {
+                if backdrop.get() { view! { <ModalBackdrop /> }.into_any() } else { ().into_any() }
+            }}
         </dialog>
     }
 }
@@ -25,7 +45,7 @@ pub fn ModalBox(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("modal-box", class)>
+        <div node_ref=node_ref class=move || merge_classes!("modal-box", class)>
             {children()}
         </div>
     }
@@ -38,7 +58,7 @@ pub fn ModalAction(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("modal-action", class)>
+        <div node_ref=node_ref class=move || merge_classes!("modal-action", class)>
             {children()}
         </div>
     }
@@ -48,21 +68,14 @@ pub fn ModalAction(
 pub fn ModalBackdrop(
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Form>,
-    #[prop(optional)] on_close: Option<Box<dyn Fn()>>,
-    children: Children,
 ) -> impl IntoView {
     view! {
         <form
             node_ref=node_ref
             method="dialog"
-            class=merge_classes!("modal-backdrop", class)
-            on:submit=move |_| {
-                if let Some(handler) = &on_close {
-                    handler();
-                }
-            }
+            class=move || merge_classes!("modal-backdrop", class)
         >
-            {children()}
+            <button>close</button>
         </form>
     }
 }

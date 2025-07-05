@@ -147,14 +147,14 @@ pub fn FileInputDemo() -> impl IntoView {
                                 </div>
                                 <div class="card-actions justify-end">
                                     <Button
-                                        size=Signal::derive(|| ButtonSize::Sm)
-                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                        size=ButtonSize::Sm
+                                        style=ButtonStyle::Ghost
                                     >
                                         "Cancel"
                                     </Button>
                                     <Button
-                                        size=Signal::derive(|| ButtonSize::Sm)
-                                        color=Signal::derive(|| ButtonColor::Primary)
+                                        size=ButtonSize::Sm
+                                        color=ButtonColor::Primary
                                     >
                                         "Upload"
                                     </Button>
@@ -194,8 +194,8 @@ pub fn FileInputDemo() -> impl IntoView {
                                 </div>
                                 <div class="card-actions justify-end">
                                     <Button
-                                        size=Signal::derive(|| ButtonSize::Sm)
-                                        color=Signal::derive(|| ButtonColor::Success)
+                                        size=ButtonSize::Sm
+                                        color=ButtonColor::Success
                                     >
                                         "Upload Files"
                                     </Button>
@@ -304,16 +304,10 @@ pub fn FileInputDemo() -> impl IntoView {
                             </div>
 
                             <div class="card-actions justify-between">
-                                <Button style=Signal::derive(|| {
-                                    ButtonStyle::Ghost
-                                })>"Save as Draft"</Button>
+                                <Button style=ButtonStyle::Ghost>"Save as Draft"</Button>
                                 <div class="flex gap-2">
-                                    <Button style=Signal::derive(|| {
-                                        ButtonStyle::Outline
-                                    })>"Preview"</Button>
-                                    <Button color=Signal::derive(|| {
-                                        ButtonColor::Primary
-                                    })>"Submit Project"</Button>
+                                    <Button style=ButtonStyle::Outline>"Preview"</Button>
+                                    <Button color=ButtonColor::Primary>"Submit Project"</Button>
                                 </div>
                             </div>
                         </div>
@@ -354,7 +348,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                 <Progress
                                     value=75.0
                                     max=100.0
-                                    color=Signal::derive(|| ProgressColor::Primary)
+                                    color=ProgressColor::Primary
                                     class="w-full"
                                 />
                             </div>
@@ -367,7 +361,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                 <Progress
                                     value=100.0
                                     max=100.0
-                                    color=Signal::derive(|| ProgressColor::Success)
+                                    color=ProgressColor::Success
                                     class="w-full"
                                 />
                             </div>
@@ -377,9 +371,9 @@ pub fn FileInputDemo() -> impl IntoView {
                                     "2 of 3 files uploaded"
                                 </span>
                                 <Button
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    color=Signal::derive(|| ButtonColor::Error)
-                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    size=ButtonSize::Sm
+                                    color=ButtonColor::Error
+                                    style=ButtonStyle::Outline
                                 >
                                     "Cancel"
                                 </Button>

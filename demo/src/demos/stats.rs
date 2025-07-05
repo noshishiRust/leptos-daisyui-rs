@@ -142,8 +142,8 @@ pub fn StatsDemo() -> impl IntoView {
                         <div class="stat-value">"$89,400"</div>
                         <div class="stat-actions">
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Success)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Success
                             >
                                 "Add funds"
                             </Button>
@@ -169,10 +169,10 @@ pub fn StatsDemo() -> impl IntoView {
                         <div class="stat-title">"Current balance"</div>
                         <div class="stat-value">"$89,400"</div>
                         <div class="stat-actions">
-                            <Button size=Signal::derive(|| ButtonSize::Sm)>"Withdrawal"</Button>
+                            <Button size=ButtonSize::Sm>"Withdrawal"</Button>
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Primary
                             >
                                 "deposit"
                             </Button>

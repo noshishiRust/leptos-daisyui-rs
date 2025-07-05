@@ -20,12 +20,14 @@ pub fn Radio(
             type="radio"
             name=name
             value=value
-            class=merge_classes!(
-                "radio",
+            class=move || {
+                merge_classes!(
+                    "radio",
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             prop:checked=checked
             prop:disabled=disabled
             on:change=move |ev| {

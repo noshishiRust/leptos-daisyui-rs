@@ -10,7 +10,7 @@ pub fn RadialProgress(
     #[prop(optional, into)] thickness: Signal<String>,
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
 ) -> impl IntoView {
     let progress_style =
         move || format!("--value:{}; --thickness:{};", value.get(), thickness.get());
@@ -18,15 +18,17 @@ pub fn RadialProgress(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "radial-progress",
-                color.get().as_str(),
-                size.get().as_str(),
-                class
-            )
+            class=move || {
+                merge_classes!(
+                    "radial-progress",
+                    color.get().as_str(),
+                    size.get().as_str(),
+                    class
+                )
+            }
             style=progress_style
         >
-            {children()}
+            {children.map(|v| v())}
         </div>
     }
 }

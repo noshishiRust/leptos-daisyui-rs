@@ -10,12 +10,14 @@ pub fn Carousel(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div class=merge_classes!(
-            "carousel",
+        <div class=move || {
+            merge_classes!(
+                "carousel",
                 modifier.get().as_str(),
                 direction.get().as_str(),
                 class
-        )>{children()}</div>
+            )
+        }>{children()}</div>
     }
 }
 
@@ -24,5 +26,5 @@ pub fn CarouselItem(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("carousel-item", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("carousel-item", class)>{children()}</div> }
 }

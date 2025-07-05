@@ -16,35 +16,35 @@ pub fn PaginationDemo() -> impl IntoView {
             <div class="space-y-4">
                 <h2 class="text-xl font-semibold">"Basic Pagination"</h2>
                 <div class="join">
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "«"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "Page 22"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "»"
                     </Button>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Numbered Pagination"</h2>
                 <div class="join">
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "1"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "2"
                     </Button>
                     <Button
                         class="join-item btn-active"
-                        color=Signal::derive(|| ButtonColor::Primary)
+                        color=ButtonColor::Primary
                     >
                         "3"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "4"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "5"
                     </Button>
                 </div>
@@ -53,15 +53,15 @@ pub fn PaginationDemo() -> impl IntoView {
                 <div class="join">
                     <Button
                         class="join-item"
-                        style=Signal::derive(|| ButtonStyle::Outline)
-                        disabled=Signal::derive(|| true)
+                        style=ButtonStyle::Outline
+                        disabled=true
                     >
                         "«"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "Page 1 of 10"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "»"
                     </Button>
                 </div>
@@ -73,29 +73,29 @@ pub fn PaginationDemo() -> impl IntoView {
                         <div class="join">
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Xs)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Xs
+                                style=ButtonStyle::Outline
                             >
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                size=Signal::derive(|| ButtonSize::Xs)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Xs
+                                color=ButtonColor::Primary
                             >
                                 "2"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Xs)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Xs
+                                style=ButtonStyle::Outline
                             >
                                 "3"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Xs)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Xs
+                                style=ButtonStyle::Outline
                             >
                                 "4"
                             </Button>
@@ -107,29 +107,29 @@ pub fn PaginationDemo() -> impl IntoView {
                         <div class="join">
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Outline
                             >
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Primary
                             >
                                 "2"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Outline
                             >
                                 "3"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Outline
                             >
                                 "4"
                             </Button>
@@ -141,29 +141,29 @@ pub fn PaginationDemo() -> impl IntoView {
                         <div class="join">
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Lg)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Lg
+                                style=ButtonStyle::Outline
                             >
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                size=Signal::derive(|| ButtonSize::Lg)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Lg
+                                color=ButtonColor::Primary
                             >
                                 "2"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Lg)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Lg
+                                style=ButtonStyle::Outline
                             >
                                 "3"
                             </Button>
                             <Button
                                 class="join-item"
-                                size=Signal::derive(|| ButtonSize::Lg)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Lg
+                                style=ButtonStyle::Outline
                             >
                                 "4"
                             </Button>
@@ -173,46 +173,46 @@ pub fn PaginationDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Responsive Pagination"</h2>
                 <div class="join">
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "First"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "Prev"
                     </Button>
                     <Button
                         class="join-item hidden sm:inline-flex"
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        style=ButtonStyle::Outline
                     >
                         "1"
                     </Button>
                     <Button
                         class="join-item hidden sm:inline-flex"
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        style=ButtonStyle::Outline
                     >
                         "2"
                     </Button>
                     <Button
                         class="join-item btn-active"
-                        color=Signal::derive(|| ButtonColor::Primary)
+                        color=ButtonColor::Primary
                     >
                         "3"
                     </Button>
                     <Button
                         class="join-item hidden sm:inline-flex"
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        style=ButtonStyle::Outline
                     >
                         "4"
                     </Button>
                     <Button
                         class="join-item hidden sm:inline-flex"
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        style=ButtonStyle::Outline
                     >
                         "5"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "Next"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "Last"
                     </Button>
                 </div>
@@ -236,8 +236,8 @@ pub fn PaginationDemo() -> impl IntoView {
                                         <div class="p-3 bg-base-200 rounded-lg flex justify-between items-center">
                                             <span>"Product #" {product_number}</span>
                                             <Badge
-                                                color=Signal::derive(|| BadgeColor::Primary)
-                                                size=Signal::derive(|| BadgeSize::Sm)
+                                                color=BadgeColor::Primary
+                                                size=BadgeSize::Sm
                                             >
                                                 "In Stock"
                                             </Badge>
@@ -251,7 +251,7 @@ pub fn PaginationDemo() -> impl IntoView {
                             <div class="join">
                                 <Button
                                     class="join-item"
-                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    style=ButtonStyle::Outline
                                     disabled=Signal::derive(move || current_page.get() == 1)
                                     on:click=move |_| {
                                         if current_page.get() > 1 {
@@ -295,7 +295,7 @@ pub fn PaginationDemo() -> impl IntoView {
 
                                 <Button
                                     class="join-item"
-                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    style=ButtonStyle::Outline
                                     disabled=Signal::derive(move || {
                                         current_page.get() == total_pages
                                     })
@@ -314,31 +314,31 @@ pub fn PaginationDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Pagination with Ellipsis"</h2>
                 <div class="join">
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "1"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "2"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "3"
                     </Button>
-                    <Button class="join-item btn-disabled" disabled=Signal::derive(|| true)>
+                    <Button class="join-item btn-disabled" disabled=true>
                         "..."
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "97"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "98"
                     </Button>
                     <Button
                         class="join-item btn-active"
-                        color=Signal::derive(|| ButtonColor::Primary)
+                        color=ButtonColor::Primary
                     >
                         "99"
                     </Button>
-                    <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                    <Button class="join-item" style=ButtonStyle::Outline>
                         "100"
                     </Button>
                 </div>
@@ -398,7 +398,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                                                     BadgeColor::Accent
                                                                 }
                                                             })
-                                                            size=Signal::derive(|| BadgeSize::Sm)
+                                                            size=BadgeSize::Sm
                                                         >
                                                             {if i % 3 == 0 {
                                                                 "Admin"
@@ -412,15 +412,15 @@ pub fn PaginationDemo() -> impl IntoView {
                                                     <td>
                                                         <div class="flex gap-1">
                                                             <Button
-                                                                size=Signal::derive(|| ButtonSize::Xs)
-                                                                style=Signal::derive(|| ButtonStyle::Ghost)
+                                                                size=ButtonSize::Xs
+                                                                style=ButtonStyle::Ghost
                                                             >
                                                                 "Edit"
                                                             </Button>
                                                             <Button
-                                                                size=Signal::derive(|| ButtonSize::Xs)
-                                                                color=Signal::derive(|| ButtonColor::Error)
-                                                                style=Signal::derive(|| ButtonStyle::Ghost)
+                                                                size=ButtonSize::Xs
+                                                                color=ButtonColor::Error
+                                                                style=ButtonStyle::Ghost
                                                             >
                                                                 "Delete"
                                                             </Button>
@@ -443,8 +443,8 @@ pub fn PaginationDemo() -> impl IntoView {
                             <div class="join">
                                 <Button
                                     class="join-item"
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    size=ButtonSize::Sm
+                                    style=ButtonStyle::Outline
                                     disabled=Signal::derive(move || current_page.get() == 1)
                                     on:click=move |_| {
                                         if current_page.get() > 1 {
@@ -483,8 +483,8 @@ pub fn PaginationDemo() -> impl IntoView {
                                                         view! {
                                                             <Button
                                                                 class="join-item btn-disabled"
-                                                                size=Signal::derive(|| ButtonSize::Sm)
-                                                                disabled=Signal::derive(|| true)
+                                                                size=ButtonSize::Sm
+                                                                disabled=true
                                                             >
                                                                 "..."
                                                             </Button>
@@ -499,7 +499,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                                     } else {
                                                         "join-item"
                                                     }
-                                                    size=Signal::derive(|| ButtonSize::Sm)
+                                                    size=ButtonSize::Sm
                                                     color=Signal::derive(move || {
                                                         if current_page.get() == page {
                                                             ButtonColor::Primary
@@ -525,8 +525,8 @@ pub fn PaginationDemo() -> impl IntoView {
 
                                 <Button
                                     class="join-item"
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    style=Signal::derive(|| ButtonStyle::Outline)
+                                    size=ButtonSize::Sm
+                                    style=ButtonStyle::Outline
                                     disabled=Signal::derive(move || {
                                         current_page.get() == total_pages
                                     })
@@ -548,16 +548,16 @@ pub fn PaginationDemo() -> impl IntoView {
                     <div>
                         <p class="text-sm font-medium mb-2">"Primary"</p>
                         <div class="join">
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                color=ButtonColor::Primary
                             >
                                 "2"
                             </Button>
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "3"
                             </Button>
                         </div>
@@ -566,16 +566,16 @@ pub fn PaginationDemo() -> impl IntoView {
                     <div>
                         <p class="text-sm font-medium mb-2">"Secondary"</p>
                         <div class="join">
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                color=Signal::derive(|| ButtonColor::Secondary)
+                                color=ButtonColor::Secondary
                             >
                                 "2"
                             </Button>
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "3"
                             </Button>
                         </div>
@@ -584,16 +584,16 @@ pub fn PaginationDemo() -> impl IntoView {
                     <div>
                         <p class="text-sm font-medium mb-2">"Accent"</p>
                         <div class="join">
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
                             <Button
                                 class="join-item btn-active"
-                                color=Signal::derive(|| ButtonColor::Accent)
+                                color=ButtonColor::Accent
                             >
                                 "2"
                             </Button>
-                            <Button class="join-item" style=Signal::derive(|| ButtonStyle::Outline)>
+                            <Button class="join-item" style=ButtonStyle::Outline>
                                 "3"
                             </Button>
                         </div>

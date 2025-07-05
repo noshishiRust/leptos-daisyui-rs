@@ -15,9 +15,11 @@ pub fn Pagination(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!("join",
+            class=move || {
+                merge_classes!("join",
                 size.get().as_str(),
                 class)
+            }
         >
             {children()}
         </div>
@@ -36,7 +38,7 @@ pub fn PaginationButton(
     view! {
         <button
             node_ref=node_ref
-            class=merge_classes!("join-item", "btn", class)
+            class=move || merge_classes!("join-item", "btn", class)
             class:btn-active=active
             prop:disabled=disabled
             on:click=move |_| {
@@ -60,7 +62,7 @@ pub fn PaginationInput(
     view! {
         <input
             node_ref=node_ref
-            class=merge_classes!("join-item", "btn", class)
+            class=move || merge_classes!("join-item", "btn", class)
             type="text"
             prop:value=value
             on:input=move |ev| {

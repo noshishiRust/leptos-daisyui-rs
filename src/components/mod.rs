@@ -120,6 +120,15 @@ pub use toast::*;
 pub use toggle::*;
 pub use validator::*;
 
+pub use leptos::{
+        prelude::RenderEffect,
+    tachys::{html::class::IntoClass, renderer
+        ::{Rndr, types}}};
+
+
+// Reference Thaw UI
+// https://github.com/thaw-ui/thaw/blob/main/thaw_utils/src/class_list.rs
+#[derive(Debug, Clone)]
 pub struct ClassAttributes {
     values: Vec<ClassAttribute>,
 }
@@ -166,6 +175,118 @@ impl Default for ClassAttributes {
     }
 }
 
+impl IntoClass for ClassAttributes {
+   type AsyncOutput = Self;
+    type State = RenderEffect<(types::Element, String)>;
+    type Cloneable = Self;
+    type CloneableOwned = Self;
+
+    fn html_len(&self) -> usize {
+            self.values.len()
+    }
+
+    fn to_html(self, _class: &mut String) {
+        self.to_class();
+    }
+
+    fn hydrate<const FROM_SERVER: bool>(self, el: &types::Element) -> Self::State {
+        let el = el.to_owned();
+        RenderEffect::new(move |prev| {
+         let class = self.to_class();
+
+            if let Some(state) = prev {
+                let (el, prev_class) = state;
+                if class != prev_class {
+                    Rndr::set_attribute(&el, "class", &class);
+                    (el, class)
+                } else {
+                    (el, prev_class)
+                }
+            } else {
+                if !class.is_empty() {
+                    if !FROM_SERVER {
+                        Rndr::set_attribute(&el, "class", &class);
+                    }
+                }
+                (el.clone(), class)
+            }
+        })
+    }
+
+    fn build(self, el: &types::Element) -> Self::State {
+                let el = el.to_owned();
+        RenderEffect::new(move |prev| {
+            let class = self.to_class();
+
+            if let Some(state) = prev {
+                let (el, prev_class) = state;
+                if class != prev_class {
+                    Rndr::set_attribute(&el, "class", &class);
+                    (el, class)
+                } else {
+                    (el, prev_class)
+                }
+            } else {
+                if !class.is_empty() {
+                    Rndr::set_attribute(&el, "class", &class);
+                }
+                (el.clone(), class)
+            }
+        })
+    }
+
+    fn rebuild(self, state: &mut Self::State) {
+                let prev = state.take_value();
+        *state = RenderEffect::new_with_value(
+            move |prev| {
+                if let Some(state) = prev {
+                  let class = self.to_class();
+                    let (el, prev_class) = state;
+                    if class != *prev_class {
+                        Rndr::set_attribute(&el, "class", &class);
+                        (el, class)
+                    } else {
+                        (el, prev_class)
+                    }
+                } else {
+                    unreachable!()
+                }
+            },
+            prev,
+        );
+    }
+
+    fn into_cloneable(self) -> Self::Cloneable {
+        self
+    }
+
+    fn into_cloneable_owned(self) -> Self::CloneableOwned {
+        self
+    }
+
+    fn dry_resolve(&mut self) {}
+
+    async fn resolve(self) -> Self::AsyncOutput {
+        self
+    }
+
+    fn reset(state: &mut Self::State) {
+                *state = RenderEffect::new_with_value(
+            move |prev| {
+                if let Some(state) = prev {
+                    let (el, _) = &state;
+                    Rndr::remove_attribute(el, "class");
+                    state
+                } else {
+                    unreachable!()
+                }
+            },
+            state.take_value(),
+        );
+    }
+}
+
+#[derive(Debug, Clone)]
 pub enum ClassAttribute {
     None,
     Dynamic(String),
@@ -202,12 +323,23 @@ impl From<Option<String>> for ClassAttribute {
     }
 }
 
+impl<F> From<F> for ClassAttribute
+where
+    F: Fn() -> &'static str,
+{
+    fn from(value: F) -> Self {
+        ClassAttribute::Dynamic(value().to_string())
+    }
+}
+
+
+
 #[macro_export]
 macro_rules! merge_classes {
     ($($name:expr),+) => {
         {
             use $crate::components::ClassAttributes;
-            ClassAttributes::new()$(.add_class($name))+.to_class()
+            ClassAttributes::new()$(.add_class($name))+
         }
     };
 }

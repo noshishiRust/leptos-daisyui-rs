@@ -15,9 +15,11 @@ pub fn Dock(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!("dock",
+            class=move || {
+                merge_classes!("dock",
                 size.get().as_str(),
                 class)
+            }
         >
             {children()}
         </div>
@@ -55,7 +57,7 @@ pub fn DockLabel(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <span node_ref=node_ref class=merge_classes!("dock-label", class)>
+        <span node_ref=node_ref class=move || merge_classes!("dock-label", class)>
             {children()}
         </span>
     }

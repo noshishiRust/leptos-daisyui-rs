@@ -1,6 +1,5 @@
 #[derive(Clone, Debug, Default)]
 pub enum ToastPosition {
-    #[default]
     TopEnd,
     TopStart,
     TopCenter,
@@ -9,6 +8,7 @@ pub enum ToastPosition {
     MiddleEnd,
     BottomStart,
     BottomCenter,
+    #[default]
     BottomEnd,
 }
 

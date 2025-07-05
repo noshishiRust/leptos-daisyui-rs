@@ -12,12 +12,14 @@ pub fn Status(
     view! {
         <span
             node_ref=node_ref
-            class=merge_classes!(
-                "status",
+            class=move || {
+                merge_classes!(
+                    "status",
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
         ></span>
     }
 }

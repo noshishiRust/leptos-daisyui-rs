@@ -230,7 +230,7 @@ pub fn NavbarDemo() -> impl IntoView {
                         </div>
                     </div>
                     <div class="navbar-end">
-                        <Button size=Signal::derive(|| ButtonSize::Sm)>"Action"</Button>
+                        <Button size=ButtonSize::Sm>"Action"</Button>
                     </div>
                 </div>
 

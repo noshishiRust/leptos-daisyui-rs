@@ -18,11 +18,11 @@ pub fn Table(
     view! {
         <table
             node_ref=node_ref
-            class=merge_classes!(
-                "table",
+            class=move || {
+                merge_classes!("table",
                 size.get().as_str(),
-                class
-            )
+                class)
+            }
             class:table-zebra=zebra
             class:table-pin-rows=pin_rows
             class:table-pin-cols=pin_cols
@@ -39,7 +39,7 @@ pub fn TableHead(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <thead node_ref=node_ref class=merge_classes!("", class)>
+        <thead node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </thead>
     }
@@ -52,7 +52,7 @@ pub fn TableBody(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tbody node_ref=node_ref class=merge_classes!("", class)>
+        <tbody node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </tbody>
     }
@@ -65,7 +65,7 @@ pub fn TableFoot(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tfoot node_ref=node_ref class=merge_classes!("", class)>
+        <tfoot node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </tfoot>
     }
@@ -78,7 +78,7 @@ pub fn TableRow(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tr node_ref=node_ref class=merge_classes!("", class)>
+        <tr node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </tr>
     }
@@ -91,7 +91,7 @@ pub fn TableHeader(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <th node_ref=node_ref class=merge_classes!("", class)>
+        <th node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </th>
     }
@@ -104,7 +104,7 @@ pub fn TableCell(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <td node_ref=node_ref class=merge_classes!("", class)>
+        <td node_ref=node_ref class=move || merge_classes!("", class)>
             {children()}
         </td>
     }

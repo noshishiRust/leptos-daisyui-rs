@@ -11,7 +11,7 @@ pub fn Diff(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <figure node_ref=node_ref class=merge_classes!("diff", class)>
+        <figure node_ref=node_ref class=move || merge_classes!("diff", class)>
             {children()}
         </figure>
     }
@@ -24,7 +24,7 @@ pub fn DiffItem1(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("diff-item-1", class)>
+        <div node_ref=node_ref class=move || merge_classes!("diff-item-1", class)>
             {children()}
         </div>
     }
@@ -37,7 +37,7 @@ pub fn DiffItem2(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("diff-item-2", class)>
+        <div node_ref=node_ref class=move || merge_classes!("diff-item-2", class)>
             {children()}
         </div>
     }
@@ -48,5 +48,5 @@ pub fn DiffResizer(
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
 ) -> impl IntoView {
-    view! { <div node_ref=node_ref class=merge_classes!("diff-resizer", class)></div> }
+    view! { <div node_ref=node_ref class=move || merge_classes!("diff-resizer", class)></div> }
 }

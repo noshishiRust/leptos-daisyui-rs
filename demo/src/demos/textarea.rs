@@ -23,18 +23,18 @@ pub fn TextareaDemo() -> impl IntoView {
                 <div class="space-y-2">
                     <Textarea prop:placeholder="Default" class="w-full max-w-xs" />
                     <Textarea
-                        color=Signal::derive(move || TextareaColor::Primary)
+                        color=TextareaColor::Primary
                         class="w-full max-w-xs"
                         prop:disabled=true
                         prop:placeholder="Primary"
                     />
                     <Textarea
-                        color=Signal::derive(move || TextareaColor::Secondary)
+                        color=TextareaColor::Secondary
                         prop:placeholder="Secondary"
                         class="w-full max-w-xs"
                     />
                     <Textarea
-                        color=Signal::derive(move || TextareaColor::Accent)
+                        color=TextareaColor::Accent
                         prop:placeholder="Accent"
                         class="w-full max-w-xs"
                     />
@@ -43,22 +43,22 @@ pub fn TextareaDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="space-y-2">
                     <Textarea
-                        size=Signal::derive(move || TextareaSize::Xs)
+                        size=TextareaSize::Xs
                         prop:placeholder="XS"
                         class="w-full max-w-xs"
                     />
                     <Textarea
-                        size=Signal::derive(move || TextareaSize::Sm)
+                        size=TextareaSize::Sm
                         prop:placeholder="SM"
                         class="w-full max-w-xs"
                     />
                     <Textarea
-                        size=Signal::derive(move || TextareaSize::Md)
+                        size=TextareaSize::Md
                         prop:placeholder="MD"
                         class="w-full max-w-xs"
                     />
                     <Textarea
-                        size=Signal::derive(move || TextareaSize::Lg)
+                        size=TextareaSize::Lg
                         prop:placeholder="LG"
                         class="w-full max-w-xs"
                     />

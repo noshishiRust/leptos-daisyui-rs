@@ -8,7 +8,7 @@ pub fn Stack(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stack", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stack", class)>
             {children()}
         </div>
     }

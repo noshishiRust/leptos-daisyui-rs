@@ -18,13 +18,15 @@ pub fn Select(
     view! {
         <select
             node_ref=node_ref
-            class=merge_classes!(
-                "select",
+            class=move || {
+                merge_classes!(
+                    "select",
                 style.get().as_str(),
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             disabled=disabled
         >
             {children()}

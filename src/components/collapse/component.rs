@@ -11,11 +11,13 @@ pub fn Collapse(
     view! {
         <div
             tabindex="0"
-            class=merge_classes!(
-                "collapse",
+            class=move || {
+                merge_classes!(
+                    "collapse",
                 modifier.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </div>
@@ -30,11 +32,13 @@ pub fn CollapseCheckbox(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div class=merge_classes!(
-            "collapse",
+        <div class=move || {
+            merge_classes!(
+                "collapse",
                 modifier.get().as_str(),
                 class
-        )>
+            )
+        }>
             <input type="checkbox" prop:checked=checked />
             {children()}
         </div>
@@ -46,7 +50,7 @@ pub fn CollapseTitle(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("collapse-title", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("collapse-title", class)>{children()}</div> }
 }
 
 #[component]
@@ -54,5 +58,5 @@ pub fn CollapseContent(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("collapse-content", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("collapse-content", class)>{children()}</div> }
 }

@@ -8,13 +8,8 @@ pub fn MockupWindow(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("mockup-window", class)>
-            <div class="mockup-window-toolbar">
-                <div class="mockup-window-button"></div>
-                <div class="mockup-window-button"></div>
-                <div class="mockup-window-button"></div>
-            </div>
-            <div class="mockup-window-content">{children()}</div>
+        <div node_ref=node_ref class=move || merge_classes!("mockup-window", class)>
+            {children()}
         </div>
     }
 }

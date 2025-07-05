@@ -24,21 +24,21 @@ pub fn LoadingDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-4">
-                    <Loading size=Signal::derive(move || LoadingSize::Xs) />
-                    <Loading size=Signal::derive(move || LoadingSize::Sm) />
-                    <Loading size=Signal::derive(move || LoadingSize::Md) />
-                    <Loading size=Signal::derive(move || LoadingSize::Lg) />
+                    <Loading size=LoadingSize::Xs />
+                    <Loading size=LoadingSize::Sm />
+                    <Loading size=LoadingSize::Md />
+                    <Loading size=LoadingSize::Lg />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex gap-4">
-                    <Loading color=Signal::derive(move || LoadingColor::Primary) />
-                    <Loading color=Signal::derive(move || LoadingColor::Secondary) />
-                    <Loading color=Signal::derive(move || LoadingColor::Accent) />
-                    <Loading color=Signal::derive(move || LoadingColor::Info) />
-                    <Loading color=Signal::derive(move || LoadingColor::Success) />
-                    <Loading color=Signal::derive(move || LoadingColor::Warning) />
-                    <Loading color=Signal::derive(move || LoadingColor::Error) />
+                    <Loading color=LoadingColor::Primary />
+                    <Loading color=LoadingColor::Secondary />
+                    <Loading color=LoadingColor::Accent />
+                    <Loading color=LoadingColor::Info />
+                    <Loading color=LoadingColor::Success />
+                    <Loading color=LoadingColor::Warning />
+                    <Loading color=LoadingColor::Error />
                 </div>
             </div>
         </div>

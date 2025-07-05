@@ -28,22 +28,22 @@ impl ToggleColor {
 
 #[derive(Clone, Debug, Default)]
 pub enum ToggleSize {
-    #[default]
-    Default,
     Xs,
     Sm,
+    #[default]
     Md,
     Lg,
+    Xl,
 }
 
 impl ToggleSize {
     pub fn as_str(&self) -> &'static str {
         match self {
-            ToggleSize::Default => "",
             ToggleSize::Xs => "toggle-xs",
             ToggleSize::Sm => "toggle-sm",
             ToggleSize::Md => "toggle-md",
             ToggleSize::Lg => "toggle-lg",
+            ToggleSize::Xl => "toggle-xl",
         }
     }
 }

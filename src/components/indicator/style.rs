@@ -1,25 +1,35 @@
 #[derive(Clone, Debug, Default)]
-pub enum IndicatorPlacement {
+pub enum IndicatorVerticalPlacement {
     #[default]
-    TopEnd,
-    Start,
-    Center,
-    End,
     Top,
     Middle,
     Bottom,
 }
 
-impl IndicatorPlacement {
+impl IndicatorVerticalPlacement {
     pub fn as_str(&self) -> &'static str {
         match self {
-            IndicatorPlacement::TopEnd => "indicator-top indicator-end",
-            IndicatorPlacement::Start => "indicator-start",
-            IndicatorPlacement::Center => "indicator-center",
-            IndicatorPlacement::End => "indicator-end",
-            IndicatorPlacement::Top => "indicator-top",
-            IndicatorPlacement::Middle => "indicator-middle",
-            IndicatorPlacement::Bottom => "indicator-bottom",
+            Self::Top => "indicator-top",
+            Self::Middle => "indicator-middle",
+            Self::Bottom => "indicator-bottom",
+        }
+    }
+}
+
+#[derive(Clone, Debug, Default)]
+pub enum IndicatorHorizontalPlacement {
+    Start,
+    Center,
+    #[default]
+    End,
+}
+
+impl IndicatorHorizontalPlacement {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Self::Start => "indicator-start",
+            Self::Center => "indicator-center",
+            Self::End => "indicator-end",
         }
     }
 }

@@ -17,11 +17,13 @@ pub fn Avatar(
         <div
             aria-label="avatar"
             node_ref=node_ref
-            class=merge_classes!(
-                "avatar",
+            class=move || {
+                merge_classes!(
+                    "avatar",
                 modifier.get().as_str(),
                 class
-            )
+                )
+            }
         >
             <div>{children()}</div>
         </div>
@@ -33,5 +35,5 @@ pub fn AvatarGroup(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("avatar-group", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("avatar-group", class)>{children()}</div> }
 }

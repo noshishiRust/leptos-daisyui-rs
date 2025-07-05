@@ -20,14 +20,16 @@ pub fn ValidatorInput(
         <input
             node_ref=node_ref
             type=input_type.unwrap_or("text")
-            class=merge_classes!(
-                "input",
+            class=move || {
+                merge_classes!(
+                    "input",
                 "validator",
                 style.get().as_str(),
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             placeholder=placeholder
             value=value
         />
@@ -47,14 +49,16 @@ pub fn ValidatorSelect(
     view! {
         <select
             node_ref=node_ref
-            class=merge_classes!(
-                "select",
+            class=move || {
+                merge_classes!(
+                    "select",
                 "validator",
                 style.get().as_str(),
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             disabled=disabled
         >
             {children()}
@@ -69,7 +73,7 @@ pub fn ValidatorHint(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("validator-text", class)>
+        <div node_ref=node_ref class=move || merge_classes!("validator-text", class)>
             {children()}
         </div>
     }

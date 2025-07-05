@@ -4,10 +4,14 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+leptos-daisyui-rs = { path = "../" }
+
 leptos = { version = "0.8", features = ["csr"] }
-leptos_router = { version = "0.8" }
-leptos-daisyui-rs = { version = "0.0.1" }
+leptos_router = "0.8"
+leptos_icons = "0.6.1"
+leptos-use = "0.16.2"
+icondata = "0.6.0"
 
 console_log = "1.0.0"
-log = "0.4.27"
 console_error_panic_hook = "0.1.7"
+log = "0.4.27"

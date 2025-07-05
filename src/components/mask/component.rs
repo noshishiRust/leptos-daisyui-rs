@@ -12,11 +12,13 @@ pub fn Mask(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "mask",
+            class=move || {
+                merge_classes!(
+                    "mask",
                 mask_type.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </div>

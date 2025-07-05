@@ -14,13 +14,15 @@ pub fn Divider(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "divider",
+            class=move || {
+                merge_classes!(
+                    "divider",
                 color.get().as_str(),
                 direction.get().as_str(),
                 placement.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children.map(|c| c())}
         </div>

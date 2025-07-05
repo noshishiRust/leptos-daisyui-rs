@@ -34,54 +34,54 @@ pub fn CheckboxDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
-                    <Checkbox checked=Signal::derive(move || true) />
+                    <Checkbox checked=true />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Primary)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Primary
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Secondary)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Secondary
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Accent)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Accent
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Success)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Success
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Warning)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Warning
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Info)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Info
+                        checked=true
                     />
                     <Checkbox
-                        color=Signal::derive(move || CheckboxColor::Error)
-                        checked=Signal::derive(move || true)
+                        color=CheckboxColor::Error
+                        checked=true
                     />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
                     <Checkbox
-                        size=Signal::derive(move || CheckboxSize::Xs)
-                        checked=Signal::derive(move || true)
+                        size=CheckboxSize::Xs
+                        checked=true
                     />
                     <Checkbox
-                        size=Signal::derive(move || CheckboxSize::Sm)
-                        checked=Signal::derive(move || true)
+                        size=CheckboxSize::Sm
+                        checked=true
                     />
                     <Checkbox
-                        size=Signal::derive(move || CheckboxSize::Md)
-                        checked=Signal::derive(move || true)
+                        size=CheckboxSize::Md
+                        checked=true
                     />
                     <Checkbox
-                        size=Signal::derive(move || CheckboxSize::Lg)
-                        checked=Signal::derive(move || true)
+                        size=CheckboxSize::Lg
+                        checked=true
                     />
                 </div>
             </div>

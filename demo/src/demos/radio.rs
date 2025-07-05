@@ -294,7 +294,7 @@ pub fn RadioDemo() -> impl IntoView {
                             </div>
                         </div>
                         <div class="card-actions justify-end mt-4">
-                            <Button color=Signal::derive(|| ButtonColor::Primary)>"Submit"</Button>
+                            <Button color=ButtonColor::Primary>"Submit"</Button>
                         </div>
                     </CardBody>
                 </Card>

@@ -15,7 +15,7 @@ pub fn AccordionDemo() -> impl IntoView {
 
                 <div class="space-y-2">
                     <Accordion
-                        modifier=Signal::derive(move || AccordionModifier::Arrow)
+                        modifier=AccordionModifier::Arrow
                         class="border border-base-300"
                     >
                         <input type="radio" name="accordion-1" checked />
@@ -28,7 +28,7 @@ pub fn AccordionDemo() -> impl IntoView {
                     </Accordion>
 
                     <Accordion
-                        modifier=Signal::derive(move || AccordionModifier::Arrow)
+                        modifier=AccordionModifier::Arrow
                         class="border border-base-300"
                     >
                         <input type="radio" name="accordion-1" />
@@ -41,7 +41,7 @@ pub fn AccordionDemo() -> impl IntoView {
                     </Accordion>
 
                     <Accordion
-                        modifier=Signal::derive(move || AccordionModifier::Plus)
+                        modifier=AccordionModifier::Plus
                         class="border border-base-300"
                     >
                         <input type="radio" name="accordion-1" />

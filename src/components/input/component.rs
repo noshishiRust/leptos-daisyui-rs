@@ -17,13 +17,15 @@ pub fn Input(
         <input
             node_ref=node_ref
             type=input_type.unwrap_or("text")
-            class=merge_classes!(
-                "input",
+            class=move || {
+                merge_classes!(
+                    "input",
                 style.get().as_str(),
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             placeholder=placeholder
             value=value
         />

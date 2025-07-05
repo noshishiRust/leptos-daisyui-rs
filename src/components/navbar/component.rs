@@ -11,7 +11,7 @@ pub fn Navbar(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <nav node_ref=node_ref class=merge_classes!("navbar", class)>
+        <nav node_ref=node_ref class=move || merge_classes!("navbar", class)>
             {children()}
         </nav>
     }
@@ -24,7 +24,7 @@ pub fn NavbarStart(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("navbar-start", class)>
+        <div node_ref=node_ref class=move || merge_classes!("navbar-start", class)>
             {children()}
         </div>
     }
@@ -37,7 +37,7 @@ pub fn NavbarCenter(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("navbar-center", class)>
+        <div node_ref=node_ref class=move || merge_classes!("navbar-center", class)>
             {children()}
         </div>
     }
@@ -50,7 +50,7 @@ pub fn NavbarEnd(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("navbar-end", class)>
+        <div node_ref=node_ref class=move || merge_classes!("navbar-end", class)>
             {children()}
         </div>
     }

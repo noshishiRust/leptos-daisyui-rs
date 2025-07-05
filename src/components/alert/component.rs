@@ -19,13 +19,15 @@ pub fn Alert(
         <div
             role="alert"
             node_ref=node_ref
-            class=merge_classes!(
-                "alert",
+            class=move || {
+                merge_classes!(
+                    "alert",
                 style.get().as_str(),
                 color.get().as_str(),
                 direction.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </div>

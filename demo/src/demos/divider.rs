@@ -149,9 +149,7 @@ pub fn DividerDemo() -> impl IntoView {
                         </div>
 
                         <div class="card-actions justify-end mt-6">
-                            <Button color=Signal::derive(|| {
-                                ButtonColor::Primary
-                            })>"Register"</Button>
+                            <Button color=ButtonColor::Primary>"Register"</Button>
                         </div>
                     </CardBody>
                 </Card>

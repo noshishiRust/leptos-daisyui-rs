@@ -16,12 +16,14 @@ pub fn Footer(
     view! {
         <footer
             node_ref=node_ref
-            class=merge_classes!(
-                "footer",
+            class=move || {
+                merge_classes!(
+                    "footer",
                 placement.get().as_str(),
                 direction.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </footer>
@@ -35,7 +37,7 @@ pub fn FooterTitle(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("footer-title", class)>
+        <div node_ref=node_ref class=move || merge_classes!("footer-title", class)>
             {children()}
         </div>
     }

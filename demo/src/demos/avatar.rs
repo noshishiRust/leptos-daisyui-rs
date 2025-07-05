@@ -34,13 +34,13 @@ pub fn AvatarDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Avatar with Status"</h2>
                 <div class="flex gap-4 items-center">
-                    <Avatar modifier=Signal::derive(move || AvatarModifier::Online)>
+                    <Avatar modifier=AvatarModifier::Online>
                         <div class="w-20 rounded-full">
                             <img src="https://picsum.photos/100/100?random=4" alt="Avatar" />
                         </div>
                     </Avatar>
 
-                    <Avatar modifier=Signal::derive(move || AvatarModifier::Offline)>
+                    <Avatar modifier=AvatarModifier::Offline>
                         <div class="w-20 rounded-full">
                             <img src="https://picsum.photos/100/100?random=5" alt="Avatar" />
                         </div>
@@ -48,7 +48,7 @@ pub fn AvatarDemo() -> impl IntoView {
                 </div>
 
                 <h2 class="text-xl font-semibold">"Placeholder Avatar"</h2>
-                <Avatar modifier=Signal::derive(move || AvatarModifier::Placeholder)>
+                <Avatar modifier=AvatarModifier::Placeholder>
                     <div class="bg-neutral text-neutral-content rounded-full w-16">
                         <span class="text-xl">"K"</span>
                     </div>
@@ -71,7 +71,7 @@ pub fn AvatarDemo() -> impl IntoView {
                             <img src="https://picsum.photos/100/100?random=8" alt="Avatar" />
                         </div>
                     </Avatar>
-                    <Avatar modifier=Signal::derive(move || AvatarModifier::Placeholder)>
+                    <Avatar modifier=AvatarModifier::Placeholder>
                         <div class="w-12 bg-neutral text-neutral-content rounded-full">
                             <span>"+3"</span>
                         </div>

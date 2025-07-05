@@ -9,7 +9,11 @@ pub fn Stats(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stats", class) class:stats-vertical=vertical>
+        <div
+            node_ref=node_ref
+            class=move || merge_classes!("stats", class)
+            class:stats-vertical=vertical
+        >
             {children()}
         </div>
     }
@@ -22,7 +26,7 @@ pub fn Stat(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat", class)>
             {children()}
         </div>
     }
@@ -35,7 +39,7 @@ pub fn StatTitle(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat-title", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat-title", class)>
             {children()}
         </div>
     }
@@ -48,7 +52,7 @@ pub fn StatValue(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat-value", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat-value", class)>
             {children()}
         </div>
     }
@@ -61,7 +65,7 @@ pub fn StatDesc(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat-desc", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat-desc", class)>
             {children()}
         </div>
     }
@@ -74,7 +78,7 @@ pub fn StatFigure(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat-figure", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat-figure", class)>
             {children()}
         </div>
     }
@@ -87,7 +91,7 @@ pub fn StatActions(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("stat-actions", class)>
+        <div node_ref=node_ref class=move || merge_classes!("stat-actions", class)>
             {children()}
         </div>
     }

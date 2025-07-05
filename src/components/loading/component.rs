@@ -13,13 +13,15 @@ pub fn Loading(
     view! {
         <span
             node_ref=node_ref
-            class=merge_classes!(
-                "loading",
+            class=move || {
+                merge_classes!(
+                    "loading",
                 color.get().as_str(),
                 loading_type.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
         ></span>
     }
 }

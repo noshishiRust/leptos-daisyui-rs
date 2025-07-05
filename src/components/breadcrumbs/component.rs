@@ -11,7 +11,7 @@ pub fn Breadcrumbs(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=outer_node_ref class=merge_classes!("breadcrumbs", ouuter_class)>
+        <div node_ref=outer_node_ref class=move || merge_classes!("breadcrumbs", ouuter_class)>
             <ul node_ref=inner_node_ref class=inner_class>
                 {children()}
             </ul>

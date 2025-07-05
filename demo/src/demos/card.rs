@@ -17,9 +17,7 @@ pub fn CardDemo() -> impl IntoView {
                         <h2 class="card-title">"Card title!"</h2>
                         <p>"If a dog chews shoes whose shoes does he choose?"</p>
                         <div class="card-actions justify-end">
-                            <Button color=Signal::derive(move || {
-                                ButtonColor::Primary
-                            })>"Buy Now"</Button>
+                            <Button color=ButtonColor::Primary>"Buy Now"</Button>
                         </div>
                     </CardBody>
                 </Card>
@@ -33,9 +31,7 @@ pub fn CardDemo() -> impl IntoView {
                         <h2 class="card-title">"Shoes!"</h2>
                         <p>"If a dog chews shoes whose shoes does he choose?"</p>
                         <div class="card-actions justify-end">
-                            <Button color=Signal::derive(move || {
-                                ButtonColor::Primary
-                            })>"Buy Now"</Button>
+                            <Button color=ButtonColor::Primary>"Buy Now"</Button>
                         </div>
                     </CardBody>
                 </Card>
@@ -50,8 +46,8 @@ pub fn CardDemo() -> impl IntoView {
                         <p>"This card uses compact style"</p>
                         <div class="card-actions justify-end">
                             <Button
-                                size=Signal::derive(move || ButtonSize::Sm)
-                                color=Signal::derive(move || ButtonColor::Primary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Primary
                             >
                                 "Buy Now"
                             </Button>

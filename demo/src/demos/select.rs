@@ -32,7 +32,7 @@ pub fn SelectDemo() -> impl IntoView {
                         <option>"Option 2"</option>
                     </Select>
                     <Select
-                        color=Signal::derive(move || SelectColor::Primary)
+                        color=SelectColor::Primary
                         class="w-full max-w-xs"
                     >
                         <option disabled selected>
@@ -42,7 +42,7 @@ pub fn SelectDemo() -> impl IntoView {
                         <option>"Option 2"</option>
                     </Select>
                     <Select
-                        color=Signal::derive(move || SelectColor::Secondary)
+                        color=SelectColor::Secondary
                         class="w-full max-w-xs"
                     >
                         <option disabled selected>
@@ -55,25 +55,25 @@ pub fn SelectDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="space-y-2">
-                    <Select size=Signal::derive(move || SelectSize::Xs) class="w-full max-w-xs">
+                    <Select size=SelectSize::Xs class="w-full max-w-xs">
                         <option disabled selected>
                             "XS"
                         </option>
                         <option>"Option 1"</option>
                     </Select>
-                    <Select size=Signal::derive(move || SelectSize::Sm) class="w-full max-w-xs">
+                    <Select size=SelectSize::Sm class="w-full max-w-xs">
                         <option disabled selected>
                             "SM"
                         </option>
                         <option>"Option 1"</option>
                     </Select>
-                    <Select size=Signal::derive(move || SelectSize::Md) class="w-full max-w-xs">
+                    <Select size=SelectSize::Md class="w-full max-w-xs">
                         <option disabled selected>
                             "MD"
                         </option>
                         <option>"Option 1"</option>
                     </Select>
-                    <Select size=Signal::derive(move || SelectSize::Lg) class="w-full max-w-xs">
+                    <Select size=SelectSize::Lg class="w-full max-w-xs">
                         <option disabled selected>
                             "LG"
                         </option>

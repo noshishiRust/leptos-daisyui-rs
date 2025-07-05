@@ -21,12 +21,14 @@ pub fn Menu(
     view! {
         <ul
             node_ref=node_ref
-            class=merge_classes!(
-                "menu",
-                direction.get().as_str(),
-                size.get().as_str(),
-                class
-            )
+            class=move || {
+                merge_classes!(
+                    "menu",
+                    direction.get().as_str(),
+                    size.get().as_str(),
+                    class
+                )
+            }
         >
             {children()}
         </ul>
@@ -94,7 +96,7 @@ pub fn MenuTitle(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <h2 node_ref=node_ref class=merge_classes!("menu-title", class)>
+        <h2 node_ref=node_ref class=move || merge_classes!("menu-title", class)>
             {children()}
         </h2>
     }

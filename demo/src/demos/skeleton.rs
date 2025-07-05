@@ -39,7 +39,7 @@ pub fn SkeletonDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Loading vs Content Toggle"</h2>
                 <div class="space-y-4">
                     <Button
-                        color=Signal::derive(|| ButtonColor::Primary)
+                        color=ButtonColor::Primary
                         on:click=move |_| set_loading.update(|loading| *loading = !*loading)
                     >
                         {move || if loading.get() { "Show Content" } else { "Show Loading" }}
@@ -83,8 +83,8 @@ pub fn SkeletonDemo() -> impl IntoView {
                                             "This is the actual content that appears after loading is complete. The skeleton was just a placeholder to show the structure while data was being fetched."
                                         </p>
                                         <Button
-                                            size=Signal::derive(|| ButtonSize::Sm)
-                                            color=Signal::derive(|| ButtonColor::Primary)
+                                            size=ButtonSize::Sm
+                                            color=ButtonColor::Primary
                                         >
                                             "Read More"
                                         </Button>

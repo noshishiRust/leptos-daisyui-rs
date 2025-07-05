@@ -18,12 +18,14 @@ pub fn Range(
         <input
             node_ref=node_ref
             type="range"
-            class=merge_classes!(
-                "range",
+            class=move || {
+                merge_classes!(
+                    "range",
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             value=value
             min=min
             max=max

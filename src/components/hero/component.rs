@@ -8,7 +8,7 @@ pub fn Hero(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("hero", class)>
+        <div node_ref=node_ref class=move || merge_classes!("hero", class)>
             {children()}
         </div>
     }
@@ -21,7 +21,7 @@ pub fn HeroContent(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("hero-content", class)>
+        <div node_ref=node_ref class=move || merge_classes!("hero-content", class)>
             {children()}
         </div>
     }
@@ -32,5 +32,5 @@ pub fn HeroOverlay(
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
 ) -> impl IntoView {
-    view! { <div node_ref=node_ref class=merge_classes!("hero-overlay", class)></div> }
+    view! { <div node_ref=node_ref class=move || merge_classes!("hero-overlay", class)></div> }
 }

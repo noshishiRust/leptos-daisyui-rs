@@ -1,7 +1,7 @@
 use super::style::{TabSize, TabVariant};
 use crate::merge_classes;
 use leptos::{
-    html::{A, Div, Input},
+    html::{Div, Input, A},
     prelude::*,
 };
 
@@ -16,12 +16,14 @@ pub fn Tabs(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "tabs",
+            class=move || {
+                merge_classes!(
+                    "tabs",
                 size.get().as_str(),
                 variant.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </div>
@@ -40,7 +42,7 @@ pub fn Tab(
     view! {
         <a
             node_ref=node_ref
-            class=merge_classes!("tab", class)
+            class=move || merge_classes!("tab", class)
             class:tab-active=active
             class:tab-disabled=disabled
             on:click=move |_| {
@@ -68,7 +70,7 @@ pub fn TabRadio(
             node_ref=node_ref
             type="radio"
             name=name
-            class=merge_classes!("tab", class)
+            class=move || merge_classes!("tab", class)
             prop:checked=checked
             on:change=move |ev| {
                 if let Some(handler) = &on_change {

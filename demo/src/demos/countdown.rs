@@ -150,9 +150,7 @@ pub fn CountdownDemo() -> impl IntoView {
                                 </div>
                             </div>
                             <div class="card-actions justify-center mt-4">
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Accent
-                                })>"Notify Me"</Button>
+                                <Button color=ButtonColor::Accent>"Notify Me"</Button>
                             </div>
                         </CardBody>
                     </Card>
@@ -182,9 +180,7 @@ pub fn CountdownDemo() -> impl IntoView {
                                 </div>
                             </div>
                             <div class="card-actions justify-center mt-4">
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Warning
-                                })>"Shop Now"</Button>
+                                <Button color=ButtonColor::Warning>"Shop Now"</Button>
                             </div>
                         </CardBody>
                     </Card>
@@ -228,12 +224,8 @@ pub fn CountdownDemo() -> impl IntoView {
                             </div>
 
                             <div class="mt-6 flex gap-2 justify-center">
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Primary
-                                })>"Join Live Stream"</Button>
-                                <Button style=Signal::derive(|| {
-                                    ButtonStyle::Outline
-                                })>"Set Reminder"</Button>
+                                <Button color=ButtonColor::Primary>"Join Live Stream"</Button>
+                                <Button style=ButtonStyle::Outline>"Set Reminder"</Button>
                             </div>
                         </div>
                     </CardBody>

@@ -11,7 +11,7 @@ pub fn AlertDemo() -> impl IntoView {
             <div class="space-y-4">
                 <h2 class="text-xl font-semibold">"Different Colors"</h2>
                 <div class="space-y-3">
-                    <Alert color=Signal::derive(move || AlertColor::Info)>
+                    <Alert color=AlertColor::Info>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -28,7 +28,7 @@ pub fn AlertDemo() -> impl IntoView {
                         <span>"Info alert with icon"</span>
                     </Alert>
 
-                    <Alert color=Signal::derive(move || AlertColor::Success)>
+                    <Alert color=AlertColor::Success>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="stroke-current shrink-0 h-6 w-6"
@@ -45,7 +45,7 @@ pub fn AlertDemo() -> impl IntoView {
                         <span>"Success alert!"</span>
                     </Alert>
 
-                    <Alert color=Signal::derive(move || AlertColor::Warning)>
+                    <Alert color=AlertColor::Warning>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="stroke-current shrink-0 h-6 w-6"
@@ -62,7 +62,7 @@ pub fn AlertDemo() -> impl IntoView {
                         <span>"Warning alert!"</span>
                     </Alert>
 
-                    <Alert color=Signal::derive(move || AlertColor::Error)>
+                    <Alert color=AlertColor::Error>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="stroke-current shrink-0 h-6 w-6"
@@ -83,15 +83,15 @@ pub fn AlertDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Different Styles"</h2>
                 <div class="space-y-3">
                     <Alert
-                        style=Signal::derive(move || AlertStyle::Outline)
-                        color=Signal::derive(move || AlertColor::Info)
+                        style=AlertStyle::Outline
+                        color=AlertColor::Info
                     >
                         <span>"Outline style alert"</span>
                     </Alert>
 
                     <Alert
-                        style=Signal::derive(move || AlertStyle::Soft)
-                        color=Signal::derive(move || AlertColor::Info)
+                        style=AlertStyle::Soft
+                        color=AlertColor::Info
                     >
                         <span>"Soft style alert"</span>
                     </Alert>

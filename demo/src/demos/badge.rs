@@ -14,43 +14,43 @@ pub fn BadgeDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
                     <Badge>"Default"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Neutral)>"Neutral"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Primary)>"Primary"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Secondary)>"Secondary"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Accent)>"Accent"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Info)>"Info"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Success)>"Success"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Warning)>"Warning"</Badge>
-                    <Badge color=Signal::derive(move || BadgeColor::Error)>"Error"</Badge>
+                    <Badge color=BadgeColor::Neutral>"Neutral"</Badge>
+                    <Badge color=BadgeColor::Primary>"Primary"</Badge>
+                    <Badge color=BadgeColor::Secondary>"Secondary"</Badge>
+                    <Badge color=BadgeColor::Accent>"Accent"</Badge>
+                    <Badge color=BadgeColor::Info>"Info"</Badge>
+                    <Badge color=BadgeColor::Success>"Success"</Badge>
+                    <Badge color=BadgeColor::Warning>"Warning"</Badge>
+                    <Badge color=BadgeColor::Error>"Error"</Badge>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
-                    <Badge size=Signal::derive(move || BadgeSize::Xs)>"XS"</Badge>
-                    <Badge size=Signal::derive(move || BadgeSize::Sm)>"SM"</Badge>
-                    <Badge size=Signal::derive(move || BadgeSize::Md)>"MD"</Badge>
-                    <Badge size=Signal::derive(move || BadgeSize::Lg)>"LG"</Badge>
-                    <Badge size=Signal::derive(move || BadgeSize::Xl)>"XL"</Badge>
+                    <Badge size=BadgeSize::Xs>"XS"</Badge>
+                    <Badge size=BadgeSize::Sm>"SM"</Badge>
+                    <Badge size=BadgeSize::Md>"MD"</Badge>
+                    <Badge size=BadgeSize::Lg>"LG"</Badge>
+                    <Badge size=BadgeSize::Xl>"XL"</Badge>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Styles"</h2>
                 <div class="flex gap-2">
-                    <Badge color=Signal::derive(move || BadgeColor::Primary)>"Default"</Badge>
+                    <Badge color=BadgeColor::Primary>"Default"</Badge>
                     <Badge
-                        style=Signal::derive(move || BadgeStyle::Outline)
-                        color=Signal::derive(move || BadgeColor::Primary)
+                        style=BadgeStyle::Outline
+                        color=BadgeColor::Primary
                     >
                         "Outline"
                     </Badge>
                     <Badge
-                        style=Signal::derive(move || BadgeStyle::Ghost)
-                        color=Signal::derive(move || BadgeColor::Primary)
+                        style=BadgeStyle::Ghost
+                        color=BadgeColor::Primary
                     >
                         "Ghost"
                     </Badge>
                     <Badge
-                        style=Signal::derive(move || BadgeStyle::Soft)
-                        color=Signal::derive(move || BadgeColor::Primary)
+                        style=BadgeStyle::Soft
+                        color=BadgeColor::Primary
                     >
                         "Soft"
                     </Badge>
@@ -58,13 +58,13 @@ pub fn BadgeDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"In Text"</h2>
                 <div class="text-lg">
-                    "Inbox " <Badge color=Signal::derive(move || BadgeColor::Secondary)>"3"</Badge>
+                    "Inbox " <Badge color=BadgeColor::Secondary>"3"</Badge>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Empty Badge"</h2>
                 <div class="flex items-center gap-2">
                     "Notifications "
-                    <Badge color=Signal::derive(move || BadgeColor::Error) class="w-3 h-3 p-0">
+                    <Badge color=BadgeColor::Error class="w-3 h-3 p-0">
                         "Notifications"
                     </Badge>
                 </div>

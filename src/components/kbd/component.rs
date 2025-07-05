@@ -12,9 +12,11 @@ pub fn Kbd(
     view! {
         <kbd
             node_ref=node_ref
-            class=merge_classes!("kbd",
+            class=move || {
+                merge_classes!("kbd",
                 size.get().as_str(),
                 class)
+            }
         >
             {children()}
         </kbd>

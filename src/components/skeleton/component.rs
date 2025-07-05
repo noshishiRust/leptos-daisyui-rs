@@ -8,7 +8,7 @@ pub fn Skeleton(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("skeleton", class)>
+        <div node_ref=node_ref class=move || merge_classes!("skeleton", class)>
             {children()}
         </div>
     }

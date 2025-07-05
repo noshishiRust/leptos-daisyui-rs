@@ -16,64 +16,64 @@ pub fn ToggleDemo() -> impl IntoView {
                 <div class="flex flex-col gap-2">
                     <Toggle
                         checked=Signal::derive(move || checked1.get())
-                        on_change=Callback::new(move |value| set_checked1.set(value))
+                        on:change=move |ev| set_checked1.set(event_target_checked(&ev))
                     />
                     <Toggle
                         checked=Signal::derive(move || checked2.get())
-                        on_change=Callback::new(move |value| set_checked2.set(value))
+                        on:change=move |ev| set_checked2.set(event_target_checked(&ev))
                     />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
-                    <Toggle checked=Signal::derive(move || true) />
+                    <Toggle checked=true />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Primary)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Primary
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Secondary)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Secondary
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Accent)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Accent
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Success)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Success
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Warning)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Warning
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Info)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Info
+                        checked=true
                     />
                     <Toggle
-                        color=Signal::derive(move || ToggleColor::Error)
-                        checked=Signal::derive(move || true)
+                        color=ToggleColor::Error
+                        checked=true
                     />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
                     <Toggle
-                        size=Signal::derive(move || ToggleSize::Xs)
-                        checked=Signal::derive(move || true)
+                        size=ToggleSize::Xs
+                        checked=true
                     />
                     <Toggle
-                        size=Signal::derive(move || ToggleSize::Sm)
-                        checked=Signal::derive(move || true)
+                        size=ToggleSize::Sm
+                        checked=true
                     />
                     <Toggle
-                        size=Signal::derive(move || ToggleSize::Md)
-                        checked=Signal::derive(move || true)
+                        size=ToggleSize::Md
+                        checked=true
                     />
                     <Toggle
-                        size=Signal::derive(move || ToggleSize::Lg)
-                        checked=Signal::derive(move || true)
+                        size=ToggleSize::Lg
+                        checked=true
                     />
                 </div>
             </div>

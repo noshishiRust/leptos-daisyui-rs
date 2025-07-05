@@ -16,11 +16,11 @@ pub fn Swap(
     view! {
         <label
             node_ref=node_ref
-            class=merge_classes!(
-                "swap",
+            class=move || {
+                merge_classes!("swap",
                 rotate.get().as_str(),
-                class
-            )
+                class)
+            }
         >
             <input type="checkbox" prop:checked=active />
             {children()}
@@ -35,7 +35,7 @@ pub fn SwapOn(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("swap-on", class)>
+        <div node_ref=node_ref class=move || merge_classes!("swap-on", class)>
             {children()}
         </div>
     }
@@ -48,7 +48,7 @@ pub fn SwapOff(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("swap-off", class)>
+        <div node_ref=node_ref class=move || merge_classes!("swap-off", class)>
             {children()}
         </div>
     }

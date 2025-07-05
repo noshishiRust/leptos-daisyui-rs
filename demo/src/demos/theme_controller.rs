@@ -90,17 +90,13 @@ pub fn ThemeControllerDemo() -> impl IntoView {
                             <h2 class="card-title">"Sample Card"</h2>
                             <p>"This card changes with the theme"</p>
                             <div class="card-actions justify-end">
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Primary
-                                })>"Primary"</Button>
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Secondary
-                                })>"Secondary"</Button>
+                                <Button color=ButtonColor::Primary>"Primary"</Button>
+                                <Button color=ButtonColor::Secondary>"Secondary"</Button>
                             </div>
                         </CardBody>
                     </Card>
 
-                    <Alert color=Signal::derive(|| AlertColor::Info)>
+                    <Alert color=AlertColor::Info>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

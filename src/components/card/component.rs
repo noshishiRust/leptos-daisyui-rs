@@ -13,12 +13,14 @@ pub fn Card(
 ) -> impl IntoView {
     view! {
         <div
-            class=merge_classes!(
-                "card",
+            class=move || {
+                merge_classes!(
+                    "card",
                 style.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             class:card-side=side
             class:image-full=image_full
         >
@@ -29,12 +31,12 @@ pub fn Card(
 
 #[component]
 pub fn CardBody(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
-    view! { <div class=merge_classes!("card-body", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("card-body", class)>{children()}</div> }
 }
 
 #[component]
 pub fn CardTitle(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
-    view! { <h2 class=merge_classes!("card-title", class)>{children()}</h2> }
+    view! { <h2 class=move || merge_classes!("card-title", class)>{children()}</h2> }
 }
 
 #[component]
@@ -42,5 +44,5 @@ pub fn CardActions(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("card-actions", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("card-actions", class)>{children()}</div> }
 }

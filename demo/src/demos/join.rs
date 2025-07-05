@@ -18,13 +18,13 @@ pub fn JoinDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Join with Different Button Colors"</h2>
                 <div class="join">
-                    <Button color=Signal::derive(|| ButtonColor::Primary) class="join-item">
+                    <Button color=ButtonColor::Primary class="join-item">
                         "Primary"
                     </Button>
-                    <Button color=Signal::derive(|| ButtonColor::Secondary) class="join-item">
+                    <Button color=ButtonColor::Secondary class="join-item">
                         "Secondary"
                     </Button>
-                    <Button color=Signal::derive(|| ButtonColor::Accent) class="join-item">
+                    <Button color=ButtonColor::Accent class="join-item">
                         "Accent"
                     </Button>
                 </div>
@@ -49,7 +49,7 @@ pub fn JoinDemo() -> impl IntoView {
                         placeholder="Search..."
                         class="join-item input-bordered w-full max-w-xs"
                     />
-                    <Button color=Signal::derive(|| ButtonColor::Primary) class="join-item">
+                    <Button color=ButtonColor::Primary class="join-item">
                         "Go"
                     </Button>
                 </div>
@@ -64,7 +64,7 @@ pub fn JoinDemo() -> impl IntoView {
                         <option>"Drama"</option>
                         <option>"Action"</option>
                     </Select>
-                    <Button color=Signal::derive(|| ButtonColor::Primary) class="join-item">
+                    <Button color=ButtonColor::Primary class="join-item">
                         "Filter"
                     </Button>
                 </div>
@@ -79,42 +79,42 @@ pub fn JoinDemo() -> impl IntoView {
                         placeholder="Last name"
                         class="join-item input-bordered w-full max-w-xs"
                     />
-                    <Button color=Signal::derive(|| ButtonColor::Success) class="join-item">
+                    <Button color=ButtonColor::Success class="join-item">
                         "Submit"
                     </Button>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Toolbar with Join"</h2>
                 <div class="join">
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "Bold"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "Italic"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "Underline"
                     </Button>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Pagination with Join"</h2>
                 <div class="join">
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "«"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "1"
                     </Button>
-                    <Button color=Signal::derive(|| ButtonColor::Primary) class="join-item">
+                    <Button color=ButtonColor::Primary class="join-item">
                         "2"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "3"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "4"
                     </Button>
-                    <Button style=Signal::derive(|| ButtonStyle::Outline) class="join-item">
+                    <Button style=ButtonStyle::Outline class="join-item">
                         "»"
                     </Button>
                 </div>
@@ -126,7 +126,7 @@ pub fn JoinDemo() -> impl IntoView {
                             placeholder="Email address"
                             class="join-item input-bordered flex-1"
                         />
-                        <Button color=Signal::derive(|| ButtonColor::Primary) class="join-item">
+                        <Button color=ButtonColor::Primary class="join-item">
                             "Subscribe"
                         </Button>
                     </div>
@@ -141,7 +141,7 @@ pub fn JoinDemo() -> impl IntoView {
                             <option>"Leptos"</option>
                             <option>"Svelte"</option>
                         </Select>
-                        <Button color=Signal::derive(|| ButtonColor::Info) class="join-item">
+                        <Button color=ButtonColor::Info class="join-item">
                             "Learn"
                         </Button>
                     </div>
@@ -168,7 +168,7 @@ pub fn JoinDemo() -> impl IntoView {
                                     <option>"Home"</option>
                                 </Select>
                                 <Button
-                                    color=Signal::derive(|| ButtonColor::Primary)
+                                    color=ButtonColor::Primary
                                     class="join-item"
                                 >
                                     "Search"
@@ -208,22 +208,22 @@ pub fn JoinDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Social Media Actions"</h2>
                 <div class="join">
                     <Button
-                        size=Signal::derive(|| ButtonSize::Sm)
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        size=ButtonSize::Sm
+                        style=ButtonStyle::Outline
                         class="join-item"
                     >
                         "👍 Like"
                     </Button>
                     <Button
-                        size=Signal::derive(|| ButtonSize::Sm)
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        size=ButtonSize::Sm
+                        style=ButtonStyle::Outline
                         class="join-item"
                     >
                         "💬 Comment"
                     </Button>
                     <Button
-                        size=Signal::derive(|| ButtonSize::Sm)
-                        style=Signal::derive(|| ButtonStyle::Outline)
+                        size=ButtonSize::Sm
+                        style=ButtonStyle::Outline
                         class="join-item"
                     >
                         "🔗 Share"
@@ -233,7 +233,7 @@ pub fn JoinDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"File Upload with Join"</h2>
                 <div class="join">
                     <input type="file" class="join-item file-input file-input-bordered flex-1" />
-                    <Button color=Signal::derive(|| ButtonColor::Success) class="join-item">
+                    <Button color=ButtonColor::Success class="join-item">
                         "Upload"
                     </Button>
                 </div>

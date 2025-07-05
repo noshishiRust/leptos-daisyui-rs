@@ -15,11 +15,13 @@ pub fn Steps(
     view! {
         <ul
             node_ref=node_ref
-            class=merge_classes!(
-                "steps",
+            class=move || {
+                merge_classes!(
+                    "steps",
                 direction.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </ul>
@@ -37,11 +39,11 @@ pub fn Step(
     view! {
         <li
             node_ref=node_ref
-            class=merge_classes!(
-                "step",
+            class=move || {
+                merge_classes!("step",
                 color.get().as_str(),
-                class
-            )
+                class)
+            }
             data-content=data_content
         >
             {children()}

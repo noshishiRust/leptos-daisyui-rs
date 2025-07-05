@@ -11,7 +11,7 @@ pub fn List(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <ul node_ref=node_ref class=merge_classes!("list", class)>
+        <ul node_ref=node_ref class=move || merge_classes!("list", class)>
             {children()}
         </ul>
     }
@@ -28,7 +28,7 @@ pub fn ListRow(
     view! {
         <li
             node_ref=node_ref
-            class=merge_classes!("list-row", class)
+            class=move || merge_classes!("list-row", class)
             class:list-col-wrap=col_wrap
             class:list-col-grow=col_grow
         >

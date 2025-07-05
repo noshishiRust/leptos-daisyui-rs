@@ -32,21 +32,21 @@ pub fn ToastDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Toast Examples"</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Button
-                        color=Signal::derive(|| ButtonColor::Info)
+                        color=ButtonColor::Info
                         on:click=move |_| show_toast_fn("Information message", "info")
                     >
                         "Show Info Toast"
                     </Button>
 
                     <Button
-                        color=Signal::derive(|| ButtonColor::Success)
+                        color=ButtonColor::Success
                         on:click=move |_| show_toast_fn("Success! Operation completed.", "success")
                     >
                         "Show Success Toast"
                     </Button>
 
                     <Button
-                        color=Signal::derive(|| ButtonColor::Warning)
+                        color=ButtonColor::Warning
                         on:click=move |_| show_toast_fn(
                             "Warning: Please check your input.",
                             "warning",
@@ -56,7 +56,7 @@ pub fn ToastDemo() -> impl IntoView {
                     </Button>
 
                     <Button
-                        color=Signal::derive(|| ButtonColor::Error)
+                        color=ButtonColor::Error
                         on:click=move |_| show_toast_fn("Error: Something went wrong!", "error")
                     >
                         "Show Error Toast"
@@ -256,14 +256,14 @@ pub fn ToastDemo() -> impl IntoView {
                         <span>"Cookie consent required"</span>
                         <div>
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Ghost)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Ghost
                             >
                                 "Deny"
                             </Button>
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Primary
                             >
                                 "Accept"
                             </Button>
@@ -289,14 +289,14 @@ pub fn ToastDemo() -> impl IntoView {
                         <span>"Unsaved changes detected"</span>
                         <div>
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Outline
                             >
                                 "Discard"
                             </Button>
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Success)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Success
                             >
                                 "Save"
                             </Button>
@@ -327,8 +327,8 @@ pub fn ToastDemo() -> impl IntoView {
 
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Info)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Info
                                 on:click=move |_| show_toast_fn(
                                     "📧 You have 3 new messages",
                                     "info",
@@ -338,8 +338,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Success)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Success
                                 on:click=move |_| show_toast_fn(
                                     "✅ Profile updated successfully!",
                                     "success",
@@ -349,8 +349,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Warning)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Warning
                                 on:click=move |_| show_toast_fn(
                                     "⚠️ Password expires in 3 days",
                                     "warning",
@@ -360,8 +360,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Error)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Error
                                 on:click=move |_| show_toast_fn(
                                     "❌ Connection lost. Retrying...",
                                     "error",
@@ -371,8 +371,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Primary
                                 on:click=move |_| show_toast_fn(
                                     "🎉 Welcome to our platform!",
                                     "info",
@@ -382,8 +382,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Secondary)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Secondary
                                 on:click=move |_| show_toast_fn(
                                     "📥 File uploaded: document.pdf",
                                     "success",
@@ -393,8 +393,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                color=Signal::derive(|| ButtonColor::Accent)
+                                size=ButtonSize::Sm
+                                color=ButtonColor::Accent
                                 on:click=move |_| show_toast_fn(
                                     "🔔 Meeting starts in 10 minutes",
                                     "warning",
@@ -404,8 +404,8 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                size=Signal::derive(|| ButtonSize::Sm)
-                                style=Signal::derive(|| ButtonStyle::Outline)
+                                size=ButtonSize::Sm
+                                style=ButtonStyle::Outline
                                 on:click=move |_| show_toast_fn(
                                     "🚀 Version 2.0 is now available!",
                                     "info",
@@ -432,8 +432,8 @@ pub fn ToastDemo() -> impl IntoView {
                                 <p class="text-lg font-bold text-primary">"$99.99"</p>
                                 <Button
                                     class="w-full mt-2"
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    color=Signal::derive(|| ButtonColor::Primary)
+                                    size=ButtonSize::Sm
+                                    color=ButtonColor::Primary
                                     on:click=move |_| show_toast_fn(
                                         "🛒 Wireless Headphones added to cart!",
                                         "success",
@@ -453,8 +453,8 @@ pub fn ToastDemo() -> impl IntoView {
                                 <p class="text-lg font-bold text-primary">"$299.99"</p>
                                 <Button
                                     class="w-full mt-2"
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    color=Signal::derive(|| ButtonColor::Primary)
+                                    size=ButtonSize::Sm
+                                    color=ButtonColor::Primary
                                     on:click=move |_| show_toast_fn(
                                         "🛒 Smart Watch added to cart!",
                                         "success",
@@ -474,8 +474,8 @@ pub fn ToastDemo() -> impl IntoView {
                                 <p class="text-lg font-bold text-primary">"$79.99"</p>
                                 <Button
                                     class="w-full mt-2"
-                                    size=Signal::derive(|| ButtonSize::Sm)
-                                    color=Signal::derive(|| ButtonColor::Primary)
+                                    size=ButtonSize::Sm
+                                    color=ButtonColor::Primary
                                     on:click=move |_| show_toast_fn(
                                         "🛒 Bluetooth Speaker added to cart!",
                                         "success",
@@ -488,7 +488,7 @@ pub fn ToastDemo() -> impl IntoView {
 
                         <div class="mt-4 flex gap-2">
                             <Button
-                                color=Signal::derive(|| ButtonColor::Success)
+                                color=ButtonColor::Success
                                 on:click=move |_| show_toast_fn(
                                     "✅ Order placed successfully! Order #12345",
                                     "success",
@@ -498,7 +498,7 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                color=Signal::derive(|| ButtonColor::Warning)
+                                color=ButtonColor::Warning
                                 on:click=move |_| show_toast_fn(
                                     "⚠️ Some items in your cart are low in stock",
                                     "warning",
@@ -508,7 +508,7 @@ pub fn ToastDemo() -> impl IntoView {
                             </Button>
 
                             <Button
-                                color=Signal::derive(|| ButtonColor::Error)
+                                color=ButtonColor::Error
                                 on:click=move |_| show_toast_fn(
                                     "❌ Payment failed. Please try again.",
                                     "error",

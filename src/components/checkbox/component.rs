@@ -14,12 +14,14 @@ pub fn Checkbox(
     view! {
         <input
             type="checkbox"
-            class=merge_classes!(
-                "checkbox",
+            class=move || {
+                merge_classes!(
+                    "checkbox",
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             prop:checked=checked
             prop:disabled=disabled
             on:change=move |ev| {

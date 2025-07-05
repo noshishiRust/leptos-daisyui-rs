@@ -11,7 +11,7 @@ pub fn Calendar(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("calendar", class)>
+        <div node_ref=node_ref class=move || merge_classes!("calendar", class)>
             {children()}
         </div>
     }
@@ -24,7 +24,7 @@ pub fn CalendarHeader(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("calendar-header", class)>
+        <div node_ref=node_ref class=move || merge_classes!("calendar-header", class)>
             {children()}
         </div>
     }
@@ -37,7 +37,7 @@ pub fn CalendarBody(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <table node_ref=node_ref class=merge_classes!("calendar-body", class)>
+        <table node_ref=node_ref class=move || merge_classes!("calendar-body", class)>
             {children()}
         </table>
     }
@@ -50,7 +50,7 @@ pub fn CalendarWeekdays(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <thead node_ref=node_ref class=merge_classes!("calendar-weekdays", class)>
+        <thead node_ref=node_ref class=move || merge_classes!("calendar-weekdays", class)>
             {children()}
         </thead>
     }
@@ -63,7 +63,7 @@ pub fn CalendarWeeks(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tbody node_ref=node_ref class=merge_classes!("calendar-weeks", class)>
+        <tbody node_ref=node_ref class=move || merge_classes!("calendar-weeks", class)>
             {children()}
         </tbody>
     }
@@ -76,7 +76,7 @@ pub fn CalendarWeek(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tr node_ref=node_ref class=merge_classes!("calendar-week", class)>
+        <tr node_ref=node_ref class=move || merge_classes!("calendar-week", class)>
             {children()}
         </tr>
     }
@@ -89,7 +89,7 @@ pub fn CalendarWeekday(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <th node_ref=node_ref class=merge_classes!("calendar-weekday", class)>
+        <th node_ref=node_ref class=move || merge_classes!("calendar-weekday", class)>
             {children()}
         </th>
     }
@@ -108,7 +108,7 @@ pub fn CalendarDate(
     view! {
         <td
             node_ref=node_ref
-            class=merge_classes!("calendar-date", class)
+            class=move || merge_classes!("calendar-date", class)
             class:calendar-date-selected=selected
             class:calendar-date-today=today
             class:calendar-date-outside=outside_month
@@ -130,7 +130,7 @@ pub fn CalendarNavigation(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("calendar-nav", class)>
+        <div node_ref=node_ref class=move || merge_classes!("calendar-nav", class)>
             {children()}
         </div>
     }
@@ -146,7 +146,7 @@ pub fn CalendarButton(
     view! {
         <button
             node_ref=node_ref
-            class=merge_classes!("btn", "btn-sm", class)
+            class=move || merge_classes!("btn", "btn-sm", class)
             on:click=move |_| {
                 if let Some(handler) = &on_click {
                     handler();

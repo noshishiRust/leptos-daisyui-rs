@@ -12,12 +12,14 @@ pub fn Textarea(
     view! {
         <textarea
             node_ref=node_ref
-            class=merge_classes!(
-                "textarea",
+            class=move || {
+                merge_classes!(
+                    "textarea",
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
         />
     }
 }

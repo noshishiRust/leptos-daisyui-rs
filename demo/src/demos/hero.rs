@@ -19,9 +19,7 @@ pub fn HeroDemo() -> impl IntoView {
                             <p class="py-6">
                                 "Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."
                             </p>
-                            <Button color=Signal::derive(|| {
-                                ButtonColor::Primary
-                            })>"Get Started"</Button>
+                            <Button color=ButtonColor::Primary>"Get Started"</Button>
                         </div>
                     </div>
                 </div>
@@ -38,9 +36,7 @@ pub fn HeroDemo() -> impl IntoView {
                             <p class="mb-5">
                                 "Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."
                             </p>
-                            <Button color=Signal::derive(|| {
-                                ButtonColor::Primary
-                            })>"Get Started"</Button>
+                            <Button color=ButtonColor::Primary>"Get Started"</Button>
                         </div>
                     </div>
                 </div>
@@ -78,9 +74,7 @@ pub fn HeroDemo() -> impl IntoView {
                                     </label>
                                 </div>
                                 <div class="form-control mt-6">
-                                    <Button color=Signal::derive(|| {
-                                        ButtonColor::Primary
-                                    })>"Login"</Button>
+                                    <Button color=ButtonColor::Primary>"Login"</Button>
                                 </div>
                             </div>
                         </div>
@@ -100,9 +94,7 @@ pub fn HeroDemo() -> impl IntoView {
                             <p class="py-6">
                                 "Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."
                             </p>
-                            <Button color=Signal::derive(|| {
-                                ButtonColor::Primary
-                            })>"Get Started"</Button>
+                            <Button color=ButtonColor::Primary>"Get Started"</Button>
                         </div>
                     </div>
                 </div>
@@ -120,69 +112,12 @@ pub fn HeroDemo() -> impl IntoView {
                                 "Modern glassmorphism design with backdrop blur effect. Perfect for creating stunning landing pages."
                             </p>
                             <div class="flex gap-2 justify-center">
-                                <Button style=Signal::derive(|| ButtonStyle::Outline) class="glass">
+                                <Button style=ButtonStyle::Outline class="glass">
                                     "Learn More"
                                 </Button>
-                                <Button color=Signal::derive(|| ButtonColor::Primary) class="glass">
+                                <Button color=ButtonColor::Primary class="glass">
                                     "Get Started"
                                 </Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="text-xl font-semibold">"Product Hero"</h2>
-                <div class="hero min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                    <div class="hero-content text-center text-white">
-                        <div class="max-w-2xl">
-                            <div class="mb-8">
-                                <div class="text-6xl mb-4">"🚀"</div>
-                                <h1 class="text-6xl font-bold mb-4">"Leptos daisyUI"</h1>
-                                <p class="text-xl opacity-90">
-                                    "Build beautiful, reactive user interfaces with Rust and daisyUI components"
-                                </p>
-                            </div>
-
-                            <div class="flex flex-wrap gap-4 justify-center mb-8">
-                                <Badge color=Signal::derive(|| BadgeColor::Accent) class="badge-lg">
-                                    "Type Safe"
-                                </Badge>
-                                <Badge
-                                    color=Signal::derive(|| BadgeColor::Success)
-                                    class="badge-lg"
-                                >
-                                    "Reactive"
-                                </Badge>
-                                <Badge color=Signal::derive(|| BadgeColor::Info) class="badge-lg">
-                                    "Fast"
-                                </Badge>
-                                <Badge
-                                    color=Signal::derive(|| BadgeColor::Warning)
-                                    class="badge-lg"
-                                >
-                                    "Modern"
-                                </Badge>
-                            </div>
-
-                            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Button
-                                    size=Signal::derive(|| ButtonSize::Lg)
-                                    color=Signal::derive(|| ButtonColor::Primary)
-                                    class="shadow-lg"
-                                >
-                                    "Get Started"
-                                </Button>
-                                <Button
-                                    size=Signal::derive(|| ButtonSize::Lg)
-                                    style=Signal::derive(|| ButtonStyle::Outline)
-                                    class="border-white text-white hover:bg-white hover:text-black"
-                                >
-                                    "View Docs"
-                                </Button>
-                            </div>
-
-                            <div class="mt-8 text-sm opacity-75">
-                                "Free • Open Source • Built with ❤️"
                             </div>
                         </div>
                     </div>
@@ -197,12 +132,8 @@ pub fn HeroDemo() -> impl IntoView {
                                 "Sometimes less is more. A minimalist approach to hero sections."
                             </p>
                             <div class="flex gap-2 justify-center">
-                                <Button style=Signal::derive(|| {
-                                    ButtonStyle::Ghost
-                                })>"Learn More"</Button>
-                                <Button color=Signal::derive(|| {
-                                    ButtonColor::Primary
-                                })>"Contact"</Button>
+                                <Button style=ButtonStyle::Ghost>"Learn More"</Button>
+                                <Button color=ButtonColor::Primary>"Contact"</Button>
                             </div>
                         </div>
                     </div>

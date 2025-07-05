@@ -11,7 +11,7 @@ pub fn Filter(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("filter", class)>
+        <div node_ref=node_ref class=move || merge_classes!("filter", class)>
             {children()}
         </div>
     }
@@ -22,7 +22,7 @@ pub fn FilterForm(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <form class=merge_classes!("filter", class)>{children()}</form> }
+    view! { <form class=move || merge_classes!("filter", class)>{children()}</form> }
 }
 
 #[component]
@@ -34,7 +34,7 @@ pub fn FilterReset(
     view! {
         <input
             node_ref=node_ref
-            class=merge_classes!("btn filter-reset", class)
+            class=move || merge_classes!("btn filter-reset", class)
             type="radio"
             name=name
             aria-label="×"

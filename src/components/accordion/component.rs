@@ -16,11 +16,11 @@ pub fn Accordion(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div class=merge_classes!(
-            "collapse",
+        <div class=move || {
+            merge_classes!("collapse",
             modifier.get().as_str(),
-            class
-        )>
+            class)
+        }>
             <input node_ref=node_ref type="radio" name=name prop:checked=checked />
             {children()}
         </div>
@@ -32,7 +32,7 @@ pub fn AccordionTitle(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("collapse-title", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("collapse-title", class)>{children()}</div> }
 }
 
 #[component]
@@ -40,5 +40,5 @@ pub fn AccordionContent(
     #[prop(optional, into)] class: &'static str,
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=merge_classes!("collapse-content", class)>{children()}</div> }
+    view! { <div class=move || merge_classes!("collapse-content", class)>{children()}</div> }
 }

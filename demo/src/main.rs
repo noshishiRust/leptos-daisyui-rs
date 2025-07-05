@@ -3,11 +3,356 @@ use demos::*;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
+use leptos_icons::Icon;
 use leptos_router::{
     components::{Outlet, ParentRoute, Route, Router, Routes},
     hooks::use_location,
     path,
 };
+use leptos_use::{breakpoints_tailwind, use_breakpoints, BreakpointsTailwind};
+
+#[derive(Clone, Debug)]
+struct ComponentItem {
+    name: &'static str,
+    href: &'static str,
+    value: &'static str,
+}
+
+#[derive(Clone, Debug)]
+struct MenuCategory {
+    title: &'static str,
+    items: Vec<ComponentItem>,
+}
+
+fn get_menu_categories() -> Vec<MenuCategory> {
+    vec![
+        MenuCategory {
+            title: "Action",
+            items: vec![
+                ComponentItem {
+                    name: "Button",
+                    href: "/components/button",
+                    value: "button",
+                },
+                ComponentItem {
+                    name: "Dropdown",
+                    href: "/components/dropdown",
+                    value: "dropdown",
+                },
+                ComponentItem {
+                    name: "Modal",
+                    href: "/components/modal",
+                    value: "modal",
+                },
+                ComponentItem {
+                    name: "Swap",
+                    href: "/components/swap",
+                    value: "swap",
+                },
+                ComponentItem {
+                    name: "Theme Controller",
+                    href: "/components/theme_controller",
+                    value: "theme_controller",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Data Display",
+            items: vec![
+                ComponentItem {
+                    name: "Accordion",
+                    href: "/components/accordion",
+                    value: "accordion",
+                },
+                ComponentItem {
+                    name: "Avatar",
+                    href: "/components/avatar",
+                    value: "avatar",
+                },
+                ComponentItem {
+                    name: "Badge",
+                    href: "/components/badge",
+                    value: "badge",
+                },
+                ComponentItem {
+                    name: "Card",
+                    href: "/components/card",
+                    value: "card",
+                },
+                ComponentItem {
+                    name: "Carousel",
+                    href: "/components/carousel",
+                    value: "carousel",
+                },
+                ComponentItem {
+                    name: "Chat",
+                    href: "/components/chat",
+                    value: "chat",
+                },
+                ComponentItem {
+                    name: "Collapse",
+                    href: "/components/collapse",
+                    value: "collapse",
+                },
+                ComponentItem {
+                    name: "Countdown",
+                    href: "/components/countdown",
+                    value: "countdown",
+                },
+                ComponentItem {
+                    name: "Diff",
+                    href: "/components/diff",
+                    value: "diff",
+                },
+                ComponentItem {
+                    name: "Kbd",
+                    href: "/components/kbd",
+                    value: "kbd",
+                },
+                ComponentItem {
+                    name: "List",
+                    href: "/components/list",
+                    value: "list",
+                },
+                ComponentItem {
+                    name: "Stats",
+                    href: "/components/stats",
+                    value: "stats",
+                },
+                ComponentItem {
+                    name: "Status",
+                    href: "/components/status",
+                    value: "status",
+                },
+                ComponentItem {
+                    name: "Table",
+                    href: "/components/table",
+                    value: "table",
+                },
+                ComponentItem {
+                    name: "Timeline",
+                    href: "/components/timeline",
+                    value: "timeline",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Navigation",
+            items: vec![
+                ComponentItem {
+                    name: "Breadcrumbs",
+                    href: "/components/breadcrumbs",
+                    value: "breadcrumbs",
+                },
+                ComponentItem {
+                    name: "Menu",
+                    href: "/components/menu",
+                    value: "menu",
+                },
+                ComponentItem {
+                    name: "Navbar",
+                    href: "/components/navbar",
+                    value: "navbar",
+                },
+                ComponentItem {
+                    name: "Pagination",
+                    href: "/components/pagination",
+                    value: "pagination",
+                },
+                ComponentItem {
+                    name: "Steps",
+                    href: "/components/steps",
+                    value: "steps",
+                },
+                ComponentItem {
+                    name: "Tab",
+                    href: "/components/tab",
+                    value: "tab",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Feedback",
+            items: vec![
+                ComponentItem {
+                    name: "Alert",
+                    href: "/components/alert",
+                    value: "alert",
+                },
+                ComponentItem {
+                    name: "Loading",
+                    href: "/components/loading",
+                    value: "loading",
+                },
+                ComponentItem {
+                    name: "Progress",
+                    href: "/components/progress",
+                    value: "progress",
+                },
+                ComponentItem {
+                    name: "Radial Progress",
+                    href: "/components/radial_progress",
+                    value: "radial_progress",
+                },
+                ComponentItem {
+                    name: "Skeleton",
+                    href: "/components/skeleton",
+                    value: "skeleton",
+                },
+                ComponentItem {
+                    name: "Toast",
+                    href: "/components/toast",
+                    value: "toast",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Data Input",
+            items: vec![
+                ComponentItem {
+                    name: "Calendar",
+                    href: "/components/calendar",
+                    value: "calendar",
+                },
+                ComponentItem {
+                    name: "Checkbox",
+                    href: "/components/checkbox",
+                    value: "checkbox",
+                },
+                ComponentItem {
+                    name: "Fieldset",
+                    href: "/components/fieldset",
+                    value: "fieldset",
+                },
+                ComponentItem {
+                    name: "File Input",
+                    href: "/components/file_input",
+                    value: "file_input",
+                },
+                ComponentItem {
+                    name: "Filter",
+                    href: "/components/filter",
+                    value: "filter",
+                },
+                ComponentItem {
+                    name: "Label",
+                    href: "/components/label",
+                    value: "label",
+                },
+                ComponentItem {
+                    name: "Radio",
+                    href: "/components/radio",
+                    value: "radio",
+                },
+                ComponentItem {
+                    name: "Range",
+                    href: "/components/range",
+                    value: "range",
+                },
+                ComponentItem {
+                    name: "Rating",
+                    href: "/components/rating",
+                    value: "rating",
+                },
+                ComponentItem {
+                    name: "Select",
+                    href: "/components/select",
+                    value: "select",
+                },
+                ComponentItem {
+                    name: "Textarea",
+                    href: "/components/textarea",
+                    value: "textarea",
+                },
+                ComponentItem {
+                    name: "Toggle",
+                    href: "/components/toggle",
+                    value: "toggle",
+                },
+                ComponentItem {
+                    name: "Validator",
+                    href: "/components/validator",
+                    value: "validator",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Layout",
+            items: vec![
+                ComponentItem {
+                    name: "Divider",
+                    href: "/components/divider",
+                    value: "divider",
+                },
+                ComponentItem {
+                    name: "Drawer",
+                    href: "/components/drawer",
+                    value: "drawer",
+                },
+                ComponentItem {
+                    name: "Footer",
+                    href: "/components/footer",
+                    value: "footer",
+                },
+                ComponentItem {
+                    name: "Hero",
+                    href: "/components/hero",
+                    value: "hero",
+                },
+                ComponentItem {
+                    name: "Indicator",
+                    href: "/components/indicator",
+                    value: "indicator",
+                },
+                ComponentItem {
+                    name: "Join",
+                    href: "/components/join",
+                    value: "join",
+                },
+                ComponentItem {
+                    name: "Link",
+                    href: "/components/link",
+                    value: "link",
+                },
+                ComponentItem {
+                    name: "Mask",
+                    href: "/components/mask",
+                    value: "mask",
+                },
+                ComponentItem {
+                    name: "Stack",
+                    href: "/components/stack",
+                    value: "stack",
+                },
+            ],
+        },
+        MenuCategory {
+            title: "Mockup",
+            items: vec![
+                ComponentItem {
+                    name: "Mockup Browser",
+                    href: "/components/mockup_browser",
+                    value: "mockup_browser",
+                },
+                ComponentItem {
+                    name: "Mockup Code",
+                    href: "/components/mockup_code",
+                    value: "mockup_code",
+                },
+                ComponentItem {
+                    name: "Mockup Phone",
+                    href: "/components/mockup_phone",
+                    value: "mockup_phone",
+                },
+                ComponentItem {
+                    name: "Mockup Window",
+                    href: "/components/mockup_window",
+                    value: "mockup_window",
+                },
+            ],
+        },
+    ]
+}
 
 fn main() {
     console_error_panic_hook::set_once();
@@ -23,6 +368,7 @@ fn App() -> impl IntoView {
     view! {
         <Router>
             <Routes fallback=|| "Page not found">
+                <Route path=path!("/") view=Landing />
                 <ParentRoute path=path!("/components") view=Layout>
                     <Route path=path!("/") view=AccordionDemo />
                     <Route path=path!("/accordion") view=AccordionDemo />
@@ -31,30 +377,45 @@ fn App() -> impl IntoView {
                     <Route path=path!("/badge") view=BadgeDemo />
                     <Route path=path!("/breadcrumbs") view=BreadcrumbsDemo />
                     <Route path=path!("/button") view=ButtonDemo />
+                    <Route path=path!("/calendar") view=CalendarDemo />
                     <Route path=path!("/card") view=CardDemo />
                     <Route path=path!("/carousel") view=CarouselDemo />
                     <Route path=path!("/chat") view=ChatDemo />
                     <Route path=path!("/checkbox") view=CheckboxDemo />
                     <Route path=path!("/collapse") view=CollapseDemo />
                     <Route path=path!("/countdown") view=CountdownDemo />
+                    <Route path=path!("/diff") view=DiffDemo />
                     <Route path=path!("/divider") view=DividerDemo />
+                    <Route path=path!("/drawer") view=DrawerDemo />
                     <Route path=path!("/dropdown") view=DropdownDemo />
+                    <Route path=path!("/fieldset") view=FieldsetDemo />
                     <Route path=path!("/file_input") view=FileInputDemo />
+                    <Route path=path!("/filter") view=FilterDemo />
+                    <Route path=path!("/footer") view=FooterDemo />
                     <Route path=path!("/hero") view=HeroDemo />
+                    <Route path=path!("/indicator") view=IndicatorDemo />
                     <Route path=path!("/input") view=InputDemo />
                     <Route path=path!("/join") view=JoinDemo />
                     <Route path=path!("/kbd") view=KbdDemo />
+                    <Route path=path!("/label") view=LabelDemo />
+                    <Route path=path!("/link") view=LinkDemo />
+                    <Route path=path!("/list") view=ListDemo />
                     <Route path=path!("/loading") view=LoadingDemo />
+                    <Route path=path!("/mask") view=MaskDemo />
+                    <Route path=path!("/menu") view=MenuDemo />
                     <Route path=path!("/modal") view=ModalDemo />
                     <Route path=path!("/navbar") view=NavbarDemo />
                     <Route path=path!("/pagination") view=PaginationDemo />
                     <Route path=path!("/progress") view=ProgressDemo />
+                    <Route path=path!("/radial_progress") view=RadialProgressDemo />
                     <Route path=path!("/radio") view=RadioDemo />
                     <Route path=path!("/range") view=RangeDemo />
                     <Route path=path!("/rating") view=RatingDemo />
                     <Route path=path!("/select") view=SelectDemo />
                     <Route path=path!("/skeleton") view=SkeletonDemo />
+                    <Route path=path!("/stack") view=StackDemo />
                     <Route path=path!("/stats") view=StatsDemo />
+                    <Route path=path!("/status") view=StatusDemo />
                     <Route path=path!("/steps") view=StepsDemo />
                     <Route path=path!("/swap") view=SwapDemo />
                     <Route path=path!("/tab") view=TabDemo />
@@ -64,6 +425,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/timeline") view=TimelineDemo />
                     <Route path=path!("/toast") view=ToastDemo />
                     <Route path=path!("/toggle") view=ToggleDemo />
+                    <Route path=path!("/validator") view=ValidatorDemo />
                 </ParentRoute>
             </Routes>
         </Router>
@@ -73,6 +435,7 @@ fn App() -> impl IntoView {
 #[component]
 fn Layout() -> impl IntoView {
     let location = use_location();
+    let breakpoints = use_breakpoints(breakpoints_tailwind());
 
     let selected = RwSignal::new(None);
 
@@ -87,54 +450,40 @@ fn Layout() -> impl IntoView {
     });
 
     view! {
-        <div class="min-h-screen bg-base-100">
-            <Navbar class="bg-base-200 border-b border-base-300">
-                <NavbarStart>
+        <div class="min-h-screen min-w-screen bg-base-100">
+            <Navbar class="min-w-screen bg-base-200 border-b border-base-300">
+                <NavbarStart class="gap-4">
+                    <div class="lg:hidden">
+                        <label for="drawer-toggle" class="hover:cursor-pointer">
+                            <Icon icon=icondata::AiMenuOutlined />
+                        </label>
+                    </div>
+                    <Icon icon=icondata::CgComponents />
                     <h1 class="text-xl font-bold">"daisyUI + Leptos Showcase"</h1>
                 </NavbarStart>
-                <NavbarEnd>
-                    <ThemeController theme_name="dark" checked=Signal::derive(move || false) />
-                    <span class="ml-2 text-sm">"Toggle Dark Mode"</span>
+                <NavbarEnd class="gap-2">
+                    <LinkButton
+                        href="https://github.com/noshishiRust/leptos-daisyui-rs"
+                        style=ButtonStyle::Ghost
+                        shape=ButtonShape::Circle
+                    >
+                        <Icon icon=icondata::AiGithubFilled />
+                    </LinkButton>
                 </NavbarEnd>
             </Navbar>
-            <div class="drawer lg:drawer-open">
-                <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
+
+            <Drawer open=breakpoints.ge(BreakpointsTailwind::Lg)>
+                <DrawerToggle id="drawer-toggle" />
 
                 <div class="drawer-content">
-                    <div class="navbar lg:hidden bg-base-200">
-                        <div class="flex-none">
-                            <label
-                                for="drawer-toggle"
-                                class="btn btn-square btn-ghost drawer-button"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    class="inline-block w-6 h-6 stroke-current"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    ></path>
-                                </svg>
-                            </label>
-                        </div>
-                        <div class="flex-1">
-                            <span class="text-lg font-semibold">"Components"</span>
-                        </div>
-                    </div>
 
                     // Content area with padding
-                    <div class="p-6">
+                    <div class="p-6 w-full">
                         <Outlet />
                     </div>
                 </div>
 
-                // Sidebar
-                <div class="drawer-side">
+                <DrawerSide>
                     <label for="drawer-toggle" class="drawer-overlay"></label>
                     <div class="min-h-full w-64 bg-base-200 text-base-content">
                         <div class="p-4">
@@ -144,255 +493,64 @@ fn Layout() -> impl IntoView {
                                 direction=MenuDirection::Vertical
                                 class="w-full"
                             >
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Action"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/button" value="button">
-                                            "Button"
-                                        </MenuItem>
-                                        <MenuItem href="/components/dropdown" value="dropdown">
-                                            "Dropdown"
-                                        </MenuItem>
-                                        <MenuItem href="/components/modal" value="modal">
-                                            "Modal"
-                                        </MenuItem>
-                                        <MenuItem href="/components/swap" value="swap">
-                                            "Swap"
-                                        </MenuItem>
-                                        <MenuItem
-                                            href="/components/theme_controller"
-                                            value="theme_controller"
-                                        >
-                                            "Theme Controller"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Data Display"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/accordion" value="accordion">
-                                            "Accordion"
-                                        </MenuItem>
-                                        <MenuItem href="/components/avatar" value="avatar">
-                                            "Avatar"
-                                        </MenuItem>
-                                        <MenuItem href="/components/badge" value="badge">
-                                            "Badge"
-                                        </MenuItem>
-                                        <MenuItem href="/components/card" value="card">
-                                            "Card"
-                                        </MenuItem>
-                                        <MenuItem href="/components/carousel" value="carousel">
-                                            "Carousel"
-                                        </MenuItem>
-                                        <MenuItem href="/components/chat" value="chat">
-                                            "Chat"
-                                        </MenuItem>
-                                        <MenuItem href="/components/collapse" value="collapse">
-                                            "Collapse"
-                                        </MenuItem>
-                                        <MenuItem href="/components/countdown" value="countdown">
-                                            "Countdown"
-                                        </MenuItem>
-                                        <MenuItem href="/components/diff" value="diff">
-                                            "Diff"
-                                        </MenuItem>
-                                        <MenuItem href="/components/kbd" value="kbd">
-                                            "Kbd"
-                                        </MenuItem>
-                                        <MenuItem href="/components/list" value="list">
-                                            "List"
-                                        </MenuItem>
-                                        <MenuItem href="/components/stats" value="stats">
-                                            "Stats"
-                                        </MenuItem>
-                                        <MenuItem href="/components/status" value="status">
-                                            "Status"
-                                        </MenuItem>
-                                        <MenuItem href="/components/table" value="table">
-                                            "Table"
-                                        </MenuItem>
-                                        <MenuItem href="/components/timeline" value="timeline">
-                                            "Timeline"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Navigation"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem
-                                            href="/components/breadcrumbs"
-                                            value="breadcrumbs"
-                                        >
-                                            "Breadcrumbs"
-                                        </MenuItem>
-                                        <MenuItem href="/components/dock" value="dock">
-                                            "Dock"
-                                        </MenuItem>
-                                        <MenuItem href="/components/link" value="link">
-                                            "Link"
-                                        </MenuItem>
-                                        <MenuItem href="/components/menu" value="menu">
-                                            "Menu"
-                                        </MenuItem>
-                                        <MenuItem href="/components/navbar" value="navbar">
-                                            "Navbar"
-                                        </MenuItem>
-                                        <MenuItem href="/components/pagination" value="pagination">
-                                            "Pagination"
-                                        </MenuItem>
-                                        <MenuItem href="/components/steps" value="steps">
-                                            "Steps"
-                                        </MenuItem>
-                                        <MenuItem href="/components/tab" value="tab">
-                                            "Tab"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
-
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Feedback"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/alert" value="alert">
-                                            "Alert"
-                                        </MenuItem>
-                                        <MenuItem href="/components/loading" value="loading">
-                                            "Loading"
-                                        </MenuItem>
-                                        <MenuItem href="/components/progress" value="progress">
-                                            "Progress"
-                                        </MenuItem>
-                                        <MenuItem
-                                            href="/components/radial_progress"
-                                            value="radial_progress"
-                                        >
-                                            "Radial Progress"
-                                        </MenuItem>
-                                        <MenuItem href="/components/skeleton" value="skeleton">
-                                            "Skeleton"
-                                        </MenuItem>
-                                        <MenuItem href="/components/toast" value="toast">
-                                            "Toast"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
-
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Data Input"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/calendar" value="calendar">
-                                            "Calendar"
-                                        </MenuItem>
-                                        <MenuItem href="/components/checkbox" value="checkbox">
-                                            "Checkbox"
-                                        </MenuItem>
-                                        <MenuItem href="/components/fieldset" value="fieldset">
-                                            "Fieldset"
-                                        </MenuItem>
-                                        <MenuItem href="/components/file_input" value="file_input">
-                                            "File Input"
-                                        </MenuItem>
-                                        <MenuItem href="/components/filter" value="filter">
-                                            "Filter"
-                                        </MenuItem>
-                                        <MenuItem href="/components/label" value="label">
-                                            "Label"
-                                        </MenuItem>
-                                        <MenuItem href="/components/radio" value="radio">
-                                            "Radio"
-                                        </MenuItem>
-                                        <MenuItem href="/components/range" value="range">
-                                            "Range"
-                                        </MenuItem>
-                                        <MenuItem href="/components/rating" value="rating">
-                                            "Rating"
-                                        </MenuItem>
-                                        <MenuItem href="/components/select" value="select">
-                                            "Select"
-                                        </MenuItem>
-                                        <MenuItem href="/components/textarea" value="textarea">
-                                            "Textarea"
-                                        </MenuItem>
-                                        <MenuItem href="/components/toggle" value="toggle">
-                                            "Toggle"
-                                        </MenuItem>
-                                        <MenuItem href="/components/validator" value="validator">
-                                            "Validator"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
-
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Layout"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/divider" value="divider">
-                                            "Divider"
-                                        </MenuItem>
-                                        <MenuItem href="/components/drawer" value="drawer">
-                                            "Drawer"
-                                        </MenuItem>
-                                        <MenuItem href="/components/footer" value="footer">
-                                            "Footer"
-                                        </MenuItem>
-                                        <MenuItem href="/components/hero" value="hero">
-                                            "Hero"
-                                        </MenuItem>
-                                        <MenuItem href="/components/indicator" value="indicator">
-                                            "Indicator"
-                                        </MenuItem>
-                                        <MenuItem href="/components/input" value="input">
-                                            "Input"
-                                        </MenuItem>
-                                        <MenuItem href="/components/join" value="join">
-                                            "Join"
-                                        </MenuItem>
-                                        <MenuItem href="/components/mask" value="mask">
-                                            "Mask"
-                                        </MenuItem>
-                                        <MenuItem href="/components/stack" value="stack">
-                                            "Stack"
-                                        </MenuItem>
-                                    </SubMenu>
-
-                                </MenuItem>
-                                <MenuItem is_submenu=true>
-                                    <MenuTitle>"Mockup"</MenuTitle>
-                                    <SubMenu>
-                                        <MenuItem href="/components/divider" value="divider">
-                                            "Divider"
-                                        </MenuItem>
-                                        <MenuItem href="/components/drawer" value="drawer">
-                                            "Drawer"
-                                        </MenuItem>
-                                        <MenuItem href="/components/footer" value="footer">
-                                            "Footer"
-                                        </MenuItem>
-                                        <MenuItem href="/components/hero" value="hero">
-                                            "Hero"
-                                        </MenuItem>
-                                        <MenuItem href="/components/indicator" value="indicator">
-                                            "Indicator"
-                                        </MenuItem>
-                                        <MenuItem href="/components/input" value="input">
-                                            "Input"
-                                        </MenuItem>
-                                        <MenuItem href="/components/join" value="join">
-                                            "Join"
-                                        </MenuItem>
-                                        <MenuItem href="/components/mask" value="mask">
-                                            "Mask"
-                                        </MenuItem>
-                                        <MenuItem href="/components/stack" value="stack">
-                                            "Stack"
-                                        </MenuItem>
-                                    </SubMenu>
-                                </MenuItem>
+                                {get_menu_categories()
+                                    .into_iter()
+                                    .map(|category| {
+                                        view! {
+                                            <MenuItem is_submenu=true>
+                                                <MenuTitle>{category.title}</MenuTitle>
+                                                <SubMenu>
+                                                    {category
+                                                        .items
+                                                        .into_iter()
+                                                        .map(|item| {
+                                                            view! {
+                                                                <MenuItem href=item.href value=item.value>
+                                                                    {item.name}
+                                                                </MenuItem>
+                                                            }
+                                                        })
+                                                        .collect_view()}
+                                                </SubMenu>
+                                            </MenuItem>
+                                        }
+                                    })
+                                    .collect_view()}
                             </Menu>
                         </div>
                     </div>
-                </div>
-
-            </div>
+                </DrawerSide>
+            </Drawer>
         </div>
+    }
+}
+
+#[component]
+fn Landing() -> impl IntoView {
+    view! {
+        <Hero class="min-h-screen">
+            <HeroContent>
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold mb-6">"leptos-daisyui-rs"</h1>
+                    <div class="flex flex-wrap gap-4 justify-center mb-8">
+                        <Badge color=BadgeColor::Accent>"Leptos"</Badge>
+                        <Badge color=BadgeColor::Success>"Tailwind CSS"</Badge>
+                        <Badge color=BadgeColor::Info>"daisyUI"</Badge>
+                    </div>
+                    <div class="flex flex-row gap-4 justify-center">
+                        <LinkButton href="/components/button" color=ButtonColor::Primary>
+                            "Browse Components"
+                        </LinkButton>
+                        <LinkButton
+                            href="https://github.com/noshishiRust/leptos-daisyui-rs"
+                            style=ButtonStyle::Ghost
+                        >
+                            <Icon icon=icondata::AiGithubFilled />
+                            "View on GitHub"
+                        </LinkButton>
+                    </div>
+                </div>
+            </HeroContent>
+        </Hero>
     }
 }

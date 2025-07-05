@@ -15,8 +15,7 @@ pub fn Dropdown(
     view! {
         <details
             node_ref=node_ref
-            class=merge_classes!("dropdown",
-                class)
+            class=move || merge_classes!("dropdown", class)
             class:dropdown-hover=hover
             class:dropdown-open=open
         >
@@ -45,7 +44,7 @@ pub fn DropdownContent(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <ul node_ref=node_ref class=merge_classes!("dropdown-content", class)>
+        <ul node_ref=node_ref class=move || merge_classes!("dropdown-content", class)>
             {children()}
         </ul>
     }

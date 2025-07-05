@@ -11,7 +11,7 @@ pub fn FieldSet(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <fieldset node_ref=node_ref class=merge_classes!("fieldset", class)>
+        <fieldset node_ref=node_ref class=move || merge_classes!("fieldset", class)>
             {children()}
         </fieldset>
     }
@@ -24,7 +24,7 @@ pub fn FieldsetLegend(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <legend node_ref=node_ref class=merge_classes!("fieldset-legend", class)>
+        <legend node_ref=node_ref class=move || merge_classes!("fieldset-legend", class)>
             {children()}
         </legend>
     }
@@ -37,7 +37,7 @@ pub fn FieldsetLabel(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <p node_ref=node_ref class=merge_classes!("label", class)>
+        <p node_ref=node_ref class=move || merge_classes!("label", class)>
             {children()}
         </p>
     }

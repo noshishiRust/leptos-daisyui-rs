@@ -16,11 +16,13 @@ pub fn Drawer(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "drawer",
-                placement.get().as_str(),
-                class
-            )
+            class=move || {
+                merge_classes!(
+                    "drawer",
+                    placement.get().as_str(),
+                    class
+                )
+            }
             class:drawer-open=open
         >
             {children()}
@@ -46,7 +48,7 @@ pub fn DrawerContent(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("drawer-content", class)>
+        <div node_ref=node_ref class=move || merge_classes!("drawer-content", class)>
             {children()}
         </div>
     }
@@ -59,7 +61,7 @@ pub fn DrawerSide(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("drawer-side", class)>
+        <div node_ref=node_ref class=move || merge_classes!("drawer-side", class)>
             {children()}
         </div>
     }
@@ -70,5 +72,5 @@ pub fn DrawerOverlay(
     #[prop(optional, into)] class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
 ) -> impl IntoView {
-    view! { <div node_ref=node_ref class=merge_classes!("drawer-overlay", class)></div> }
+    view! { <div node_ref=node_ref class=move || merge_classes!("drawer-overlay", class)></div> }
 }

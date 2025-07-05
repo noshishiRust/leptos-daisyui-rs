@@ -107,7 +107,7 @@ pub fn TableDemo() -> impl IntoView {
                                                         "Moderator" => BadgeColor::Secondary,
                                                         _ => BadgeColor::Neutral,
                                                     })
-                                                    size=Signal::derive(|| BadgeSize::Sm)
+                                                    size=BadgeSize::Sm
                                                 >
                                                     {role}
                                                 </Badge>
@@ -120,7 +120,7 @@ pub fn TableDemo() -> impl IntoView {
                                                         "Pending" => BadgeColor::Warning,
                                                         _ => BadgeColor::Neutral,
                                                     })
-                                                    size=Signal::derive(|| BadgeSize::Sm)
+                                                    size=BadgeSize::Sm
                                                 >
                                                     {status}
                                                 </Badge>
@@ -128,15 +128,15 @@ pub fn TableDemo() -> impl IntoView {
                                             <td>
                                                 <div class="flex gap-1">
                                                     <Button
-                                                        size=Signal::derive(|| ButtonSize::Xs)
-                                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                                        size=ButtonSize::Xs
+                                                        style=ButtonStyle::Ghost
                                                     >
                                                         "Edit"
                                                     </Button>
                                                     <Button
-                                                        size=Signal::derive(|| ButtonSize::Xs)
-                                                        color=Signal::derive(|| ButtonColor::Error)
-                                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                                        size=ButtonSize::Xs
+                                                        color=ButtonColor::Error
+                                                        style=ButtonStyle::Ghost
                                                     >
                                                         "Delete"
                                                     </Button>
@@ -271,8 +271,8 @@ pub fn TableDemo() -> impl IntoView {
                                 <td>
                                     "Desktop Support Technician" <br />
                                     <Badge
-                                        color=Signal::derive(|| BadgeColor::Neutral)
-                                        size=Signal::derive(|| BadgeSize::Sm)
+                                        color=BadgeColor::Neutral
+                                        size=BadgeSize::Sm
                                     >
                                         "Desktop Support Technician"
                                     </Badge>
@@ -280,8 +280,8 @@ pub fn TableDemo() -> impl IntoView {
                                 <td>"Purple"</td>
                                 <th>
                                     <Button
-                                        size=Signal::derive(|| ButtonSize::Xs)
-                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                        size=ButtonSize::Xs
+                                        style=ButtonStyle::Ghost
                                     >
                                         "details"
                                     </Button>
@@ -312,8 +312,8 @@ pub fn TableDemo() -> impl IntoView {
                                 <td>
                                     "Tax Accountant" <br />
                                     <Badge
-                                        color=Signal::derive(|| BadgeColor::Neutral)
-                                        size=Signal::derive(|| BadgeSize::Sm)
+                                        color=BadgeColor::Neutral
+                                        size=BadgeSize::Sm
                                     >
                                         "Tax Accountant"
                                     </Badge>
@@ -321,8 +321,8 @@ pub fn TableDemo() -> impl IntoView {
                                 <td>"Red"</td>
                                 <th>
                                     <Button
-                                        size=Signal::derive(|| ButtonSize::Xs)
-                                        style=Signal::derive(|| ButtonStyle::Ghost)
+                                        size=ButtonSize::Xs
+                                        style=ButtonStyle::Ghost
                                     >
                                         "details"
                                     </Button>

@@ -12,11 +12,13 @@ pub fn Join(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "join",
+            class=move || {
+                merge_classes!(
+                    "join",
                 direction.get().as_str(),
                 class
-            )
+                )
+            }
         >
             {children()}
         </div>

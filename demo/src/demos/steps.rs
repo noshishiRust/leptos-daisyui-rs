@@ -91,8 +91,8 @@ pub fn StepsDemo() -> impl IntoView {
 
                     <div class="flex gap-2">
                         <Button
-                            size=Signal::derive(|| ButtonSize::Sm)
-                            style=Signal::derive(|| ButtonStyle::Outline)
+                            size=ButtonSize::Sm
+                            style=ButtonStyle::Outline
                             disabled=Signal::derive(move || current_step.get() <= 1)
                             on:click=move |_| {
                                 set_current_step
@@ -106,8 +106,8 @@ pub fn StepsDemo() -> impl IntoView {
                             "Previous"
                         </Button>
                         <Button
-                            size=Signal::derive(|| ButtonSize::Sm)
-                            color=Signal::derive(|| ButtonColor::Primary)
+                            size=ButtonSize::Sm
+                            color=ButtonColor::Primary
                             disabled=Signal::derive(move || current_step.get() >= 5)
                             on:click=move |_| {
                                 set_current_step
@@ -121,8 +121,8 @@ pub fn StepsDemo() -> impl IntoView {
                             "Next"
                         </Button>
                         <Button
-                            size=Signal::derive(|| ButtonSize::Sm)
-                            style=Signal::derive(|| ButtonStyle::Ghost)
+                            size=ButtonSize::Sm
+                            style=ButtonStyle::Ghost
                             on:click=move |_| set_current_step.set(1)
                         >
                             "Reset"
@@ -239,10 +239,8 @@ pub fn StepsDemo() -> impl IntoView {
                         </div>
 
                         <div class="card-actions justify-between mt-6">
-                            <Button style=Signal::derive(|| ButtonStyle::Ghost)>"Cancel"</Button>
-                            <Button color=Signal::derive(|| {
-                                ButtonColor::Primary
-                            })>"Continue"</Button>
+                            <Button style=ButtonStyle::Ghost>"Cancel"</Button>
+                            <Button color=ButtonColor::Primary>"Continue"</Button>
                         </div>
                     </CardBody>
                 </Card>
@@ -332,7 +330,7 @@ pub fn StepsDemo() -> impl IntoView {
                             <Progress
                                 value=37.5
                                 max=100.0
-                                color=Signal::derive(|| ProgressColor::Primary)
+                                color=ProgressColor::Primary
                                 class="w-full mt-2"
                             />
                         </div>

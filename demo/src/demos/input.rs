@@ -23,37 +23,37 @@ pub fn InputDemo() -> impl IntoView {
                 <div class="space-y-2">
                     <Input placeholder="Default" class="w-full max-w-xs" />
                     <Input
-                        color=Signal::derive(move || InputColor::Primary)
+                        color=InputColor::Primary
                         placeholder="Primary"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Secondary)
+                        color=InputColor::Secondary
                         placeholder="Secondary"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Accent)
+                        color=InputColor::Accent
                         placeholder="Accent"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Info)
+                        color=InputColor::Info
                         placeholder="Info"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Success)
+                        color=InputColor::Success
                         placeholder="Success"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Warning)
+                        color=InputColor::Warning
                         placeholder="Warning"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        color=Signal::derive(move || InputColor::Error)
+                        color=InputColor::Error
                         placeholder="Error"
                         class="w-full max-w-xs"
                     />
@@ -62,22 +62,22 @@ pub fn InputDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="space-y-2">
                     <Input
-                        size=Signal::derive(move || InputSize::Xs)
+                        size=InputSize::Xs
                         placeholder="XS"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        size=Signal::derive(move || InputSize::Sm)
+                        size=InputSize::Sm
                         placeholder="SM"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        size=Signal::derive(move || InputSize::Md)
+                        size=InputSize::Md
                         placeholder="MD"
                         class="w-full max-w-xs"
                     />
                     <Input
-                        size=Signal::derive(move || InputSize::Lg)
+                        size=InputSize::Lg
                         placeholder="LG"
                         class="w-full max-w-xs"
                     />
@@ -88,7 +88,7 @@ pub fn InputDemo() -> impl IntoView {
                     <Input placeholder="Default" class="w-full max-w-xs" />
                     <Input placeholder="Bordered" class="w-full max-w-xs" />
                     <Input
-                        style=Signal::derive(move || InputStyle::Ghost)
+                        style=InputStyle::Ghost
                         placeholder="Ghost"
                         class="w-full max-w-xs"
                     />

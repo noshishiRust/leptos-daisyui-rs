@@ -8,7 +8,7 @@ pub fn Countdown(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <span node_ref=node_ref class=merge_classes!("countdown", class)>
+        <span node_ref=node_ref class=move || merge_classes!("countdown", class)>
             {children()}
         </span>
     }

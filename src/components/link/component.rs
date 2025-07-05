@@ -15,11 +15,11 @@ pub fn Link(
         <a
             node_ref=node_ref
             href=href.unwrap_or("#")
-            class=merge_classes!(
-                "link",
+            class=move || {
+                merge_classes!("link",
                 color.get().as_str(),
-                class
-            )
+                class)
+            }
             class:link-hover=hover
         >
             {children()}

@@ -16,13 +16,15 @@ pub fn FileInput(
         <input
             node_ref=node_ref
             type="file"
-            class=merge_classes!(
-                "file-input",
+            class=move || {
+                merge_classes!(
+                    "file-input",
                 style.get().as_str(),
                 color.get().as_str(),
                 size.get().as_str(),
                 class
-            )
+                )
+            }
             prop:disabled=disabled
             on:change=move |ev| {
                 if let Some(handler) = &on_change {

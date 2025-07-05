@@ -15,11 +15,11 @@ pub fn Rating(
     view! {
         <div
             node_ref=node_ref
-            class=merge_classes!(
-                "rating",
+            class=move || {
+                merge_classes!("rating",
                 size.get().as_str(),
-                class
-            )
+                class)
+            }
         >
             {children()}
         </div>
@@ -41,7 +41,7 @@ pub fn RatingItem(
             type="radio"
             name=name
             value=value
-            class=merge_classes!("mask", "mask-star-2", "bg-orange-400", class)
+            class=move || merge_classes!("mask", "mask-star-2", "bg-orange-400", class)
             prop:checked=checked
             on:change=move |ev| {
                 if let Some(handler) = &on_change {
@@ -63,7 +63,7 @@ pub fn RatingHidden(
             node_ref=node_ref
             type="radio"
             name=name
-            class=merge_classes!("rating-hidden", class)
+            class=move || merge_classes!("rating-hidden", class)
         />
     }
 }

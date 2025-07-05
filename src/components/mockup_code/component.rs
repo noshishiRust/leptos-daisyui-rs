@@ -1,5 +1,8 @@
 use crate::merge_classes;
-use leptos::{html::Div, prelude::*};
+use leptos::{
+    html::{Div, Pre},
+    prelude::*,
+};
 
 #[component]
 pub fn MockupCode(
@@ -8,8 +11,8 @@ pub fn MockupCode(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("mockup-code", class)>
-            <pre>{children()}</pre>
+        <div node_ref=node_ref class=move || merge_classes!("mockup-code", class)>
+            {children()}
         </div>
     }
 }
@@ -18,12 +21,12 @@ pub fn MockupCode(
 pub fn MockupCodeLine(
     #[prop(optional)] prefix: Option<&'static str>,
     #[prop(optional, into)] class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)] node_ref: NodeRef<Pre>,
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("", class) data-prefix=prefix.unwrap_or("$")>
+        <pre node_ref=node_ref class=class data-prefix=prefix.unwrap_or("$")>
             {children()}
-        </div>
+        </pre>
     }
 }

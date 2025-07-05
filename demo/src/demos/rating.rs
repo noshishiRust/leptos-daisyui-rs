@@ -358,7 +358,7 @@ pub fn RatingDemo() -> impl IntoView {
                         </div>
                         <div class="card-actions justify-end">
                             <Button
-                                color=Signal::derive(|| ButtonColor::Primary)
+                                color=ButtonColor::Primary
                                 disabled=Signal::derive(move || rating2.get() == 0)
                             >
                                 "Submit Rating"
