@@ -36,35 +36,23 @@ pub fn BadgeDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Styles"</h2>
                 <div class="flex gap-2">
                     <Badge color=BadgeColor::Primary>"Default"</Badge>
-                    <Badge
-                        style=BadgeStyle::Outline
-                        color=BadgeColor::Primary
-                    >
+                    <Badge style=BadgeStyle::Outline color=BadgeColor::Primary>
                         "Outline"
                     </Badge>
-                    <Badge
-                        style=BadgeStyle::Ghost
-                        color=BadgeColor::Primary
-                    >
+                    <Badge style=BadgeStyle::Ghost color=BadgeColor::Primary>
                         "Ghost"
                     </Badge>
-                    <Badge
-                        style=BadgeStyle::Soft
-                        color=BadgeColor::Primary
-                    >
+                    <Badge style=BadgeStyle::Soft color=BadgeColor::Primary>
                         "Soft"
                     </Badge>
                 </div>
 
                 <h2 class="text-xl font-semibold">"In Text"</h2>
-                <div class="text-lg">
-                    "Inbox " <Badge color=BadgeColor::Secondary>"3"</Badge>
-                </div>
+                <div class="text-lg">"Inbox " <Badge color=BadgeColor::Secondary>"3"</Badge></div>
 
                 <h2 class="text-xl font-semibold">"Empty Badge"</h2>
                 <div class="flex items-center gap-2">
-                    "Notifications "
-                    <Badge color=BadgeColor::Error class="w-3 h-3 p-0">
+                    "Notifications " <Badge color=BadgeColor::Error class="w-3 h-3 p-0">
                         "Notifications"
                     </Badge>
                 </div>

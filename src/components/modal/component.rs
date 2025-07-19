@@ -18,7 +18,7 @@ pub fn Modal(
         if open.get() {
             let _ = node.show_modal();
         } else {
-            let _ = node.close();
+            node.close();
         }
     });
 

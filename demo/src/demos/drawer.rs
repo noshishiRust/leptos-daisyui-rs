@@ -17,15 +17,15 @@ pub fn DrawerDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Basic Drawer"</h2>
                 <div class="h-96 bg-base-200 rounded-lg overflow-hidden">
                     <Drawer open=drawer_open>
-                        <DrawerToggle 
+                        <DrawerToggle
                             id="drawer-demo"
                             on:click=move |_| set_drawer_open.update(|open| *open = !*open)
                         />
-                        
+
                         <div class="drawer-content flex flex-col items-center justify-center">
                             <div class="text-center">
                                 <h3 class="text-lg font-semibold mb-4">"Page Content"</h3>
-                                <Button 
+                                <Button
                                     color=ButtonColor::Primary
                                     on:click=move |_| set_drawer_open.set(true)
                                 >
@@ -35,15 +35,15 @@ pub fn DrawerDemo() -> impl IntoView {
                         </div>
 
                         <DrawerSide>
-                            <label 
-                                for="drawer-demo" 
+                            <label
+                                for="drawer-demo"
                                 class="drawer-overlay"
                                 on:click=move |_| set_drawer_open.set(false)
                             ></label>
                             <div class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                                 <div class="flex justify-between items-center mb-6">
                                     <h3 class="text-lg font-semibold">"Sidebar Menu"</h3>
-                                    <Button 
+                                    <Button
                                         size=ButtonSize::Sm
                                         style=ButtonStyle::Ghost
                                         shape=ButtonShape::Circle
@@ -52,7 +52,7 @@ pub fn DrawerDemo() -> impl IntoView {
                                         <Icon icon=icondata::AiCloseOutlined />
                                     </Button>
                                 </div>
-                                
+
                                 <Menu direction=MenuDirection::Vertical class="w-full">
                                     <MenuItem>
                                         <Icon icon=icondata::AiHomeOutlined />
@@ -93,7 +93,7 @@ pub fn DrawerDemo() -> impl IntoView {
                         <Icon icon=icondata::AiInfoCircleOutlined />
                         "The drawer component is also used in the main layout of this demo application. You can see it in action by toggling the sidebar menu."
                     </Alert>
-                    
+
                     <div class="mockup-code">
                         <pre data-prefix="1">
                             <code>"<Drawer open={{drawer_open}}>"</code>

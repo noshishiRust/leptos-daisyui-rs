@@ -82,10 +82,7 @@ pub fn SkeletonDemo() -> impl IntoView {
                                         <p class="mb-4">
                                             "This is the actual content that appears after loading is complete. The skeleton was just a placeholder to show the structure while data was being fetched."
                                         </p>
-                                        <Button
-                                            size=ButtonSize::Sm
-                                            color=ButtonColor::Primary
-                                        >
+                                        <Button size=ButtonSize::Sm color=ButtonColor::Primary>
                                             "Read More"
                                         </Button>
                                     }

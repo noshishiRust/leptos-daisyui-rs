@@ -127,10 +127,7 @@ pub fn TableDemo() -> impl IntoView {
                                             </td>
                                             <td>
                                                 <div class="flex gap-1">
-                                                    <Button
-                                                        size=ButtonSize::Xs
-                                                        style=ButtonStyle::Ghost
-                                                    >
+                                                    <Button size=ButtonSize::Xs style=ButtonStyle::Ghost>
                                                         "Edit"
                                                     </Button>
                                                     <Button
@@ -270,19 +267,13 @@ pub fn TableDemo() -> impl IntoView {
                                 </td>
                                 <td>
                                     "Desktop Support Technician" <br />
-                                    <Badge
-                                        color=BadgeColor::Neutral
-                                        size=BadgeSize::Sm
-                                    >
+                                    <Badge color=BadgeColor::Neutral size=BadgeSize::Sm>
                                         "Desktop Support Technician"
                                     </Badge>
                                 </td>
                                 <td>"Purple"</td>
                                 <th>
-                                    <Button
-                                        size=ButtonSize::Xs
-                                        style=ButtonStyle::Ghost
-                                    >
+                                    <Button size=ButtonSize::Xs style=ButtonStyle::Ghost>
                                         "details"
                                     </Button>
                                 </th>
@@ -311,19 +302,13 @@ pub fn TableDemo() -> impl IntoView {
                                 </td>
                                 <td>
                                     "Tax Accountant" <br />
-                                    <Badge
-                                        color=BadgeColor::Neutral
-                                        size=BadgeSize::Sm
-                                    >
+                                    <Badge color=BadgeColor::Neutral size=BadgeSize::Sm>
                                         "Tax Accountant"
                                     </Badge>
                                 </td>
                                 <td>"Red"</td>
                                 <th>
-                                    <Button
-                                        size=ButtonSize::Xs
-                                        style=ButtonStyle::Ghost
-                                    >
+                                    <Button size=ButtonSize::Xs style=ButtonStyle::Ghost>
                                         "details"
                                     </Button>
                                 </th>

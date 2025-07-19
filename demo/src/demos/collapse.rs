@@ -112,10 +112,7 @@ pub fn CollapseDemo() -> impl IntoView {
                     <div class="collapse-content">
                         <p>"You can customize the appearance using daisyUI color classes"</p>
                         <div class="mt-2">
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Accent
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Accent>
                                 "Action Button"
                             </Button>
                         </div>

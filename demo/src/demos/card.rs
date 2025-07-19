@@ -45,10 +45,7 @@ pub fn CardDemo() -> impl IntoView {
                         <h2 class="card-title">"Compact card!"</h2>
                         <p>"This card uses compact style"</p>
                         <div class="card-actions justify-end">
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Primary
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Primary>
                                 "Buy Now"
                             </Button>
                         </div>

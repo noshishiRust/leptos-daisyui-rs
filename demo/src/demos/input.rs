@@ -32,16 +32,8 @@ pub fn InputDemo() -> impl IntoView {
                         placeholder="Secondary"
                         class="w-full max-w-xs"
                     />
-                    <Input
-                        color=InputColor::Accent
-                        placeholder="Accent"
-                        class="w-full max-w-xs"
-                    />
-                    <Input
-                        color=InputColor::Info
-                        placeholder="Info"
-                        class="w-full max-w-xs"
-                    />
+                    <Input color=InputColor::Accent placeholder="Accent" class="w-full max-w-xs" />
+                    <Input color=InputColor::Info placeholder="Info" class="w-full max-w-xs" />
                     <Input
                         color=InputColor::Success
                         placeholder="Success"
@@ -52,46 +44,22 @@ pub fn InputDemo() -> impl IntoView {
                         placeholder="Warning"
                         class="w-full max-w-xs"
                     />
-                    <Input
-                        color=InputColor::Error
-                        placeholder="Error"
-                        class="w-full max-w-xs"
-                    />
+                    <Input color=InputColor::Error placeholder="Error" class="w-full max-w-xs" />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="space-y-2">
-                    <Input
-                        size=InputSize::Xs
-                        placeholder="XS"
-                        class="w-full max-w-xs"
-                    />
-                    <Input
-                        size=InputSize::Sm
-                        placeholder="SM"
-                        class="w-full max-w-xs"
-                    />
-                    <Input
-                        size=InputSize::Md
-                        placeholder="MD"
-                        class="w-full max-w-xs"
-                    />
-                    <Input
-                        size=InputSize::Lg
-                        placeholder="LG"
-                        class="w-full max-w-xs"
-                    />
+                    <Input size=InputSize::Xs placeholder="XS" class="w-full max-w-xs" />
+                    <Input size=InputSize::Sm placeholder="SM" class="w-full max-w-xs" />
+                    <Input size=InputSize::Md placeholder="MD" class="w-full max-w-xs" />
+                    <Input size=InputSize::Lg placeholder="LG" class="w-full max-w-xs" />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Styles"</h2>
                 <div class="space-y-2">
                     <Input placeholder="Default" class="w-full max-w-xs" />
                     <Input placeholder="Bordered" class="w-full max-w-xs" />
-                    <Input
-                        style=InputStyle::Ghost
-                        placeholder="Ghost"
-                        class="w-full max-w-xs"
-                    />
+                    <Input style=InputStyle::Ghost placeholder="Ghost" class="w-full max-w-xs" />
                 </div>
             </div>
         </div>

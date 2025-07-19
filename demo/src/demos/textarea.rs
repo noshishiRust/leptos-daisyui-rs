@@ -42,26 +42,10 @@ pub fn TextareaDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="space-y-2">
-                    <Textarea
-                        size=TextareaSize::Xs
-                        prop:placeholder="XS"
-                        class="w-full max-w-xs"
-                    />
-                    <Textarea
-                        size=TextareaSize::Sm
-                        prop:placeholder="SM"
-                        class="w-full max-w-xs"
-                    />
-                    <Textarea
-                        size=TextareaSize::Md
-                        prop:placeholder="MD"
-                        class="w-full max-w-xs"
-                    />
-                    <Textarea
-                        size=TextareaSize::Lg
-                        prop:placeholder="LG"
-                        class="w-full max-w-xs"
-                    />
+                    <Textarea size=TextareaSize::Xs prop:placeholder="XS" class="w-full max-w-xs" />
+                    <Textarea size=TextareaSize::Sm prop:placeholder="SM" class="w-full max-w-xs" />
+                    <Textarea size=TextareaSize::Md prop:placeholder="MD" class="w-full max-w-xs" />
+                    <Textarea size=TextareaSize::Lg prop:placeholder="LG" class="w-full max-w-xs" />
                 </div>
             </div>
         </div>

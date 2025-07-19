@@ -31,20 +31,14 @@ pub fn SelectDemo() -> impl IntoView {
                         <option>"Option 1"</option>
                         <option>"Option 2"</option>
                     </Select>
-                    <Select
-                        color=SelectColor::Primary
-                        class="w-full max-w-xs"
-                    >
+                    <Select color=SelectColor::Primary class="w-full max-w-xs">
                         <option disabled selected>
                             "Primary"
                         </option>
                         <option>"Option 1"</option>
                         <option>"Option 2"</option>
                     </Select>
-                    <Select
-                        color=SelectColor::Secondary
-                        class="w-full max-w-xs"
-                    >
+                    <Select color=SelectColor::Secondary class="w-full max-w-xs">
                         <option disabled selected>
                             "Secondary"
                         </option>

@@ -46,10 +46,7 @@ pub fn ButtonDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"States"</h2>
                 <div class="flex gap-2">
                     <Button color=ButtonColor::Primary>"Normal"</Button>
-                    <Button
-                        color=ButtonColor::Primary
-                        disabled=true
-                    >
+                    <Button color=ButtonColor::Primary disabled=true>
                         "Disabled"
                     </Button>
                     <Button color=ButtonColor::Primary disabled=true>
@@ -60,28 +57,16 @@ pub fn ButtonDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Shapes"</h2>
                 <div class="flex items-center gap-2">
-                    <Button
-                        color=ButtonColor::Primary
-                        shape=ButtonShape::Wide
-                    >
+                    <Button color=ButtonColor::Primary shape=ButtonShape::Wide>
                         "Wide"
                     </Button>
-                    <Button
-                        color=ButtonColor::Primary
-                        shape=ButtonShape::Square
-                    >
+                    <Button color=ButtonColor::Primary shape=ButtonShape::Square>
                         "Square"
                     </Button>
-                    <Button
-                        color=ButtonColor::Primary
-                        shape=ButtonShape::Circle
-                    >
+                    <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
                         "Circle"
                     </Button>
-                    <Button
-                        color=ButtonColor::Primary
-                        shape=ButtonShape::Block
-                    >
+                    <Button color=ButtonColor::Primary shape=ButtonShape::Block>
                         "Block"
                     </Button>
                 </div>

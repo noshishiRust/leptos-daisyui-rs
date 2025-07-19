@@ -27,54 +27,21 @@ pub fn ToggleDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
                     <Toggle checked=true />
-                    <Toggle
-                        color=ToggleColor::Primary
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Secondary
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Accent
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Success
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Warning
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Info
-                        checked=true
-                    />
-                    <Toggle
-                        color=ToggleColor::Error
-                        checked=true
-                    />
+                    <Toggle color=ToggleColor::Primary checked=true />
+                    <Toggle color=ToggleColor::Secondary checked=true />
+                    <Toggle color=ToggleColor::Accent checked=true />
+                    <Toggle color=ToggleColor::Success checked=true />
+                    <Toggle color=ToggleColor::Warning checked=true />
+                    <Toggle color=ToggleColor::Info checked=true />
+                    <Toggle color=ToggleColor::Error checked=true />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
-                    <Toggle
-                        size=ToggleSize::Xs
-                        checked=true
-                    />
-                    <Toggle
-                        size=ToggleSize::Sm
-                        checked=true
-                    />
-                    <Toggle
-                        size=ToggleSize::Md
-                        checked=true
-                    />
-                    <Toggle
-                        size=ToggleSize::Lg
-                        checked=true
-                    />
+                    <Toggle size=ToggleSize::Xs checked=true />
+                    <Toggle size=ToggleSize::Sm checked=true />
+                    <Toggle size=ToggleSize::Md checked=true />
+                    <Toggle size=ToggleSize::Lg checked=true />
                 </div>
             </div>
         </div>

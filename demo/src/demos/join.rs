@@ -167,10 +167,7 @@ pub fn JoinDemo() -> impl IntoView {
                                     <option>"Books"</option>
                                     <option>"Home"</option>
                                 </Select>
-                                <Button
-                                    color=ButtonColor::Primary
-                                    class="join-item"
-                                >
+                                <Button color=ButtonColor::Primary class="join-item">
                                     "Search"
                                 </Button>
                             </div>
@@ -207,25 +204,13 @@ pub fn JoinDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Social Media Actions"</h2>
                 <div class="join">
-                    <Button
-                        size=ButtonSize::Sm
-                        style=ButtonStyle::Outline
-                        class="join-item"
-                    >
+                    <Button size=ButtonSize::Sm style=ButtonStyle::Outline class="join-item">
                         "👍 Like"
                     </Button>
-                    <Button
-                        size=ButtonSize::Sm
-                        style=ButtonStyle::Outline
-                        class="join-item"
-                    >
+                    <Button size=ButtonSize::Sm style=ButtonStyle::Outline class="join-item">
                         "💬 Comment"
                     </Button>
-                    <Button
-                        size=ButtonSize::Sm
-                        style=ButtonStyle::Outline
-                        class="join-item"
-                    >
+                    <Button size=ButtonSize::Sm style=ButtonStyle::Outline class="join-item">
                         "🔗 Share"
                     </Button>
                 </div>

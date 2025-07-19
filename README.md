@@ -3,17 +3,21 @@
 This crate is a daisyUI 5 components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components.
 
 > 🚧 **Work in Progress**  
-This project is currently under active development.  
-The design and usage are still evolving, and breaking changes can be expected.  
-Feedback is welcome!
+> This project is currently under active development.  
+> The design and usage are still evolving, and breaking changes can be expected.  
+> Feedback is welcome!
 
 ## How to use
+
+### Install
 
 Include this crate in your dependencies.
 
 ```sh
 cargo add leptos-daisyui-rs
 ```
+
+### Code
 
 You can use components as follows: Tailwind CSS (v4) is used, so you can insert additional classes.
 
@@ -36,6 +40,7 @@ fn Demo () -> impl IntoView {
 }
 ```
 
+### CSS Install
 
 As a note at build time, since the class names included in daisyUI are included in the crate, please refer to each component you use inline as follows.
 
@@ -51,7 +56,117 @@ As a note at build time, since the class names included in daisyUI are included 
 If you want to include everything first [daisyui-components.css](. /stytles/daisyui-components.css).
 
 > 🚧 **There is room for optimization** 
-I still refer to class names by force in this area, so in the future I would like to include only the classes used in the build.
+> I still refer to class names by force in this area, so in the future I would like to include only the classes used in the build.
+
+## How to Code
+
+This section describes a more in-depth implementation.
+
+###  Wrapper Components
+
+Basically, this library implements a component that wraps a simple HTML element and hides the design part of daisyUI inside.
+
+Therefore, it is designed to be flexible enough to add attributes and event listeners to the top HTML element using [Spread (Leptos Book)](https://book.leptos.dev/view/03_components.html#spreading-attributes-onto-components) .
+
+For example, take a look at the following Button component:
+
+```rust
+use leptos::prelude::*;
+use leptos::html::{Button as HTMLButton};
+use leptos_daisyui_rs::components::*;;
+
+
+let active = Signal::derive(move || some_condition());
+let node_ref = NodeRef::<HTMLButton>::new();
+
+// It is also possible to access the DOM API directly through NodeRef.
+Effect::new(move || {
+    let node_ref = node_ref.clone();
+    let button = node_ref.get();
+    if let Some(button) = button {
+        if button.check_validity() {
+            log::info!("Button is valid");
+        } else {
+            log::warn!("Button is invalid");
+        }
+    }
+});
+
+...
+
+<Buttton
+    // This is already defined as a property.
+    color=ButtonColor::Neutral
+    shape=ButtonShape::Square
+    active=active
+    node_ref=node_ref
+    class="my-custom-class"
+
+    // Attributes of the Top HTML element can be added using the `attr` modifier.
+    //
+    // - HTMLButtonElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
+    // - HTMLElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+    attr:name="my-button"
+    attr:r#tytpe="button"
+
+    // You can also add style or class attributes using the `class` and `style` modifiers.
+    //
+    // - Leptos ClassAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.ClassAttribute.html
+    // - Leptos StyleAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.StyleAttribute.html
+    class:btn=true
+    style:font="normal"
+    class:btn-block=true
+
+    // Of course, event listeners belonging to Element can be added using the `on` modifier.
+    //
+    // - Leptos OnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.OnAttribute.html
+    // - Leptos GlobalOnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.GlobalOnAttributes.html
+    on:click=move |ev| {
+        // Handle click event
+        log::info!("Button clicked: {:?}", ev);
+    }
+
+    // You can also add custom properties using the `prop` modifier.
+    //
+    // Leptos PropAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.PropAttribute.html
+    prop:command="show-popover"
+>
+    "Button!"
+</Buttton>
+```
+
+### What you can't do
+
+While the above consists of top HTML elements that match daisyUI components to some degree, the CSS design should be more flexible than it should be. For example, we think it would be good to have a link (anchor tag) with a Button design.
+
+If you would like to use the same design but use the internal configuration HTML elements, we would be glad to receive your contribution!!
+
+As a workaround, a wrapper component that only assigns attributes to child components can be considered. For example
+
+```rust
+use leptos::prelude::*;
+use leptos::tachys::html::class::class as class_fn;
+
+#[component]
+pub fn FullWrapperButton(children: Children) -> impl IntoView {
+    // It can be added without overwriting it by making it a conditional class.
+    children().add_any_attr(class_fn(("btn", true)))
+}
+
+...
+
+<FullWrapperButton>
+    <a href="/some-link">
+        "Link Button"
+    </a>
+</FullWrapperButton>
+
+<FullWrapperButton>
+    <button>
+        "Button"
+    </button
+</FullWrapperButton>
+```
 
 
 ## Implementation Status
@@ -123,6 +238,14 @@ I still refer to class names by force in this area, so in the future I would lik
 
 🎉 **All daisyUI 5 components are now fully implemented!**
 
-## TODO
+## TODO utility
 - utility hooks
-- utility provder ... Toast etc...
+    - [ ] toggle
+    - [ ] validator
+    - [ ] modal
+    - [ ] popover
+    - etc ...
+- utility provder
+    - [ ] Theme controller
+    - [ ] Toast Manager
+    - etc ...

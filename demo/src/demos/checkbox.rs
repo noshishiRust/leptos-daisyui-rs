@@ -35,54 +35,21 @@ pub fn CheckboxDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
                     <Checkbox checked=true />
-                    <Checkbox
-                        color=CheckboxColor::Primary
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Secondary
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Accent
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Success
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Warning
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Info
-                        checked=true
-                    />
-                    <Checkbox
-                        color=CheckboxColor::Error
-                        checked=true
-                    />
+                    <Checkbox color=CheckboxColor::Primary checked=true />
+                    <Checkbox color=CheckboxColor::Secondary checked=true />
+                    <Checkbox color=CheckboxColor::Accent checked=true />
+                    <Checkbox color=CheckboxColor::Success checked=true />
+                    <Checkbox color=CheckboxColor::Warning checked=true />
+                    <Checkbox color=CheckboxColor::Info checked=true />
+                    <Checkbox color=CheckboxColor::Error checked=true />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
-                    <Checkbox
-                        size=CheckboxSize::Xs
-                        checked=true
-                    />
-                    <Checkbox
-                        size=CheckboxSize::Sm
-                        checked=true
-                    />
-                    <Checkbox
-                        size=CheckboxSize::Md
-                        checked=true
-                    />
-                    <Checkbox
-                        size=CheckboxSize::Lg
-                        checked=true
-                    />
+                    <Checkbox size=CheckboxSize::Xs checked=true />
+                    <Checkbox size=CheckboxSize::Sm checked=true />
+                    <Checkbox size=CheckboxSize::Md checked=true />
+                    <Checkbox size=CheckboxSize::Lg checked=true />
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 use super::style::{MenuDirection, MenuSize};
 use crate::merge_classes;
 use leptos::{
-    html::{Li, Ul, H2},
+    html::{H2, Li, Ul},
     prelude::*,
 };
 

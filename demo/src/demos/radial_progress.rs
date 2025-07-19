@@ -96,19 +96,13 @@ pub fn RadialProgressDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"With Custom Content"</h2>
                 <div class="flex flex-wrap gap-4">
                     <RadialProgress value=75.0 class="text-primary">
-                        <div class="text-xs">
-                            "3/4"
-                        </div>
+                        <div class="text-xs">"3/4"</div>
                     </RadialProgress>
                     <RadialProgress value=66.0 class="text-secondary">
-                        <div class="text-xs">
-                            "2 of 3"
-                        </div>
+                        <div class="text-xs">"2 of 3"</div>
                     </RadialProgress>
                     <RadialProgress value=88.0 class="text-accent">
-                        <div class="text-xs">
-                            "8.8"
-                        </div>
+                        <div class="text-xs">"8.8"</div>
                     </RadialProgress>
                 </div>
             </div>

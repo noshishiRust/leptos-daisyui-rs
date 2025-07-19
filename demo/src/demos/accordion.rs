@@ -14,10 +14,7 @@ pub fn AccordionDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Examples"</h2>
 
                 <div class="space-y-2">
-                    <Accordion
-                        modifier=AccordionModifier::Arrow
-                        class="border border-base-300"
-                    >
+                    <Accordion modifier=AccordionModifier::Arrow class="border border-base-300">
                         <input type="radio" name="accordion-1" checked />
                         <AccordionTitle>"What is daisyUI?"</AccordionTitle>
                         <AccordionContent>
@@ -27,10 +24,7 @@ pub fn AccordionDemo() -> impl IntoView {
                         </AccordionContent>
                     </Accordion>
 
-                    <Accordion
-                        modifier=AccordionModifier::Arrow
-                        class="border border-base-300"
-                    >
+                    <Accordion modifier=AccordionModifier::Arrow class="border border-base-300">
                         <input type="radio" name="accordion-1" />
                         <AccordionTitle>"How do I use it with Leptos?"</AccordionTitle>
                         <AccordionContent>
@@ -40,10 +34,7 @@ pub fn AccordionDemo() -> impl IntoView {
                         </AccordionContent>
                     </Accordion>
 
-                    <Accordion
-                        modifier=AccordionModifier::Plus
-                        class="border border-base-300"
-                    >
+                    <Accordion modifier=AccordionModifier::Plus class="border border-base-300">
                         <input type="radio" name="accordion-1" />
                         <AccordionTitle>"Plus style accordion"</AccordionTitle>
                         <AccordionContent>

@@ -1,7 +1,7 @@
 use super::style::{ButtonColor, ButtonShape, ButtonSize, ButtonStyle};
 use crate::merge_classes;
 use leptos::{
-    html::{Button as HTMLButton, A},
+    html::{A, Button as HTMLButton},
     prelude::*,
 };
 
@@ -22,16 +22,15 @@ pub fn Button(
         <button
             disabled=disabled
             node_ref=node_ref
-            class=move || {
-                merge_classes!(
-                    "btn",
-                    color.get().as_str(),
-                    style.get().as_str(),
-                    size.get().as_str(),
-                    shape.get().as_str(),
-                    class
-                )
-            }
+            class=merge_classes!(
+                "btn",
+                color.get().as_str(),
+                style.get().as_str(),
+                size.get().as_str(),
+                shape.get().as_str(),
+                class
+            )
+
             class:btn-active=active
             class:btn-disabled=disabled
             class:loading=loading
@@ -56,17 +55,16 @@ pub fn LinkButton(
         <a
             href=href
             node_ref=node_ref
-            class=move || {
-                merge_classes!(
-                    "btn",
+            class=merge_classes!(
+                "btn",
                 color.get().as_str(),
                 style.get().as_str(),
                 size.get().as_str(),
                 shape.get().as_str(),
                 class
-                )
-            }
+            )
         >
+
             {children()}
         </a>
     }

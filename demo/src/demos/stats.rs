@@ -141,10 +141,7 @@ pub fn StatsDemo() -> impl IntoView {
                         <div class="stat-title">"Account balance"</div>
                         <div class="stat-value">"$89,400"</div>
                         <div class="stat-actions">
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Success
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Success>
                                 "Add funds"
                             </Button>
                         </div>
@@ -170,10 +167,7 @@ pub fn StatsDemo() -> impl IntoView {
                         <div class="stat-value">"$89,400"</div>
                         <div class="stat-actions">
                             <Button size=ButtonSize::Sm>"Withdrawal"</Button>
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Primary
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Primary>
                                 "deposit"
                             </Button>
                         </div>

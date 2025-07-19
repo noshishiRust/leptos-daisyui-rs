@@ -35,10 +35,7 @@ pub fn PaginationDemo() -> impl IntoView {
                     <Button class="join-item" style=ButtonStyle::Outline>
                         "2"
                     </Button>
-                    <Button
-                        class="join-item btn-active"
-                        color=ButtonColor::Primary
-                    >
+                    <Button class="join-item btn-active" color=ButtonColor::Primary>
                         "3"
                     </Button>
                     <Button class="join-item" style=ButtonStyle::Outline>
@@ -51,11 +48,7 @@ pub fn PaginationDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Pagination with Disabled States"</h2>
                 <div class="join">
-                    <Button
-                        class="join-item"
-                        style=ButtonStyle::Outline
-                        disabled=true
-                    >
+                    <Button class="join-item" style=ButtonStyle::Outline disabled=true>
                         "«"
                     </Button>
                     <Button class="join-item" style=ButtonStyle::Outline>
@@ -179,34 +172,19 @@ pub fn PaginationDemo() -> impl IntoView {
                     <Button class="join-item" style=ButtonStyle::Outline>
                         "Prev"
                     </Button>
-                    <Button
-                        class="join-item hidden sm:inline-flex"
-                        style=ButtonStyle::Outline
-                    >
+                    <Button class="join-item hidden sm:inline-flex" style=ButtonStyle::Outline>
                         "1"
                     </Button>
-                    <Button
-                        class="join-item hidden sm:inline-flex"
-                        style=ButtonStyle::Outline
-                    >
+                    <Button class="join-item hidden sm:inline-flex" style=ButtonStyle::Outline>
                         "2"
                     </Button>
-                    <Button
-                        class="join-item btn-active"
-                        color=ButtonColor::Primary
-                    >
+                    <Button class="join-item btn-active" color=ButtonColor::Primary>
                         "3"
                     </Button>
-                    <Button
-                        class="join-item hidden sm:inline-flex"
-                        style=ButtonStyle::Outline
-                    >
+                    <Button class="join-item hidden sm:inline-flex" style=ButtonStyle::Outline>
                         "4"
                     </Button>
-                    <Button
-                        class="join-item hidden sm:inline-flex"
-                        style=ButtonStyle::Outline
-                    >
+                    <Button class="join-item hidden sm:inline-flex" style=ButtonStyle::Outline>
                         "5"
                     </Button>
                     <Button class="join-item" style=ButtonStyle::Outline>
@@ -235,10 +213,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                     view! {
                                         <div class="p-3 bg-base-200 rounded-lg flex justify-between items-center">
                                             <span>"Product #" {product_number}</span>
-                                            <Badge
-                                                color=BadgeColor::Primary
-                                                size=BadgeSize::Sm
-                                            >
+                                            <Badge color=BadgeColor::Primary size=BadgeSize::Sm>
                                                 "In Stock"
                                             </Badge>
                                         </div>
@@ -332,10 +307,7 @@ pub fn PaginationDemo() -> impl IntoView {
                     <Button class="join-item" style=ButtonStyle::Outline>
                         "98"
                     </Button>
-                    <Button
-                        class="join-item btn-active"
-                        color=ButtonColor::Primary
-                    >
+                    <Button class="join-item btn-active" color=ButtonColor::Primary>
                         "99"
                     </Button>
                     <Button class="join-item" style=ButtonStyle::Outline>
@@ -411,10 +383,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                                     </td>
                                                     <td>
                                                         <div class="flex gap-1">
-                                                            <Button
-                                                                size=ButtonSize::Xs
-                                                                style=ButtonStyle::Ghost
-                                                            >
+                                                            <Button size=ButtonSize::Xs style=ButtonStyle::Ghost>
                                                                 "Edit"
                                                             </Button>
                                                             <Button
@@ -551,10 +520,7 @@ pub fn PaginationDemo() -> impl IntoView {
                             <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
-                            <Button
-                                class="join-item btn-active"
-                                color=ButtonColor::Primary
-                            >
+                            <Button class="join-item btn-active" color=ButtonColor::Primary>
                                 "2"
                             </Button>
                             <Button class="join-item" style=ButtonStyle::Outline>
@@ -569,10 +535,7 @@ pub fn PaginationDemo() -> impl IntoView {
                             <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
-                            <Button
-                                class="join-item btn-active"
-                                color=ButtonColor::Secondary
-                            >
+                            <Button class="join-item btn-active" color=ButtonColor::Secondary>
                                 "2"
                             </Button>
                             <Button class="join-item" style=ButtonStyle::Outline>
@@ -587,10 +550,7 @@ pub fn PaginationDemo() -> impl IntoView {
                             <Button class="join-item" style=ButtonStyle::Outline>
                                 "1"
                             </Button>
-                            <Button
-                                class="join-item btn-active"
-                                color=ButtonColor::Accent
-                            >
+                            <Button class="join-item btn-active" color=ButtonColor::Accent>
                                 "2"
                             </Button>
                             <Button class="join-item" style=ButtonStyle::Outline>

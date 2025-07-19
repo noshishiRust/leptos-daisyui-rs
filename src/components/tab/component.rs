@@ -1,7 +1,7 @@
 use super::style::{TabSize, TabVariant};
 use crate::merge_classes;
 use leptos::{
-    html::{Div, Input, A},
+    html::{A, Div, Input},
     prelude::*,
 };
 

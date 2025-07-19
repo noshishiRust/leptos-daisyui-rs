@@ -146,16 +146,10 @@ pub fn FileInputDemo() -> impl IntoView {
                                     </label>
                                 </div>
                                 <div class="card-actions justify-end">
-                                    <Button
-                                        size=ButtonSize::Sm
-                                        style=ButtonStyle::Ghost
-                                    >
+                                    <Button size=ButtonSize::Sm style=ButtonStyle::Ghost>
                                         "Cancel"
                                     </Button>
-                                    <Button
-                                        size=ButtonSize::Sm
-                                        color=ButtonColor::Primary
-                                    >
+                                    <Button size=ButtonSize::Sm color=ButtonColor::Primary>
                                         "Upload"
                                     </Button>
                                 </div>
@@ -193,10 +187,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                     />
                                 </div>
                                 <div class="card-actions justify-end">
-                                    <Button
-                                        size=ButtonSize::Sm
-                                        color=ButtonColor::Success
-                                    >
+                                    <Button size=ButtonSize::Sm color=ButtonColor::Success>
                                         "Upload Files"
                                     </Button>
                                 </div>

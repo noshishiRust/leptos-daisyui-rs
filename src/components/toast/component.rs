@@ -2,7 +2,7 @@ use super::style::ToastPosition;
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
-//// A Toast component that displays notifications or messages.
+/// A Toast component that displays notifications or messages.
 ///
 /// This component is a wrapper `<div>` element,
 /// you can spread [HTMLDivElement](https://developer.mozilla.org/ja/docs/Web/API/HTMLDivElement) attributes to it.

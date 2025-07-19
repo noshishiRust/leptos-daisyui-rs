@@ -255,16 +255,10 @@ pub fn ToastDemo() -> impl IntoView {
                         </svg>
                         <span>"Cookie consent required"</span>
                         <div>
-                            <Button
-                                size=ButtonSize::Sm
-                                style=ButtonStyle::Ghost
-                            >
+                            <Button size=ButtonSize::Sm style=ButtonStyle::Ghost>
                                 "Deny"
                             </Button>
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Primary
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Primary>
                                 "Accept"
                             </Button>
                         </div>
@@ -288,16 +282,10 @@ pub fn ToastDemo() -> impl IntoView {
                         </svg>
                         <span>"Unsaved changes detected"</span>
                         <div>
-                            <Button
-                                size=ButtonSize::Sm
-                                style=ButtonStyle::Outline
-                            >
+                            <Button size=ButtonSize::Sm style=ButtonStyle::Outline>
                                 "Discard"
                             </Button>
-                            <Button
-                                size=ButtonSize::Sm
-                                color=ButtonColor::Success
-                            >
+                            <Button size=ButtonSize::Sm color=ButtonColor::Success>
                                 "Save"
                             </Button>
                         </div>

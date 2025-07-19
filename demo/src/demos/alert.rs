@@ -82,17 +82,11 @@ pub fn AlertDemo() -> impl IntoView {
 
                 <h2 class="text-xl font-semibold">"Different Styles"</h2>
                 <div class="space-y-3">
-                    <Alert
-                        style=AlertStyle::Outline
-                        color=AlertColor::Info
-                    >
+                    <Alert style=AlertStyle::Outline color=AlertColor::Info>
                         <span>"Outline style alert"</span>
                     </Alert>
 
-                    <Alert
-                        style=AlertStyle::Soft
-                        color=AlertColor::Info
-                    >
+                    <Alert style=AlertStyle::Soft color=AlertColor::Info>
                         <span>"Soft style alert"</span>
                     </Alert>
                 </div>
