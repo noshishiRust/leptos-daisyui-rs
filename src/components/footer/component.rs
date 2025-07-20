@@ -9,7 +9,9 @@ use leptos::{
 pub fn Footer(
     #[prop(optional, into)] placement: Signal<FooterPlacement>,
     #[prop(optional, into)] direction: Signal<FooterDirection>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<HtmlFooter>,
     children: Children,
 ) -> impl IntoView {
@@ -32,7 +34,9 @@ pub fn Footer(
 
 #[component]
 pub fn FooterTitle(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {

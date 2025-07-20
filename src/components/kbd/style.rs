@@ -10,6 +10,7 @@ pub enum KbdSize {
 }
 
 impl KbdSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             KbdSize::Default => "",

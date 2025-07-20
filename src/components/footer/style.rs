@@ -6,6 +6,7 @@ pub enum FooterPlacement {
 }
 
 impl FooterPlacement {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             FooterPlacement::Default => "",
@@ -23,6 +24,7 @@ pub enum FooterDirection {
 }
 
 impl FooterDirection {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             FooterDirection::Default => "",

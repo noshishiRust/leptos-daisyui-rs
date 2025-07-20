@@ -3,7 +3,9 @@ use leptos::{html::Div, prelude::*};
 
 #[component]
 pub fn MockupPhone(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -19,7 +21,9 @@ pub fn MockupPhone(
 
 #[component]
 pub fn MockupPhoneCamera(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -35,7 +39,9 @@ pub fn MockupPhoneCamera(
 
 #[component]
 pub fn MockupPhoneDisplay(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {

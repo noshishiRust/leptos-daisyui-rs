@@ -8,7 +8,9 @@ use leptos::{
 #[component]
 pub fn Dock(
     #[prop(optional, into)] size: Signal<DockSize>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -29,7 +31,9 @@ pub fn Dock(
 #[component]
 pub fn DockItem(
     #[prop(optional, into)] active: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Button>,
     #[prop(optional)] on_click: Option<Box<dyn Fn()>>,
     children: Children,
@@ -52,7 +56,9 @@ pub fn DockItem(
 
 #[component]
 pub fn DockLabel(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     children: Children,
 ) -> impl IntoView {

@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn Diff(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Figure>,
     children: Children,
 ) -> impl IntoView {
@@ -19,7 +21,9 @@ pub fn Diff(
 
 #[component]
 pub fn DiffItem1(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -32,7 +36,9 @@ pub fn DiffItem1(
 
 #[component]
 pub fn DiffItem2(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -45,7 +51,9 @@ pub fn DiffItem2(
 
 #[component]
 pub fn DiffResizer(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
 ) -> impl IntoView {
     view! { <div node_ref=node_ref class=move || merge_classes!("diff-resizer", class)></div> }

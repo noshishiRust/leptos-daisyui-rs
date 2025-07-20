@@ -6,7 +6,9 @@ use leptos::prelude::*;
 pub fn Carousel(
     #[prop(optional, into)] modifier: Signal<CarouselModifier>,
     #[prop(optional, into)] direction: Signal<CarouselDirection>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -23,7 +25,9 @@ pub fn Carousel(
 
 #[component]
 pub fn CarouselItem(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! { <div class=move || merge_classes!("carousel-item", class)>{children()}</div> }

@@ -6,6 +6,7 @@ pub enum DrawerPlacement {
 }
 
 impl DrawerPlacement {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             DrawerPlacement::Start => "",

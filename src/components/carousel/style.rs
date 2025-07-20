@@ -8,6 +8,7 @@ pub enum CarouselModifier {
 }
 
 impl CarouselModifier {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             CarouselModifier::Default => "",
@@ -26,6 +27,7 @@ pub enum CarouselDirection {
 }
 
 impl CarouselDirection {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             CarouselDirection::Horizontal => "carousel-horizontal",

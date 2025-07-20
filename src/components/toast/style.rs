@@ -13,6 +13,7 @@ pub enum ToastPosition {
 }
 
 impl ToastPosition {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             ToastPosition::TopEnd => "toast-top toast-end",

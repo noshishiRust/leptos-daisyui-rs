@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn Filter(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -19,7 +21,9 @@ pub fn Filter(
 
 #[component]
 pub fn FilterForm(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! { <form class=move || merge_classes!("filter", class)>{children()}</form> }
@@ -28,7 +32,9 @@ pub fn FilterForm(
 #[component]
 pub fn FilterReset(
     name: &'static str,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {

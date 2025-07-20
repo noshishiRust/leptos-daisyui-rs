@@ -3,7 +3,9 @@ use leptos::{html::Span, prelude::*};
 
 #[component]
 pub fn Countdown(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     children: Children,
 ) -> impl IntoView {
@@ -17,7 +19,9 @@ pub fn Countdown(
 #[component]
 pub fn CountdownValue(
     value: Signal<u8>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     #[prop(optional, into)] aria_label: Signal<Option<String>>,
 ) -> impl IntoView {

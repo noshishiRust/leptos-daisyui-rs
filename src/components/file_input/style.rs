@@ -6,6 +6,7 @@ pub enum FileInputStyle {
 }
 
 impl FileInputStyle {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             FileInputStyle::Default => "",
@@ -29,6 +30,7 @@ pub enum FileInputColor {
 }
 
 impl FileInputColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             FileInputColor::Default => "",
@@ -56,6 +58,7 @@ pub enum FileInputSize {
 }
 
 impl FileInputSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             FileInputSize::Default => "",

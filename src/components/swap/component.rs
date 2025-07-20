@@ -9,7 +9,9 @@ use leptos::{
 pub fn Swap(
     #[prop(optional, into)] rotate: Signal<SwapRotate>,
     #[prop(optional, into)] active: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Label>,
     children: Children,
 ) -> impl IntoView {
@@ -30,7 +32,9 @@ pub fn Swap(
 
 #[component]
 pub fn SwapOn(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -43,7 +47,9 @@ pub fn SwapOn(
 
 #[component]
 pub fn SwapOff(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {

@@ -5,7 +5,9 @@ use leptos::{html::Kbd as HtmlKbd, prelude::*};
 #[component]
 pub fn Kbd(
     #[prop(optional, into)] size: Signal<KbdSize>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<HtmlKbd>,
     children: Children,
 ) -> impl IntoView {

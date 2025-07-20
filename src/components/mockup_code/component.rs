@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn MockupCode(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -20,7 +22,9 @@ pub fn MockupCode(
 #[component]
 pub fn MockupCodeLine(
     #[prop(optional)] prefix: Option<&'static str>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Pre>,
     children: Children,
 ) -> impl IntoView {

@@ -8,7 +8,9 @@ use leptos::{
 #[component]
 pub fn Rating(
     #[prop(optional, into)] size: Signal<RatingSize>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -31,7 +33,9 @@ pub fn RatingItem(
     #[prop(optional, into)] checked: Signal<bool>,
     #[prop(optional)] name: Option<&'static str>,
     #[prop(optional)] value: Option<&'static str>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
     #[prop(optional)] on_change: Option<Box<dyn Fn(bool)>>,
 ) -> impl IntoView {
@@ -55,7 +59,9 @@ pub fn RatingItem(
 #[component]
 pub fn RatingHidden(
     #[prop(optional)] name: Option<&'static str>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {

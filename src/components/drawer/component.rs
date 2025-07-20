@@ -9,7 +9,9 @@ use leptos::{
 pub fn Drawer(
     #[prop(optional, into)] placement: Signal<DrawerPlacement>,
     #[prop(optional, into)] open: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -43,7 +45,9 @@ pub fn DrawerToggle(
 
 #[component]
 pub fn DrawerContent(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -56,7 +60,9 @@ pub fn DrawerContent(
 
 #[component]
 pub fn DrawerSide(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -69,7 +75,9 @@ pub fn DrawerSide(
 
 #[component]
 pub fn DrawerOverlay(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
 ) -> impl IntoView {
     view! { <div node_ref=node_ref class=move || merge_classes!("drawer-overlay", class)></div> }

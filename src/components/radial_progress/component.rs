@@ -8,7 +8,9 @@ pub fn RadialProgress(
     #[prop(optional, into)] size: Signal<RadialProgressSize>,
     #[prop(optional, into)] value: Signal<f64>,
     #[prop(optional, into)] thickness: Signal<String>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     #[prop(optional)] children: Option<Children>,
 ) -> impl IntoView {

@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn FieldSet(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Fieldset>,
     children: Children,
 ) -> impl IntoView {
@@ -19,7 +21,9 @@ pub fn FieldSet(
 
 #[component]
 pub fn FieldsetLegend(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Legend>,
     children: Children,
 ) -> impl IntoView {
@@ -32,7 +36,9 @@ pub fn FieldsetLegend(
 
 #[component]
 pub fn FieldsetLabel(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<P>,
     children: Children,
 ) -> impl IntoView {

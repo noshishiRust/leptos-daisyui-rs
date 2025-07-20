@@ -23,6 +23,7 @@ pub enum MaskType {
 }
 
 impl MaskType {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             MaskType::Squircle => "mask-squircle",

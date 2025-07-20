@@ -6,7 +6,9 @@ use leptos::{html::Span, prelude::*};
 pub fn Status(
     #[prop(optional, into)] color: Signal<StatusColor>,
     #[prop(optional, into)] size: Signal<StatusSize>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
 ) -> impl IntoView {
     view! {

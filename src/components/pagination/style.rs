@@ -9,6 +9,7 @@ pub enum PaginationSize {
 }
 
 impl PaginationSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             PaginationSize::Default => "",

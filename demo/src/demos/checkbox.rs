@@ -1,4 +1,4 @@
-use leptos::prelude::*;
+use leptos::{ev, prelude::*};
 use leptos_daisyui_rs::components::*;
 
 #[component]
@@ -19,37 +19,37 @@ pub fn CheckboxDemo() -> impl IntoView {
                     <label class="cursor-pointer label">
                         <span class="label-text">"Unchecked"</span>
                         <Checkbox
-                            checked=Signal::derive(move || checked1.get())
-                            on_change=Box::new(move |value| set_checked1.set(value))
+                            attr:checked=Signal::derive(move || checked1.get())
+                            on:change=move |ev| set_checked1.set(event_target_checked(&ev))
                         />
                     </label>
                     <label class="cursor-pointer label">
                         <span class="label-text">"Checked"</span>
                         <Checkbox
-                            checked=Signal::derive(move || checked2.get())
-                            on_change=Box::new(move |value| set_checked2.set(value))
+                            attr:checked=Signal::derive(move || checked2.get())
+                            on:change=move |ev| set_checked2.set(event_target_checked(&ev))
                         />
                     </label>
                 </div>
 
                 <h2 class="text-xl font-semibold">"Colors"</h2>
                 <div class="flex flex-wrap gap-2">
-                    <Checkbox checked=true />
-                    <Checkbox color=CheckboxColor::Primary checked=true />
-                    <Checkbox color=CheckboxColor::Secondary checked=true />
-                    <Checkbox color=CheckboxColor::Accent checked=true />
-                    <Checkbox color=CheckboxColor::Success checked=true />
-                    <Checkbox color=CheckboxColor::Warning checked=true />
-                    <Checkbox color=CheckboxColor::Info checked=true />
-                    <Checkbox color=CheckboxColor::Error checked=true />
+                    <Checkbox attr:checked=true />
+                    <Checkbox color=CheckboxColor::Primary attr:checked=true />
+                    <Checkbox color=CheckboxColor::Secondary attr:checked=true />
+                    <Checkbox color=CheckboxColor::Accent attr:checked=true />
+                    <Checkbox color=CheckboxColor::Success attr:checked=true />
+                    <Checkbox color=CheckboxColor::Warning attr:checked=true />
+                    <Checkbox color=CheckboxColor::Info attr:checked=true />
+                    <Checkbox color=CheckboxColor::Error attr:checked=true />
                 </div>
 
                 <h2 class="text-xl font-semibold">"Sizes"</h2>
                 <div class="flex items-center gap-2">
-                    <Checkbox size=CheckboxSize::Xs checked=true />
-                    <Checkbox size=CheckboxSize::Sm checked=true />
-                    <Checkbox size=CheckboxSize::Md checked=true />
-                    <Checkbox size=CheckboxSize::Lg checked=true />
+                    <Checkbox size=CheckboxSize::Xs attr:checked=true />
+                    <Checkbox size=CheckboxSize::Sm attr:checked=true />
+                    <Checkbox size=CheckboxSize::Md attr:checked=true />
+                    <Checkbox size=CheckboxSize::Lg attr:checked=true />
                 </div>
             </div>
         </div>

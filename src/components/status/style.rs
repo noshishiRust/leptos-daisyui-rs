@@ -13,6 +13,7 @@ pub enum StatusColor {
 }
 
 impl StatusColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             StatusColor::Default => "",
@@ -40,6 +41,7 @@ pub enum StatusSize {
 }
 
 impl StatusSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             StatusSize::Default => "",

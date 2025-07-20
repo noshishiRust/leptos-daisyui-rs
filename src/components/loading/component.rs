@@ -7,7 +7,9 @@ pub fn Loading(
     #[prop(optional, into)] color: Signal<LoadingColor>,
     #[prop(optional, into)] loading_type: Signal<LoadingType>,
     #[prop(optional, into)] size: Signal<LoadingSize>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
 ) -> impl IntoView {
     view! {

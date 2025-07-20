@@ -6,6 +6,7 @@ pub enum ChatPlacement {
 }
 
 impl ChatPlacement {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             ChatPlacement::Start => "chat-start",
@@ -29,6 +30,7 @@ pub enum ChatBubbleColor {
 }
 
 impl ChatBubbleColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             ChatBubbleColor::Default => "",

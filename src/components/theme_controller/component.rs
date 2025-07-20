@@ -5,7 +5,9 @@ use leptos::{html::Input, prelude::*};
 pub fn ThemeController(
     #[prop(optional, into)] theme_name: &'static str,
     #[prop(optional, into)] checked: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {

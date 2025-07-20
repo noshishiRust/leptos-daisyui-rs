@@ -13,6 +13,7 @@ pub enum LinkColor {
 }
 
 impl LinkColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             LinkColor::Default => "",

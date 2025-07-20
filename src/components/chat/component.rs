@@ -5,7 +5,9 @@ use leptos::prelude::*;
 #[component]
 pub fn Chat(
     placement: Signal<ChatPlacement>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -18,13 +20,20 @@ pub fn Chat(
 }
 
 #[component]
-pub fn ChatImage(#[prop(optional, into)] class: &'static str, children: Children) -> impl IntoView {
+pub fn ChatImage(
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
+    children: Children,
+) -> impl IntoView {
     view! { <div class=move || merge_classes!("chat-image", class)>{children()}</div> }
 }
 
 #[component]
 pub fn ChatHeader(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! { <div class=move || merge_classes!("chat-header", class)>{children()}</div> }
@@ -33,7 +42,9 @@ pub fn ChatHeader(
 #[component]
 pub fn ChatBubble(
     #[prop(optional, into)] color: Signal<ChatBubbleColor>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -49,7 +60,9 @@ pub fn ChatBubble(
 
 #[component]
 pub fn ChatFooter(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     children: Children,
 ) -> impl IntoView {
     view! { <div class=move || merge_classes!("chat-footer", class)>{children()}</div> }

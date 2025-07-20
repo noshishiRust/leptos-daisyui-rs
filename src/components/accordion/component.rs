@@ -5,28 +5,88 @@ use leptos::{
     prelude::*,
 };
 
-/// Accordion component that allows for collapsible content sections.
+/// # Accordion Component
 ///
-///  Add inline css to `input.css`
-/// - `@source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");`
+/// A reactive Leptos wrapper for daisyUI's accordion/collapse component that allows for collapsible content sections.
+/// When multiple accordions share the same radio input name, only one can be open at a time, creating traditional
+/// accordion behavior.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
+/// ```
+///
+/// ## Usage Example
+///
+/// ```rust
+/// use leptos::*;
+/// use leptos_daisyui::accordion::*;
+///
+/// #[component]
+/// fn AccordionDemo() -> impl IntoView {
+///     let (checked1, set_checked1) = signal(false);
+///     let (checked2, set_checked2) = signal(false);
+///
+///     view! {
+///         // Grouped accordions - only one can be open
+///         <Accordion name="my-accordion" checked=checked1 modifier=AccordionModifier::Arrow>
+///             <AccordionTitle>"Section 1"</AccordionTitle>
+///             <AccordionContent>"Content for section 1"</AccordionContent>
+///         </Accordion>
+///         
+///         <Accordion name="my-accordion" checked=checked2 modifier=AccordionModifier::Plus>
+///             <AccordionTitle>"Section 2"</AccordionTitle>
+///             <AccordionContent>"Content for section 2"</AccordionContent>
+///         </Accordion>
+///     }
+/// }
+/// ```
+///
+/// ## Node References
+/// - `outer_node_ref` - References the outer `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+/// - `inner_node_ref` - References the inner `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn Accordion(
-    #[prop(optional)] name: Option<&'static str>,
-    #[prop(optional, into)] checked: Signal<bool>,
-    #[prop(optional, into)] modifier: Signal<AccordionModifier>,
-    #[prop(optional, into)] class: &'static str,
-    #[prop(optional)] outer_node_ref: NodeRef<Div>,
-    #[prop(optional)] inner_node_ref: NodeRef<Input>,
+    /// Radio input name for grouping accordion sections
+    ///
+    /// When multiple accordions share the same name, only one can be open at a time.
+    /// Each group should have a unique name to avoid conflicts with other accordion groups.
+    #[prop(optional)]
+    name: Option<&'static str>,
+
+    /// Reactive signal controlling whether the accordion is open/checked
+    #[prop(optional, into)]
+    checked: Signal<bool>,
+
+    /// Visual modifier for the accordion appearance
+    #[prop(optional, into)]
+    modifier: Signal<AccordionModifier>,
+
+    /// Additional CSS classes to apply to the accordion container
+    #[prop(optional, into)]
+    class: &'static str,
+
+    /// Node reference for the outer container `<div>` element
+    #[prop(optional)]
+    outer_node_ref: NodeRef<Div>,
+
+    /// Node reference for the internal radio `<input>` element
+    #[prop(optional)]
+    inner_node_ref: NodeRef<Input>,
+
+    /// Child components, typically [`AccordionTitle`] and [`AccordionContent`]
     children: Children,
 ) -> impl IntoView {
     view! {
         <div
             node_ref=outer_node_ref
-            class=merge_classes!(
-                "collapse",
-                modifier.get().as_str(),
-                class
-            )
+            class=move || {
+                merge_classes!(
+                    "collapse",
+                    modifier.get().as_str(),
+                    class
+                )
+            }
         >
             <input node_ref=inner_node_ref type="radio" name=name prop:checked=checked />
             {children()}
@@ -34,27 +94,55 @@ pub fn Accordion(
     }
 }
 
+/// # Accordion Title Component
+///
+/// A clickable title/header section for accordion content. This component provides the interactive
+/// element that users click to expand or collapse the accordion section.
+///
+/// ## Node References
+/// - `node_ref` - References the title `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn AccordionTitle(
-    #[prop(optional, into)] class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    /// Additional CSS classes to apply to the title element
+    #[prop(optional, into)]
+    class: &'static str,
+
+    /// Node reference for the title `<div>` element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
+    /// Title content (text, icons, or other elements)
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("collapse-title", class)>
+        <div node_ref=node_ref class=move || merge_classes!("collapse-title", class)>
             {children()}
         </div>
     }
 }
 
+/// # Accordion Content Component
+///
+/// The collapsible content section of an accordion. This component contains the content that
+/// is shown or hidden when the accordion is expanded or collapsed.
+///
+/// ## Node References
+/// - `node_ref` - References the content `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn AccordionContent(
-    #[prop(optional, into)] class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    /// Additional CSS classes to apply to the content element
+    #[prop(optional, into)]
+    class: &'static str,
+
+    /// Node reference for the content `<div>` element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
+    /// Content to display when the accordion is expanded
     children: Children,
 ) -> impl IntoView {
     view! {
-        <div node_ref=node_ref class=merge_classes!("collapse-content", class)>
+        <div node_ref=node_ref class=move || merge_classes!("collapse-content", class)>
             {children()}
         </div>
     }

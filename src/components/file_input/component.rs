@@ -8,7 +8,9 @@ pub fn FileInput(
     #[prop(optional, into)] color: Signal<FileInputColor>,
     #[prop(optional, into)] size: Signal<FileInputSize>,
     #[prop(optional, into)] disabled: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
     #[prop(optional)] on_change: Option<Box<dyn Fn(leptos::ev::Event)>>,
 ) -> impl IntoView {

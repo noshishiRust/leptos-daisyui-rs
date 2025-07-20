@@ -6,7 +6,9 @@ use leptos::{html::A, prelude::*};
 pub fn Link(
     #[prop(optional, into)] color: Signal<LinkColor>,
     #[prop(optional, into)] hover: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<A>,
     #[prop(optional)] href: Option<&'static str>,
     children: Children,

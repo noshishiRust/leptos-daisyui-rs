@@ -1,18 +1,37 @@
+/// Color variants for checkbox components based on daisyUI's color system.
 #[derive(Clone, Debug, Default)]
 pub enum CheckboxColor {
+    /// Default checkbox color (no additional styling)
     #[default]
     Default,
+
+    /// Primary theme color checkbox
     Primary,
+
+    /// Secondary theme color checkbox
     Secondary,
+
+    /// Accent theme color checkbox
     Accent,
+
+    /// Neutral theme color checkbox
     Neutral,
+
+    /// Success color
     Success,
+
+    /// Warning color
     Warning,
+
+    /// Info color
     Info,
+
+    /// Error color
     Error,
 }
 
 impl CheckboxColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             CheckboxColor::Default => "",
@@ -28,21 +47,31 @@ impl CheckboxColor {
     }
 }
 
+/// Size variants for checkbox components based on daisyUI's sizing system.
+
 #[derive(Clone, Debug, Default)]
 pub enum CheckboxSize {
-    #[default]
-    Default,
+    /// Extra small checkbox
     Xs,
+
+    /// Small checkbox
     Sm,
+
+    /// Medium checkbox (explicit size)
+    #[default]
     Md,
+
+    /// Large checkbox
     Lg,
+
+    /// Extra large checkbox
     Xl,
 }
 
 impl CheckboxSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
-            CheckboxSize::Default => "",
             CheckboxSize::Xs => "checkbox-xs",
             CheckboxSize::Sm => "checkbox-sm",
             CheckboxSize::Md => "checkbox-md",

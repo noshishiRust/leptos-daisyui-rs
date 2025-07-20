@@ -6,6 +6,7 @@ pub enum JoinDirection {
 }
 
 impl JoinDirection {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             JoinDirection::Horizontal => "join-horizontal",

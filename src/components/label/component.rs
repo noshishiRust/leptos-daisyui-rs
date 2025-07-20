@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn Label(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<HtmlLabel>,
     children: Children,
 ) -> impl IntoView {
@@ -19,7 +21,9 @@ pub fn Label(
 
 #[component]
 pub fn LabelText(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     children: Children,
 ) -> impl IntoView {
@@ -32,7 +36,9 @@ pub fn LabelText(
 
 #[component]
 pub fn LabelTextAlt(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     children: Children,
 ) -> impl IntoView {

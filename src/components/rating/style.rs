@@ -9,6 +9,7 @@ pub enum RatingSize {
 }
 
 impl RatingSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             RatingSize::Default => "",

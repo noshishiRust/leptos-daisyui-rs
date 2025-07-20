@@ -1,3 +1,7 @@
+//! # daisyUI Avatar Components
+//!
+//! For more information, see: https://daisyui.com/components/avatar/
+
 mod component;
 mod style;
 

@@ -13,7 +13,9 @@ pub fn ValidatorInput(
     #[prop(optional)] input_type: Option<&'static str>,
     #[prop(optional, into)] placeholder: &'static str,
     #[prop(optional, into)] value: Signal<String>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {
@@ -42,7 +44,9 @@ pub fn ValidatorSelect(
     #[prop(optional, into)] color: Signal<SelectColor>,
     #[prop(optional, into)] size: Signal<SelectSize>,
     #[prop(optional, into)] disabled: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Select>,
     children: Children,
 ) -> impl IntoView {
@@ -68,7 +72,9 @@ pub fn ValidatorSelect(
 
 #[component]
 pub fn ValidatorHint(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {

@@ -7,6 +7,7 @@ pub enum IndicatorVerticalPlacement {
 }
 
 impl IndicatorVerticalPlacement {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             Self::Top => "indicator-top",
@@ -25,6 +26,7 @@ pub enum IndicatorHorizontalPlacement {
 }
 
 impl IndicatorHorizontalPlacement {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             Self::Start => "indicator-start",

@@ -6,7 +6,9 @@ use leptos::{
 
 #[component]
 pub fn List(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Ul>,
     children: Children,
 ) -> impl IntoView {
@@ -21,7 +23,9 @@ pub fn List(
 pub fn ListRow(
     #[prop(optional, into)] col_wrap: Signal<bool>,
     #[prop(optional, into)] col_grow: Signal<bool>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Li>,
     children: Children,
 ) -> impl IntoView {

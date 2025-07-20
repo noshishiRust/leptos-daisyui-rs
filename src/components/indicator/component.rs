@@ -7,7 +7,9 @@ use leptos::{
 
 #[component]
 pub fn Indicator(
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Div>,
     children: Children,
 ) -> impl IntoView {
@@ -22,7 +24,9 @@ pub fn Indicator(
 pub fn IndicatorItem(
     #[prop(optional, into)] vertical: Signal<IndicatorVerticalPlacement>,
     #[prop(optional, into)] horizontal: Signal<IndicatorHorizontalPlacement>,
-    #[prop(optional, into)] class: &'static str,
+    /// Additional CSS classes
+    #[prop(optional, into)]
+    class: &'static str,
     #[prop(optional)] node_ref: NodeRef<Span>,
     children: Children,
 ) -> impl IntoView {

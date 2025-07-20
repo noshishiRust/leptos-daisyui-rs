@@ -12,6 +12,7 @@ pub enum RadialProgressColor {
 }
 
 impl RadialProgressColor {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             RadialProgressColor::Default => "",
@@ -38,6 +39,7 @@ pub enum RadialProgressSize {
 }
 
 impl RadialProgressSize {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             RadialProgressSize::Default => "",

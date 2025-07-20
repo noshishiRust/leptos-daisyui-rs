@@ -7,6 +7,7 @@ pub enum SwapRotate {
 }
 
 impl SwapRotate {
+    /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
             SwapRotate::None => "",
