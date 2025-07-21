@@ -12,7 +12,7 @@ use leptos::{
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("swap swap-on swap-off swap-active swap-rotate swap-flip");
+/// @source inline("swap swap-on swap-off swap-indeterminate swap-active swap-rotate swap-flip");
 /// ```
 ///
 /// ## Node References
@@ -20,19 +20,23 @@ use leptos::{
 #[component]
 pub fn Swap(
     /// Animation style for the swap transition
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     rotate: Signal<SwapRotate>,
 
     /// Whether the swap is currently active (showing "on" content)
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     active: Signal<bool>,
+
+    /// Whether the swap is currently indeterminate (showing "indeterminate" content)
+    #[prop(optional, into)]
+    indeterminate: Signal<bool>,
 
     /// Additional CSS classes to apply to the swap container
     #[prop(optional, into)]
     class: &'static str,
 
     /// Node reference for the swap `<label>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Label>,
 
     /// Child components: [`SwapOn`] and [`SwapOff`]
@@ -47,7 +51,7 @@ pub fn Swap(
                 class)
             }
         >
-            <input type="checkbox" prop:checked=active />
+            <input type="checkbox" checked=active prop:indeterminate=indeterminate />
             {children()}
         </label>
     }
@@ -66,7 +70,7 @@ pub fn SwapOn(
     class: &'static str,
 
     /// Node reference for the on-state `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content to show when swap is active
@@ -92,7 +96,7 @@ pub fn SwapOff(
     class: &'static str,
 
     /// Node reference for the off-state `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content to show when swap is inactive
@@ -100,6 +104,32 @@ pub fn SwapOff(
 ) -> impl IntoView {
     view! {
         <div node_ref=node_ref class=move || merge_classes!("swap-off", class)>
+            {children()}
+        </div>
+    }
+}
+
+/// # Swap Indeterminate Component
+///
+/// The child element that should be visible when checkbox is indeterminate
+///
+/// ## Node References
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+#[component]
+pub fn SwapIndeterminate(
+    /// Additional CSS classes to apply to the indeterminate-state content
+    #[prop(optional, into)]
+    class: &'static str,
+
+    /// Node reference for the indeterminate-state `<div>` element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
+    /// Content to show when swap is indeterminate
+    children: Children,
+) -> impl IntoView {
+    view! {
+        <div node_ref=node_ref class=move || merge_classes!("swap-indeterminate", class)>
             {children()}
         </div>
     }

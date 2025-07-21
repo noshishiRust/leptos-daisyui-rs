@@ -12,38 +12,9 @@ use leptos::prelude::*;
 /// @source inline("breadcrumbs");
 /// ```
 ///
-/// ## Usage Example
-///
-/// ```rust
-/// use leptos::*;
-/// use leptos_daisyui::breadcrumbs::*;
-///
-/// #[component]
-/// fn BreadcrumbsDemo() -> impl IntoView {
-///     view! {
-///         <Breadcrumbs outer_class="text-sm">
-///             <BreadcrumbItem href="/".to_string()>
-///                 "Home"
-///             </BreadcrumbItem>
-///             <BreadcrumbItem href="/documents".to_string()>
-///                 "Documents"
-///             </BreadcrumbItem>
-///             <BreadcrumbItem>
-///                 "Current Page"
-///             </BreadcrumbItem>
-///         </Breadcrumbs>
-///     }
-/// }
-/// ```
-///
-/// ## Styling Notes
-///
-/// - Separators are automatically added between items via CSS pseudo-elements
-/// - Works well with Tailwind utilities like `text-sm` for responsive sizing
-/// - Can be combined with color utilities for theming
-/// - The last breadcrumb item should typically not be a clickable link
-///
-/// For more information, see: https://daisyui.com/components/breadcrumbs/
+/// ## Node References
+/// - `outer_node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+/// - `inner_node_ref` - Rederences the inner `<ul>` element ([HTMLUlElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUlElement))
 #[component]
 pub fn Breadcrumbs(
     /// Additional CSS classes for the outer container
@@ -61,6 +32,7 @@ pub fn Breadcrumbs(
     /// Node reference for the inner `<ul>` element
     #[prop(optional, into)]
     inner_node_ref: NodeRef<Ul>,
+
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -74,8 +46,8 @@ pub fn Breadcrumbs(
 
 /// # BreadcrumbItem Component
 ///
-/// A reactive Leptos wrapper for individual breadcrumb items within a breadcrumbs navigation.
-/// Renders as a list item that can contain either a clickable link or plain text.
+/// ## Node References
+/// - `node_ref` - References the top `<li>` element ([HTMLLiElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLiElement))
 #[component]
 pub fn BreadcrumbItem(
     /// Optional link URL for the breadcrumb item

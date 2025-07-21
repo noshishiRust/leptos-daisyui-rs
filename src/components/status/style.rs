@@ -7,20 +7,28 @@ pub enum StatusColor {
     /// Default status color (no color class applied)
     #[default]
     Default,
+
     /// Neutral color for subdued status indicators
     Neutral,
+
     /// Primary brand color for main status indicators
     Primary,
+
     /// Secondary brand color for secondary status indicators
     Secondary,
+
     /// Accent brand color for highlighted status indicators
     Accent,
+
     /// Info color for informational status indicators
     Info,
+
     /// Success color for positive status indicators
     Success,
+
     /// Warning color for cautionary status indicators
     Warning,
+
     /// Error color for error state status indicators
     Error,
 }
@@ -48,14 +56,12 @@ impl StatusColor {
 /// of status indicators. Sizes scale proportionally for various contexts.
 #[derive(Clone, Debug, Default)]
 pub enum StatusSize {
-    /// Default size (no size class applied)
-    #[default]
-    Default,
     /// Extra small size for compact layouts
     Xs,
     /// Small size for minimal space usage
     Sm,
     /// Medium size for standard usage
+    #[default]
     Md,
     /// Large size for emphasis and visibility
     Lg,
@@ -67,7 +73,6 @@ impl StatusSize {
     /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
-            StatusSize::Default => "",
             StatusSize::Xs => "status-xs",
             StatusSize::Sm => "status-sm",
             StatusSize::Md => "status-md",

@@ -17,7 +17,7 @@ use leptos::{html::Div, prelude::*};
 #[component]
 pub fn Join(
     /// Direction of the join layout (horizontal by default)
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     direction: Signal<JoinDirection>,
 
     /// Additional CSS classes to apply to the join container
@@ -25,7 +25,7 @@ pub fn Join(
     class: &'static str,
 
     /// Node reference for the join `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Child elements to be joined together (buttons, inputs, etc.)

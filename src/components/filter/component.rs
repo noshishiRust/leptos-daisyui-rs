@@ -23,7 +23,7 @@ pub fn Filter(
     class: &'static str,
 
     /// Node reference for the filter `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Child elements including filter radio buttons and [`FilterReset`]
@@ -68,7 +68,7 @@ pub fn FilterReset(
     class: &'static str,
 
     /// Node reference for the reset `<input>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {

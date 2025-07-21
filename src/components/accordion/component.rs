@@ -1,4 +1,4 @@
-use super::style::AccordionModifier;
+use super::style::{AccordionForceModifier, AccordionModifier};
 use crate::merge_classes;
 use leptos::{
     html::{Div, Input},
@@ -28,9 +28,13 @@ pub fn Accordion(
     #[prop(optional)]
     name: Option<&'static str>,
 
-    /// Reactive signal controlling whether the accordion is open/checked
+    /// Reactive signal controlling whether the accordion is checked for open
     #[prop(optional, into)]
     checked: Signal<bool>,
+
+    /// Reactive signal controlling whether the accordion is open/close
+    #[prop(optional, into)]
+    force: Signal<AccordionForceModifier>,
 
     /// Visual modifier for the accordion appearance
     #[prop(optional, into)]
@@ -58,11 +62,12 @@ pub fn Accordion(
                 merge_classes!(
                     "collapse",
                     modifier.get().as_str(),
+                    force.get().as_str(),
                     class
                 )
             }
         >
-            <input node_ref=inner_node_ref type="radio" name=name prop:checked=checked />
+            <input node_ref=inner_node_ref type="radio" name=name checked=checked />
             {children()}
         </div>
     }

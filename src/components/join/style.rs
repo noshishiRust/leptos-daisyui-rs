@@ -7,6 +7,7 @@ pub enum JoinDirection {
     /// Elements joined horizontally in a row (default)
     #[default]
     Horizontal,
+
     /// Elements joined vertically in a column
     Vertical,
 }

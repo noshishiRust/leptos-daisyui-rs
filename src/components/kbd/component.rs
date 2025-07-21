@@ -17,7 +17,7 @@ use leptos::{html::Kbd as HtmlKbd, prelude::*};
 #[component]
 pub fn Kbd(
     /// Size of the keyboard key display
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     size: Signal<KbdSize>,
 
     /// Additional CSS classes to apply to the kbd element
@@ -25,7 +25,7 @@ pub fn Kbd(
     class: &'static str,
 
     /// Node reference for the `<kbd>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<HtmlKbd>,
 
     /// Key text or symbol content

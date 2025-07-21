@@ -23,7 +23,7 @@ pub fn List(
     class: &'static str,
 
     /// Node reference for the `<ul>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Ul>,
 
     /// Child [`ListRow`] components
@@ -46,11 +46,11 @@ pub fn List(
 #[component]
 pub fn ListRow(
     /// Force content to wrap to the next line
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     col_wrap: Signal<bool>,
 
     /// Make this column fill remaining space instead of the default second column
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     col_grow: Signal<bool>,
 
     /// Additional CSS classes to apply to the row
@@ -58,7 +58,7 @@ pub fn ListRow(
     class: &'static str,
 
     /// Node reference for the `<li>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Li>,
 
     /// Row content (multiple columns supported)

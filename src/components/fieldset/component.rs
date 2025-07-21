@@ -23,7 +23,7 @@ pub fn FieldSet(
     class: &'static str,
 
     /// Node reference for the `<fieldset>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Fieldset>,
 
     /// Child elements including [`FieldsetLegend`], form controls, and [`FieldsetLabel`]
@@ -49,7 +49,7 @@ pub fn FieldsetLegend(
     class: &'static str,
 
     /// Node reference for the `<legend>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Legend>,
 
     /// Legend text or content
@@ -76,7 +76,7 @@ pub fn FieldsetLabel(
     class: &'static str,
 
     /// Node reference for the `<p>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<P>,
 
     /// Descriptive text or help content

@@ -25,3 +25,28 @@ impl AccordionModifier {
         }
     }
 }
+
+/// # Accordion Open force Modifiers
+#[derive(Clone, Debug, Default)]
+pub enum AccordionForceModifier {
+    /// No indicator (default)
+    #[default]
+    Default,
+
+    /// Force openm
+    Open,
+
+    /// Force clse
+    Close,
+}
+
+impl AccordionForceModifier {
+    /// CSS class string
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            AccordionForceModifier::Default => "",
+            AccordionForceModifier::Open => "collapse-opem",
+            AccordionForceModifier::Close => "collapse-close",
+        }
+    }
+}

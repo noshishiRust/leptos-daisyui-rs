@@ -49,15 +49,19 @@ pub fn IndicatorItem(
     /// Vertical placement of the indicator item
     #[prop(optional, into)]
     vertical: Signal<IndicatorVerticalPlacement>,
+
     /// Horizontal placement of the indicator item
     #[prop(optional, into)]
     horizontal: Signal<IndicatorHorizontalPlacement>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the span element
     #[prop(optional)]
     node_ref: NodeRef<Span>,
+
     /// Child elements of the indicator item
     children: Children,
 ) -> impl IntoView {

@@ -1,3 +1,7 @@
+use super::style::{RadialProgressColor, RadialProgressSize};
+use crate::merge_classes;
+use leptos::{html::Div, prelude::*};
+
 /// # Radial Progress Component
 ///
 /// A reactive Leptos wrapper for daisyUI's radial progress component that provides
@@ -9,29 +13,36 @@
 /// ```
 ///
 /// ## Node References
-/// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
-use super::style::{RadialProgressColor, RadialProgressSize};
-use crate::merge_classes;
-use leptos::{html::Div, prelude::*};
-
+/// - `node_ref` - References top `div`` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn RadialProgress(
     /// Color scheme of the radial progress
-    #[prop(optional, into)] color: Signal<RadialProgressColor>,
+    #[prop(optional, into)]
+    color: Signal<RadialProgressColor>,
+
     /// Size of the radial progress indicator
-    #[prop(optional, into)] size: Signal<RadialProgressSize>,
+    #[prop(optional, into)]
+    size: Signal<RadialProgressSize>,
+
     /// Progress value (0-100)
-    #[prop(optional, into)] value: Signal<f64>,
+    #[prop(optional, into)]
+    value: Signal<f64>,
+
     /// Thickness of the progress ring
-    #[prop(optional, into)] thickness: Signal<String>,
+    #[prop(optional, into)]
+    thickness: Signal<String>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Optional child elements displayed in the center
-    #[prop(optional)] children: Option<Children>,
+    #[prop(optional)]
+    children: Option<Children>,
 ) -> impl IntoView {
     let progress_style =
         move || format!("--value:{}; --thickness:{};", value.get(), thickness.get());

@@ -20,11 +20,11 @@ use leptos::{
 #[component]
 pub fn Drawer(
     /// Placement of the drawer (left by default, or right with DrawerPlacement::End)
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     placement: Signal<DrawerPlacement>,
 
     /// Whether the drawer is open
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     open: Signal<bool>,
 
     /// Additional CSS classes to apply to the drawer container
@@ -32,7 +32,7 @@ pub fn Drawer(
     class: &'static str,
 
     /// Node reference for the drawer `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Child components: [`DrawerToggle`], [`DrawerContent`], [`DrawerSide`]
@@ -68,11 +68,11 @@ pub fn DrawerToggle(
     id: &'static str,
 
     /// Whether the drawer is currently open
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     checked: Signal<bool>,
 
     /// Node reference for the toggle `<input>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {
@@ -94,7 +94,7 @@ pub fn DrawerContent(
     class: &'static str,
 
     /// Node reference for the content `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Main page content (navbar, pages, footer, etc.)
@@ -121,7 +121,7 @@ pub fn DrawerSide(
     class: &'static str,
 
     /// Node reference for the sidebar `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Sidebar content (usually menu components)
@@ -148,7 +148,7 @@ pub fn DrawerOverlay(
     class: &'static str,
 
     /// Node reference for the overlay `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 ) -> impl IntoView {
     view! { <div node_ref=node_ref class=move || merge_classes!("drawer-overlay", class)></div> }

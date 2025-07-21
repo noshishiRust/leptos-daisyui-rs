@@ -22,18 +22,23 @@ pub fn Timeline(
     /// Direction of the timeline layout
     #[prop(optional, into)]
     direction: Signal<TimelineDirection>,
+
     /// Whether to snap icons to timeline
     #[prop(optional, into)]
     snap_icon: Signal<bool>,
+
     /// Whether to use compact spacing
     #[prop(optional, into)]
     compact: Signal<bool>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the ul element
     #[prop(optional)]
     node_ref: NodeRef<Ul>,
+
     /// Child timeline items
     children: Children,
 ) -> impl IntoView {
@@ -66,18 +71,23 @@ pub fn TimelineItem(
     /// Position in timeline affecting connector lines
     #[prop(into)]
     position: Signal<TimelineItemPosition>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// CSS classes for the starting connector line
     #[prop(optional, into)]
     start_class: &'static str,
+
     /// CSS classes for the ending connector line
     #[prop(optional, into)]
     end_class: &'static str,
+
     /// Node reference to the li element
     #[prop(optional)]
     node_ref: NodeRef<Li>,
+
     /// Timeline item content
     children: Children,
 ) -> impl IntoView {
@@ -117,12 +127,15 @@ pub fn TimelineItemStart(
     /// Whether to apply box styling
     #[prop(optional, into)]
     boxed: Signal<bool>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
+
     /// Start content
     children: Children,
 ) -> impl IntoView {
@@ -149,12 +162,15 @@ pub fn TimelineItemMiddle(
     /// Whether to apply box styling
     #[prop(optional, into)]
     boxed: Signal<bool>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
+
     /// Middle content
     children: Children,
 ) -> impl IntoView {
@@ -180,12 +196,15 @@ pub fn TimelineItemEnd(
     /// Whether to apply box styling
     #[prop(optional, into)]
     boxed: Signal<bool>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
+
     /// End content
     children: Children,
 ) -> impl IntoView {

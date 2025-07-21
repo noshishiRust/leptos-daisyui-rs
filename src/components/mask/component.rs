@@ -9,7 +9,7 @@ use leptos::{html::Div, prelude::*};
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("mask mask-squircle mask-heart mask-hexagon mask-decagon mask-pentagon mask-diamond mask-square mask-circle mask-star mask-triangle mask-half-1 mask-half-2");
+/// @source inline("mask "mask-squircle mask-heart mask-hexagon mask-hexagon-2 mask-decagon mask-pentagon mask-diamond mask-square mask-circle mask-parallelogram mask-parallelogram-2 mask-parallelogram-3 mask-parallelogram-4 mask-star mask-star-2 mask-triangle mask-triangle-2 mask-triangle-3 mask-triangle-4"");
 /// ```
 ///
 /// ## Node References
@@ -17,7 +17,7 @@ use leptos::{html::Div, prelude::*};
 #[component]
 pub fn Mask(
     /// Shape type for the mask
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     mask_type: Signal<MaskType>,
 
     /// Additional CSS classes to apply to the mask container
@@ -25,7 +25,7 @@ pub fn Mask(
     class: &'static str,
 
     /// Node reference for the mask `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content to be masked (images, text, etc.)
@@ -37,8 +37,8 @@ pub fn Mask(
             class=move || {
                 merge_classes!(
                     "mask",
-                mask_type.get().as_str(),
-                class
+                    mask_type.get().as_str(),
+                    class
                 )
             }
         >

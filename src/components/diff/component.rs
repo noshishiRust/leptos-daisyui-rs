@@ -23,7 +23,7 @@ pub fn Diff(
     class: &'static str,
 
     /// Node reference for the diff `<figure>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Figure>,
 
     /// Child components: [`DiffItem1`], [`DiffItem2`], and [`DiffResizer`]
@@ -49,7 +49,7 @@ pub fn DiffItem1(
     class: &'static str,
 
     /// Node reference for the first item `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content for the first comparison item
@@ -75,7 +75,7 @@ pub fn DiffItem2(
     class: &'static str,
 
     /// Node reference for the second item `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content for the second comparison item
@@ -102,7 +102,7 @@ pub fn DiffResizer(
     class: &'static str,
 
     /// Node reference for the resizer `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 ) -> impl IntoView {
     view! { <div node_ref=node_ref class=move || merge_classes!("diff-resizer", class)></div> }

@@ -1,3 +1,6 @@
+use crate::merge_classes;
+use leptos::{html::Div, prelude::*};
+
 /// # Mockup Phone Component
 ///
 /// A reactive Leptos wrapper for daisyUI's mockup phone component that provides
@@ -10,26 +13,22 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
-use crate::merge_classes;
-use leptos::{html::Div, prelude::*};
-
 #[component]
 pub fn MockupPhone(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the phone screen
     children: Children,
 ) -> impl IntoView {
     view! {
         <div node_ref=node_ref class=move || { merge_classes!("mockup-phone", class) }>
-            <div class="camera"></div>
-            <div class="display">
-                <div class="artboard">{children()}</div>
-            </div>
+            {children()}
         </div>
     }
 }
@@ -41,23 +40,22 @@ pub fn MockupPhone(
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
 #[component]
 pub fn MockupPhoneCamera(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the phone screen
     children: Children,
 ) -> impl IntoView {
     view! {
         <div node_ref=node_ref class=move || { merge_classes!("mockup-phone-camera", class) }>
-            <div class="camera"></div>
-            <div class="display">
-                <div class="artboard">{children()}</div>
-            </div>
+            {children()}
         </div>
     }
 }
@@ -69,23 +67,22 @@ pub fn MockupPhoneCamera(
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
 #[component]
 pub fn MockupPhoneDisplay(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the phone display
     children: Children,
 ) -> impl IntoView {
     view! {
         <div node_ref=node_ref class=move || { merge_classes!("mockup-phone-display", class) }>
-            <div class="camera"></div>
-            <div class="display">
-                <div class="artboard">{children()}</div>
-            </div>
+            {children()}
         </div>
     }
 }

@@ -1,5 +1,6 @@
 use super::style::{CardSize, CardStyle};
 use crate::merge_classes;
+use leptos::html::{Div, H2};
 use leptos::prelude::*;
 
 /// # Card Components
@@ -13,28 +14,6 @@ use leptos::prelude::*;
 /// @source inline("card card-title card-body card-actions card-boader card-dash card-side image-full card-xs card-sm card-md card-lg card-xl");
 /// ```
 ///
-/// ## Usage Example
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::card::*;
-///
-/// #[component]
-/// fn StyledCard() -> impl IntoView {
-///     view! {
-///         <Card style=CardStyle::Border size=CardSize::Lg>
-///             <CardBody>
-///                 <CardTitle>"Product Card"</CardTitle>
-///                 <p>"Product description and details go here."</p>
-///                 <CardActions>
-///                     <button class="btn btn-primary">"Buy Now"</button>
-///                     <button class="btn btn-ghost">"Learn More"</button>
-///                 </CardActions>
-///             </CardBody>
-///         </Card>
-///     }
-/// }
-/// ```
 /// ## Node References
 /// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
@@ -57,21 +36,25 @@ pub fn Card(
     image_full: Signal<bool>,
 
     /// Additional CSS classes to apply to the card.
-
     #[prop(optional, into)]
     class: &'static str,
+
+    /// Node reference for the card container element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
 
     /// Child elements to render inside the card.
     children: Children,
 ) -> impl IntoView {
     view! {
         <div
+            node_ref=node_ref
             class=move || {
                 merge_classes!(
                     "card",
-                style.get().as_str(),
-                size.get().as_str(),
-                class
+                    style.get().as_str(),
+                    size.get().as_str(),
+                    class
                 )
             }
             class:card-side=side
@@ -93,10 +76,18 @@ pub fn CardBody(
     #[prop(optional, into)]
     class: &'static str,
 
+    /// Node reference for the card body container element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Child elements to render inside the card body.
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=move || merge_classes!("card-body", class)>{children()}</div> }
+    view! {
+        <div node_ref=node_ref class=move || merge_classes!("card-body", class)>
+            {children()}
+        </div>
+    }
 }
 
 /// # Card Title Component
@@ -106,14 +97,21 @@ pub fn CardBody(
 #[component]
 pub fn CardTitle(
     /// Additional CSS classes to apply to the card title.
-
     #[prop(optional, into)]
     class: &'static str,
+
+    /// Node reference for the card title text element
+    #[prop(optional)]
+    node_ref: NodeRef<H2>,
 
     /// Content to render as the card title.
     children: Children,
 ) -> impl IntoView {
-    view! { <h2 class=move || merge_classes!("card-title", class)>{children()}</h2> }
+    view! {
+        <h2 node_ref=node_ref class=move || merge_classes!("card-title", class)>
+            {children()}
+        </h2>
+    }
 }
 
 /// # Card Actions Component
@@ -123,17 +121,19 @@ pub fn CardTitle(
 #[component]
 pub fn CardActions(
     /// Additional CSS classes to apply to the card actions container.
-    ///
-    /// These classes will be merged with the base `card-actions` class,
-    /// allowing for custom layout, spacing, and alignment.
     #[prop(optional, into)]
     class: &'static str,
 
+    /// Node reference for the card action container element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Interactive elements to render in the actions area.
-    ///
-    /// This typically includes buttons, links, or other controls
-    /// that allow users to interact with the card content.
     children: Children,
 ) -> impl IntoView {
-    view! { <div class=move || merge_classes!("card-actions", class)>{children()}</div> }
+    view! {
+        <div node_ref=node_ref class=move || merge_classes!("card-actions", class)>
+            {children()}
+        </div>
+    }
 }

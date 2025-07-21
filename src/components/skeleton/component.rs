@@ -20,7 +20,7 @@ pub fn Skeleton(
     class: &'static str,
 
     /// Node reference for the skeleton `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Optional child content (typically empty for pure skeleton effect)

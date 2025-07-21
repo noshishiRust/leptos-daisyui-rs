@@ -1,8 +1,6 @@
-//! # Table
+//! # daisyUI Table Component
 //!
-//! Table can be used to show a list of data in a table format.
-//!
-//! [daisyUI Table documentation](https://daisyui.com/components/table/)
+//! For more information, see: https://daisyui.com/components/table/
 
 mod component;
 mod style;

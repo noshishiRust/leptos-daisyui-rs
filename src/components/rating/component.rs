@@ -20,7 +20,7 @@ use leptos::{
 #[component]
 pub fn Rating(
     /// Size of the rating display
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     size: Signal<RatingSize>,
 
     /// Additional CSS classes to apply to the rating container
@@ -28,7 +28,7 @@ pub fn Rating(
     class: &'static str,
 
     /// Node reference for the rating `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Child [`RatingItem`] and optionally [`RatingHidden`] components
@@ -58,15 +58,15 @@ pub fn Rating(
 #[component]
 pub fn RatingItem(
     /// Whether this rating star is selected
-    #[prop(optional, into)] 
+    #[prop(optional, into)]
     checked: Signal<bool>,
 
     /// Radio group name for the rating (all items should share the same name)
-    #[prop(optional)] 
+    #[prop(optional)]
     name: Option<&'static str>,
 
     /// Value for this rating level
-    #[prop(optional)] 
+    #[prop(optional)]
     value: Option<&'static str>,
 
     /// Additional CSS classes to apply to the rating item
@@ -74,12 +74,8 @@ pub fn RatingItem(
     class: &'static str,
 
     /// Node reference for the item `<input>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Input>,
-
-    /// Change handler when this rating is selected
-    #[prop(optional)] 
-    on_change: Option<Box<dyn Fn(bool)>>,
 ) -> impl IntoView {
     view! {
         <input
@@ -87,13 +83,8 @@ pub fn RatingItem(
             type="radio"
             name=name
             value=value
+            checked=checked
             class=move || merge_classes!("mask", "mask-star-2", "bg-orange-400", class)
-            prop:checked=checked
-            on:change=move |ev| {
-                if let Some(handler) = &on_change {
-                    handler(event_target_checked(&ev));
-                }
-            }
         />
     }
 }
@@ -108,7 +99,7 @@ pub fn RatingItem(
 #[component]
 pub fn RatingHidden(
     /// Radio group name that matches the rating items
-    #[prop(optional)] 
+    #[prop(optional)]
     name: Option<&'static str>,
 
     /// Additional CSS classes to apply to the hidden input
@@ -116,7 +107,7 @@ pub fn RatingHidden(
     class: &'static str,
 
     /// Node reference for the hidden `<input>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {

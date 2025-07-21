@@ -1,3 +1,10 @@
+use super::style::TableSize;
+use crate::merge_classes;
+use leptos::{
+    html::{Table as HtmlTable, Tbody, Td, Tfoot, Th, Thead, Tr},
+    prelude::*,
+};
+
 /// # Table Component
 ///
 /// A reactive Leptos wrapper for daisyUI's table component that provides
@@ -10,33 +17,32 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the table element ([HTMLTableElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement))
-
-use super::style::TableSize;
-use crate::merge_classes;
-use leptos::{
-    html::{Table as HtmlTable, Tbody, Td, Tfoot, Th, Thead, Tr},
-    prelude::*,
-};
 #[component]
 pub fn Table(
     /// Size variant for the table
     #[prop(optional, into)]
     size: Signal<TableSize>,
+
     /// Enable zebra striping for alternating rows
     #[prop(optional, into)]
     zebra: Signal<bool>,
+
     /// Pin header and footer rows when scrolling
     #[prop(optional, into)]
     pin_rows: Signal<bool>,
+
     /// Pin first column when scrolling horizontally
     #[prop(optional, into)]
     pin_cols: Signal<bool>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the table element
     #[prop(optional)]
     node_ref: NodeRef<HtmlTable>,
+
     /// Table content
     children: Children,
 ) -> impl IntoView {
@@ -68,9 +74,11 @@ pub fn TableHead(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the thead element
     #[prop(optional)]
     node_ref: NodeRef<Thead>,
+
     /// Header content
     children: Children,
 ) -> impl IntoView {
@@ -92,9 +100,11 @@ pub fn TableBody(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the tbody element
     #[prop(optional)]
     node_ref: NodeRef<Tbody>,
+
     /// Body content
     children: Children,
 ) -> impl IntoView {
@@ -116,9 +126,11 @@ pub fn TableFoot(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the tfoot element
     #[prop(optional)]
     node_ref: NodeRef<Tfoot>,
+
     /// Footer content
     children: Children,
 ) -> impl IntoView {
@@ -140,9 +152,11 @@ pub fn TableRow(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the tr element
     #[prop(optional)]
     node_ref: NodeRef<Tr>,
+
     /// Row content
     children: Children,
 ) -> impl IntoView {
@@ -164,9 +178,11 @@ pub fn TableHeader(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the th element
     #[prop(optional)]
     node_ref: NodeRef<Th>,
+
     /// Header content
     children: Children,
 ) -> impl IntoView {
@@ -188,9 +204,11 @@ pub fn TableCell(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the td element
     #[prop(optional)]
     node_ref: NodeRef<Td>,
+
     /// Cell content
     children: Children,
 ) -> impl IntoView {

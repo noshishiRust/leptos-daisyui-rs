@@ -1,3 +1,7 @@
+use super::style::{LoadingColor, LoadingSize, LoadingType};
+use crate::merge_classes;
+use leptos::{html::Span, prelude::*};
+
 /// # Loading Component
 ///
 /// A reactive Leptos wrapper for daisyUI's loading component that provides animated
@@ -10,24 +14,27 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the span element ([HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement))
-
-use super::style::{LoadingColor, LoadingSize, LoadingType};
-use crate::merge_classes;
-use leptos::{html::Span, prelude::*};
-
 #[component]
 pub fn Loading(
     /// Color scheme of the loading indicator
-    #[prop(optional, into)] color: Signal<LoadingColor>,
+    #[prop(optional, into)]
+    color: Signal<LoadingColor>,
+
     /// Type of loading animation
-    #[prop(optional, into)] loading_type: Signal<LoadingType>,
+    #[prop(optional, into)]
+    loading_type: Signal<LoadingType>,
+
     /// Size of the loading indicator
-    #[prop(optional, into)] size: Signal<LoadingSize>,
+    #[prop(optional, into)]
+    size: Signal<LoadingSize>,
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the span element
-    #[prop(optional)] node_ref: NodeRef<Span>,
+    #[prop(optional)]
+    node_ref: NodeRef<Span>,
 ) -> impl IntoView {
     view! {
         <span

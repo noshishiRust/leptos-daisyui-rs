@@ -20,7 +20,7 @@ pub fn Hero(
     class: &'static str,
 
     /// Node reference for the hero `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Child components, typically [`HeroContent`] and optionally [`HeroOverlay`]
@@ -47,7 +47,7 @@ pub fn HeroContent(
     class: &'static str,
 
     /// Node reference for the hero content `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 
     /// Content to display within the hero section
@@ -74,7 +74,7 @@ pub fn HeroOverlay(
     class: &'static str,
 
     /// Node reference for the overlay `<div>` element
-    #[prop(optional)] 
+    #[prop(optional)]
     node_ref: NodeRef<Div>,
 ) -> impl IntoView {
     view! { <div node_ref=node_ref class=move || merge_classes!("hero-overlay", class)></div> }

@@ -1,8 +1,6 @@
-//! # Tab
+//! # daisyUI Tab Component
 //!
-//! Tabs can be used to show a list of links in a tabbed format.
-//!
-//! [daisyUI Tab documentation](https://daisyui.com/components/tab/)
+//! For more information, see: https://daisyui.com/components/tab/
 
 mod component;
 mod style;

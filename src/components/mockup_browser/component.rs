@@ -1,3 +1,6 @@
+use crate::merge_classes;
+use leptos::{html::Div, prelude::*};
+
 /// # Mockup Browser Component
 ///
 /// A reactive Leptos wrapper for daisyUI's mockup browser component that provides
@@ -10,17 +13,16 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
-use crate::merge_classes;
-use leptos::{html::Div, prelude::*};
-
 #[component]
 pub fn MockupBrowser(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the browser frame
     children: Children,
 ) -> impl IntoView {
@@ -38,14 +40,16 @@ pub fn MockupBrowser(
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
 #[component]
 pub fn MockupBrowserToolbar(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the browser toolbar
     children: Children,
 ) -> impl IntoView {

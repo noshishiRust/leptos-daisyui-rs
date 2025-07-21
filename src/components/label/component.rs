@@ -1,3 +1,9 @@
+use crate::merge_classes;
+use leptos::{
+    html::{Label as HtmlLabel, Span},
+    prelude::*,
+};
+
 /// # Label Component
 ///
 /// A reactive Leptos wrapper for daisyUI's label component that provides accessible
@@ -10,20 +16,16 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the label element ([HTMLLabelElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLabelElement))
-
-use crate::merge_classes;
-use leptos::{
-    html::{Label as HtmlLabel, Span},
-    prelude::*,
-};
-
 #[component]
 pub fn Label(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the label element
-    #[prop(optional)] node_ref: NodeRef<HtmlLabel>,
+    #[prop(optional)]
+    node_ref: NodeRef<HtmlLabel>,
+
     /// Child elements of the label
     children: Children,
 ) -> impl IntoView {
@@ -41,14 +43,14 @@ pub fn Label(
 ///
 /// ## Node References
 /// - `node_ref` - References the span element ([HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement))
-
 #[component]
 pub fn LabelText(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
     /// Node reference to the span element
-    #[prop(optional)] node_ref: NodeRef<Span>,
+    #[prop(optional)]
+    node_ref: NodeRef<Span>,
     /// Text content of the label
     children: Children,
 ) -> impl IntoView {
@@ -66,14 +68,16 @@ pub fn LabelText(
 ///
 /// ## Node References
 /// - `node_ref` - References the span element ([HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement))
-
 #[component]
 pub fn LabelTextAlt(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the span element
-    #[prop(optional)] node_ref: NodeRef<Span>,
+    #[prop(optional)]
+    node_ref: NodeRef<Span>,
+
     /// Alternative text content of the label
     children: Children,
 ) -> impl IntoView {

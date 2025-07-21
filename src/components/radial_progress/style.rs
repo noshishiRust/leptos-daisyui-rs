@@ -7,18 +7,25 @@ pub enum RadialProgressColor {
     /// Default radial progress color (no color class applied)
     #[default]
     Default,
+
     /// Primary brand color for main progress indicators
     Primary,
+
     /// Secondary brand color for secondary progress indicators
     Secondary,
+
     /// Accent brand color for highlighted progress indicators
     Accent,
+
     /// Success color for positive progress indicators
     Success,
+
     /// Info color for informational progress indicators
     Info,
+
     /// Warning color for cautionary progress indicators
     Warning,
+
     /// Error color for error state progress indicators
     Error,
 }
@@ -45,18 +52,20 @@ impl RadialProgressColor {
 /// of radial progress indicators using Tailwind CSS width and height utilities.
 #[derive(Clone, Debug, Default)]
 pub enum RadialProgressSize {
-    /// Default size (no size class applied)
-    #[default]
-    Default,
-    /// Extra small size (32px x 32px)
+    /// Extra small size
     Xs,
-    /// Small size (48px x 48px)
+
+    /// Small size
     Sm,
-    /// Medium size (64px x 64px)
+
+    /// Medium size
+    #[default]
     Md,
-    /// Large size (80px x 80px)
+
+    /// Large size
     Lg,
-    /// Extra large size (96px x 96px)
+
+    /// Extra large size
     Xl,
 }
 
@@ -64,7 +73,6 @@ impl RadialProgressSize {
     /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
-            RadialProgressSize::Default => "",
             RadialProgressSize::Xs => "w-8 h-8",
             RadialProgressSize::Sm => "w-12 h-12",
             RadialProgressSize::Md => "w-16 h-16",

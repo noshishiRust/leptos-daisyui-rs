@@ -1,5 +1,3 @@
-//! Menu component implementations for navigation structures.
-
 use super::style::{MenuDirection, MenuSize};
 use crate::merge_classes;
 use leptos::{
@@ -7,95 +5,44 @@ use leptos::{
     prelude::*,
 };
 
-/// A navigation menu container component.
+/// # Menu Component
 ///
-/// Provides a structured navigation menu with configurable direction, size, and selection state.
-/// Can operate in automatic selection mode (tracks selected items) or manual mode for custom behavior.
+/// A reactive Leptos wrapper for daisyUI's menu component that provides
+/// structured navigation with automatic selection tracking and hierarchical organization.
 ///
-/// # Props
-///
-/// - `manual` - If `true`, disables automatic selection tracking (default: `false`)
-/// - `selected` - Signal for tracking the currently selected menu item value
-/// - `direction` - Layout direction: vertical (default) or horizontal
-/// - `size` - Size variant: xs, sm, md (default), lg, xl
-/// - `class` - Additional CSS classes to apply
-/// - `node_ref` - Reference to the underlying `<ul>` element
-/// - `children` - Menu content (typically `MenuItem`, `MenuTitle`, `SubMenu` components)
-///
-/// # Context
-///
-/// Provides `MenuManager` context to child components for selection state management.
-///
-/// # Examples
-///
-/// ## Basic Usage
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{Menu, MenuItem};
-///
-/// #[component]
-/// fn Navigation() -> impl IntoView {
-///     let selected = RwSignal::new(Some("home".to_string()));
-///
-///     view! {
-///         <Menu selected=selected>
-///             <MenuItem value="home".to_string()>"Home"</MenuItem>
-///             <MenuItem value="about".to_string()>"About"</MenuItem>
-///             <MenuItem value="contact".to_string()>"Contact"</MenuItem>
-///         </Menu>
-///     }
-/// }
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("menu menu-horizontal menu-vertical menu-xs menu-sm menu-md menu-lg menu-xl menu-title menu-active");
 /// ```
 ///
-/// ## Horizontal Menu
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{Menu, MenuItem, MenuDirection};
-///
-/// view! {
-///     <Menu direction=MenuDirection::Horizontal>
-///         <MenuItem value="nav1".to_string()>"Item 1"</MenuItem>
-///         <MenuItem value="nav2".to_string()>"Item 2"</MenuItem>
-///     </Menu>
-/// }
-/// ```
-///
-/// ## Manual Selection Mode
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{Menu, MenuItem};
-///
-/// view! {
-///     <Menu manual=true>
-///         <MenuItem active=Signal::derive(|| true)>"Always Active"</MenuItem>
-///         <MenuItem>"Normal Item"</MenuItem>
-///     </Menu>
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the ul element ([HTMLUListElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUListElement))
 #[component]
 pub fn Menu(
     /// If true, disables automatic selection tracking
     #[prop(optional)]
     manual: bool,
+
     /// Signal for tracking the currently selected menu item value
     #[prop(optional)]
     selected: RwSignal<Option<String>>,
+
     /// Layout direction of menu items
     #[prop(optional, into)]
     direction: Signal<MenuDirection>,
+
     /// Size variant for menu items
     #[prop(optional, into)]
     size: Signal<MenuSize>,
-    /// Additional CSS classes
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Reference to the ul element
     #[prop(optional)]
     node_ref: NodeRef<Ul>,
+
     /// Menu content
     children: Children,
 ) -> impl IntoView {
@@ -119,97 +66,43 @@ pub fn Menu(
     }
 }
 
-/// An individual menu item component.
+/// # Menu Item Component
 ///
-/// Represents a single selectable item within a menu. Supports navigation links,
-/// selection state tracking, and disabled state. Can be used in regular menus or submenus.
+/// A reactive Leptos wrapper for individual menu items with selection tracking
+/// and navigation support.
 ///
-/// # Props
-///
-/// - `href` - Optional URL for navigation when clicked
-/// - `value` - Unique identifier for this menu item (used for selection tracking)
-/// - `active` - Manual active state (only used when parent Menu has `manual=true`)
-/// - `disabled` - Whether the item is disabled and non-interactive
-/// - `class` - Additional CSS classes to apply
-/// - `node_ref` - Reference to the underlying `<li>` element
-/// - `is_submenu` - If `true`, renders without anchor wrapper for submenu containers
-/// - `children` - Item content (text, icons, etc.)
-///
-/// # Behavior
-///
-/// - Automatically updates parent Menu's selected state when clicked (unless disabled)
-/// - Active state determined by parent Menu's selection (unless in manual mode)
-/// - Disabled items ignore click events
-/// - Submenu items render content directly without anchor wrapper
-///
-/// # Examples
-///
-/// ## Basic Menu Item
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::MenuItem;
-///
-/// view! {
-///     <MenuItem value="profile".to_string() href="/profile".to_string()>
-///         "Profile Settings"
-///     </MenuItem>
-/// }
-/// ```
-///
-/// ## Disabled Item
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::MenuItem;
-///
-/// view! {
-///     <MenuItem value="admin".to_string() disabled=Signal::derive(|| true)>
-///         "Admin Panel (Disabled)"
-///     </MenuItem>
-/// }
-/// ```
-///
-/// ## Submenu Container
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{MenuItem, SubMenu};
-///
-/// view! {
-///     <MenuItem is_submenu=true>
-///         "Settings"
-///         <SubMenu>
-///             <MenuItem value="profile".to_string()>"Profile"</MenuItem>
-///             <MenuItem value="account".to_string()>"Account"</MenuItem>
-///         </SubMenu>
-///     </MenuItem>
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the li element ([HTMLLIElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLIElement))
 #[component]
 pub fn MenuItem(
     /// Optional URL for navigation
     #[prop(optional, into)]
     href: Signal<String>,
+
     /// Unique identifier for selection tracking
     #[prop(optional, into)]
     value: Signal<String>,
+
     /// Manual active state (manual mode only)
     #[prop(optional, into)]
     active: Signal<bool>,
+
     /// Whether the item is disabled
     #[prop(optional, into)]
     disabled: Signal<bool>,
-    /// Additional CSS classes
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Reference to the li element
     #[prop(optional)]
     node_ref: NodeRef<Li>,
+
     /// If true, renders without anchor wrapper
     #[prop(optional, into)]
     is_submenu: bool,
+
     /// Item content
     children: Children,
 ) -> impl IntoView {
@@ -256,62 +149,23 @@ pub fn MenuItem(
     }
 }
 
-/// A section title component for organizing menu items.
+/// # Menu Title Component
 ///
-/// Provides semantic sectioning within menus to group related items.
-/// Typically used to create visual and logical separation between menu sections.
+/// A reactive Leptos wrapper for menu section titles that provide
+/// visual organization of menu items into groups.
 ///
-/// # Props
-///
-/// - `class` - Additional CSS classes to apply
-/// - `node_ref` - Reference to the underlying `<h2>` element
-/// - `children` - Title text content
-///
-/// # Examples
-///
-/// ## Section Organization
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{Menu, MenuItem, MenuTitle};
-///
-/// view! {
-///     <Menu>
-///         <MenuItem value="home".to_string()>"Home"</MenuItem>
-///         <MenuItem value="about".to_string()>"About"</MenuItem>
-///         
-///         <MenuTitle>"Account"</MenuTitle>
-///         <MenuItem value="profile".to_string()>"Profile"</MenuItem>
-///         <MenuItem value="settings".to_string()>"Settings"</MenuItem>
-///         
-///         <MenuTitle>"Admin"</MenuTitle>
-///         <MenuItem value="users".to_string()>"Manage Users"</MenuItem>
-///         <MenuItem value="reports".to_string()>"Reports"</MenuItem>
-///     </Menu>
-/// }
-/// ```
-///
-/// ## Custom Styling
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::MenuTitle;
-///
-/// view! {
-///     <MenuTitle class="text-primary font-bold">
-///         "Important Section"
-///     </MenuTitle>
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the h2 element ([HTMLHeadingElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLHeadingElement))
 #[component]
 pub fn MenuTitle(
     /// Additional CSS classes
-    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Reference to the h2 element
     #[prop(optional)]
     node_ref: NodeRef<H2>,
+
     /// Title text
     children: Children,
 ) -> impl IntoView {
@@ -322,85 +176,23 @@ pub fn MenuTitle(
     }
 }
 
-/// A nested submenu container component.
+/// # SubMenu Component
 ///
-/// Creates a nested menu structure within a parent MenuItem. Used for hierarchical
-/// navigation where items need to be organized in a tree-like structure.
+/// A reactive Leptos wrapper for nested submenu containers within menu items.
+/// Used for hierarchical navigation structures.
 ///
-/// # Props
-///
-/// - `class` - Additional CSS classes to apply
-/// - `node_ref` - Reference to the underlying `<ul>` element
-/// - `children` - Submenu content (typically more MenuItem components)
-///
-/// # Usage
-///
-/// Should be used inside a MenuItem with `is_submenu=true` to create proper nesting.
-///
-/// # Examples
-///
-/// ## Nested Menu Structure
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{Menu, MenuItem, SubMenu};
-///
-/// view! {
-///     <Menu>
-///         <MenuItem value="home".to_string()>"Home"</MenuItem>
-///         
-///         <MenuItem is_submenu=true>
-///             "Settings"
-///             <SubMenu>
-///                 <MenuItem value="profile".to_string()>"Profile"</MenuItem>
-///                 <MenuItem value="account".to_string()>"Account"</MenuItem>
-///                 <MenuItem value="privacy".to_string()>"Privacy"</MenuItem>
-///             </SubMenu>
-///         </MenuItem>
-///         
-///         <MenuItem is_submenu=true>
-///             "Tools"
-///             <SubMenu>
-///                 <MenuItem value="export".to_string()>"Export Data"</MenuItem>
-///                 <MenuItem value="import".to_string()>"Import Data"</MenuItem>
-///             </SubMenu>
-///         </MenuItem>
-///     </Menu>
-/// }
-/// ```
-///
-/// ## Deep Nesting
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::{MenuItem, SubMenu};
-///
-/// view! {
-///     <MenuItem is_submenu=true>
-///         "Advanced"
-///         <SubMenu>
-///             <MenuItem value="config".to_string()>"Configuration"</MenuItem>
-///             
-///             <MenuItem is_submenu=true>
-///                 "Developer Tools"
-///                 <SubMenu>
-///                     <MenuItem value="debug".to_string()>"Debug Mode"</MenuItem>
-///                     <MenuItem value="console".to_string()>"Console"</MenuItem>
-///                 </SubMenu>
-///             </MenuItem>
-///         </SubMenu>
-///     </MenuItem>
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the ul element ([HTMLUListElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUListElement))
 #[component]
 pub fn SubMenu(
     /// Additional CSS classes
-    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Reference to the ul element
     #[prop(optional)]
     node_ref: NodeRef<Ul>,
+
     /// Submenu content
     children: Children,
 ) -> impl IntoView {
@@ -412,9 +204,6 @@ pub fn SubMenu(
 }
 
 /// Internal context manager for menu selection state.
-///
-/// Provides centralized state management for menu item selection and behavior modes.
-/// This context is automatically provided by the Menu component and consumed by MenuItem components.
 #[derive(Clone)]
 pub(crate) struct MenuManager {
     /// Whether the menu operates in manual mode (disables automatic selection)
@@ -425,10 +214,6 @@ pub(crate) struct MenuManager {
 
 impl MenuManager {
     /// Retrieves the MenuManager from context.
-    ///
-    /// # Panics
-    ///
-    /// Panics if called outside of a Menu component context.
     pub fn expect_context() -> Self {
         expect_context()
     }

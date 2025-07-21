@@ -1,3 +1,6 @@
+use crate::merge_classes;
+use leptos::{html::Div, prelude::*};
+
 /// # Mockup Window Component
 ///
 /// A reactive Leptos wrapper for daisyUI's mockup window component that provides
@@ -10,17 +13,16 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-
-use crate::merge_classes;
-use leptos::{html::Div, prelude::*};
-
 #[component]
 pub fn MockupWindow(
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
+
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
     /// Content displayed within the window frame
     children: Children,
 ) -> impl IntoView {

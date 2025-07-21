@@ -1,3 +1,10 @@
+use super::style::{FooterDirection, FooterPlacement};
+use crate::merge_classes;
+use leptos::{
+    html::{Div, Footer as HtmlFooter},
+    prelude::*,
+};
+
 /// # Footer Component
 ///
 /// A reactive Leptos wrapper for daisyUI's footer component that provides structured
@@ -10,25 +17,20 @@
 ///
 /// ## Node References
 /// - `node_ref` - References the footer element ([HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement))
-
-use super::style::{FooterDirection, FooterPlacement};
-use crate::merge_classes;
-use leptos::{
-    html::{Div, Footer as HtmlFooter},
-    prelude::*,
-};
-
 #[component]
 pub fn Footer(
     /// Placement alignment of footer content
-    #[prop(optional, into)] placement: Signal<FooterPlacement>,
+    #[prop(optional, into)]
+    placement: Signal<FooterPlacement>,
     /// Layout direction of footer items
-    #[prop(optional, into)] direction: Signal<FooterDirection>,
+    #[prop(optional, into)]
+    direction: Signal<FooterDirection>,
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
     /// Node reference to the footer element
-    #[prop(optional)] node_ref: NodeRef<HtmlFooter>,
+    #[prop(optional)]
+    node_ref: NodeRef<HtmlFooter>,
     /// Child elements of the footer
     children: Children,
 ) -> impl IntoView {
@@ -63,7 +65,8 @@ pub fn FooterTitle(
     #[prop(optional, into)]
     class: &'static str,
     /// Node reference to the div element
-    #[prop(optional)] node_ref: NodeRef<Div>,
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
     /// Title content of the footer section
     children: Children,
 ) -> impl IntoView {
