@@ -26,7 +26,7 @@ pub fn RadialProgress(
 
     /// Thickness of the progress ring
     #[prop(optional, into)]
-    thickness: Signal<String>,
+    thickness: Signal<Option<String>>,
 
     /// Additional CSS classes
     #[prop(optional, into)]
@@ -53,8 +53,8 @@ pub fn RadialProgress(
             }
 
             aria-valuenow=value
-            attr:style:--value-valuie
-            attr:style:--thickness=thickness
+            style=("--value", move || value.get().to_string())
+            style=("--thickness", move || thickness.get())
         >
             {children.map(|v| v())}
         </div>

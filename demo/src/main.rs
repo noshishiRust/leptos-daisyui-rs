@@ -1,12 +1,13 @@
 mod core;
 mod demos;
 
-use core::{ContentLayout, Layout};
+use core::Layout;
 use demos::*;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_icons::Icon;
+use leptos_meta::*;
 use leptos_router::{
     components::{ParentRoute, Route, Router, Routes},
     path,
@@ -23,7 +24,11 @@ fn main() {
 
 #[component]
 fn App() -> impl IntoView {
+    provide_meta_context();
+
     view! {
+        <Title text="Leptos x daisyUI" />
+
         <Router>
             <Routes fallback=|| "Page not found">
                 <Route path=path!("/") view=Landing />
@@ -35,7 +40,6 @@ fn App() -> impl IntoView {
                     <Route path=path!("/badge") view=BadgeDemo />
                     <Route path=path!("/breadcrumbs") view=BreadcrumbsDemo />
                     <Route path=path!("/button") view=ButtonDemo />
-                    <Route path=path!("/calendar") view=CalendarDemo />
                     <Route path=path!("/card") view=CardDemo />
                     <Route path=path!("/carousel") view=CarouselDemo />
                     <Route path=path!("/chat") view=ChatDemo />

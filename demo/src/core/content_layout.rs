@@ -13,9 +13,7 @@ pub fn ContentLayout(
             <h1 class="text-3xl font-bold">{title}</h1>
             <p class="text-base-content/70">{description}</p>
 
-            <div class="space-y-4">
-                <div class="space-y-2">{{ children() }}</div>
-            </div>
+            <div class="space-y-4">{{ children() }}</div>
         </div>
     }
 }

@@ -1,154 +1,138 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
+use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn ChatDemo() -> impl IntoView {
+    let selected_color = RwSignal::new(ChatBubbleColor::default());
+    let message_text = RwSignal::new("Hello World!".to_string());
+    let show_avatar = RwSignal::new(true);
+    let show_timestamp = RwSignal::new(true);
+
     view! {
-        <div class="space-y-6">
-            <h1 class="text-3xl font-bold">"Chat"</h1>
-            <p class="text-base-content/70">
-                "Chat bubbles are used to show conversations between multiple people"
-            </p>
+        <ContentLayout
+            title="Chat"
+            description="Chat bubbles are used to show conversations between multiple people"
+        >
+            <Section title="Basic Usage" col=true>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble>"It's over Anakin, I have the high ground."</ChatBubble>
+                </Chat>
+                <Chat placement=ChatPlacement::End>
+                    <ChatBubble>"You underestimate my power!"</ChatBubble>
+                </Chat>
+            </Section>
 
-            <div class="space-y-4">
-                <h2 class="text-xl font-semibold">"Basic Chat"</h2>
-                <div class="chat chat-start">
-                    <div class="chat-bubble">"It's over Anakin, I have the high ground."</div>
-                </div>
-                <div class="chat chat-end">
-                    <div class="chat-bubble">"You underestimate my power!"</div>
-                </div>
-
-                <h2 class="text-xl font-semibold">"Chat with Header and Footer"</h2>
-                <div class="chat chat-start">
-                    <div class="chat-image avatar">
-                        <div class="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://picsum.photos/40/40?random=1"
-                            />
-                        </div>
-                    </div>
-                    <div class="chat-header">
-                        "Obi-Wan Kenobi" <time class="text-xs opacity-50">"12:45"</time>
-                    </div>
-                    <div class="chat-bubble">"You were the Chosen One!"</div>
-                    <div class="chat-footer opacity-50">"Delivered"</div>
-                </div>
-                <div class="chat chat-end">
-                    <div class="chat-image avatar">
-                        <div class="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://picsum.photos/40/40?random=2"
-                            />
-                        </div>
-                    </div>
-                    <div class="chat-header">
-                        "Anakin" <time class="text-xs opacity-50">"12:46"</time>
-                    </div>
-                    <div class="chat-bubble">"I hate you!"</div>
-                    <div class="chat-footer opacity-50">"Seen at 12:46"</div>
+            <Section title="Interactive Message" col=true>
+                <div class="form-control">
+                    <label class="label cursor-pointer">
+                        <span class="label-text">"Show Timestamp"</span>
+                        <Checkbox
+                            prop:checked=move || show_timestamp.get()
+                            on:change=move |e| show_timestamp.set(event_target_checked(&e))
+                        />
+                    </label>
                 </div>
 
-                <h2 class="text-xl font-semibold">"Chat Bubble Colors"</h2>
-                <div class="chat chat-start">
-                    <div class="chat-bubble">"Default color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-primary">"Primary color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-secondary">"Secondary color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-accent">"Accent color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-info">"Info color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-success">"Success color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-warning">"Warning color"</div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble chat-bubble-error">"Error color"</div>
-                </div>
+                <Chat placement=ChatPlacement::Start>
+                    {move || {
+                        show_avatar
+                            .get()
+                            .then(|| {
+                                view! {
+                                    <ChatImage class="avatar">
+                                        <div class="w-10 rounded-full">
+                                            <img
+                                                src="https://picsum.photos/40/40?random=1"
+                                                alt="User"
+                                            />
+                                        </div>
+                                    </ChatImage>
+                                }
+                            })
+                    }}
+                    {move || {
+                        show_timestamp
+                            .get()
+                            .then(|| {
+                                view! {
+                                    <ChatHeader>
+                                        "User" <time class="text-xs opacity-50">"12:45"</time>
+                                    </ChatHeader>
+                                }
+                            })
+                    }} <ChatBubble color=selected_color>{move || message_text.get()}</ChatBubble>
+                </Chat>
+            </Section>
 
-                <h2 class="text-xl font-semibold">"Chat Conversation"</h2>
-                <div class="h-64 overflow-y-auto bg-base-200 p-4 rounded-lg">
-                    <div class="chat chat-start">
-                        <div class="chat-image avatar">
+            <Section title="Color Variants" row=true>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble color=ChatBubbleColor::Default>"Default"</ChatBubble>
+                </Chat>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble color=ChatBubbleColor::Primary>"Primary"</ChatBubble>
+                </Chat>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble color=ChatBubbleColor::Secondary>"Secondary"</ChatBubble>
+                </Chat>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble color=ChatBubbleColor::Success>"Success"</ChatBubble>
+                </Chat>
+                <Chat placement=ChatPlacement::Start>
+                    <ChatBubble color=ChatBubbleColor::Error>"Error"</ChatBubble>
+                </Chat>
+            </Section>
+
+            <Section title="Complete Chat Example" col=true>
+                <div class="h-64 overflow-y-auto bg-base-200 p-4 rounded-lg space-y-2">
+                    <Chat placement=ChatPlacement::Start>
+                        <ChatImage class="avatar">
                             <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=3" alt="User 1" />
+                                <img src="https://picsum.photos/40/40?random=3" alt="Alice" />
                             </div>
-                        </div>
-                        <div class="chat-header">
+                        </ChatImage>
+                        <ChatHeader>
                             "Alice" <time class="text-xs opacity-50">"2 hours ago"</time>
-                        </div>
-                        <div class="chat-bubble">"Hey! How are you doing?"</div>
-                    </div>
+                        </ChatHeader>
+                        <ChatBubble>"Hey! How are you doing?"</ChatBubble>
+                    </Chat>
 
-                    <div class="chat chat-end">
-                        <div class="chat-image avatar">
+                    <Chat placement=ChatPlacement::End>
+                        <ChatImage class="avatar">
                             <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=4" alt="User 2" />
+                                <img src="https://picsum.photos/40/40?random=4" alt="Bob" />
                             </div>
-                        </div>
-                        <div class="chat-header">
+                        </ChatImage>
+                        <ChatHeader>
                             "Bob" <time class="text-xs opacity-50">"2 hours ago"</time>
-                        </div>
-                        <div class="chat-bubble chat-bubble-primary">
+                        </ChatHeader>
+                        <ChatBubble color=ChatBubbleColor::Primary>
                             "I'm doing great! Just working on some Leptos components."
-                        </div>
-                    </div>
+                        </ChatBubble>
+                    </Chat>
 
-                    <div class="chat chat-start">
-                        <div class="chat-image avatar">
+                    <Chat placement=ChatPlacement::Start>
+                        <ChatImage class="avatar">
                             <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=3" alt="User 1" />
+                                <img src="https://picsum.photos/40/40?random=3" alt="Alice" />
                             </div>
-                        </div>
-                        <div class="chat-bubble">"That sounds awesome! Are you using daisyUI?"</div>
-                    </div>
+                        </ChatImage>
+                        <ChatBubble>"That sounds awesome! Are you using daisyUI?"</ChatBubble>
+                    </Chat>
 
-                    <div class="chat chat-end">
-                        <div class="chat-image avatar">
+                    <Chat placement=ChatPlacement::End>
+                        <ChatImage class="avatar">
                             <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=4" alt="User 2" />
+                                <img src="https://picsum.photos/40/40?random=4" alt="Bob" />
                             </div>
-                        </div>
-                        <div class="chat-bubble chat-bubble-primary">
-                            "Yes! The leptos-daisyui-rs library is fantastic. The components are so easy to use."
-                        </div>
-                    </div>
-
-                    <div class="chat chat-start">
-                        <div class="chat-image avatar">
-                            <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=3" alt="User 1" />
-                            </div>
-                        </div>
-                        <div class="chat-bubble">
-                            "I should check that out. Thanks for the recommendation!"
-                        </div>
-                        <div class="chat-footer opacity-50">"Delivered"</div>
-                    </div>
-
-                    <div class="chat chat-end">
-                        <div class="chat-image avatar">
-                            <div class="w-10 rounded-full">
-                                <img src="https://picsum.photos/40/40?random=4" alt="User 2" />
-                            </div>
-                        </div>
-                        <div class="chat-bubble chat-bubble-success">
-                            "You definitely should! Happy coding! 🚀"
-                        </div>
-                        <div class="chat-footer opacity-50">"Seen"</div>
-                    </div>
+                        </ChatImage>
+                        <ChatBubble color=ChatBubbleColor::Success>
+                            "Yes! The leptos-daisyui-rs library is fantastic."
+                        </ChatBubble>
+                        <ChatFooter class="opacity-50">"Delivered"</ChatFooter>
+                    </Chat>
                 </div>
-            </div>
-        </div>
+            </Section>
+        </ContentLayout>
     }
 }

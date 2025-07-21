@@ -152,7 +152,7 @@ pub fn FooterDemo() -> impl IntoView {
                             </label>
                             <div class="join">
                                 <Input
-                                    placeholder="username@site.com"
+                                    attr:placeholder="username@site.com"
                                     class="input input-bordered join-item"
                                 />
                                 <Button color=ButtonColor::Primary class="join-item">

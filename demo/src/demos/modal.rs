@@ -1,3 +1,4 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 
@@ -6,14 +7,13 @@ pub fn ModalDemo() -> impl IntoView {
     let (modal_1_open, set_modal_1_open) = signal(false);
 
     view! {
-        <div class="space-y-6">
-            <h1 class="text-3xl font-bold">"Modal"</h1>
-            <p class="text-base-content/70">
-                "Modals are used to show content in a layer above the page"
-            </p>
+        <ContentLayout
+            title="Modal"
+            description="Modals are used to show content in a layer above the page"
+        >
 
-            <div class="space-y-4">
-                <h2 class="text-xl font-semibold">"Basic Modal"</h2>
+            <Section title="Basic Modal">
+
                 <Button color=ButtonColor::Primary on:click=move |_| set_modal_1_open.set(true)>
                     "Open Modal"
                 </Button>
@@ -34,7 +34,7 @@ pub fn ModalDemo() -> impl IntoView {
                         </ModalAction>
                     </ModalBox>
                 </Modal>
-            </div>
-        </div>
+            </Section>
+        </ContentLayout>
     }
 }

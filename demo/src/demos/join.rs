@@ -46,7 +46,7 @@ pub fn JoinDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Join with Input and Button"</h2>
                 <div class="join">
                     <Input
-                        placeholder="Search..."
+                        attr:placeholder="Search..."
                         class="join-item input-bordered w-full max-w-xs"
                     />
                     <Button color=ButtonColor::Primary class="join-item">
@@ -72,11 +72,11 @@ pub fn JoinDemo() -> impl IntoView {
                 <h2 class="text-xl font-semibold">"Join with Multiple Inputs"</h2>
                 <div class="join">
                     <Input
-                        placeholder="First name"
+                        attr:placeholder="First name"
                         class="join-item input-bordered w-full max-w-xs"
                     />
                     <Input
-                        placeholder="Last name"
+                        attr:placeholder="Last name"
                         class="join-item input-bordered w-full max-w-xs"
                     />
                     <Button color=ButtonColor::Success class="join-item">
@@ -123,7 +123,7 @@ pub fn JoinDemo() -> impl IntoView {
                 <div class="space-y-4">
                     <div class="join w-full">
                         <Input
-                            placeholder="Email address"
+                            attr:placeholder="Email address"
                             class="join-item input-bordered flex-1"
                         />
                         <Button color=ButtonColor::Primary class="join-item">
@@ -155,7 +155,7 @@ pub fn JoinDemo() -> impl IntoView {
                         <div class="space-y-4">
                             <div class="join w-full">
                                 <Input
-                                    placeholder="Search products..."
+                                    attr:placeholder="Search products..."
                                     class="join-item input-bordered flex-1"
                                 />
                                 <Select class="join-item select-bordered">

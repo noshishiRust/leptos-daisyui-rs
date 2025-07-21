@@ -1,4 +1,4 @@
-use crate::core::ContentLayout;
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 
@@ -10,18 +10,21 @@ pub fn DropdownDemo() -> impl IntoView {
             description="Dropdown can open a menu or any other element when the button is clicked"
         >
 
-            <h2 class="text-xl font-semibold">"Basic Dropdown"</h2>
+            <Section title="Basic Dropdown">
+                <Dropdown>
+                    <Button>"Menu"</Button>
+                    <DropdownContent
+                        is_menu=true
+                        class="bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                    >
+                        <MenuItem>"Item1"</MenuItem>
+                        <MenuItem>"Item2"</MenuItem>
+                    </DropdownContent>
+                </Dropdown>
 
-            <Dropdown>
-                <Button>"Menu"</Button>
-                <DropdownContent is_menu=true class="bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                    <MenuItem>"Item1"</MenuItem>
-                    <MenuItem>"Item2"</MenuItem>
-                </DropdownContent>
-            </Dropdown>
+            </Section>
 
-            <h2 class="text-xl font-semibold">"Dropdown Positions"</h2>
-            <div class="flex flex-wrap gap-4">
+            <Section title="Dropdown Positions" row=true>
                 <Dropdown>
                     <Button>"Top"</Button>
                     <DropdownContent is_menu=true class="bg-base-100 rounded-box p-2 shadow">
@@ -53,7 +56,8 @@ pub fn DropdownDemo() -> impl IntoView {
                         <MenuItem>"Item2"</MenuItem>
                     </DropdownContent>
                 </Dropdown>
-            </div>
+
+            </Section>
         </ContentLayout>
     }
 }

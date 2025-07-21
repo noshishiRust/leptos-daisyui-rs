@@ -63,7 +63,7 @@
 /* List */
 @source inline("list list-row list-col-wrap list-col-grow");
 /* Loading */
-@source inline("loading loading-spinner loading-dots loading-ring loading-ball loading-bars loading-infinity loading-xs loading-sm loading-md loading-lg loading-xl");
+@source inline("loading loading-spinner loading-dots loading-ring loading-ball loading-bars loading-infinity loading-xs loading-sm loading-md loading-lg loading-xl text-primary text-secondary text-accent text-success text-info text-warning text-error");
 /* Mask */
 @source inline("mask mask-squircle mask-heart mask-hexagon mask-hexagon-2 mask-decagon mask-pentagon mask-diamond mask-square mask-circle mask-star mask-star-2 mask-triangle mask-triangle-2 mask-triangle-3 mask-triangle-4 mask-half-1 mask-half-2");
 /* Menu */
@@ -85,7 +85,7 @@
 /* Progress */
 @source inline("progress progress-neutral progress-primary progress-secondary progress-accent progress-info progress-success progress-warning progress-error");
 /* Radial-Progress */
-@source inline("radial-progress");
+@source inline("radial-progress text-primary text-secondary text-accent text-success text-info text-warning text-error");
 /* Radio */
 @source inline("radio radio-neutral radio-primary radio-secondary radio-accent radio-success radio-warning radio-info radio-error radio-xs radio-sm radio-md radio-lg radio-xl");
 /* Range */

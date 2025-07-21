@@ -56,7 +56,7 @@ pub fn HeroDemo() -> impl IntoView {
                                     <label class="label">
                                         <span class="label-text">"Email"</span>
                                     </label>
-                                    <Input placeholder="email" class="w-full" />
+                                    <Input attr:placeholder="email" class="w-full" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
@@ -64,7 +64,7 @@ pub fn HeroDemo() -> impl IntoView {
                                     </label>
                                     <input
                                         type="password"
-                                        placeholder="password"
+                                        attr:placeholder="password"
                                         class="input input-bordered w-full"
                                     />
                                     <label class="label">

@@ -1,21 +1,21 @@
-use crate::core::ContentLayout;
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn ButtonDemo() -> impl IntoView {
+    let (counter, set_counter) = signal(0);
+    let (loading, set_loading) = signal(false);
+    let (active_color, set_active_color) = signal(ButtonColor::Primary);
+
     view! {
         <ContentLayout
             title="Button"
             description="Buttons allow users to take actions and make choices"
         >
-
-            <h2 class="text-xl font-semibold">"Colors"</h2>
-            <div class="flex flex-wrap gap-2">
+            <Section title="Colors" row=true>
                 <Button>"Default"</Button>
-                <Button class:btn-neutral=true on:click=move |_| log::info!("Button clicked")>
-                    <span>"Neutral"</span>
-                </Button>
+                <Button color=ButtonColor::Neutral>"Neutral"</Button>
                 <Button color=ButtonColor::Primary>"Primary"</Button>
                 <Button color=ButtonColor::Secondary>"Secondary"</Button>
                 <Button color=ButtonColor::Accent>"Accent"</Button>
@@ -23,49 +23,127 @@ pub fn ButtonDemo() -> impl IntoView {
                 <Button color=ButtonColor::Success>"Success"</Button>
                 <Button color=ButtonColor::Warning>"Warning"</Button>
                 <Button color=ButtonColor::Error>"Error"</Button>
-            </div>
+            </Section>
 
-            <h2 class="text-xl font-semibold">"Sizes"</h2>
-            <div class="flex items-center gap-2">
+            <Section title="Sizes" row=true>
                 <Button size=ButtonSize::Xs>"XS"</Button>
                 <Button size=ButtonSize::Sm>"SM"</Button>
                 <Button size=ButtonSize::Md>"MD"</Button>
                 <Button size=ButtonSize::Lg>"LG"</Button>
                 <Button size=ButtonSize::Xl>"XL"</Button>
-            </div>
+            </Section>
 
-            <h2 class="text-xl font-semibold">"Styles"</h2>
-            <div class="flex flex-wrap gap-2">
+            <Section title="Styles" row=true>
+                <Button style=ButtonStyle::Default>"Default"</Button>
                 <Button style=ButtonStyle::Outline>"Outline"</Button>
                 <Button style=ButtonStyle::Ghost>"Ghost"</Button>
                 <Button style=ButtonStyle::Link>"Link"</Button>
                 <Button style=ButtonStyle::Soft>"Soft"</Button>
-            </div>
+                <Button style=ButtonStyle::Dash>"Dash"</Button>
+            </Section>
 
-            <h2 class="text-xl font-semibold">"States"</h2>
-            <div class="flex gap-2">
+            <Section title="States" row=true>
                 <Button color=ButtonColor::Primary>"Normal"</Button>
+                <Button color=ButtonColor::Primary active=true>
+                    "Active"
+                </Button>
                 <Button color=ButtonColor::Primary disabled=true>
                     "Disabled"
                 </Button>
-                <Button color=ButtonColor::Primary disabled=true>
-                    <Loading />
+                <Button color=ButtonColor::Primary loading=true>
                     "Loading"
                 </Button>
-            </div>
+            </Section>
 
-            <h2 class="text-xl font-semibold">"Shapes"</h2>
-            <div class="flex items-center gap-2">
+            <Section title="Shapes" row=true>
                 <Button color=ButtonColor::Primary shape=ButtonShape::Wide>
                     "Wide"
                 </Button>
                 <Button color=ButtonColor::Primary shape=ButtonShape::Square>
-                    "Square"
+                    "□"
                 </Button>
                 <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
-                    "Circle"
+                    "○"
                 </Button>
-            </div>
+                <Button color=ButtonColor::Primary shape=ButtonShape::Block>
+                    "Block"
+                </Button>
+            </Section>
+
+            <Section title="Reactive Examples">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2">
+                        <Button
+                            color=ButtonColor::Primary
+                            on:click=move |_| set_counter.update(|c| *c += 1)
+                        >
+                            "Clicked "
+                            {counter}
+                            " times"
+                        </Button>
+                        <Button
+                            color=ButtonColor::Error
+                            style=ButtonStyle::Outline
+                            on:click=move |_| set_counter.set(0)
+                        >
+                            "Reset"
+                        </Button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <Button
+                            color=ButtonColor::Info
+                            loading=loading
+                            on:click=move |_| {
+                                set_loading.set(true);
+                                set_timeout(
+                                    move || set_loading.set(false),
+                                    std::time::Duration::from_millis(2000),
+                                );
+                            }
+                        >
+                            "Simulate Loading"
+                        </Button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <Button
+                            color=active_color
+                            on:click=move |_| {
+                                set_active_color
+                                    .update(|color| {
+                                        *color = match color {
+                                            ButtonColor::Primary => ButtonColor::Secondary,
+                                            ButtonColor::Secondary => ButtonColor::Accent,
+                                            ButtonColor::Accent => ButtonColor::Success,
+                                            ButtonColor::Success => ButtonColor::Warning,
+                                            ButtonColor::Warning => ButtonColor::Error,
+                                            ButtonColor::Error => ButtonColor::Primary,
+                                            _ => ButtonColor::Primary,
+                                        }
+                                    });
+                            }
+                        >
+                            "Cycle Color: "
+                            {move || format!("{:?}", active_color.get())}
+                        </Button>
+                    </div>
+                </div>
+            </Section>
+
+            <Section title="Link Button">
+                <div class="flex items-center gap-2">
+                    <LinkButton href="#" color=ButtonColor::Primary>
+                        "Primary Link"
+                    </LinkButton>
+                    <LinkButton href="#" style=ButtonStyle::Outline>
+                        "Outline Link"
+                    </LinkButton>
+                    <LinkButton href="#" style=ButtonStyle::Ghost>
+                        "Ghost Link"
+                    </LinkButton>
+                </div>
+            </Section>
         </ContentLayout>
     }
 }

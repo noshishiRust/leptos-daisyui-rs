@@ -1,3 +1,4 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_icons::Icon;
@@ -7,14 +8,11 @@ pub fn DrawerDemo() -> impl IntoView {
     let (drawer_open, set_drawer_open) = signal(false);
 
     view! {
-        <div class="space-y-6">
-            <h1 class="text-3xl font-bold">"Drawer"</h1>
-            <p class="text-base-content/70">
-                "Drawer is a sidebar overlay that can be toggled on and off"
-            </p>
-
-            <div class="space-y-4">
-                <h2 class="text-xl font-semibold">"Basic Drawer"</h2>
+        <ContentLayout
+            title="Drawer"
+            description="Drawer is a sidebar overlay that can be toggled on and off"
+        >
+            <Section title="Basic Drawer" col=true>
                 <div class="h-96 bg-base-200 rounded-lg overflow-hidden">
                     <Drawer open=drawer_open>
                         <DrawerToggle
@@ -86,45 +84,44 @@ pub fn DrawerDemo() -> impl IntoView {
                         </DrawerSide>
                     </Drawer>
                 </div>
+            </Section>
 
-                <h2 class="text-xl font-semibold">"Drawer with Different Content"</h2>
-                <div class="grid gap-4">
-                    <Alert color=AlertColor::Info>
-                        <Icon icon=icondata::AiInfoCircleOutlined />
-                        "The drawer component is also used in the main layout of this demo application. You can see it in action by toggling the sidebar menu."
-                    </Alert>
+            <Section title="Drawer with Different Content" col=true>
+                <Alert color=AlertColor::Info>
+                    <Icon icon=icondata::AiInfoCircleOutlined />
+                    "The drawer component is also used in the main layout of this demo application. You can see it in action by toggling the sidebar menu."
+                </Alert>
 
-                    <div class="mockup-code">
-                        <pre data-prefix="1">
-                            <code>"<Drawer open={{drawer_open}}>"</code>
-                        </pre>
-                        <pre data-prefix="2">
-                            <code>"  <DrawerToggle id=\"my-drawer\" />"</code>
-                        </pre>
-                        <pre data-prefix="3">
-                            <code>"  <div class=\"drawer-content\">"</code>
-                        </pre>
-                        <pre data-prefix="4">
-                            <code>"    <!-- Page content -->"</code>
-                        </pre>
-                        <pre data-prefix="5">
-                            <code>"  </div>"</code>
-                        </pre>
-                        <pre data-prefix="6">
-                            <code>"  <DrawerSide>"</code>
-                        </pre>
-                        <pre data-prefix="7">
-                            <code>"    <!-- Sidebar content -->"</code>
-                        </pre>
-                        <pre data-prefix="8">
-                            <code>"  </DrawerSide>"</code>
-                        </pre>
-                        <pre data-prefix="9">
-                            <code>"</Drawer>"</code>
-                        </pre>
-                    </div>
+                <div class="mockup-code">
+                    <pre data-prefix="1">
+                        <code>"<Drawer open={{drawer_open}}>"</code>
+                    </pre>
+                    <pre data-prefix="2">
+                        <code>"  <DrawerToggle id=\"my-drawer\" />"</code>
+                    </pre>
+                    <pre data-prefix="3">
+                        <code>"  <div class=\"drawer-content\">"</code>
+                    </pre>
+                    <pre data-prefix="4">
+                        <code>"    <!-- Page content -->"</code>
+                    </pre>
+                    <pre data-prefix="5">
+                        <code>"  </div>"</code>
+                    </pre>
+                    <pre data-prefix="6">
+                        <code>"  <DrawerSide>"</code>
+                    </pre>
+                    <pre data-prefix="7">
+                        <code>"    <!-- Sidebar content -->"</code>
+                    </pre>
+                    <pre data-prefix="8">
+                        <code>"  </DrawerSide>"</code>
+                    </pre>
+                    <pre data-prefix="9">
+                        <code>"</Drawer>"</code>
+                    </pre>
                 </div>
-            </div>
-        </div>
+            </Section>
+        </ContentLayout>
     }
 }

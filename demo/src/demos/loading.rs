@@ -1,46 +1,41 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn LoadingDemo() -> impl IntoView {
     view! {
-        <div class="space-y-6">
-            <h1 class="text-3xl font-bold">"Loading"</h1>
-            <p class="text-base-content/70">
-                "Loading indicators show that something is being processed"
-            </p>
+        <ContentLayout
+            title="Loading"
+            description="Loading indicators show that something is being processed"
+        >
+            <Section title="Basic Loading">
+                <Loading />
+                <Loading loading_type=LoadingType::Dots />
+                <Loading loading_type=LoadingType::Ring />
+                <Loading loading_type=LoadingType::Ball />
+                <Loading loading_type=LoadingType::Bars />
+                <Loading loading_type=LoadingType::Infinity />
+            </Section>
 
-            <div class="space-y-4">
-                <h2 class="text-xl font-semibold">"Basic Loading"</h2>
-                <div class="flex gap-4">
-                    <Loading />
-                    <Loading class="loading-spinner" />
-                    <Loading class="loading-dots" />
-                    <Loading class="loading-ring" />
-                    <Loading class="loading-ball" />
-                    <Loading class="loading-bars" />
-                    <Loading class="loading-infinity" />
-                </div>
+            <Section title="Sizes">
+                <Loading size=LoadingSize::Xs />
+                <Loading size=LoadingSize::Sm />
+                <Loading size=LoadingSize::Md />
+                <Loading size=LoadingSize::Lg />
+                <Loading size=LoadingSize::Xl />
+            </Section>
 
-                <h2 class="text-xl font-semibold">"Sizes"</h2>
-                <div class="flex items-center gap-4">
-                    <Loading size=LoadingSize::Xs />
-                    <Loading size=LoadingSize::Sm />
-                    <Loading size=LoadingSize::Md />
-                    <Loading size=LoadingSize::Lg />
-                </div>
+            <Section title="Colors">
+                <Loading color=LoadingColor::Primary />
+                <Loading color=LoadingColor::Secondary />
+                <Loading color=LoadingColor::Accent />
+                <Loading color=LoadingColor::Info />
+                <Loading color=LoadingColor::Success />
+                <Loading color=LoadingColor::Warning />
+                <Loading color=LoadingColor::Error />
+            </Section>
 
-                <h2 class="text-xl font-semibold">"Colors"</h2>
-                <div class="flex gap-4">
-                    <Loading color=LoadingColor::Primary />
-                    <Loading color=LoadingColor::Secondary />
-                    <Loading color=LoadingColor::Accent />
-                    <Loading color=LoadingColor::Info />
-                    <Loading color=LoadingColor::Success />
-                    <Loading color=LoadingColor::Warning />
-                    <Loading color=LoadingColor::Error />
-                </div>
-            </div>
-        </div>
+        </ContentLayout>
     }
 }

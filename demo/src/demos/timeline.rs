@@ -1,3 +1,4 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_icons::Icon;
@@ -5,14 +6,11 @@ use leptos_icons::Icon;
 #[component]
 pub fn TimelineDemo() -> impl IntoView {
     view! {
-        <div class="space-y-6">
-            <h1 class="text-3xl font-bold">"Timeline"</h1>
-            <p class="text-base-content/70">
-                "Timeline component shows a list of events in chronological order"
-            </p>
-
-            <div class="space-y-4">
-                <h2 class="text-xl font-semibold">"Basic Timeline"</h2>
+        <ContentLayout
+            title="Timeline"
+            description="Timeline component shows a list of events in chronological order"
+        >
+            <Section title="Basic Timeline">
                 <Timeline>
                     <TimelineItem position=TimelineItemPosition::Start>
                         <TimelineItemMiddle>
@@ -39,8 +37,9 @@ pub fn TimelineDemo() -> impl IntoView {
                         </TimelineItemMiddle>
                     </TimelineItem>
                 </Timeline>
+            </Section>
 
-                <h2 class="text-xl font-semibold">"Event Timeline with Status"</h2>
+            <Section title="Event Timeline with Status">
                 <Timeline>
                     <TimelineItem position=TimelineItemPosition::Start end_class="bg-success">
                         <TimelineItemStart boxed=true class="bg-success text-success-content">
@@ -80,8 +79,8 @@ pub fn TimelineDemo() -> impl IntoView {
                             </div>
                             <p class="text-sm mt-1">"Building core features - 65% complete"</p>
                             <Progress
-                                value=65.0
-                                max=100.0
+                                attr:value=65.0
+                                attr:max=100.0
                                 color=ProgressColor::Warning
                                 class="w-full mt-2"
                             />
@@ -133,7 +132,7 @@ pub fn TimelineDemo() -> impl IntoView {
                         </TimelineItemEnd>
                     </TimelineItem>
                 </Timeline>
-            </div>
-        </div>
+            </Section>
+        </ContentLayout>
     }
 }

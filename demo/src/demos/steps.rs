@@ -205,13 +205,13 @@ pub fn StepsDemo() -> impl IntoView {
                                     <label class="label">
                                         <span class="label-text">"First Name"</span>
                                     </label>
-                                    <Input placeholder="Enter first name" class="w-full" />
+                                    <Input attr:placeholder="Enter first name" class="w-full" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text">"Last Name"</span>
                                     </label>
-                                    <Input placeholder="Enter last name" class="w-full" />
+                                    <Input attr:placeholder="Enter last name" class="w-full" />
                                 </div>
                             </div>
 
@@ -328,8 +328,8 @@ pub fn StepsDemo() -> impl IntoView {
                                 "Progress: 3/8 completed"
                             </div>
                             <Progress
-                                value=37.5
-                                max=100.0
+                                attr:value=37.5
+                                attr:max=100.0
                                 color=ProgressColor::Primary
                                 class="w-full mt-2"
                             />

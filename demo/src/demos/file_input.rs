@@ -207,7 +207,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                     <label class="label">
                                         <span class="label-text">"Project Name"</span>
                                     </label>
-                                    <Input placeholder="Enter project name" class="w-full" />
+                                    <Input attr:placeholder="Enter project name" class="w-full" />
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
@@ -279,7 +279,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                     <span class="label-text">"Project Description"</span>
                                 </label>
                                 <textarea
-                                    placeholder="Describe your project, its features, and any special instructions..."
+                                    attr:placeholder="Describe your project, its features, and any special instructions..."
                                     rows="4"
                                     class="textarea textarea-bordered w-full"
                                 ></textarea>
@@ -337,8 +337,8 @@ pub fn FileInputDemo() -> impl IntoView {
                                     <span>"75%"</span>
                                 </div>
                                 <Progress
-                                    value=75.0
-                                    max=100.0
+                                    attr:value=75.0
+                                    attr:max=100.0
                                     color=ProgressColor::Primary
                                     class="w-full"
                                 />
@@ -350,8 +350,8 @@ pub fn FileInputDemo() -> impl IntoView {
                                     <span>"100%"</span>
                                 </div>
                                 <Progress
-                                    value=100.0
-                                    max=100.0
+                                    attr:value=100.0
+                                    attr:max=100.0
                                     color=ProgressColor::Success
                                     class="w-full"
                                 />
