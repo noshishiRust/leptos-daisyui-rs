@@ -1,113 +1,28 @@
+/// # Table Component
+///
+/// A reactive Leptos wrapper for daisyUI's table component that provides
+/// styled table elements for displaying tabular data.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("table table-zebra table-pin-rows table-pin-cols table-xs table-sm table-md table-lg table-xl");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the table element ([HTMLTableElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableElement))
+
 use super::style::TableSize;
 use crate::merge_classes;
 use leptos::{
     html::{Table as HtmlTable, Tbody, Td, Tfoot, Th, Thead, Tr},
     prelude::*,
 };
-
-/// A styled table component for displaying tabular data.
-///
-/// The `Table` component provides a semantic HTML table with daisyUI styling
-/// and various customization options including size variants, zebra striping,
-/// and pinned rows/columns for better data visualization.
-///
-/// # Props
-///
-/// - `size` - Optional table size variant (default: `TableSize::Default`)
-/// - `zebra` - Optional zebra striping for alternating row backgrounds
-/// - `pin_rows` - Optional pinning of header and footer rows during scroll
-/// - `pin_cols` - Optional pinning of first column during horizontal scroll
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the table element
-/// - `children` - Table content (typically TableHead, TableBody, TableFoot)
-///
-/// # CSS Classes
-///
-/// - Base: `table`
-/// - Size: `table-xs`, `table-sm`, `table-md`, `table-lg` (based on size prop)
-/// - Zebra: `table-zebra` (when zebra is true)
-/// - Pin rows: `table-pin-rows` (when pin_rows is true)
-/// - Pin cols: `table-pin-cols` (when pin_cols is true)
-///
-/// # Examples
-///
-/// ## Basic Table
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableHead>
-///                 <TableRow>
-///                     <TableHeader>"Product"</TableHeader>
-///                     <TableHeader>"Price"</TableHeader>
-///                 </TableRow>
-///             </TableHead>
-///             <TableBody>
-///                 <TableRow>
-///                     <TableCell>"MacBook"</TableCell>
-///                     <TableCell>"$1999"</TableCell>
-///                 </TableRow>
-///             </TableBody>
-///         </Table>
-///     }
-/// }
-/// ```
-///
-/// ## With All Features
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     let table_size = RwSignal::new(TableSize::Sm);
-///     let zebra_enabled = RwSignal::new(true);
-///     let pin_rows = RwSignal::new(true);
-///     let pin_cols = RwSignal::new(true);
-///
-///     view! {
-///         <div class="overflow-x-auto">
-///             <Table
-///                 size=table_size
-///                 zebra=zebra_enabled
-///                 pin_rows=pin_rows
-///                 pin_cols=pin_cols
-///             >
-///                 <TableHead>
-///                     <TableRow>
-///                         <TableHeader>"Name"</TableHeader>
-///                         <TableHeader>"Q1"</TableHeader>
-///                         <TableHeader>"Q2"</TableHeader>
-///                         <TableHeader>"Q3"</TableHeader>
-///                         <TableHeader>"Q4"</TableHeader>
-///                     </TableRow>
-///                 </TableHead>
-///                 <TableBody>
-///                     <TableRow>
-///                         <TableCell>"Sales"</TableCell>
-///                         <TableCell>"$100K"</TableCell>
-///                         <TableCell>"$120K"</TableCell>
-///                         <TableCell>"$110K"</TableCell>
-///                         <TableCell>"$130K"</TableCell>
-///                     </TableRow>
-///                 </TableBody>
-///             </Table>
-///         </div>
-///     }
-/// }
-/// ```
 #[component]
 pub fn Table(
-    /// Size variant for the table (affects padding and font size)
+    /// Size variant for the table
     #[prop(optional, into)]
     size: Signal<TableSize>,
-    /// Enable zebra striping for alternating row backgrounds
+    /// Enable zebra striping for alternating rows
     #[prop(optional, into)]
     zebra: Signal<bool>,
     /// Pin header and footer rows when scrolling
@@ -116,14 +31,13 @@ pub fn Table(
     /// Pin first column when scrolling horizontally
     #[prop(optional, into)]
     pin_cols: Signal<bool>,
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the table element
+    /// Node reference to the table element
     #[prop(optional)]
     node_ref: NodeRef<HtmlTable>,
-    /// Table content (TableHead, TableBody, TableFoot)
+    /// Table content
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -143,45 +57,18 @@ pub fn Table(
     }
 }
 
-/// A table header section component (`<thead>`).
+/// # Table Head Component
 ///
-/// The `TableHead` component wraps the header content of a table, typically containing
-/// column headers and labels. It provides semantic structure and enables proper styling
-/// and accessibility for table headers.
+/// A reactive Leptos wrapper for table header sections.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the thead element
-/// - `children` - Header content (typically TableRow with TableHeader cells)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableHead>
-///                 <TableRow>
-///                     <TableHeader>"Column 1"</TableHeader>
-///                     <TableHeader>"Column 2"</TableHeader>
-///                 </TableRow>
-///             </TableHead>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the thead element ([HTMLTableSectionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement))
 #[component]
 pub fn TableHead(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the thead element
+    /// Node reference to the thead element
     #[prop(optional)]
     node_ref: NodeRef<Thead>,
     /// Header content
@@ -194,44 +81,18 @@ pub fn TableHead(
     }
 }
 
-/// A table body section component (`<tbody>`).
+/// # Table Body Component
 ///
-/// The `TableBody` component contains the main data content of a table.
-/// It provides semantic structure and proper styling for table data rows.
+/// A reactive Leptos wrapper for table body sections.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the tbody element
-/// - `children` - Body content (typically TableRow components with data)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableBody>
-///                 <TableRow>
-///                     <TableCell>"Data 1"</TableCell>
-///                     <TableCell>"Data 2"</TableCell>
-///                 </TableRow>
-///             </TableBody>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the tbody element ([HTMLTableSectionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement))
 #[component]
 pub fn TableBody(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the tbody element
+    /// Node reference to the tbody element
     #[prop(optional)]
     node_ref: NodeRef<Tbody>,
     /// Body content
@@ -244,47 +105,18 @@ pub fn TableBody(
     }
 }
 
-/// A table footer section component (`<tfoot>`).
+/// # Table Foot Component
 ///
-/// The `TableFoot` component contains footer content for a table, typically
-/// used for summaries, totals, or additional column information.
+/// A reactive Leptos wrapper for table footer sections.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the tfoot element
-/// - `children` - Footer content (typically TableRow components)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableBody>
-///                 // ... data rows
-///             </TableBody>
-///             <TableFoot>
-///                 <TableRow>
-///                     <TableCell>"Total"</TableCell>
-///                     <TableCell>"$1,234"</TableCell>
-///                 </TableRow>
-///             </TableFoot>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the tfoot element ([HTMLTableSectionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableSectionElement))
 #[component]
 pub fn TableFoot(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the tfoot element
+    /// Node reference to the tfoot element
     #[prop(optional)]
     node_ref: NodeRef<Tfoot>,
     /// Footer content
@@ -297,53 +129,21 @@ pub fn TableFoot(
     }
 }
 
-/// A table row component (`<tr>`).
+/// # Table Row Component
 ///
-/// The `TableRow` component represents a single row in a table, containing
-/// either header cells (TableHeader) or data cells (TableCell).
+/// A reactive Leptos wrapper for table rows.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the tr element
-/// - `children` - Row content (TableHeader or TableCell components)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableBody>
-///                 <TableRow>
-///                     <TableCell>"John Doe"</TableCell>
-///                     <TableCell>"Engineer"</TableCell>
-///                     <TableCell>"$75,000"</TableCell>
-///                 </TableRow>
-///                 <TableRow class="bg-base-200">
-///                     <TableCell>"Jane Smith"</TableCell>
-///                     <TableCell>"Designer"</TableCell>
-///                     <TableCell>"$65,000"</TableCell>
-///                 </TableRow>
-///             </TableBody>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the tr element ([HTMLTableRowElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableRowElement))
 #[component]
 pub fn TableRow(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the tr element
+    /// Node reference to the tr element
     #[prop(optional)]
     node_ref: NodeRef<Tr>,
-    /// Row content (cells)
+    /// Row content
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -353,46 +153,18 @@ pub fn TableRow(
     }
 }
 
-/// A table header cell component (`<th>`).
+/// # Table Header Component
 ///
-/// The `TableHeader` component represents a header cell in a table, typically
-/// used for column labels and descriptions. It provides semantic meaning and
-/// appropriate styling for table headers.
+/// A reactive Leptos wrapper for table header cells.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the th element
-/// - `children` - Header content (typically text or simple elements)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableHead>
-///                 <TableRow>
-///                     <TableHeader>"Employee Name"</TableHeader>
-///                     <TableHeader class="text-right">"Salary"</TableHeader>
-///                     <TableHeader>"Department"</TableHeader>
-///                 </TableRow>
-///             </TableHead>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the th element ([HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement))
 #[component]
 pub fn TableHeader(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the th element
+    /// Node reference to the th element
     #[prop(optional)]
     node_ref: NodeRef<Th>,
     /// Header content
@@ -405,48 +177,18 @@ pub fn TableHeader(
     }
 }
 
-/// A table data cell component (`<td>`).
+/// # Table Cell Component
 ///
-/// The `TableCell` component represents a data cell in a table, containing
-/// the actual data content. It provides appropriate styling and structure
-/// for table data.
+/// A reactive Leptos wrapper for table data cells.
 ///
-/// # Props
-///
-/// - `class` - Optional additional CSS classes
-/// - `node_ref` - Optional node reference for the td element
-/// - `children` - Cell content (data, text, or other elements)
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         <Table>
-///             <TableBody>
-///                 <TableRow>
-///                     <TableCell>"Product A"</TableCell>
-///                     <TableCell class="text-right font-mono">"$99.99"</TableCell>
-///                     <TableCell>
-///                         <Badge color=BadgeColor::Success>"In Stock"</Badge>
-///                     </TableCell>
-///                 </TableRow>
-///             </TableBody>
-///         </Table>
-///     }
-/// }
-/// ```
+/// ## Node References
+/// - `node_ref` - References the td element ([HTMLTableCellElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLTableCellElement))
 #[component]
 pub fn TableCell(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the td element
+    /// Node reference to the td element
     #[prop(optional)]
     node_ref: NodeRef<Td>,
     /// Cell content

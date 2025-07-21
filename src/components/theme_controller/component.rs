@@ -1,22 +1,24 @@
-use crate::merge_classes;
-use leptos::{html::Input, prelude::*};
+use leptos::{prelude::*, tachys::html::class::class as class_fn};
 
+/// # Theme Controller Wrapper Component
+///
+/// This component itself does not have a container, only a validator class for its child components.
+/// As such, it is intended to be used with form elements such as `Input` and `Button`.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("theme-controller");
+/// ```
 #[component]
 pub fn ThemeController(
-    #[prop(optional, into)] theme_name: &'static str,
-    #[prop(optional, into)] checked: Signal<bool>,
-    /// Additional CSS classes
+    /// Valid daisyUI theme name to activate when checked
     #[prop(optional, into)]
-    class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Input>,
+    theme_name: &'static str,
+
+    /// Form element clildren (suach as input (checkbox, toggle), button etc...)
+    children: Children,
 ) -> impl IntoView {
-    view! {
-        <input
-            node_ref=node_ref
-            type="checkbox"
-            value=theme_name
-            class=move || merge_classes!("theme-controller", class)
-            prop:checked=checked
-        />
-    }
+    children()
+        .add_any_attr(class_fn(("theme-controller", true)))
+        .attr("value", theme_name)
 }

@@ -2,17 +2,33 @@ use super::style::ToastPosition;
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
-/// A Toast component that displays notifications or messages.
+/// # Toast Container Component
 ///
-/// This component is a wrapper `<div>` element,
-/// you can spread [HTMLDivElement](https://developer.mozilla.org/ja/docs/Web/API/HTMLDivElement) attributes to it.
+/// A wrapper for stacking notification elements positioned at the corners of the page.
+/// Use for displaying temporary messages, alerts, or notifications.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("toast toast-start toast-center toast-end toast-top toast-middle toast-bottom");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn Toast(
-    #[prop(optional, into)] position: Signal<ToastPosition>,
-    /// Additional CSS classes
+    /// Position of the toast container on the page
+    #[prop(optional, into)]
+    position: Signal<ToastPosition>,
+
+    /// Additional CSS classes to apply to the toast container
     #[prop(optional, into)]
     class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Div>,
+
+    /// Node reference for the top `<div>` element
+    #[prop(optional)]
+    node_ref: NodeRef<Div>,
+
+    /// Toast notification content (alerts, messages, etc.)
     children: Children,
 ) -> impl IntoView {
     view! {

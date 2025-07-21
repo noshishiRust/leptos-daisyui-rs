@@ -16,32 +16,6 @@ use leptos::{
 /// @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
 /// ```
 ///
-/// ## Usage Example
-///
-/// ```rust
-/// use leptos::*;
-/// use leptos_daisyui::accordion::*;
-///
-/// #[component]
-/// fn AccordionDemo() -> impl IntoView {
-///     let (checked1, set_checked1) = signal(false);
-///     let (checked2, set_checked2) = signal(false);
-///
-///     view! {
-///         // Grouped accordions - only one can be open
-///         <Accordion name="my-accordion" checked=checked1 modifier=AccordionModifier::Arrow>
-///             <AccordionTitle>"Section 1"</AccordionTitle>
-///             <AccordionContent>"Content for section 1"</AccordionContent>
-///         </Accordion>
-///         
-///         <Accordion name="my-accordion" checked=checked2 modifier=AccordionModifier::Plus>
-///             <AccordionTitle>"Section 2"</AccordionTitle>
-///             <AccordionContent>"Content for section 2"</AccordionContent>
-///         </Accordion>
-///     }
-/// }
-/// ```
-///
 /// ## Node References
 /// - `outer_node_ref` - References the outer `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 /// - `inner_node_ref` - References the inner `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
@@ -100,7 +74,7 @@ pub fn Accordion(
 /// element that users click to expand or collapse the accordion section.
 ///
 /// ## Node References
-/// - `node_ref` - References the title `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn AccordionTitle(
     /// Additional CSS classes to apply to the title element
@@ -127,7 +101,7 @@ pub fn AccordionTitle(
 /// is shown or hidden when the accordion is expanded or collapsed.
 ///
 /// ## Node References
-/// - `node_ref` - References the content `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn AccordionContent(
     /// Additional CSS classes to apply to the content element

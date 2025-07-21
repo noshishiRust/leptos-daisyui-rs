@@ -1,13 +1,25 @@
+/// # Radial Progress Color Variants
+///
+/// Style enum for daisyUI radial progress color classes that control the semantic color scheme
+/// of radial progress indicators. Colors follow daisyUI's semantic system for context and meaning.
 #[derive(Clone, Debug, Default)]
 pub enum RadialProgressColor {
+    /// Default radial progress color (no color class applied)
     #[default]
     Default,
+    /// Primary brand color for main progress indicators
     Primary,
+    /// Secondary brand color for secondary progress indicators
     Secondary,
+    /// Accent brand color for highlighted progress indicators
     Accent,
+    /// Success color for positive progress indicators
     Success,
+    /// Info color for informational progress indicators
     Info,
+    /// Warning color for cautionary progress indicators
     Warning,
+    /// Error color for error state progress indicators
     Error,
 }
 
@@ -27,14 +39,24 @@ impl RadialProgressColor {
     }
 }
 
+/// # Radial Progress Size Variants
+///
+/// Style enum for daisyUI radial progress size classes that control the physical dimensions
+/// of radial progress indicators using Tailwind CSS width and height utilities.
 #[derive(Clone, Debug, Default)]
 pub enum RadialProgressSize {
+    /// Default size (no size class applied)
     #[default]
     Default,
+    /// Extra small size (32px x 32px)
     Xs,
+    /// Small size (48px x 48px)
     Sm,
+    /// Medium size (64px x 64px)
     Md,
+    /// Large size (80px x 80px)
     Lg,
+    /// Extra large size (96px x 96px)
     Xl,
 }
 

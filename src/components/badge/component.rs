@@ -65,7 +65,7 @@ use leptos::{html::Div, prelude::*};
 /// ```
 ///
 /// ## Node References
-/// - `node_ref` - References the badge `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn Badge(
     /// Visual style of the badge

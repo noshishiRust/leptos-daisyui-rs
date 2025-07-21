@@ -1,70 +1,23 @@
-/// Size variants for table components, affecting padding and font size.
+/// # Table Size Variants
 ///
-/// The `TableSize` enum provides different sizing options for tables to accommodate
-/// various data densities and design requirements. Smaller sizes are useful for
-/// data-heavy tables, while larger sizes provide better readability.
-///
-/// # Variants
-///
-/// - `Default` - Standard table sizing (no additional class)
-/// - `Xs` - Extra small with minimal padding (maps to `table-xs`)
-/// - `Sm` - Small with reduced padding (maps to `table-sm`)
-/// - `Md` - Medium with comfortable padding (maps to `table-md`)
-/// - `Lg` - Large with generous padding (maps to `table-lg`)
-///
-/// # CSS Class Mapping
-///
-/// | Variant | CSS Class | Description |
-/// |---------|-----------|-------------|
-/// | `Default` | (none) | Standard table styling |
-/// | `Xs` | `table-xs` | Extra small padding and text |
-/// | `Sm` | `table-sm` | Small padding and text |
-/// | `Md` | `table-md` | Medium padding and text |
-/// | `Lg` | `table-lg` | Large padding and text |
-///
-/// # Examples
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::*;
-///
-/// #[component]
-/// fn App() -> impl IntoView {
-///     view! {
-///         // Compact table for data-heavy displays
-///         <Table size=TableSize::Xs>
-///             // ... table content
-///         </Table>
-///
-///         // Comfortable table for general use
-///         <Table size=TableSize::Md>
-///             // ... table content
-///         </Table>
-///     }
-/// }
-/// ```
+/// Style enum for daisyUI table size classes that control the physical dimensions
+/// of table components. Sizes scale proportionally for various contexts.
 #[derive(Clone, Debug, Default)]
 pub enum TableSize {
-    /// Standard table sizing with default daisyUI styling
+    /// Default size (no size class applied)
     #[default]
     Default,
-    /// Extra small size with minimal padding - ideal for data-heavy tables
+    /// Extra small size for compact layouts
     Xs,
-    /// Small size with reduced padding - good for compact displays
+    /// Small size for minimal space usage
     Sm,
-    /// Medium size with comfortable padding - balanced readability
+    /// Medium size for standard usage
     Md,
-    /// Large size with generous padding - maximum readability
+    /// Large size for emphasis and visibility
     Lg,
 }
 
 impl TableSize {
-    /// Returns the corresponding CSS class for the table size variant.
-    ///
-    /// # Returns
-    ///
-    /// A static string slice containing the CSS class name, or an empty string
-    /// for the default variant.
     /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {

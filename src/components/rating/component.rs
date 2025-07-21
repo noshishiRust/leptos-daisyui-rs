@@ -5,13 +5,33 @@ use leptos::{
     prelude::*,
 };
 
+/// # Rating Component
+///
+/// A container for star rating inputs that allows users to rate items.
+/// Supports radio button groups for single ratings.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("rating rating-hidden rating-xs rating-sm rating-md rating-lg rating-xl");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the rating `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn Rating(
-    #[prop(optional, into)] size: Signal<RatingSize>,
-    /// Additional CSS classes
+    /// Size of the rating display
+    #[prop(optional, into)] 
+    size: Signal<RatingSize>,
+
+    /// Additional CSS classes to apply to the rating container
     #[prop(optional, into)]
     class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Div>,
+
+    /// Node reference for the rating `<div>` element
+    #[prop(optional)] 
+    node_ref: NodeRef<Div>,
+
+    /// Child [`RatingItem`] and optionally [`RatingHidden`] components
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -28,16 +48,38 @@ pub fn Rating(
     }
 }
 
+/// # Rating Item Component
+///
+/// An individual star in the rating system. Uses radio inputs to ensure
+/// only one rating can be selected at a time.
+///
+/// ## Node References
+/// - `node_ref` - References the item `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn RatingItem(
-    #[prop(optional, into)] checked: Signal<bool>,
-    #[prop(optional)] name: Option<&'static str>,
-    #[prop(optional)] value: Option<&'static str>,
-    /// Additional CSS classes
+    /// Whether this rating star is selected
+    #[prop(optional, into)] 
+    checked: Signal<bool>,
+
+    /// Radio group name for the rating (all items should share the same name)
+    #[prop(optional)] 
+    name: Option<&'static str>,
+
+    /// Value for this rating level
+    #[prop(optional)] 
+    value: Option<&'static str>,
+
+    /// Additional CSS classes to apply to the rating item
     #[prop(optional, into)]
     class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Input>,
-    #[prop(optional)] on_change: Option<Box<dyn Fn(bool)>>,
+
+    /// Node reference for the item `<input>` element
+    #[prop(optional)] 
+    node_ref: NodeRef<Input>,
+
+    /// Change handler when this rating is selected
+    #[prop(optional)] 
+    on_change: Option<Box<dyn Fn(bool)>>,
 ) -> impl IntoView {
     view! {
         <input
@@ -56,13 +98,26 @@ pub fn RatingItem(
     }
 }
 
+/// # Rating Hidden Component
+///
+/// A hidden radio input that allows users to clear/reset the rating.
+/// Should be the first item in the rating group.
+///
+/// ## Node References
+/// - `node_ref` - References the hidden `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn RatingHidden(
-    #[prop(optional)] name: Option<&'static str>,
-    /// Additional CSS classes
+    /// Radio group name that matches the rating items
+    #[prop(optional)] 
+    name: Option<&'static str>,
+
+    /// Additional CSS classes to apply to the hidden input
     #[prop(optional, into)]
     class: &'static str,
-    #[prop(optional)] node_ref: NodeRef<Input>,
+
+    /// Node reference for the hidden `<input>` element
+    #[prop(optional)] 
+    node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {
         <input

@@ -2,154 +2,33 @@ use super::style::{ToggleColor, ToggleSize};
 use crate::merge_classes;
 use leptos::{html::Input, prelude::*};
 
-/// A toggle switch component that provides a visual alternative to traditional checkboxes.
+/// # Toggle Component
 ///
-/// The Toggle component represents binary state (on/off, enabled/disabled, true/false)
-/// with a modern switch-style interface. It maintains checkbox semantics while providing
-/// a more intuitive visual representation for users.
+/// A checkbox styled as a switch that provides binary state selection.
+/// Uses semantic checkbox input with toggle appearance.
 ///
-/// # Props
-///
-/// * `color` - The color variant of the toggle switch (optional, reactive)
-/// * `size` - The size variant of the toggle switch (optional, reactive)
-/// * `checked` - Whether the toggle is checked/enabled (optional, reactive)
-/// * `disabled` - Whether the toggle is disabled (optional, reactive)
-/// * `class` - Additional CSS classes to apply (optional)
-/// * `node_ref` - Reference to the underlying HTML input element (optional)
-///
-/// # CSS Classes
-///
-/// This component applies the following CSS classes:
-/// - Base: `toggle`
-/// - Color: Applied from `ToggleColor` enum
-/// - Size: Applied from `ToggleSize` enum
-/// - Additional: Any classes provided via the `class` prop
-///
-/// # Example
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::toggle::{Toggle, ToggleColor, ToggleSize};
-///
-/// #[component]
-/// fn SettingsPanel() -> impl IntoView {
-///     let (notifications_enabled, set_notifications_enabled) = signal(true);
-///     let (dark_mode_enabled, set_dark_mode_enabled) = signal(false);
-///
-///     view! {
-///         <div class="space-y-4">
-///             <div class="form-control">
-///                 <label class="label cursor-pointer">
-///                     <span class="label-text">"Enable Notifications"</span>
-///                     <Toggle
-///                         color=ToggleColor::Primary
-///                         size=ToggleSize::Md
-///                         checked=notifications_enabled
-///                     />
-///                 </label>
-///             </div>
-///             <div class="form-control">
-///                 <label class="label cursor-pointer">
-///                     <span class="label-text">"Dark Mode"</span>
-///                     <Toggle
-///                         color=ToggleColor::Accent
-///                         size=ToggleSize::Md
-///                         checked=dark_mode_enabled
-///                     />
-///                 </label>
-///             </div>
-///         </div>
-///     }
-/// }
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("toggle toggle-primary toggle-secondary toggle-accent toggle-neutral toggle-success toggle-warning toggle-info toggle-error toggle-xs toggle-sm toggle-md toggle-lg toggle-xl");
 /// ```
 ///
-/// # Advanced Example with Event Handling
-///
-/// ```rust
-/// use leptos::prelude::*;
-/// use leptos_daisyui::toggle::{Toggle, ToggleColor};
-///
-/// #[component]
-/// fn FeatureToggle() -> impl IntoView {
-///     let (feature_enabled, set_feature_enabled) = signal(false);
-///     let (is_loading, set_is_loading) = signal(false);
-///
-///     let toggle_ref = NodeRef::<Input>::new();
-///
-///     let handle_toggle = move |_| {
-///         if let Some(input) = toggle_ref.get() {
-///             let is_checked = input.checked();
-///             set_is_loading.set(true);
-///             
-///             // Simulate API call
-///             spawn_local(async move {
-///                 TimeoutFuture::new(1000).await;
-///                 set_feature_enabled.set(is_checked);
-///                 set_is_loading.set(false);
-///             });
-///         }
-///     };
-///
-///     let color = move || {
-///         if is_loading.get() {
-///             ToggleColor::Warning
-///         } else if feature_enabled.get() {
-///             ToggleColor::Success
-///         } else {
-///             ToggleColor::Default
-///         }
-///     };
-///
-///     view! {
-///         <div class="form-control">
-///             <label class="label cursor-pointer">
-///                 <span class="label-text">
-///                     {move || if is_loading.get() {
-///                         "Updating..."
-///                     } else {
-///                         "Advanced Features"
-///                     }}
-///                 </span>
-///                 <Toggle
-///                     node_ref=toggle_ref
-///                     color=move || color()
-///                     checked=feature_enabled
-///                     disabled=is_loading
-///                     on:change=handle_toggle
-///                 />
-///             </label>
-///         </div>
-///     }
-/// }
-/// ```
-///
-/// # Accessibility
-///
-/// - Uses semantic `<input type="checkbox">` element with toggle styling
-/// - Supports keyboard navigation (Space to toggle, Tab to focus)
-/// - Properly announces state changes to screen readers
-/// - Compatible with form validation and submission
-/// - Supports focus management and visual focus indicators
-/// - Works with assistive technologies that understand checkbox semantics
+/// ## Node References
+/// - `node_ref` - References the top `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn Toggle(
-    /// The color variant of the toggle switch
+    /// Color theme of the toggle
     #[prop(optional, into)]
     color: Signal<ToggleColor>,
-    /// The size variant of the toggle switch
+
+    /// Size of the toggle
     #[prop(optional, into)]
     size: Signal<ToggleSize>,
-    /// Whether the toggle is checked/enabled
-    #[prop(optional, into)]
-    checked: Signal<bool>,
-    /// Whether the toggle is disabled
-    #[prop(optional, into)]
-    disabled: Signal<bool>,
-    /// Additional CSS classes to apply
-    /// Additional CSS classes
+
+    /// Additional CSS classes to apply to the toggle
     #[prop(optional, into)]
     class: &'static str,
-    /// Reference to the underlying HTML input element
+
+    /// Node reference for the top `<input>` element
     #[prop(optional)]
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {
@@ -157,8 +36,6 @@ pub fn Toggle(
         <input
             node_ref=node_ref
             type="checkbox"
-            checked=checked
-            disabled=disabled
             class=move || {
                 merge_classes!(
                     "toggle",

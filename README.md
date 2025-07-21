@@ -2,6 +2,8 @@
 
 This crate is a daisyUI 5 components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components.
 
+""At present, it is assumed to be used for CSR.""
+
 > 🚧 **Work in Progress**  
 > This project is currently under active development.  
 > The design and usage are still evolving, and breaking changes can be expected.  
@@ -179,9 +181,9 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Badge | ✅ | [src](src/components/badge/) | [docs](https://daisyui.com/components/badge/) |
 | Breadcrumbs | ✅ | [src](src/components/breadcrumbs/) | [docs](https://daisyui.com/components/breadcrumbs/) |
 | Button | ✅ | [src](src/components/button/) | [docs](https://daisyui.com/components/button/) |
-| Calendar | ✅ | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
+| Calendar | - | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
 | Card | ✅ | [src](src/components/card/) | [docs](https://daisyui.com/components/card/) |
-| Carousel | ✅ | [src](src/components/carousel/) | [docs](https://daisyui.com/components/carousel/) |
+| Carousel | ✅ | [src](src/components/carousel/)  | [docs](https://daisyui.com/components/carousel/) |
 | Chat | ✅ | [src](src/components/chat/) | [docs](https://daisyui.com/components/chat/) |
 | Checkbox | ✅ | [src](src/components/checkbox/) | [docs](https://daisyui.com/components/checkbox/) |
 | Collapse | ✅ | [src](src/components/collapse/) | [docs](https://daisyui.com/components/collapse/) |
@@ -234,9 +236,8 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Toggle | ✅ | [src](src/components/toggle/) | [docs](https://daisyui.com/components/toggle/) |
 | Validator | ✅ | [src](src/components/validator/) | [docs](https://daisyui.com/components/validator/) |
 
-**Progress: 57/57 components implemented (100%)**
+**Progress: 56/57 components implemented**
 
-🎉 **All daisyUI 5 components are now fully implemented!**
 
 ## TODO utility
 - utility hooks

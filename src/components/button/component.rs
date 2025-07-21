@@ -7,48 +7,12 @@ use leptos::{
 
 /// # Button Component
 ///
-/// A reactive Leptos wrapper for daisyUI's button component that provides a comprehensive
-/// set of styling options for interactive button elements.
+/// A reactive wrapper for daisyUI's button component with comprehensive styling options
+/// including colors, sizes, shapes, and interactive states.
 ///
 /// ### Add to `input.css`
 /// ```css
 /// @source inline("btn btn-neutral btn-primary btn-secondary btn-accent btn-info btn-success btn-warning btn-error btn-outline btn-dash btn-soft btn-ghost btn-link btn-xs btn-sm btn-md btn-lg btn-xl btn-wide btn-block btn-square btn-circle btn-active btn-disabled loading");
-/// ```
-///
-/// ## Usage Example
-///
-/// ```rust
-/// use leptos::*;
-/// use leptos_daisyui::button::*;
-///
-/// #[component]
-/// fn ButtonDemo() -> impl IntoView {
-///     let (loading, set_loading) = signal(false);
-///     let (disabled, set_disabled) = signal(false);
-///
-///     view! {
-///         <Button
-///             color=ButtonColor::Primary
-///             size=ButtonSize::Lg
-///             loading=loading
-///             on:click=move |_| set_loading.set(true)
-///         >
-///             "Save Changes"
-///         </Button>
-///         
-///         <Button
-///             style=ButtonStyle::Outline
-///             color=ButtonColor::Error
-///             disabled=disabled
-///         >
-///             "Delete"
-///         </Button>
-///         
-///         <Button shape=ButtonShape::Circle size=ButtonSize::Sm>
-///             "+"
-///         </Button>
-///     }
-/// }
 /// ```
 ///
 /// ## Node References
@@ -120,32 +84,8 @@ pub fn Button(
 
 /// # Link Button Component
 ///
-/// A reactive Leptos wrapper that renders an anchor (`<a>`) element styled as a daisyUI button.
-/// This component is useful for navigation actions that should look like buttons.
-///
-/// ## Usage Example
-///
-/// ```rust
-/// use leptos::*;
-/// use leptos_daisyui::button::*;
-///
-/// view! {
-///     <LinkButton
-///         href="/dashboard"
-///         color=ButtonColor::Primary
-///         size=ButtonSize::Lg
-///     >
-///         "Go to Dashboard"
-///     </LinkButton>
-///     
-///     <LinkButton
-///         href="/help"
-///         style=ButtonStyle::Ghost
-///     >
-///         "Help & Support"
-///     </LinkButton>
-/// }
-/// ```
+/// An anchor element styled as a daisyUI button for navigation actions.
+/// Provides the same styling options as Button but renders as a link.
 ///
 /// ## Node References
 /// - `node_ref` - References the `<a>` element ([HTMLAnchorElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement))
