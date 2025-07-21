@@ -42,10 +42,10 @@ pub fn Loading(
             class=move || {
                 merge_classes!(
                     "loading",
-                color.get().as_str(),
-                loading_type.get().as_str(),
-                size.get().as_str(),
-                class
+                    color.get().as_str(),
+                    loading_type.get().as_str(),
+                    size.get().as_str(),
+                    class
                 )
             }
         ></span>

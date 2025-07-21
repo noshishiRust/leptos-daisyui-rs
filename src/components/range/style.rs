@@ -1,7 +1,7 @@
 /// Color variants for the Range component.
 #[derive(Clone, Debug, Default)]
 pub enum RangeColor {
-    /// Default range styling with no additional color classes
+    /// Default range styling
     #[default]
     Default,
     /// Primary theme color
@@ -10,13 +10,13 @@ pub enum RangeColor {
     Secondary,
     /// Accent theme color
     Accent,
-    /// Success/positive color (green)
+    /// Success color
     Success,
-    /// Warning color (yellow/orange)
+    /// Warning color
     Warning,
-    /// Info color (blue)
+    /// Info color
     Info,
-    /// Error/danger color (red)
+    /// Error color
     Error,
 }
 

@@ -5,17 +5,29 @@ use leptos::{
     prelude::*,
 };
 
+/// # Select Component
+///
+/// A reactive Leptos wrapper for daisyUI's select component that provides dropdown
+/// selection controls with multiple styling and size options.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("select select-ghost select-primary select-secondary select-accent select-info select-success select-warning select-error select-xs select-sm select-md select-lg select-xl");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the top select element ([HTMLSelectElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement))
 #[component]
 pub fn Select(
-    /// The style variant of the select
+    /// Style variant of the select
     #[prop(optional, into)]
     style: Signal<SelectStyle>,
 
-    /// The color variant of the select
+    /// Color scheme of the select
     #[prop(optional, into)]
     color: Signal<SelectColor>,
 
-    /// The size variant of the select
+    /// Size of the select
     #[prop(optional, into)]
     size: Signal<SelectSize>,
 
@@ -23,15 +35,15 @@ pub fn Select(
     #[prop(optional, into)]
     disabled: Signal<bool>,
 
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Reference to the underlying HTML select element
+    /// Node reference to the select element
     #[prop(optional)]
     node_ref: NodeRef<HtmlSelect>,
 
-    /// The child elements (typically SelectOption components)
+    /// Child elements (typically SelectOption components)
     children: Children,
 ) -> impl IntoView {
     view! {
@@ -53,19 +65,25 @@ pub fn Select(
     }
 }
 
+/// Option element for Select component.
+///
+/// ## Node References
+/// - `node_ref` - References the top option element ([HTMLOptionElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement))
 #[component]
 pub fn SelectOption(
-    /// Whether the option is disabled and cannot be selected
+    /// Whether the option is disabled
     #[prop(optional, into)]
     disabled: Signal<bool>,
-    /// Additional CSS classes to apply
+
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Reference to the underlying HTML option element
+
+    /// Node reference to the option element
     #[prop(optional)]
     node_ref: NodeRef<Option_>,
-    /// The content of the option
+
+    /// Content of the option
     children: Children,
 ) -> impl IntoView {
     view! {

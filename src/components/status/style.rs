@@ -1,35 +1,32 @@
-/// # Status Color Variants
-///
-/// Style enum for daisyUI status color classes that control the semantic color scheme
-/// of status indicators. Colors follow daisyUI's semantic system for context and meaning.
+/// Color variants for the Status component.
 #[derive(Clone, Debug, Default)]
 pub enum StatusColor {
-    /// Default status color (no color class applied)
+    /// Default status styling
     #[default]
     Default,
 
-    /// Neutral color for subdued status indicators
+    /// Neutral color
     Neutral,
 
-    /// Primary brand color for main status indicators
+    /// Primary theme color
     Primary,
 
-    /// Secondary brand color for secondary status indicators
+    /// Secondary theme color
     Secondary,
 
-    /// Accent brand color for highlighted status indicators
+    /// Accent theme color
     Accent,
 
-    /// Info color for informational status indicators
+    /// Info color
     Info,
 
-    /// Success color for positive status indicators
+    /// Success color
     Success,
 
-    /// Warning color for cautionary status indicators
+    /// Warning color
     Warning,
 
-    /// Error color for error state status indicators
+    /// Error color
     Error,
 }
 
@@ -50,22 +47,23 @@ impl StatusColor {
     }
 }
 
-/// # Status Size Variants
-///
-/// Style enum for daisyUI status size classes that control the physical dimensions
-/// of status indicators. Sizes scale proportionally for various contexts.
+/// Size variants for the Status component.
 #[derive(Clone, Debug, Default)]
 pub enum StatusSize {
-    /// Extra small size for compact layouts
+    /// Extra small status
     Xs,
-    /// Small size for minimal space usage
+
+    /// Small status
     Sm,
-    /// Medium size for standard usage
+
+    /// Medium status
     #[default]
     Md,
-    /// Large size for emphasis and visibility
+
+    /// Large status
     Lg,
-    /// Extra large size for prominent display
+
+    /// Extra large status
     Xl,
 }
 

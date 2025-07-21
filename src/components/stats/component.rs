@@ -1,17 +1,29 @@
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
+/// # Stats Component
+///
+/// A reactive Leptos wrapper for daisyUI's stats component that provides a container
+/// for displaying statistical data in organized, visually appealing card layouts.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("stats stats-horizontal stats-vertical stat stat-title stat-value stat-desc stat-figure stat-actions");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the div element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn Stats(
-    /// Toggle vertical layout (default: false for horizontal layout)
+    /// Toggle vertical layout
     #[prop(optional, into)]
     vertical: Signal<bool>,
 
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
@@ -29,13 +41,14 @@ pub fn Stats(
     }
 }
 
+/// Individual statistic item within a Stats container.
 #[component]
 pub fn Stat(
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
@@ -49,13 +62,13 @@ pub fn Stat(
     }
 }
 
+/// Title/label component for a statistic.
 #[component]
 pub fn StatTitle(
-    /// Additional CSS classes to apply
     /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
     /// Title content
@@ -68,13 +81,14 @@ pub fn StatTitle(
     }
 }
 
+/// Primary value display component for a statistic.
 #[component]
 pub fn StatValue(
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
@@ -88,14 +102,14 @@ pub fn StatValue(
     }
 }
 
+/// Description component providing additional context for a statistic.
 #[component]
 pub fn StatDesc(
-    /// Additional CSS classes to apply
-
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
@@ -109,13 +123,14 @@ pub fn StatDesc(
     }
 }
 
+/// Figure component for displaying icons, images, or visual elements in a statistic.
 #[component]
 pub fn StatFigure(
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
@@ -129,13 +144,14 @@ pub fn StatFigure(
     }
 }
 
+/// Actions container for interactive elements within a statistic.
 #[component]
 pub fn StatActions(
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the container div
+    /// Node reference to the div element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 

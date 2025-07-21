@@ -1,7 +1,7 @@
 /// Color variants for the Radio component.
 #[derive(Clone, Debug, Default)]
 pub enum RadioColor {
-    /// Default radio styling with no additional color classes
+    /// Default radio styling
     #[default]
     Default,
 
@@ -14,16 +14,16 @@ pub enum RadioColor {
     /// Accent theme color
     Accent,
 
-    /// Success/positive color (green)
+    /// Success color
     Success,
 
-    /// Warning color (yellow/orange)
+    /// Warning color
     Warning,
 
-    /// Info color (blue)
+    /// Info color
     Info,
 
-    /// Error/danger color (red)
+    /// Error color
     Error,
 }
 
@@ -46,20 +46,20 @@ impl RadioColor {
 /// Size variants for the Radio component.
 #[derive(Clone, Debug, Default)]
 pub enum RadioSize {
-    /// Extra small range
+    /// Extra small radio
     Xs,
 
-    /// Small range
+    /// Small radio
     Sm,
 
-    /// Medium range
+    /// Medium radio
     #[default]
     Md,
 
-    /// Large range
+    /// Large radio
     Lg,
 
-    /// Extra large range
+    /// Extra large radio
     Xl,
 }
 

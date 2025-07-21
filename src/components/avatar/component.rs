@@ -45,12 +45,12 @@ pub fn Avatar(
             class=move || {
                 merge_classes!(
                     "avatar",
-                modifier.get().as_str(),
-                class
+                    modifier.get().as_str(),
+                    class
                 )
             }
         >
-            <div>{children()}</div>
+            {children()}
         </div>
     }
 }

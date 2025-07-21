@@ -1,11 +1,11 @@
 /// Style variants for the Select component.
 #[derive(Clone, Debug, Default)]
 pub enum SelectStyle {
-    /// Standard select styling with default appearance
+    /// Default select styling
     #[default]
     Default,
 
-    /// Transparent background with border appearing on focus
+    /// Transparent background
     Ghost,
 }
 
@@ -22,7 +22,7 @@ impl SelectStyle {
 /// Color variants for the Select component.
 #[derive(Clone, Debug, Default)]
 pub enum SelectColor {
-    /// Default select styling with no additional color classes
+    /// Default select styling
     #[default]
     Default,
 
@@ -35,16 +35,16 @@ pub enum SelectColor {
     /// Accent theme color
     Accent,
 
-    /// Info color (blue)
+    /// Info color
     Info,
 
-    /// Success/positive color (green)
+    /// Success color
     Success,
 
-    /// Warning color (yellow/orange)
+    /// Warning color
     Warning,
 
-    /// Error/danger color (red)
+    /// Error color
     Error,
 }
 
@@ -73,7 +73,7 @@ pub enum SelectSize {
     /// Small select
     Sm,
 
-    /// Medium select (default size)
+    /// Medium select
     #[default]
     Md,
 

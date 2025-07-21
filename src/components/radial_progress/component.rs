@@ -1,4 +1,4 @@
-use super::style::{RadialProgressColor, RadialProgressSize};
+use super::style::RadialProgressColor;
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
@@ -20,10 +20,6 @@ pub fn RadialProgress(
     #[prop(optional, into)]
     color: Signal<RadialProgressColor>,
 
-    /// Size of the radial progress indicator
-    #[prop(optional, into)]
-    size: Signal<RadialProgressSize>,
-
     /// Progress value (0-100)
     #[prop(optional, into)]
     value: Signal<f64>,
@@ -44,21 +40,21 @@ pub fn RadialProgress(
     #[prop(optional)]
     children: Option<Children>,
 ) -> impl IntoView {
-    let progress_style =
-        move || format!("--value:{}; --thickness:{};", value.get(), thickness.get());
-
     view! {
         <div
             node_ref=node_ref
+            role="progressbar"
             class=move || {
                 merge_classes!(
                     "radial-progress",
                     color.get().as_str(),
-                    size.get().as_str(),
                     class
                 )
             }
-            style=progress_style
+
+            aria-valuenow=value
+            attr:style:--value-valuie
+            attr:style:--thickness=thickness
         >
             {children.map(|v| v())}
         </div>

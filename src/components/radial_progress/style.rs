@@ -45,39 +45,3 @@ impl RadialProgressColor {
         }
     }
 }
-
-/// # Radial Progress Size Variants
-///
-/// Style enum for daisyUI radial progress size classes that control the physical dimensions
-/// of radial progress indicators using Tailwind CSS width and height utilities.
-#[derive(Clone, Debug, Default)]
-pub enum RadialProgressSize {
-    /// Extra small size
-    Xs,
-
-    /// Small size
-    Sm,
-
-    /// Medium size
-    #[default]
-    Md,
-
-    /// Large size
-    Lg,
-
-    /// Extra large size
-    Xl,
-}
-
-impl RadialProgressSize {
-    /// CSS class string
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            RadialProgressSize::Xs => "w-8 h-8",
-            RadialProgressSize::Sm => "w-12 h-12",
-            RadialProgressSize::Md => "w-16 h-16",
-            RadialProgressSize::Lg => "w-20 h-20",
-            RadialProgressSize::Xl => "w-24 h-24",
-        }
-    }
-}

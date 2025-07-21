@@ -2,21 +2,33 @@ use super::style::{RangeColor, RangeSize};
 use crate::merge_classes;
 use leptos::{html::Input, prelude::*};
 
+/// # Range Component
+///
+/// A reactive Leptos wrapper for daisyUI's range component that provides interactive
+/// slider controls for selecting numeric values within a defined range.
+///
+/// ### Add to `input.css`
+/// ```css
+/// @source inline("range range-primary range-secondary range-accent range-success range-warning range-info range-error range-xs range-sm range-md range-lg range-xl");
+/// ```
+///
+/// ## Node References
+/// - `node_ref` - References the input element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn Range(
-    /// The color variant of the range slider
+    /// Color scheme of the range slider
     #[prop(optional, into)]
     color: Signal<RangeColor>,
 
-    /// The size variant of the range slider
+    /// Size of the range slider
     #[prop(optional, into)]
     size: Signal<RangeSize>,
 
-    /// Additional CSS classes to apply
+    /// Additional CSS classes
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Reference to the underlying HTML input element
+    /// Node reference to the input element
     #[prop(optional)]
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {

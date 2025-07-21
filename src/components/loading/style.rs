@@ -35,14 +35,14 @@ impl LoadingColor {
     pub fn as_str(&self) -> &'static str {
         match self {
             LoadingColor::Default => "",
-            LoadingColor::Neutral => "loading-neutral",
-            LoadingColor::Primary => "loading-primary",
-            LoadingColor::Secondary => "loading-secondary",
-            LoadingColor::Accent => "loading-accent",
-            LoadingColor::Info => "loading-info",
-            LoadingColor::Success => "loading-success",
-            LoadingColor::Warning => "loading-warning",
-            LoadingColor::Error => "loading-error",
+            LoadingColor::Neutral => "text-neutral",
+            LoadingColor::Primary => "text-primary",
+            LoadingColor::Secondary => "text-secondary",
+            LoadingColor::Accent => "text-accent",
+            LoadingColor::Info => "text-info",
+            LoadingColor::Success => "text-success",
+            LoadingColor::Warning => "text-warning",
+            LoadingColor::Error => "text-error",
         }
     }
 }
@@ -87,28 +87,32 @@ impl LoadingType {
 /// Size variations for loading indicators.
 #[derive(Clone, Debug, Default)]
 pub enum LoadingSize {
-    /// Standard/medium size
-    #[default]
-    Default,
     /// Extra small size
     Xs,
+
     /// Small size
     Sm,
+
     /// Medium size (explicit)
+    #[default]
     Md,
+
     /// Large size
     Lg,
+
+    /// Extra large size
+    Xl,
 }
 
 impl LoadingSize {
     /// CSS class string
     pub fn as_str(&self) -> &'static str {
         match self {
-            LoadingSize::Default => "",
             LoadingSize::Xs => "loading-xs",
             LoadingSize::Sm => "loading-sm",
             LoadingSize::Md => "loading-md",
             LoadingSize::Lg => "loading-lg",
+            LoadingSize::Xl => "loading-xl",
         }
     }
 }

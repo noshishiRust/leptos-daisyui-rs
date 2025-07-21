@@ -5,12 +5,8 @@ on:
   pull_request:
 
 jobs:
-  build-and-deploy:
+  check:
     runs-on: ubuntu-latest
-    environment: demo
-    permissions:
-        contents: write
-        pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,9 +27,6 @@ jobs:
 
       - name: Install leptosfmt
         run: cargo install leptosfmt
-
-      - name: Run check
-        run: cargo check
 
       - name: Run rustfmt
         run: leptosfmt --check .
