@@ -181,7 +181,7 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Badge | ✅ | [src](src/components/badge/) | [docs](https://daisyui.com/components/badge/) |
 | Breadcrumbs | ✅ | [src](src/components/breadcrumbs/) | [docs](https://daisyui.com/components/breadcrumbs/) |
 | Button | ✅ | [src](src/components/button/) | [docs](https://daisyui.com/components/button/) |
-| Calendar | - | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
+| Calendar | ✅ | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
 | Card | ✅ | [src](src/components/card/) | [docs](https://daisyui.com/components/card/) |
 | Carousel | ✅ | [src](src/components/carousel/)  | [docs](https://daisyui.com/components/carousel/) |
 | Chat | ✅ | [src](src/components/chat/) | [docs](https://daisyui.com/components/chat/) |
@@ -196,8 +196,11 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Fieldset | ✅ | [src](src/components/fieldset/) | [docs](https://daisyui.com/components/fieldset/) |
 | File Input | ✅ | [src](src/components/file_input/) | [docs](https://daisyui.com/components/file-input/) |
 | Filter | ✅ | [src](src/components/filter/) | [docs](https://daisyui.com/components/filter/) |
+| FAB / Speed Dial | ✅ | [src](src/components/fab/) | [docs](https://daisyui.com/components/fab/) |
 | Footer | ✅ | [src](src/components/footer/) | [docs](https://daisyui.com/components/footer/) |
 | Hero | ✅ | [src](src/components/hero/) | [docs](https://daisyui.com/components/hero/) |
+| Hover 3D Card | ✅ | [src](src/components/hover_3d/) | [docs](https://daisyui.com/components/hover-3d/) |
+| Hover Gallery | ✅ | [src](src/components/hover_gallery/) | [docs](https://daisyui.com/components/hover-gallery/) |
 | Indicator | ✅ | [src](src/components/indicator/) | [docs](https://daisyui.com/components/indicator/) |
 | Input | ✅ | [src](src/components/input/) | [docs](https://daisyui.com/components/input/) |
 | Join | ✅ | [src](src/components/join/) | [docs](https://daisyui.com/components/join/) |
@@ -230,13 +233,15 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Tab | ✅ | [src](src/components/tab/) | [docs](https://daisyui.com/components/tab/) |
 | Table | ✅ | [src](src/components/table/) | [docs](https://daisyui.com/components/table/) |
 | Textarea | ✅ | [src](src/components/textarea/) | [docs](https://daisyui.com/components/textarea/) |
+| Text Rotate | ✅ | [src](src/components/text_rotate/) | [docs](https://daisyui.com/components/text-rotate/) |
 | Theme Controller | ✅ | [src](src/components/theme_controller/) | [docs](https://daisyui.com/components/theme-controller/) |
 | Timeline | ✅ | [src](src/components/timeline/) | [docs](https://daisyui.com/components/timeline/) |
 | Toast | ✅ | [src](src/components/toast/) | [docs](https://daisyui.com/components/toast/) |
 | Toggle | ✅ | [src](src/components/toggle/) | [docs](https://daisyui.com/components/toggle/) |
+| Tooltip | ✅ | [src](src/components/tooltip/) | [docs](https://daisyui.com/components/tooltip/) |
 | Validator | ✅ | [src](src/components/validator/) | [docs](https://daisyui.com/components/validator/) |
 
-**Progress: 56/57 components implemented**
+**Progress: 62/62 components implemented** 🎉
 
 
 ## TODO utility
