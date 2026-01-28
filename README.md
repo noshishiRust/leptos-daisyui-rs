@@ -24,13 +24,13 @@ cargo add leptos-daisyui-rs
 You can use components as follows: Tailwind CSS (v4) is used, so you can insert additional classes.
 
 
-```rust
-use leptos-daisyui-rs as daisyui'
+```rust,ignore
+use leptos_daisyui_rs as daisyui;
 
-use daisyui:components:::Accordion;
+use daisyui::components::Accordion;
 
-#[components]
-fn Demo () -> impl IntoView {
+#[component]
+fn Demo() -> impl IntoView {
     view! {
         <Accordion name="demo" checked=Signal::new(true) class="bg-base-100">
             <AccordionTitle class="text-lg">{"Accordion Title"}</AccordionTitle>
@@ -72,69 +72,75 @@ Therefore, it is designed to be flexible enough to add attributes and event list
 
 For example, take a look at the following Button component:
 
-```rust
+```rust,ignore
 use leptos::prelude::*;
-use leptos::html::{Button as HTMLButton};
-use leptos_daisyui_rs::components::*;;
+use leptos::html::Button as HTMLButton;
+use leptos_daisyui_rs::components::*;
 
+#[component]
+fn ButtonExample() -> impl IntoView {
+    let active = Signal::derive(move || some_condition());
+    let node_ref = NodeRef::<HTMLButton>::new();
 
-let active = Signal::derive(move || some_condition());
-let node_ref = NodeRef::<HTMLButton>::new();
-
-// It is also possible to access the DOM API directly through NodeRef.
-Effect::new(move || {
-    let node_ref = node_ref.clone();
-    let button = node_ref.get();
-    if let Some(button) = button {
-        if button.check_validity() {
-            log::info!("Button is valid");
-        } else {
-            log::warn!("Button is invalid");
+    // It is also possible to access the DOM API directly through NodeRef.
+    Effect::new(move || {
+        let node_ref = node_ref.clone();
+        let button = node_ref.get();
+        if let Some(button) = button {
+            if button.check_validity() {
+                log::info!("Button is valid");
+            } else {
+                log::warn!("Button is invalid");
+            }
         }
+    });
+
+    view! {
+        <Button
+            // This is already defined as a property.
+            color=ButtonColor::Neutral
+            shape=ButtonShape::Square
+            active=active
+            node_ref=node_ref
+            class="my-custom-class"
+
+            // Attributes of the Top HTML element can be added using the `attr` modifier.
+            //
+            // - HTMLButtonElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
+            // - HTMLElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+            attr:name="my-button"
+            attr:r#type="button"
+
+            // You can also add style or class attributes using the `class` and `style` modifiers.
+            //
+            // - Leptos ClassAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.ClassAttribute.html
+            // - Leptos StyleAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.StyleAttribute.html
+            class:btn=true
+            style:font="normal"
+            class:btn-block=true
+
+            // Of course, event listeners belonging to Element can be added using the `on` modifier.
+            //
+            // - Leptos OnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.OnAttribute.html
+            // - Leptos GlobalOnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.GlobalOnAttributes.html
+            on:click=move |ev| {
+                // Handle click event
+                log::info!("Button clicked: {:?}", ev);
+            }
+
+            // You can also add custom properties using the `prop` modifier.
+            //
+            // Leptos PropAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.PropAttribute.html
+            prop:command="show-popover"
+        >
+            "Button!"
+        </Button>
     }
-});
+}
 
-...
-
-<Buttton
-    // This is already defined as a property.
-    color=ButtonColor::Neutral
-    shape=ButtonShape::Square
-    active=active
-    node_ref=node_ref
-    class="my-custom-class"
-
-    // Attributes of the Top HTML element can be added using the `attr` modifier.
-    //
-    // - HTMLButtonElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
-    // - HTMLElement: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
-    attr:name="my-button"
-    attr:r#tytpe="button"
-
-    // You can also add style or class attributes using the `class` and `style` modifiers.
-    //
-    // - Leptos ClassAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.ClassAttribute.html
-    // - Leptos StyleAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.StyleAttribute.html
-    class:btn=true
-    style:font="normal"
-    class:btn-block=true
-
-    // Of course, event listeners belonging to Element can be added using the `on` modifier.
-    //
-    // - Leptos OnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.OnAttribute.html
-    // - Leptos GlobalOnAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.GlobalOnAttributes.html
-    on:click=move |ev| {
-        // Handle click event
-        log::info!("Button clicked: {:?}", ev);
-    }
-
-    // You can also add custom properties using the `prop` modifier.
-    //
-    // Leptos PropAttribute: https://docs.rs/leptos/latest/leptos/attr/global/trait.PropAttribute.html
-    prop:command="show-popover"
->
-    "Button!"
-</Buttton>
+fn some_condition() -> bool {
+    true
+}
 ```
 
 ### What you can't do
@@ -145,7 +151,7 @@ If you would like to use the same design but use the internal configuration HTML
 
 As a workaround, a wrapper component that only assigns attributes to child components can be considered. For example
 
-```rust
+```rust,ignore
 use leptos::prelude::*;
 use leptos::tachys::html::class::class as class_fn;
 
@@ -155,19 +161,23 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
     children().add_any_attr(class_fn(("btn", true)))
 }
 
-...
+// Usage example:
+#[component]
+fn WrapperExample() -> impl IntoView {
+    view! {
+        <FullWrapperButton>
+            <a href="/some-link">
+                "Link Button"
+            </a>
+        </FullWrapperButton>
 
-<FullWrapperButton>
-    <a href="/some-link">
-        "Link Button"
-    </a>
-</FullWrapperButton>
-
-<FullWrapperButton>
-    <button>
-        "Button"
-    </button
-</FullWrapperButton>
+        <FullWrapperButton>
+            <button>
+                "Button"
+            </button>
+        </FullWrapperButton>
+    }
+}
 ```
 
 
@@ -181,7 +191,7 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Badge | ✅ | [src](src/components/badge/) | [docs](https://daisyui.com/components/badge/) |
 | Breadcrumbs | ✅ | [src](src/components/breadcrumbs/) | [docs](https://daisyui.com/components/breadcrumbs/) |
 | Button | ✅ | [src](src/components/button/) | [docs](https://daisyui.com/components/button/) |
-| Calendar | - | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
+| Calendar | ✅ | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
 | Card | ✅ | [src](src/components/card/) | [docs](https://daisyui.com/components/card/) |
 | Carousel | ✅ | [src](src/components/carousel/)  | [docs](https://daisyui.com/components/carousel/) |
 | Chat | ✅ | [src](src/components/chat/) | [docs](https://daisyui.com/components/chat/) |
@@ -193,11 +203,14 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Dock | ✅ | [src](src/components/dock/) | [docs](https://daisyui.com/components/dock/) |
 | Drawer | ✅ | [src](src/components/drawer/) | [docs](https://daisyui.com/components/drawer/) |
 | Dropdown | ✅ | [src](src/components/dropdown/) | [docs](https://daisyui.com/components/dropdown/) |
+| FAB (Floating Action Button) | ✅ | [src](src/components/fab/) | [docs](https://daisyui.com/components/fab/) |
 | Fieldset | ✅ | [src](src/components/fieldset/) | [docs](https://daisyui.com/components/fieldset/) |
 | File Input | ✅ | [src](src/components/file_input/) | [docs](https://daisyui.com/components/file-input/) |
 | Filter | ✅ | [src](src/components/filter/) | [docs](https://daisyui.com/components/filter/) |
 | Footer | ✅ | [src](src/components/footer/) | [docs](https://daisyui.com/components/footer/) |
 | Hero | ✅ | [src](src/components/hero/) | [docs](https://daisyui.com/components/hero/) |
+| Hover 3D Card | ✅ | [src](src/components/hover_3d/) | [docs](https://daisyui.com/components/hover-3d/) |
+| Hover Gallery | ✅ | [src](src/components/hover_gallery/) | [docs](https://daisyui.com/components/hover-gallery/) |
 | Indicator | ✅ | [src](src/components/indicator/) | [docs](https://daisyui.com/components/indicator/) |
 | Input | ✅ | [src](src/components/input/) | [docs](https://daisyui.com/components/input/) |
 | Join | ✅ | [src](src/components/join/) | [docs](https://daisyui.com/components/join/) |
@@ -229,14 +242,16 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 | Swap | ✅ | [src](src/components/swap/) | [docs](https://daisyui.com/components/swap/) |
 | Tab | ✅ | [src](src/components/tab/) | [docs](https://daisyui.com/components/tab/) |
 | Table | ✅ | [src](src/components/table/) | [docs](https://daisyui.com/components/table/) |
+| Text Rotate | ✅ | [src](src/components/text_rotate/) | [docs](https://daisyui.com/components/text-rotate/) |
 | Textarea | ✅ | [src](src/components/textarea/) | [docs](https://daisyui.com/components/textarea/) |
 | Theme Controller | ✅ | [src](src/components/theme_controller/) | [docs](https://daisyui.com/components/theme-controller/) |
 | Timeline | ✅ | [src](src/components/timeline/) | [docs](https://daisyui.com/components/timeline/) |
 | Toast | ✅ | [src](src/components/toast/) | [docs](https://daisyui.com/components/toast/) |
 | Toggle | ✅ | [src](src/components/toggle/) | [docs](https://daisyui.com/components/toggle/) |
+| Tooltip | ✅ | [src](src/components/tooltip/) | [docs](https://daisyui.com/components/tooltip/) |
 | Validator | ✅ | [src](src/components/validator/) | [docs](https://daisyui.com/components/validator/) |
 
-**Progress: 56/57 components implemented**
+**Progress: 62/62 components implemented (100% coverage!)**
 
 
 ## TODO utility
