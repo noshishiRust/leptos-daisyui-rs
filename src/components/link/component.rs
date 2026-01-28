@@ -39,10 +39,12 @@ pub fn Link(
     /// Text content of the link
     children: Children,
 ) -> impl IntoView {
+    let href_value = href.unwrap_or("javascript:void(0)");
+
     view! {
         <a
             node_ref=node_ref
-            href=href.unwrap_or("#")
+            href=href_value
             class=move || {
                 merge_classes!("link",
                 color.get().as_str(),
