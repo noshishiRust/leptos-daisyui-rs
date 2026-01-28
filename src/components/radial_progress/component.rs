@@ -53,8 +53,8 @@ pub fn RadialProgress(
             }
 
             aria-valuenow=value
-            style=("--value", move || value.get().to_string())
-            style=("--thickness", move || thickness.get())
+            style:--value=move || value.get().to_string()
+            style:--thickness=move || thickness.get()
         >
             {children.map(|v| v())}
         </div>
