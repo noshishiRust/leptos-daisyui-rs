@@ -15,7 +15,7 @@ pub fn ThemeController(
     #[prop(optional, into)]
     theme_name: &'static str,
 
-    /// Form element clildren (suach as input (checkbox, toggle), button etc...)
+    /// Form element children (such as input (checkbox, toggle), button etc...)
     children: Children,
 ) -> impl IntoView {
     children()

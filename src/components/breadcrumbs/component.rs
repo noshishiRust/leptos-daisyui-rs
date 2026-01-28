@@ -14,7 +14,7 @@ use leptos::prelude::*;
 ///
 /// ## Node References
 /// - `outer_node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
-/// - `inner_node_ref` - Rederences the inner `<ul>` element ([HTMLUlElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUlElement))
+/// - `inner_node_ref` - References the inner `<ul>` element ([HTMLUlElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLUlElement))
 #[component]
 pub fn Breadcrumbs(
     /// Additional CSS classes for the outer container
@@ -22,7 +22,7 @@ pub fn Breadcrumbs(
     outer_class: &'static str,
 
     /// Node reference for the outer `<div>` element
-    #[prop(optional, into)]
+    #[prop(optional)]
     outer_node_ref: NodeRef<Div>,
 
     /// Additional CSS classes for the inner `<ul>` element
@@ -30,7 +30,7 @@ pub fn Breadcrumbs(
     inner_class: &'static str,
 
     /// Node reference for the inner `<ul>` element
-    #[prop(optional, into)]
+    #[prop(optional)]
     inner_node_ref: NodeRef<Ul>,
 
     children: Children,
@@ -59,7 +59,7 @@ pub fn BreadcrumbItem(
     class: &'static str,
 
     /// Node reference for the breadcrumb item `<li>` element
-    #[prop(optional, into)]
+    #[prop(optional)]
     node_ref: NodeRef<Li>,
 
     /// Child components, typically text or other elements

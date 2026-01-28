@@ -11,7 +11,7 @@ use leptos::{
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("dropdown menu "dropdown-start dropdown-center dropdown-end dropdown-top dropdown-bottom dropdown-left dropdown-right"");
+/// @source inline("dropdown menu dropdown-start dropdown-center dropdown-end dropdown-top dropdown-bottom dropdown-left dropdown-right");
 /// ```
 ///
 /// ## Node References

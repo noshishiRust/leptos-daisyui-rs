@@ -7,7 +7,7 @@ use leptos::{html::Div, prelude::*, tachys::html::class::class as class_fn};
 /// As such, it is intended to be used with form elements such as `Input` and `Select`.
 #[component]
 pub fn Validator(
-    /// Form element clildren (suach as input, select, textarea etc...)
+    /// Form element children (such as input, select, textarea etc...)
     children: Children,
 ) -> impl IntoView {
     children().add_any_attr(class_fn(("validator", true)));
