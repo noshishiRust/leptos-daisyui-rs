@@ -86,7 +86,7 @@ pub fn TextRotateItem(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <span node_ref=node_ref class=class>
+        <span node_ref=node_ref class=move || merge_classes!("text-rotate-item", class)>
             {children()}
         </span>
     }

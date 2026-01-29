@@ -42,7 +42,7 @@ pub fn Hover3d(
     children: Children,
 ) -> impl IntoView {
     let internal_ref = NodeRef::<Div>::new();
-    let combined_ref = if node_ref.get().is_some() {
+    let combined_ref = if node_ref.get_untracked().is_some() {
         node_ref
     } else {
         internal_ref
@@ -50,7 +50,7 @@ pub fn Hover3d(
 
     // Handle mousemove for 3D tilt effect
     let handle_mouse_move = move |e: ev::MouseEvent| {
-        if let Some(element) = combined_ref.get() {
+        if let Some(element) = combined_ref.get_untracked() {
             // Use as_ref to get the Element reference
             let elem = element.unchecked_ref::<web_sys::Element>();
             let rect = elem.get_bounding_client_rect();
@@ -80,7 +80,7 @@ pub fn Hover3d(
 
     // Handle mouseleave to reset transform
     let handle_mouse_leave = move |_e: ev::MouseEvent| {
-        if let Some(element) = combined_ref.get() {
+        if let Some(element) = combined_ref.get_untracked() {
             let children = element.children();
             for i in 8..children.length() {
                 if let Some(child) = children.item(i)

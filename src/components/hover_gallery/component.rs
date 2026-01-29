@@ -37,7 +37,7 @@ pub fn HoverGallery(
     children: Children,
 ) -> impl IntoView {
     let internal_ref = NodeRef::<Figure>::new();
-    let combined_ref = if node_ref.get().is_some() {
+    let combined_ref = if node_ref.get_untracked().is_some() {
         node_ref
     } else {
         internal_ref
@@ -45,7 +45,7 @@ pub fn HoverGallery(
 
     // Handle mousemove for hover gallery
     let handle_mouse_move = move |e: ev::MouseEvent| {
-        if let Some(element) = combined_ref.get() {
+        if let Some(element) = combined_ref.get_untracked() {
             // Cast to Element to access getBoundingClientRect and querySelectorAll
             let elem = element.unchecked_ref::<web_sys::Element>();
             let rect = elem.get_bounding_client_rect();
@@ -84,7 +84,7 @@ pub fn HoverGallery(
 
     // Handle mouseleave to reset to first image
     let handle_mouse_leave = move |_e: ev::MouseEvent| {
-        if let Some(element) = combined_ref.get() {
+        if let Some(element) = combined_ref.get_untracked() {
             let elem = element.unchecked_ref::<web_sys::Element>();
             // Reset to show only first image on mouse leave
             if let Ok(images) = elem.query_selector_all("img") {
