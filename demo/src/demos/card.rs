@@ -43,13 +43,13 @@ pub fn CardDemo() -> impl IntoView {
                         <p>"Default card style"</p>
                     </CardBody>
                 </Card>
-                <Card style=CardStyle::Border class="w-64 bg-base-100 shadow-xl">
+                <Card style=CardStyle::Border class="w-64 bg-base-100 shadow-xl border-2 border-base-300">
                     <CardBody>
                         <CardTitle>"Border"</CardTitle>
                         <p>"Card with border"</p>
                     </CardBody>
                 </Card>
-                <Card style=CardStyle::Dash class="w-64 bg-base-100 shadow-xl">
+                <Card style=CardStyle::Dash class="w-64 bg-base-100 shadow-xl border-2 border-base-300">
                     <CardBody>
                         <CardTitle>"Dash"</CardTitle>
                         <p>"Card with dashed border"</p>
