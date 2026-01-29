@@ -1,6 +1,7 @@
 use super::style::{MenuDirection, MenuSize};
 use crate::merge_classes;
 use leptos::{
+    ev,
     html::{H2, Li, Ul},
     prelude::*,
 };
@@ -108,9 +109,16 @@ pub fn MenuItem(
 ) -> impl IntoView {
     let MenuManager { manual, selected } = MenuManager::expect_context();
 
-    let on_click = move |_| {
+    let on_click = move |e: ev::MouseEvent| {
         if disabled.get_untracked() {
+            e.prevent_default();
             return;
+        }
+
+        // Prevent default navigation if href is empty or not a real URL
+        let href_value = href.get_untracked();
+        if href_value.is_empty() || href_value == "#" || href_value.starts_with("javascript:") {
+            e.prevent_default();
         }
 
         if value.get_untracked().is_empty() {

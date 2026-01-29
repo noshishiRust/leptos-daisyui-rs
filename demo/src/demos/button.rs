@@ -50,7 +50,7 @@ pub fn ButtonDemo() -> impl IntoView {
                 <Button color=ButtonColor::Primary disabled=true>
                     "Disabled"
                 </Button>
-                <Button color=ButtonColor::Primary loading=true>
+                <Button color=ButtonColor::Primary class="loading">
                     "Loading"
                 </Button>
             </Section>
@@ -93,7 +93,7 @@ pub fn ButtonDemo() -> impl IntoView {
                     <div class="flex items-center gap-2">
                         <Button
                             color=ButtonColor::Info
-                            loading=loading
+                            class:loading=loading
                             on:click=move |_| {
                                 set_loading.set(true);
                                 set_timeout(
@@ -133,13 +133,31 @@ pub fn ButtonDemo() -> impl IntoView {
 
             <Section title="Link Button">
                 <div class="flex items-center gap-2">
-                    <LinkButton href="#" color=ButtonColor::Primary>
+                    <LinkButton
+                        href="javascript:void(0)"
+                        color=ButtonColor::Primary
+                        on:click=move |e| {
+                            e.prevent_default();
+                        }
+                    >
                         "Primary Link"
                     </LinkButton>
-                    <LinkButton href="#" style=ButtonStyle::Outline>
+                    <LinkButton
+                        href="javascript:void(0)"
+                        style=ButtonStyle::Outline
+                        on:click=move |e| {
+                            e.prevent_default();
+                        }
+                    >
                         "Outline Link"
                     </LinkButton>
-                    <LinkButton href="#" style=ButtonStyle::Ghost>
+                    <LinkButton
+                        href="javascript:void(0)"
+                        style=ButtonStyle::Ghost
+                        on:click=move |e| {
+                            e.prevent_default();
+                        }
+                    >
                         "Ghost Link"
                     </LinkButton>
                 </div>

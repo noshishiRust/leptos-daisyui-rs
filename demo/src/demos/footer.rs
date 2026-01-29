@@ -87,13 +87,25 @@ pub fn FooterDemo() -> impl IntoView {
                     <nav>
                         <h6 class="footer-title">"Social"</h6>
                         <div class="grid grid-flow-col gap-4">
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                             </a>
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                             </a>
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiInstagramOutlined attr:class="w-6 h-6" />
                             </a>
                         </div>
@@ -111,13 +123,25 @@ pub fn FooterDemo() -> impl IntoView {
                     </aside>
                     <nav>
                         <div class="grid grid-flow-col gap-4">
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                             </a>
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                             </a>
-                            <a href="#" class="link">
+                            <a
+                                href="javascript:void(0)"
+                                class="link"
+                                on:click=move |e| e.prevent_default()
+                            >
                                 <Icon icon=icondata::AiInstagramOutlined attr:class="w-6 h-6" />
                             </a>
                         </div>
@@ -227,13 +251,25 @@ pub fn FooterDemo() -> impl IntoView {
                         </aside>
                         <nav class="md:place-self-center md:justify-self-end">
                             <div class="grid grid-flow-col gap-4">
-                                <a href="#" class="link">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="link"
+                                    on:click=move |e| e.prevent_default()
+                                >
                                     <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                                 </a>
-                                <a href="#" class="link">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="link"
+                                    on:click=move |e| e.prevent_default()
+                                >
                                     <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                                 </a>
-                                <a href="#" class="link">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="link"
+                                    on:click=move |e| e.prevent_default()
+                                >
                                     <Icon icon=icondata::AiInstagramOutlined attr:class="w-6 h-6" />
                                 </a>
                             </div>

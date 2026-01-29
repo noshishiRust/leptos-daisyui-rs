@@ -258,8 +258,9 @@ pub fn scroll_to_carousel_item(carousel_ref: NodeRef<Div>, index: usize) {
             && let Some(item) = items.item(index as u32)
             && let Some(element) = item.dyn_ref::<web_sys::Element>()
         {
-            // Scroll the item into view smoothly
-            element.scroll_into_view();
+            // Use scrollIntoView with inline option to prevent page scroll
+            // This uses the simpler API that's always available
+            element.scroll_into_view_with_bool(true);
         }
     }
 }

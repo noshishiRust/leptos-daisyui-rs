@@ -1,382 +1,226 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
+use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn FilterDemo() -> impl IntoView {
-    let (_selected_category, _set_selected_category) = signal("all".to_string());
-    let (_selected_price, _set_selected_price) = signal("all".to_string());
-    let (_selected_rating, _set_selected_rating) = signal("all".to_string());
-    let (_search_query, _set_search_query) = signal("".to_string());
-
     view! {
-        // <div class="space-y-6">
-        //     <h1 class="text-3xl font-bold">"Filter"</h1>
-        //     <p class="text-base-content/70">
-        //         "Filter components for searching and filtering data"
-        //     </p>
+        <ContentLayout
+            title="Filter"
+            description="Filter components use radio buttons to allow users to filter and sort content"
+        >
+            <Section title="Basic Filter">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-basic"
+                        aria-label="All"
+                        class="btn"
+                        checked=true
+                    />
+                    <input r#type="radio" name="filter-basic" aria-label="Electronics" class="btn" />
+                    <input r#type="radio" name="filter-basic" aria-label="Clothing" class="btn" />
+                    <input r#type="radio" name="filter-basic" aria-label="Books" class="btn" />
+                    <FilterReset name="filter-basic" />
+                </Filter>
+            </Section>
 
-        //     <div class="space-y-4">
-        //         <h2 class="text-xl font-semibold">"Search Filter"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <div class="flex flex-col sm:flex-row gap-4">
-        //                     <div class="flex-1">
-        //                         <Input
-        //                             placeholder="Search products..."
-        //                             class="input input-bordered w-full"
-        //                             value=search_query
-        //                             on:input=move |ev| {
-        //                                 set_search_query(event_target_value(&ev));
-        //                             }
-        //                         />
-        //                     </div>
-        //                     <Button color=ButtonColor::Primary>
-        //                         <Icon icon=icondata::AiSearchOutlined class="mr-2" />
-        //                         "Search"
-        //                     </Button>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Filter with Colors">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-colors"
+                        aria-label="All"
+                        class="btn btn-primary"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-colors"
+                        aria-label="Premium"
+                        class="btn btn-secondary"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-colors"
+                        aria-label="Popular"
+                        class="btn btn-accent"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-colors"
+                        aria-label="New"
+                        class="btn btn-success"
+                    />
+                    <FilterReset name="filter-colors" />
+                </Filter>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Category Filters"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <h3 class="card-title mb-4">"Product Categories"</h3>
-        //                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        //                     <Filter
-        //                         active=move || selected_category() == "all"
-        //                         on:click=move |_| set_selected_category("all".to_string())
-        //                     >
-        //                         <Icon icon=icondata::AiAppstoreOutlined class="mr-2" />
-        //                         "All"
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_category() == "electronics"
-        //                         on:click=move |_| set_selected_category("electronics".to_string())
-        //                     >
-        //                         <Icon icon=icondata::AiLaptopOutlined class="mr-2" />
-        //                         "Electronics"
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_category() == "clothing"
-        //                         on:click=move |_| set_selected_category("clothing".to_string())
-        //                     >
-        //                         <Icon icon=icondata::AiShoppingOutlined class="mr-2" />
-        //                         "Clothing"
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_category() == "books"
-        //                         on:click=move |_| set_selected_category("books".to_string())
-        //                     >
-        //                         <Icon icon=icondata::AiBookOutlined class="mr-2" />
-        //                         "Books"
-        //                     </Filter>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Filter with Different Sizes">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-sizes"
+                        aria-label="All Products"
+                        class="btn btn-xs"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-sizes"
+                        aria-label="Electronics"
+                        class="btn btn-sm"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-sizes"
+                        aria-label="Clothing"
+                        class="btn btn-md"
+                    />
+                    <input r#type="radio" name="filter-sizes" aria-label="Books" class="btn btn-lg" />
+                    <FilterReset name="filter-sizes" />
+                </Filter>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Price Range Filter"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <h3 class="card-title mb-4">"Filter by Price"</h3>
-        //                 <div class="space-y-4">
-        //                     <div class="flex flex-wrap gap-2">
-        //                         <Filter
-        //                             active=move || selected_price() == "all"
-        //                             on:click=move |_| set_selected_price("all".to_string())
-        //                         >
-        //                             "All Prices"
-        //                         </Filter>
-        //                         <Filter
-        //                             active=move || selected_price() == "under-25"
-        //                             on:click=move |_| set_selected_price("under-25".to_string())
-        //                         >
-        //                             "Under $25"
-        //                         </Filter>
-        //                         <Filter
-        //                             active=move || selected_price() == "25-50"
-        //                             on:click=move |_| set_selected_price("25-50".to_string())
-        //                         >
-        //                             "$25 - $50"
-        //                         </Filter>
-        //                         <Filter
-        //                             active=move || selected_price() == "50-100"
-        //                             on:click=move |_| set_selected_price("50-100".to_string())
-        //                         >
-        //                             "$50 - $100"
-        //                         </Filter>
-        //                         <Filter
-        //                             active=move || selected_price() == "over-100"
-        //                             on:click=move |_| set_selected_price("over-100".to_string())
-        //                         >
-        //                             "Over $100"
-        //                         </Filter>
-        //                     </div>
-        //                     <div class="form-control">
-        //                         <Label class="label">
-        //                             <LabelText>"Custom Range"</LabelText>
-        //                         </Label>
-        //                         <div class="flex gap-2">
-        //                             <Input placeholder="Min" class="input input-bordered input-sm" />
-        //                             <Input placeholder="Max" class="input input-bordered input-sm" />
-        //                             <Button size=ButtonSize::Sm style=ButtonStyle::Outline>
-        //                                 "Apply"
-        //                             </Button>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Price Range Filter">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-price"
+                        aria-label="All Prices"
+                        class="btn"
+                        checked=true
+                    />
+                    <input r#type="radio" name="filter-price" aria-label="Under $25" class="btn" />
+                    <input r#type="radio" name="filter-price" aria-label="$25-$50" class="btn" />
+                    <input r#type="radio" name="filter-price" aria-label="$50-$100" class="btn" />
+                    <input r#type="radio" name="filter-price" aria-label="Over $100" class="btn" />
+                    <FilterReset name="filter-price" />
+                </Filter>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Rating Filter"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <h3 class="card-title mb-4">"Filter by Rating"</h3>
-        //                 <div class="space-y-2">
-        //                     <Filter
-        //                         active=move || selected_rating() == "all"
-        //                         on:click=move |_| set_selected_rating("all".to_string())
-        //                         class="w-full justify-start"
-        //                     >
-        //                         "All Ratings"
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_rating() == "5"
-        //                         on:click=move |_| set_selected_rating("5".to_string())
-        //                         class="w-full justify-start"
-        //                     >
-        //                         <div class="flex items-center gap-2">
-        //                             <Rating value=5 size=RatingSize::Sm />
-        //                             <span>"5 Stars"</span>
-        //                         </div>
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_rating() == "4"
-        //                         on:click=move |_| set_selected_rating("4".to_string())
-        //                         class="w-full justify-start"
-        //                     >
-        //                         <div class="flex items-center gap-2">
-        //                             <Rating value=4 size=RatingSize::Sm />
-        //                             <span>"4 Stars & Up"</span>
-        //                         </div>
-        //                     </Filter>
-        //                     <Filter
-        //                         active=move || selected_rating() == "3"
-        //                         on:click=move |_| set_selected_rating("3".to_string())
-        //                         class="w-full justify-start"
-        //                     >
-        //                         <div class="flex items-center gap-2">
-        //                             <Rating value=3 size=RatingSize::Sm />
-        //                             <span>"3 Stars & Up"</span>
-        //                         </div>
-        //                     </Filter>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Filter with Form Wrapper">
+                <p class="text-sm text-base-content/70 mb-4">
+                    "Using FilterForm provides better semantic structure"
+                </p>
+                <FilterForm>
+                    <input
+                        r#type="radio"
+                        name="filter-form"
+                        aria-label="Featured"
+                        class="btn btn-primary"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-form"
+                        aria-label="Best Selling"
+                        class="btn btn-secondary"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-form"
+                        aria-label="On Sale"
+                        class="btn btn-accent"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-form"
+                        aria-label="New Arrivals"
+                        class="btn btn-info"
+                    />
+                    <FilterReset name="filter-form" />
+                </FilterForm>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Advanced Filters"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <h3 class="card-title mb-4">"Product Filters"</h3>
-        //                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        //                     <div>
-        //                         <h4 class="font-semibold mb-3">"Brand"</h4>
-        //                         <div class="space-y-2">
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Apple"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Samsung"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Google"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Microsoft"</LabelText>
-        //                             </Label>
-        //                         </div>
-        //                     </div>
-        //                     <div>
-        //                         <h4 class="font-semibold mb-3">"Features"</h4>
-        //                         <div class="space-y-2">
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Wireless"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Waterproof"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Fast Charging"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Checkbox />
-        //                                 <LabelText>"Bluetooth"</LabelText>
-        //                             </Label>
-        //                         </div>
-        //                     </div>
-        //                     <div>
-        //                         <h4 class="font-semibold mb-3">"Availability"</h4>
-        //                         <div class="space-y-2">
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Radio name="availability" />
-        //                                 <LabelText>"In Stock"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Radio name="availability" />
-        //                                 <LabelText>"Out of Stock"</LabelText>
-        //                             </Label>
-        //                             <Label class="label cursor-pointer justify-start gap-2">
-        //                                 <Radio name="availability" />
-        //                                 <LabelText>"Pre-order"</LabelText>
-        //                             </Label>
-        //                         </div>
-        //                     </div>
-        //                 </div>
-        //                 <div class="mt-6 flex gap-2">
-        //                     <Button color=ButtonColor::Primary>
-        //                         "Apply Filters"
-        //                     </Button>
-        //                     <Button style=ButtonStyle::Ghost>
-        //                         "Clear All"
-        //                     </Button>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Sort Options">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-sort"
+                        aria-label="Relevance"
+                        class="btn"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-sort"
+                        aria-label="Price: Low to High"
+                        class="btn"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-sort"
+                        aria-label="Price: High to Low"
+                        class="btn"
+                    />
+                    <input r#type="radio" name="filter-sort" aria-label="Newest First" class="btn" />
+                    <input r#type="radio" name="filter-sort" aria-label="Best Rating" class="btn" />
+                    <FilterReset name="filter-sort" />
+                </Filter>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Sort Options"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <h3 class="card-title mb-4">"Sort Results"</h3>
-        //                 <div class="flex flex-wrap gap-2">
-        //                     <Filter active=true>
-        //                         "Relevance"
-        //                     </Filter>
-        //                     <Filter>
-        //                         "Price: Low to High"
-        //                     </Filter>
-        //                     <Filter>
-        //                         "Price: High to Low"
-        //                     </Filter>
-        //                     <Filter>
-        //                         "Newest First"
-        //                     </Filter>
-        //                     <Filter>
-        //                         "Best Rating"
-        //                     </Filter>
-        //                     <Filter>
-        //                         "Most Popular"
-        //                     </Filter>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
+            <Section title="Vertical Stack Filter">
+                <Filter class="flex-col items-start">
+                    <input
+                        r#type="radio"
+                        name="filter-vertical"
+                        aria-label="All Categories"
+                        class="btn justify-start w-full"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-vertical"
+                        aria-label="Technology"
+                        class="btn justify-start w-full"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-vertical"
+                        aria-label="Fashion"
+                        class="btn justify-start w-full"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-vertical"
+                        aria-label="Home & Garden"
+                        class="btn justify-start w-full"
+                    />
+                    <FilterReset name="filter-vertical" class="w-full" />
+                </Filter>
+            </Section>
 
-        //         <h2 class="text-xl font-semibold">"Filter Results"</h2>
-        //         <Card class="bg-base-100 shadow-xl">
-        //             <CardBody>
-        //                 <div class="flex justify-between items-center mb-4">
-        //                     <h3 class="card-title">"Products"</h3>
-        //                     <div class="flex items-center gap-2">
-        //                         <span class="text-sm">"Showing 1-12 of 48 results"</span>
-        //                         <Button size=ButtonSize::Sm style=ButtonStyle::Ghost>
-        //                             <Icon icon=icondata::AiFilterOutlined />
-        //                         </Button>
-        //                     </div>
-        //                 </div>
-
-        //                 <div class="mb-4">
-        //                     <h4 class="font-semibold mb-2">"Active Filters"</h4>
-        //                     <div class="flex flex-wrap gap-2">
-        //                         <Badge color=BadgeColor::Primary class="gap-2">
-        //                             "Electronics"
-        //                             <Button size=ButtonSize::Xs style=ButtonStyle::Ghost class="p-0">
-        //                                 <Icon icon=icondata::AiCloseOutlined />
-        //                             </Button>
-        //                         </Badge>
-        //                         <Badge color=BadgeColor::Secondary class="gap-2">
-        //                             "$25 - $50"
-        //                             <Button size=ButtonSize::Xs style=ButtonStyle::Ghost class="p-0">
-        //                                 <Icon icon=icondata::AiCloseOutlined />
-        //                             </Button>
-        //                         </Badge>
-        //                         <Badge color=BadgeColor::Accent class="gap-2">
-        //                             "4 Stars & Up"
-        //                             <Button size=ButtonSize::Xs style=ButtonStyle::Ghost class="p-0">
-        //                                 <Icon icon=icondata::AiCloseOutlined />
-        //                             </Button>
-        //                         </Badge>
-        //                     </div>
-        //                 </div>
-
-        //                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        //                     <Card class="bg-base-200">
-        //                         <CardBody class="p-4">
-        //                             <div class="bg-base-300 h-32 rounded mb-2 flex items-center justify-center">
-        //                                 <Icon icon=icondata::AiLaptopOutlined class="w-8 h-8" />
-        //                             </div>
-        //                             <h4 class="font-semibold text-sm">"Wireless Headphones"</h4>
-        //                             <p class="text-xs opacity-70">"Premium sound quality"</p>
-        //                             <div class="flex items-center justify-between mt-2">
-        //                                 <span class="font-bold text-primary">"$45"</span>
-        //                                 <Rating value=4 size=RatingSize::Sm />
-        //                             </div>
-        //                         </CardBody>
-        //                     </Card>
-        //                     <Card class="bg-base-200">
-        //                         <CardBody class="p-4">
-        //                             <div class="bg-base-300 h-32 rounded mb-2 flex items-center justify-center">
-        //                                 <Icon icon=icondata::AiMobileOutlined class="w-8 h-8" />
-        //                             </div>
-        //                             <h4 class="font-semibold text-sm">"Smartphone Case"</h4>
-        //                             <p class="text-xs opacity-70">"Protective and stylish"</p>
-        //                             <div class="flex items-center justify-between mt-2">
-        //                                 <span class="font-bold text-primary">"$29"</span>
-        //                                 <Rating value=5 size=RatingSize::Sm />
-        //                             </div>
-        //                         </CardBody>
-        //                     </Card>
-        //                     <Card class="bg-base-200">
-        //                         <CardBody class="p-4">
-        //                             <div class="bg-base-300 h-32 rounded mb-2 flex items-center justify-center">
-        //                                 <Icon icon=icondata::AiUsbOutlined class="w-8 h-8" />
-        //                             </div>
-        //                             <h4 class="font-semibold text-sm">"USB-C Cable"</h4>
-        //                             <p class="text-xs opacity-70">"Fast charging cable"</p>
-        //                             <div class="flex items-center justify-between mt-2">
-        //                                 <span class="font-bold text-primary">"$15"</span>
-        //                                 <Rating value=4 size=RatingSize::Sm />
-        //                             </div>
-        //                         </CardBody>
-        //                     </Card>
-        //                 </div>
-
-        //                 <div class="mt-6 flex justify-center">
-        //                     <Join>
-        //                         <Button class="join-item" style=ButtonStyle::Outline>
-        //                             <Icon icon=icondata::AiLeftOutlined />
-        //                         </Button>
-        //                         <Button class="join-item" color=ButtonColor::Primary>
-        //                             "1"
-        //                         </Button>
-        //                         <Button class="join-item" style=ButtonStyle::Outline>
-        //                             "2"
-        //                         </Button>
-        //                         <Button class="join-item" style=ButtonStyle::Outline>
-        //                             "3"
-        //                         </Button>
-        //                         <Button class="join-item" style=ButtonStyle::Outline>
-        //                             <Icon icon=icondata::AiRightOutlined />
-        //                         </Button>
-        //                     </Join>
-        //                 </div>
-        //             </CardBody>
-        //         </Card>
-        //     </div>
-        // </div>
+            <Section title="Filter with Custom Styling">
+                <Filter>
+                    <input
+                        r#type="radio"
+                        name="filter-custom"
+                        aria-label="All"
+                        class="btn btn-outline btn-primary"
+                        checked=true
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-custom"
+                        aria-label="Active"
+                        class="btn btn-outline btn-secondary"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-custom"
+                        aria-label="Pending"
+                        class="btn btn-outline btn-warning"
+                    />
+                    <input
+                        r#type="radio"
+                        name="filter-custom"
+                        aria-label="Completed"
+                        class="btn btn-outline btn-success"
+                    />
+                    <FilterReset name="filter-custom" />
+                </Filter>
+            </Section>
+        </ContentLayout>
     }
 }

@@ -764,6 +764,7 @@ dependencies = [
 name = "leptos-daisyui-rs"
 version = "0.0.3"
 dependencies = [
+ "js-sys",
  "leptos",
  "table-rs",
  "wasm-bindgen",
