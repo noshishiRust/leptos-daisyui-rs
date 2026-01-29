@@ -4,9 +4,9 @@ use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn DividerDemo() -> impl IntoView {
-    let direction = RwSignal::new(DividerDirection::Horizontal);
-    let color = RwSignal::new(DividerColor::Primary);
-    let text_content = RwSignal::new("OR");
+    let _direction = RwSignal::new(DividerDirection::Horizontal);
+    let _color = RwSignal::new(DividerColor::Primary);
+    let _text_content = RwSignal::new("OR");
 
     view! {
         <ContentLayout

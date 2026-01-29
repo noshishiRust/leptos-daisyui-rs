@@ -127,6 +127,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "dropdown",
                 },
                 ComponentItem {
+                    name: "FAB",
+                    href: "/components/fab",
+                    value: "fab",
+                },
+                ComponentItem {
                     name: "Modal",
                     href: "/components/modal",
                     value: "modal",
@@ -192,6 +197,16 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "diff",
                 },
                 ComponentItem {
+                    name: "Hover 3D",
+                    href: "/components/hover_3d",
+                    value: "hover_3d",
+                },
+                ComponentItem {
+                    name: "Hover Gallery",
+                    href: "/components/hover_gallery",
+                    value: "hover_gallery",
+                },
+                ComponentItem {
                     name: "Kbd",
                     href: "/components/kbd",
                     value: "kbd",
@@ -215,6 +230,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "Table",
                     href: "/components/table",
                     value: "table",
+                },
+                ComponentItem {
+                    name: "Text Rotate",
+                    href: "/components/text_rotate",
+                    value: "text_rotate",
                 },
                 ComponentItem {
                     name: "Timeline",
@@ -291,6 +311,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     href: "/components/toast",
                     value: "toast",
                 },
+                ComponentItem {
+                    name: "Tooltip",
+                    href: "/components/tooltip",
+                    value: "tooltip",
+                },
             ],
         },
         MenuCategory {
@@ -320,6 +345,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "Filter",
                     href: "/components/filter",
                     value: "filter",
+                },
+                ComponentItem {
+                    name: "Input",
+                    href: "/components/input",
+                    value: "input",
                 },
                 ComponentItem {
                     name: "Label",
@@ -370,6 +400,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "Divider",
                     href: "/components/divider",
                     value: "divider",
+                },
+                ComponentItem {
+                    name: "Dock",
+                    href: "/components/dock",
+                    value: "dock",
                 },
                 ComponentItem {
                     name: "Drawer",

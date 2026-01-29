@@ -18,5 +18,5 @@ open = false
 
 [[hooks]]
 stage = "pre_build"
-command = "npx"
+command = "npx.cmd"
 command_arguments = ["tailwindcss", "-i", "input.css", "-o", "output.css"]

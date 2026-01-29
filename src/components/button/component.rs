@@ -48,7 +48,7 @@ pub fn Button(
     disabled: Signal<bool>,
 
     /// Node reference for the button element
-    #[prop(optional, into)]
+    #[prop(optional)]
     node_ref: NodeRef<HTMLButton>,
 
     /// Additional CSS classes
@@ -112,7 +112,7 @@ pub fn LinkButton(
     shape: Signal<ButtonShape>,
 
     /// Node reference for the anchor element
-    #[prop(optional, into)]
+    #[prop(optional)]
     node_ref: NodeRef<A>,
 
     /// Additional CSS classes

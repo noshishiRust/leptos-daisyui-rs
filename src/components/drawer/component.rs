@@ -76,6 +76,11 @@ pub fn DrawerToggle(
     node_ref: NodeRef<Input>,
 ) -> impl IntoView {
     view! {
+        // Note: Using prop:checked instead of attr:checked or checked attribute
+        // because we need to set the DOM property, not the HTML attribute.
+        // The checked *property* controls the actual checked state of the checkbox,
+        // while the checked *attribute* only sets the initial state.
+        // This is important for reactive updates with Signal<bool>.
         <input node_ref=node_ref id=id type="checkbox" class="drawer-toggle" prop:checked=checked />
     }
 }

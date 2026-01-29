@@ -26,7 +26,12 @@ fn main() {
 fn App() -> impl IntoView {
     provide_meta_context();
 
+    // Global theme state
+    let (theme, set_theme) = signal("light".to_string());
+    provide_context(set_theme);
+
     view! {
+        <Html attr:data-theme=move || theme.get() />
         <Title text="Leptos x daisyUI" />
 
         <Router>
@@ -40,6 +45,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/badge") view=BadgeDemo />
                     <Route path=path!("/breadcrumbs") view=BreadcrumbsDemo />
                     <Route path=path!("/button") view=ButtonDemo />
+                    <Route path=path!("/calendar") view=CalendarDemo />
                     <Route path=path!("/card") view=CardDemo />
                     <Route path=path!("/carousel") view=CarouselDemo />
                     <Route path=path!("/chat") view=ChatDemo />
@@ -48,13 +54,17 @@ fn App() -> impl IntoView {
                     <Route path=path!("/countdown") view=CountdownDemo />
                     <Route path=path!("/diff") view=DiffDemo />
                     <Route path=path!("/divider") view=DividerDemo />
+                    <Route path=path!("/dock") view=DockDemo />
                     <Route path=path!("/drawer") view=DrawerDemo />
                     <Route path=path!("/dropdown") view=DropdownDemo />
+                    <Route path=path!("/fab") view=FabDemo />
                     <Route path=path!("/fieldset") view=FieldsetDemo />
                     <Route path=path!("/file_input") view=FileInputDemo />
                     <Route path=path!("/filter") view=FilterDemo />
                     <Route path=path!("/footer") view=FooterDemo />
                     <Route path=path!("/hero") view=HeroDemo />
+                    <Route path=path!("/hover_3d") view=Hover3dDemo />
+                    <Route path=path!("/hover_gallery") view=HoverGalleryDemo />
                     <Route path=path!("/indicator") view=IndicatorDemo />
                     <Route path=path!("/input") view=InputDemo />
                     <Route path=path!("/join") view=JoinDemo />
@@ -65,6 +75,10 @@ fn App() -> impl IntoView {
                     <Route path=path!("/loading") view=LoadingDemo />
                     <Route path=path!("/mask") view=MaskDemo />
                     <Route path=path!("/menu") view=MenuDemo />
+                    <Route path=path!("/mockup_browser") view=MockupBrowserDemo />
+                    <Route path=path!("/mockup_code") view=MockupCodeDemo />
+                    <Route path=path!("/mockup_phone") view=MockupPhoneDemo />
+                    <Route path=path!("/mockup_window") view=MockupWindowDemo />
                     <Route path=path!("/modal") view=ModalDemo />
                     <Route path=path!("/navbar") view=NavbarDemo />
                     <Route path=path!("/pagination") view=PaginationDemo />
@@ -82,11 +96,13 @@ fn App() -> impl IntoView {
                     <Route path=path!("/swap") view=SwapDemo />
                     <Route path=path!("/tab") view=TabDemo />
                     <Route path=path!("/table") view=TableDemo />
+                    <Route path=path!("/text_rotate") view=TextRotateDemo />
                     <Route path=path!("/textarea") view=TextareaDemo />
                     <Route path=path!("/theme_controller") view=ThemeControllerDemo />
                     <Route path=path!("/timeline") view=TimelineDemo />
                     <Route path=path!("/toast") view=ToastDemo />
                     <Route path=path!("/toggle") view=ToggleDemo />
+                    <Route path=path!("/tooltip") view=TooltipDemo />
                     <Route path=path!("/validator") view=ValidatorDemo />
                 </ParentRoute>
             </Routes>

@@ -24,10 +24,10 @@ cargo add leptos-daisyui-rs
 You can use components as follows: Tailwind CSS (v4) is used, so you can insert additional classes.
 
 
-```rust
-use leptos-daisyui-rs as daisyui'
+```rust,ignore
+use leptos_daisyui_rs as daisyui;
 
-use daisyui:components:::Accordion;
+use daisyui::components::Accordion;
 
 #[components]
 fn Demo () -> impl IntoView {
@@ -72,10 +72,10 @@ Therefore, it is designed to be flexible enough to add attributes and event list
 
 For example, take a look at the following Button component:
 
-```rust
+```rust,ignore
 use leptos::prelude::*;
 use leptos::html::{Button as HTMLButton};
-use leptos_daisyui_rs::components::*;;
+use leptos_daisyui_rs::components::*;
 
 
 let active = Signal::derive(move || some_condition());
@@ -145,7 +145,7 @@ If you would like to use the same design but use the internal configuration HTML
 
 As a workaround, a wrapper component that only assigns attributes to child components can be considered. For example
 
-```rust
+```rust,ignore
 use leptos::prelude::*;
 use leptos::tachys::html::class::class as class_fn;
 

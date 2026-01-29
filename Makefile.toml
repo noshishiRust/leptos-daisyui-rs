@@ -1,0 +1,171 @@
+[config]
+default_to_workspace = false
+min_version = "0.37.0"
+
+# ============================================================================
+# Library Tasks
+# ============================================================================
+
+[tasks.build]
+description = "Build the library"
+command = "cargo"
+args = ["build"]
+
+[tasks.build-release]
+description = "Build the library in release mode"
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.test]
+description = "Run all tests with output"
+command = "cargo"
+args = ["test", "--", "--nocapture", "--test-threads=1"]
+
+[tasks.test-quiet]
+description = "Run all tests quietly"
+command = "cargo"
+args = ["test"]
+
+[tasks.check]
+description = "Check code without building"
+command = "cargo"
+args = ["check"]
+
+[tasks.clippy]
+description = "Run clippy linter"
+command = "cargo"
+args = ["clippy", "--", "-D", "warnings"]
+
+[tasks.clippy-fix]
+description = "Run clippy and automatically fix issues"
+command = "cargo"
+args = ["clippy", "--fix", "--allow-dirty", "--allow-staged"]
+
+[tasks.fmt]
+description = "Format code with rustfmt"
+command = "cargo"
+args = ["fmt"]
+
+[tasks.fmt-check]
+description = "Check code formatting"
+command = "cargo"
+args = ["fmt", "--", "--check"]
+
+[tasks.clean]
+description = "Clean build artifacts"
+command = "cargo"
+args = ["clean"]
+
+# ============================================================================
+# Demo Application Tasks
+# ============================================================================
+
+[tasks.demo-serve]
+description = "Run demo app development server (trunk serve)"
+cwd = "demo"
+command = "trunk"
+args = ["serve"]
+
+[tasks.demo-build]
+description = "Build demo app for production"
+cwd = "demo"
+command = "trunk"
+args = ["build", "--release"]
+
+[tasks.demo-clean]
+description = "Clean demo build artifacts"
+cwd = "demo"
+command = "trunk"
+args = ["clean"]
+
+# ============================================================================
+# Combined Workflows
+# ============================================================================
+
+[tasks.verify-all]
+description = "Verify everything: build, test, and lint"
+dependencies = [
+    "fmt-check",
+    "build",
+    "test-quiet",
+    "clippy",
+]
+
+[tasks.fix-all]
+description = "Fix all auto-fixable issues (clippy + fmt)"
+dependencies = [
+    "fmt",
+    "clippy-fix",
+]
+
+[tasks.ci]
+description = "Full CI workflow: format, build, test, lint"
+run_task = { name = [
+    "fmt-check",
+    "build",
+    "test",
+    "clippy",
+], fork = false, parallel = false }
+
+[tasks.fix-and-verify]
+description = "Fix issues then verify everything passes"
+run_task = { name = [
+    "fix-all",
+    "verify-all",
+], fork = false, parallel = false }
+
+# ============================================================================
+# Complete Build Workflow
+# ============================================================================
+
+[tasks.all]
+description = "Build library and demo app"
+dependencies = [
+    "build",
+    "demo-build",
+]
+
+[tasks.clean-all]
+description = "Clean library and demo artifacts"
+dependencies = [
+    "clean",
+    "demo-clean",
+]
+
+# ============================================================================
+# Development Workflows
+# ============================================================================
+
+[tasks.dev]
+description = "Start development mode (alias for demo-serve)"
+alias = "demo-serve"
+
+[tasks.quick-check]
+description = "Quick check before commit (fmt + clippy-fix + test)"
+run_task = { name = [
+    "fmt",
+    "clippy-fix",
+    "test-quiet",
+], fork = false, parallel = false }
+
+# ============================================================================
+# Documentation Tasks
+# ============================================================================
+
+[tasks.doc]
+description = "Build documentation"
+command = "cargo"
+args = ["doc", "--no-deps"]
+
+[tasks.doc-open]
+description = "Build and open documentation in browser"
+command = "cargo"
+args = ["doc", "--no-deps", "--open"]
+
+# ============================================================================
+# Default Task
+# ============================================================================
+
+[tasks.default]
+description = "Default task: verify-all"
+alias = "verify-all"

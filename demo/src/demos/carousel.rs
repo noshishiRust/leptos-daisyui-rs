@@ -149,25 +149,25 @@ pub fn CarouselDemo() -> impl IntoView {
 
             <Section title="Direction Control" col=true>
                 <Carousel direction=CarouselDirection::Vertical class="h-96 w-full">
-                    <CarouselItem class="h-full">
+                    <CarouselItem class="h-full w-full flex items-center justify-center">
                         <img
                             src="https://picsum.photos/400/400?random=11"
                             alt="Item 1"
-                            class="h-full w-full object-cover"
+                            class="max-h-full max-w-full object-contain"
                         />
                     </CarouselItem>
-                    <CarouselItem class="h-full">
+                    <CarouselItem class="h-full w-full flex items-center justify-center">
                         <img
                             src="https://picsum.photos/400/400?random=12"
                             alt="Item 2"
-                            class="h-full w-full object-cover"
+                            class="max-h-full max-w-full object-contain"
                         />
                     </CarouselItem>
-                    <CarouselItem class="h-full">
+                    <CarouselItem class="h-full w-full flex items-center justify-center">
                         <img
                             src="https://picsum.photos/400/400?random=13"
                             alt="Item 3"
-                            class="h-full w-full object-cover"
+                            class="max-h-full max-w-full object-contain"
                         />
                     </CarouselItem>
                 </Carousel>

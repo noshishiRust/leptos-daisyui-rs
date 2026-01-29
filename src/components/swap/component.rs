@@ -50,8 +50,13 @@ pub fn Swap(
                 rotate.get().as_str(),
                 class)
             }
+            class:swap-active=move || active.get()
         >
-            <input type="checkbox" checked=active prop:indeterminate=indeterminate />
+            <input
+                type="checkbox"
+                prop:indeterminate=indeterminate
+                style="display: none;"
+            />
             {children()}
         </label>
     }

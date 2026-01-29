@@ -214,7 +214,11 @@ pub(crate) struct MenuManager {
 
 impl MenuManager {
     /// Retrieves the MenuManager from context.
+    ///
+    /// # Panics
+    /// Panics if MenuItem or MenuDropdown is used outside of a Menu component.
     pub fn expect_context() -> Self {
-        expect_context()
+        use_context::<MenuManager>()
+            .expect("MenuItem and MenuDropdown must be used within a Menu component")
     }
 }

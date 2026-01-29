@@ -1,12 +1,11 @@
 use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
-use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn RangeDemo() -> impl IntoView {
-    let (value1, set_value1) = signal(25.0);
-    let (value2, set_value2) = signal(40.0);
-    let (value3, set_value3) = signal(60.0);
+    let (_value1, _set_value1) = signal(25.0);
+    let (_value2, _set_value2) = signal(40.0);
+    let (_value3, _set_value3) = signal(60.0);
 
     view! {
         <ContentLayout

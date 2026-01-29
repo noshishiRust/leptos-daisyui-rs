@@ -1,6 +1,4 @@
 use leptos::prelude::*;
-use leptos_daisyui_rs::components::*;
-use leptos_icons::Icon;
 
 #[component]
 pub fn FieldsetDemo() -> impl IntoView {

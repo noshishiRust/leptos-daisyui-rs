@@ -83,7 +83,7 @@ pub fn TableHead(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <thead node_ref=node_ref class=move || merge_classes!("", class)>
+        <thead node_ref=node_ref class=class>
             {children()}
         </thead>
     }
@@ -109,7 +109,7 @@ pub fn TableBody(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tbody node_ref=node_ref class=move || merge_classes!("", class)>
+        <tbody node_ref=node_ref class=class>
             {children()}
         </tbody>
     }
@@ -135,7 +135,7 @@ pub fn TableFoot(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tfoot node_ref=node_ref class=move || merge_classes!("", class)>
+        <tfoot node_ref=node_ref class=class>
             {children()}
         </tfoot>
     }
@@ -161,7 +161,7 @@ pub fn TableRow(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <tr node_ref=node_ref class=move || merge_classes!("", class)>
+        <tr node_ref=node_ref class=class>
             {children()}
         </tr>
     }
@@ -187,7 +187,7 @@ pub fn TableHeader(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <th node_ref=node_ref class=move || merge_classes!("", class)>
+        <th node_ref=node_ref class=class>
             {children()}
         </th>
     }
@@ -213,7 +213,7 @@ pub fn TableCell(
     children: Children,
 ) -> impl IntoView {
     view! {
-        <td node_ref=node_ref class=move || merge_classes!("", class)>
+        <td node_ref=node_ref class=class>
             {children()}
         </td>
     }

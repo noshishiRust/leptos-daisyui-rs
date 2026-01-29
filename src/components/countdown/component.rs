@@ -36,13 +36,13 @@ pub fn Countdown(
 /// # Countdown Value Component
 ///
 /// An individual animated number within a countdown display. The value animates
-/// smoothly when changed and must be between 0-99 for proper animation.
+/// smoothly when changed. Values are automatically clamped to 0-99 range for proper animation.
 ///
 /// ## Node References
 /// - `node_ref` - References the top `<span>` element ([HTMLSpanElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement))
 #[component]
 pub fn CountdownValue(
-    /// Reactive signal containing the numeric value (0-99) to display
+    /// Reactive signal containing the numeric value to display (values > 99 are clamped to 99)
     value: Signal<u8>,
 
     /// Additional CSS classes to apply to the value element
@@ -61,7 +61,7 @@ pub fn CountdownValue(
         <span
             node_ref=node_ref
             class=class
-            style=move || format!("--value:{};", value.get())
+            style=move || format!("--value:{};", value.get().min(99))
             aria-live="polite"
             aria-label=move || {
                 if let Some(label) = aria_label.get() { label } else { value.get().to_string() }

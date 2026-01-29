@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn MaskDemo() -> impl IntoView {

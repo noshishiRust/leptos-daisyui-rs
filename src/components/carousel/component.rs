@@ -87,7 +87,7 @@ pub fn CarouselItem(
 /// Each dot can be clicked to navigate to that slide.
 ///
 /// ## Usage
-/// ```rust
+/// ```rust,ignore
 /// let (active_index, set_active_index) = signal(0);
 /// let carousel_ref = NodeRef::<Div>::new();
 ///
@@ -154,7 +154,7 @@ pub fn CarouselIndicators(
 /// Displays previous/next arrow buttons for carousel navigation.
 ///
 /// ## Usage
-/// ```rust
+/// ```rust,ignore
 /// let (active_index, set_active_index) = signal(0);
 /// let carousel_ref = NodeRef::<Div>::new();
 /// let slide_count = 3;
@@ -243,7 +243,7 @@ pub fn CarouselNavButtons(
 /// Helper function to scroll to a specific carousel item by index.
 ///
 /// ## Usage
-/// ```rust
+/// ```rust,ignore
 /// let carousel_ref = NodeRef::<Div>::new();
 ///
 /// // Scroll to the second slide (index 1)
@@ -254,13 +254,12 @@ pub fn scroll_to_carousel_item(carousel_ref: NodeRef<Div>, index: usize) {
         let carousel_elem = carousel.unchecked_ref::<web_sys::Element>();
 
         // Get all carousel items
-        if let Ok(items) = carousel_elem.query_selector_all(".carousel-item") {
-            if let Some(item) = items.item(index as u32)
-                && let Some(element) = item.dyn_ref::<web_sys::Element>()
-            {
-                // Scroll the item into view smoothly
-                element.scroll_into_view();
-            }
+        if let Ok(items) = carousel_elem.query_selector_all(".carousel-item")
+            && let Some(item) = items.item(index as u32)
+            && let Some(element) = item.dyn_ref::<web_sys::Element>()
+        {
+            // Scroll the item into view smoothly
+            element.scroll_into_view();
         }
     }
 }

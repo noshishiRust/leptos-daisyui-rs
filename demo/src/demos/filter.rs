@@ -1,13 +1,11 @@
 use leptos::prelude::*;
-use leptos_daisyui_rs::components::*;
-use leptos_icons::Icon;
 
 #[component]
 pub fn FilterDemo() -> impl IntoView {
-    let (selected_category, set_selected_category) = signal("all".to_string());
-    let (selected_price, set_selected_price) = signal("all".to_string());
-    let (selected_rating, set_selected_rating) = signal("all".to_string());
-    let (search_query, set_search_query) = signal("".to_string());
+    let (_selected_category, _set_selected_category) = signal("all".to_string());
+    let (_selected_price, _set_selected_price) = signal("all".to_string());
+    let (_selected_rating, _set_selected_rating) = signal("all".to_string());
+    let (_search_query, _set_search_query) = signal("".to_string());
 
     view! {
         // <div class="space-y-6">
