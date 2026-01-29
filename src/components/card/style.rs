@@ -18,7 +18,7 @@ impl CardStyle {
         match self {
             CardStyle::Default => "",
             CardStyle::Border => "card-border",
-            CardStyle::Dash => "card-dash",
+            CardStyle::Dash => "card-border border-dashed",
         }
     }
 }

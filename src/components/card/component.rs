@@ -11,7 +11,7 @@ use leptos::prelude::*;
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("card card-title card-body card-actions card-boader card-dash card-side image-full card-xs card-sm card-md card-lg card-xl");
+/// @source inline("card card-title card-body card-actions card-border card-side image-full card-xs card-sm card-md card-lg card-xl");
 /// ```
 ///
 /// ## Node References
