@@ -241,7 +241,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                     .map(|page| {
                                         view! {
                                             <Button
-                                                class=if current_page.get() == page {
+                                                class=move || if current_page.get() == page {
                                                     "join-item btn-active"
                                                 } else {
                                                     "join-item"
@@ -424,26 +424,27 @@ pub fn PaginationDemo() -> impl IntoView {
                                     "‹"
                                 </Button>
 
-                                {(1..=total_pages)
-                                    .filter(|&page| {
-                                        let current = current_page.get();
-                                        page == 1 || page == total_pages
-                                            || (page >= current - 1 && page <= current + 1)
-                                    })
-                                    .enumerate()
-                                    .map(|(idx, page)| {
-                                        let prev_page = if idx > 0 {
-                                            (1..=total_pages)
-                                                .filter(|&p| {
-                                                    let current = current_page.get();
-                                                    p == 1 || p == total_pages
-                                                        || (p >= current - 1 && p <= current + 1)
-                                                })
-                                                .nth(idx - 1)
-                                                .unwrap_or(1)
-                                        } else {
-                                            1
-                                        };
+                                {move || {
+                                    (1..=total_pages)
+                                        .filter(|&page| {
+                                            let current = current_page.get();
+                                            page == 1 || page == total_pages
+                                                || (page >= current - 1 && page <= current + 1)
+                                        })
+                                        .enumerate()
+                                        .map(|(idx, page)| {
+                                            let prev_page = if idx > 0 {
+                                                (1..=total_pages)
+                                                    .filter(|&p| {
+                                                        let current = current_page.get();
+                                                        p == 1 || p == total_pages
+                                                            || (p >= current - 1 && p <= current + 1)
+                                                    })
+                                                    .nth(idx - 1)
+                                                    .unwrap_or(1)
+                                            } else {
+                                                1
+                                            };
 
                                         view! {
                                             <>
@@ -463,7 +464,7 @@ pub fn PaginationDemo() -> impl IntoView {
                                                     None
                                                 }}
                                                 <Button
-                                                    class=if current_page.get() == page {
+                                                    class=move || if current_page.get() == page {
                                                         "join-item btn-active"
                                                     } else {
                                                         "join-item"
@@ -490,7 +491,8 @@ pub fn PaginationDemo() -> impl IntoView {
                                             </>
                                         }
                                     })
-                                    .collect::<Vec<_>>()}
+                                    .collect::<Vec<_>>()
+                                }}
 
                                 <Button
                                     class="join-item"

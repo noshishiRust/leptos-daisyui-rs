@@ -1,0 +1,316 @@
+/**
+ * Custom Component Styles for leptos-daisyui-rs
+ *
+ * These are custom components not included in daisyUI 5:
+ * - FAB (Floating Action Button) with speed dial
+ * - Text Rotate with CSS animations
+ * - Hover 3D (requires JavaScript, styles here support it)
+ * - Hover Gallery (requires JavaScript, styles here support it)
+ */
+
+/* ==================== FAB Component ==================== */
+
+/* Hide action buttons initially */
+.fab > *:not(:first-child) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.8);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Show action buttons when FAB is focused */
+.fab:focus > *:not(:first-child),
+.fab:focus-within > *:not(:first-child) {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* Stagger animation for action buttons */
+.fab:focus > *:nth-child(2),
+.fab:focus-within > *:nth-child(2) {
+  transition-delay: 0.05s;
+}
+
+.fab:focus > *:nth-child(3),
+.fab:focus-within > *:nth-child(3) {
+  transition-delay: 0.1s;
+}
+
+.fab:focus > *:nth-child(4),
+.fab:focus-within > *:nth-child(4) {
+  transition-delay: 0.15s;
+}
+
+.fab:focus > *:nth-child(5),
+.fab:focus-within > *:nth-child(5) {
+  transition-delay: 0.2s;
+}
+
+.fab:focus > *:nth-child(6),
+.fab:focus-within > *:nth-child(6) {
+  transition-delay: 0.25s;
+}
+
+/* Vertical stacking layout */
+.fab {
+  display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* Flower layout (quarter-circle) */
+.fab.fab-flower {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.fab.fab-flower > *:not(:first-child) {
+  position: absolute;
+}
+
+.fab.fab-flower:focus > *:nth-child(2),
+.fab.fab-flower:focus-within > *:nth-child(2) {
+  transform: translate(-80px, -80px) scale(1);
+}
+
+.fab.fab-flower:focus > *:nth-child(3),
+.fab.fab-flower:focus-within > *:nth-child(3) {
+  transform: translate(-110px, 0) scale(1);
+}
+
+.fab.fab-flower:focus > *:nth-child(4),
+.fab.fab-flower:focus-within > *:nth-child(4) {
+  transform: translate(-80px, 80px) scale(1);
+}
+
+.fab.fab-flower:focus > *:nth-child(5),
+.fab.fab-flower:focus-within > *:nth-child(5) {
+  transform: translate(0, 110px) scale(1);
+}
+
+.fab.fab-flower:focus > *:nth-child(6),
+.fab.fab-flower:focus-within > *:nth-child(6) {
+  transform: translate(80px, 80px) scale(1);
+}
+
+
+/* ==================== Text Rotate Component ==================== */
+
+@keyframes text-rotate-1-item {
+  0%, 100% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0; transform: translateY(-20px); }
+}
+
+@keyframes text-rotate-2-items {
+  0%, 45% { opacity: 1; transform: translateY(0); }
+  50%, 95% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes text-rotate-3-items {
+  0%, 30% { opacity: 1; transform: translateY(0); }
+  33%, 97% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes text-rotate-4-items {
+  0%, 22% { opacity: 1; transform: translateY(0); }
+  25%, 97% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes text-rotate-5-items {
+  0%, 18% { opacity: 1; transform: translateY(0); }
+  20%, 98% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes text-rotate-6-items {
+  0%, 15% { opacity: 1; transform: translateY(0); }
+  16.66%, 98% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.text-rotate {
+  position: relative;
+  display: inline-block;
+}
+
+.text-rotate > span {
+  position: relative;
+  display: inline-block;
+}
+
+.text-rotate > span > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+/* Show first item by default */
+.text-rotate > span > span:first-child {
+  position: relative;
+  opacity: 1;
+}
+
+/* Pause animation on hover */
+.text-rotate:hover > span > span {
+  animation-play-state: paused !important;
+}
+
+/* Apply animations based on number of children */
+.text-rotate > span:has(> span:nth-child(1):last-child) > span {
+  animation: text-rotate-1-item 3s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(2):last-child) > span:nth-child(1) {
+  animation: text-rotate-2-items 6s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(2):last-child) > span:nth-child(2) {
+  animation: text-rotate-2-items 6s ease-in-out infinite 3s;
+}
+
+.text-rotate > span:has(> span:nth-child(3):last-child) > span:nth-child(1) {
+  animation: text-rotate-3-items 9s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(3):last-child) > span:nth-child(2) {
+  animation: text-rotate-3-items 9s ease-in-out infinite 3s;
+}
+
+.text-rotate > span:has(> span:nth-child(3):last-child) > span:nth-child(3) {
+  animation: text-rotate-3-items 9s ease-in-out infinite 6s;
+}
+
+.text-rotate > span:has(> span:nth-child(4):last-child) > span:nth-child(1) {
+  animation: text-rotate-4-items 12s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(4):last-child) > span:nth-child(2) {
+  animation: text-rotate-4-items 12s ease-in-out infinite 3s;
+}
+
+.text-rotate > span:has(> span:nth-child(4):last-child) > span:nth-child(3) {
+  animation: text-rotate-4-items 12s ease-in-out infinite 6s;
+}
+
+.text-rotate > span:has(> span:nth-child(4):last-child) > span:nth-child(4) {
+  animation: text-rotate-4-items 12s ease-in-out infinite 9s;
+}
+
+.text-rotate > span:has(> span:nth-child(5):last-child) > span:nth-child(1) {
+  animation: text-rotate-5-items 15s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(5):last-child) > span:nth-child(2) {
+  animation: text-rotate-5-items 15s ease-in-out infinite 3s;
+}
+
+.text-rotate > span:has(> span:nth-child(5):last-child) > span:nth-child(3) {
+  animation: text-rotate-5-items 15s ease-in-out infinite 6s;
+}
+
+.text-rotate > span:has(> span:nth-child(5):last-child) > span:nth-child(4) {
+  animation: text-rotate-5-items 15s ease-in-out infinite 9s;
+}
+
+.text-rotate > span:has(> span:nth-child(5):last-child) > span:nth-child(5) {
+  animation: text-rotate-5-items 15s ease-in-out infinite 12s;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(1) {
+  animation: text-rotate-6-items 18s ease-in-out infinite;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(2) {
+  animation: text-rotate-6-items 18s ease-in-out infinite 3s;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(3) {
+  animation: text-rotate-6-items 18s ease-in-out infinite 6s;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(4) {
+  animation: text-rotate-6-items 18s ease-in-out infinite 9s;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(5) {
+  animation: text-rotate-6-items 18s ease-in-out infinite 12s;
+}
+
+.text-rotate > span:has(> span:nth-child(6):last-child) > span:nth-child(6) {
+  animation: text-rotate-6-items 18s ease-in-out infinite 15s;
+}
+
+
+/* ==================== Hover 3D Component ==================== */
+
+.hover-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.1s ease-out;
+}
+
+.hover-3d > *:not(div:empty) {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* Hover zones - hidden overlay grid */
+.hover-3d > div:empty {
+  position: absolute;
+  width: 33.333%;
+  height: 33.333%;
+  z-index: 10;
+  pointer-events: all;
+}
+
+.hover-3d > div:empty:nth-child(1) { top: 0; left: 0; }
+.hover-3d > div:empty:nth-child(2) { top: 0; left: 33.333%; }
+.hover-3d > div:empty:nth-child(3) { top: 0; left: 66.666%; }
+.hover-3d > div:empty:nth-child(4) { top: 33.333%; left: 0; }
+.hover-3d > div:empty:nth-child(5) { top: 33.333%; left: 33.333%; }
+.hover-3d > div:empty:nth-child(6) { top: 33.333%; left: 66.666%; }
+.hover-3d > div:empty:nth-child(7) { top: 66.666%; left: 0; }
+.hover-3d > div:empty:nth-child(8) { top: 66.666%; left: 33.333%; }
+
+
+/* ==================== Hover Gallery Component ==================== */
+
+.hover-gallery {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.hover-gallery > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.hover-gallery > img:first-child {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Show images on hover (will be enhanced with JavaScript) */
+.hover-gallery:hover > img {
+  opacity: 1;
+}

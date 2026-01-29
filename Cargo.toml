@@ -10,3 +10,6 @@ repository = "https://github.com/noshishiRust/leptos-daisyui-rs"
 
 [dependencies]
 leptos = { version = "0.8" }
+table-rs = { path = "../table-rs" }
+wasm-bindgen = "0.2"
+web-sys = { version = "0.3", features = ["Element", "DomRect", "HtmlElement", "HtmlCollection", "NodeList"] }

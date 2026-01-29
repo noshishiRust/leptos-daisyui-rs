@@ -765,6 +765,9 @@ name = "leptos-daisyui-rs"
 version = "0.0.3"
 dependencies = [
  "leptos",
+ "table-rs",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -1489,6 +1492,13 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "table-rs"
+version = "0.0.5"
+dependencies = [
+ "web-sys",
 ]
 
 [[package]]

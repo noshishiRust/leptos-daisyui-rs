@@ -1,5 +1,7 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake, cyberpunk, retro, forest, aqua, dracula;
+}
 @source "../src/**/*.rs";
 
 /* Accordion */
@@ -42,12 +44,18 @@
 @source inline("fieldset label fieldset-legend");
 /* File-Input */
 @source inline("file-input file-input-ghost file-input-neutral file-input-primary file-input-secondary file-input-accent file-input-info file-input-success file-input-warning file-input-error file-input-xs file-input-sm file-input-md file-input-lg file-input-xl");
+/* FAB (Floating Action Button) */
+@source inline("fab fab-trigger fab-actions fab-action fab-vertical fab-flower fab-xs fab-sm fab-md fab-lg fab-xl");
 /* Filter */
 @source inline("filter filter-reset");
 /* Footer */
 @source inline("footer footer-title footer-center footer-horizontal footer-vertical");
 /* Hero */
 @source inline("hero hero-content hero-overlay");
+/* Hover 3D */
+@source inline("hover-3d");
+/* Hover Gallery */
+@source inline("hover-gallery hover-gallery-item");
 /* Indicator */
 @source inline("indicator indicator-item indicator-start indicator-center indicator-end indicator-top indicator-middle indicator-bottom");
 /* Input */
@@ -112,6 +120,8 @@
 @source inline("table table-zebra table-pin-rows table-pin-cols table-xs table-sm table-md table-lg table-xl");
 /* Textarea */
 @source inline("textarea textarea-ghost textarea-neutral textarea-primary textarea-secondary textarea-accent textarea-info textarea-success textarea-warning textarea-error textarea-xs textarea-sm textarea-md textarea-lg textarea-xl");
+/* Text Rotate */
+@source inline("text-rotate text-rotate-item");
 /* Theme-Controller */
 @source inline("theme-controller");
 /* Timeline */
@@ -120,5 +130,7 @@
 @source inline("toast toast-start toast-center toast-end toast-top toast-middle toast-bottom");
 /* Toggle */
 @source inline("toggle toggle-primary toggle-secondary toggle-accent toggle-neutral toggle-success toggle-warning toggle-info toggle-error toggle-xs toggle-sm toggle-md toggle-lg toggle-xl");
+/* Tooltip */
+@source inline("tooltip tooltip-open tooltip-top tooltip-bottom tooltip-left tooltip-right tooltip-neutral tooltip-primary tooltip-secondary tooltip-accent tooltip-info tooltip-success tooltip-warning tooltip-error");
 /* Validator */
 @source inline("validator validator-hint");
