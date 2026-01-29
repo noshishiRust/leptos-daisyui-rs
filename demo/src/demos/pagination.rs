@@ -241,11 +241,8 @@ pub fn PaginationDemo() -> impl IntoView {
                                     .map(|page| {
                                         view! {
                                             <Button
-                                                class=move || if current_page.get() == page {
-                                                    "join-item btn-active"
-                                                } else {
-                                                    "join-item"
-                                                }
+                                                class="join-item"
+                                                class:btn-active=move || current_page.get() == page
                                                 color=Signal::derive(move || {
                                                     if current_page.get() == page {
                                                         ButtonColor::Primary
@@ -464,11 +461,8 @@ pub fn PaginationDemo() -> impl IntoView {
                                                     None
                                                 }}
                                                 <Button
-                                                    class=move || if current_page.get() == page {
-                                                        "join-item btn-active"
-                                                    } else {
-                                                        "join-item"
-                                                    }
+                                                    class="join-item"
+                                                    class:btn-active=move || current_page.get() == page
                                                     size=ButtonSize::Sm
                                                     color=Signal::derive(move || {
                                                         if current_page.get() == page {

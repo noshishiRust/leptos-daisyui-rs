@@ -80,11 +80,11 @@ pub fn DiffDemo() -> impl IntoView {
                     <Button
                         on:click=move |_| set_show_before.update(|b| *b = !*b)
                         size=ButtonSize::Sm
-                        color=move || if show_before.get() {
+                        color=Signal::derive(move || if show_before.get() {
                             ButtonColor::Primary
                         } else {
                             ButtonColor::Secondary
-                        }
+                        })
                     >
                         "Toggle Theme: "
                         {move || if show_before.get() { "Dark" } else { "Light" }}
