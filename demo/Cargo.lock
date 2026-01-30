@@ -1106,6 +1106,7 @@ dependencies = [
  "console_error_panic_hook",
  "console_log",
  "icondata",
+ "js-sys",
  "leptos",
  "leptos-daisyui-rs",
  "leptos-use",

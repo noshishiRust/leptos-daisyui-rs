@@ -2,7 +2,15 @@ use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_icons::Icon;
 use leptos_router::{components::Outlet, hooks::use_location};
-use leptos_use::{breakpoints_tailwind, use_breakpoints, BreakpointsTailwind};
+use leptos_use::{breakpoints_tailwind, use_breakpoints, use_interval_fn, BreakpointsTailwind};
+use wasm_bindgen::prelude::*;
+
+// External JavaScript interface for performance.memory (Chrome only)
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = ["performance", "memory"], js_name = usedJSHeapSize, catch)]
+    fn used_js_heap_size() -> Result<JsValue, JsValue>;
+}
 
 /// Layout component for the demos
 #[component]
@@ -22,9 +30,39 @@ pub fn Layout() -> impl IntoView {
         selected.set(init_component_name);
     });
 
+    // Status bar state
+    let (current_time, set_current_time) = signal(String::new());
+    let (memory_usage, set_memory_usage) = signal(String::new());
+
+    // Update time and memory every second
+    let _ = use_interval_fn(
+        move || {
+            // Update time
+            let date = js_sys::Date::new_0();
+            let time_str = format!(
+                "{:02}:{:02}:{:02}",
+                date.get_hours(),
+                date.get_minutes(),
+                date.get_seconds()
+            );
+            set_current_time.set(time_str);
+
+            // Update memory usage (Chrome only, graceful degradation)
+            if let Ok(heap_size) = used_js_heap_size() {
+                if let Some(bytes) = heap_size.as_f64() {
+                    let mb = bytes / 1_048_576.0; // Convert to MB
+                    set_memory_usage.set(format!("{:.2} MB", mb));
+                }
+            } else {
+                set_memory_usage.set("N/A".to_string());
+            }
+        },
+        1000,
+    );
+
     view! {
-        <div class="h-screen w-screen bg-base-100">
-            <Navbar class="w-screen bg-base-200 border-b border-base-300">
+        <div class="h-screen w-screen bg-base-100 flex flex-col">
+            <Navbar class="w-screen bg-base-200 border-b border-base-300 flex-none">
                 <NavbarStart class="gap-4">
                     <div class="lg:hidden">
                         <label for="drawer-toggle" class="hover:cursor-pointer">
@@ -45,55 +83,84 @@ pub fn Layout() -> impl IntoView {
                 </NavbarEnd>
             </Navbar>
 
-            <Drawer open=breakpoints.ge(BreakpointsTailwind::Lg)>
-                <DrawerToggle id="drawer-toggle" checked=breakpoints.ge(BreakpointsTailwind::Lg) />
+            <div class="flex-1 overflow-hidden">
+                <Drawer open=breakpoints.ge(BreakpointsTailwind::Lg)>
+                    <DrawerToggle id="drawer-toggle" checked=breakpoints.ge(BreakpointsTailwind::Lg) />
 
-                <div class="drawer-content">
+                    <div class="drawer-content">
 
-                    // Content area with padding
-                    <div class="p-6 w-full">
-                        <Outlet />
-                    </div>
-                </div>
-
-                <DrawerSide>
-                    <label for="drawer-toggle" class="drawer-overlay"></label>
-                    <div class="min-h-full w-64 bg-base-200 text-base-content">
-                        <div class="p-4">
-                            <h2 class="text-lg font-semibold mb-4">"Components"</h2>
-                            <Menu
-                                selected=selected
-                                direction=MenuDirection::Vertical
-                                class="w-full"
-                            >
-                                {get_menu_categories()
-                                    .into_iter()
-                                    .map(|category| {
-                                        view! {
-                                            <MenuItem is_submenu=true>
-                                                <MenuTitle>{category.title}</MenuTitle>
-                                                <SubMenu>
-                                                    {category
-                                                        .items
-                                                        .into_iter()
-                                                        .map(|item| {
-                                                            view! {
-                                                                <MenuItem href=item.href value=item.value>
-                                                                    {item.name}
-                                                                </MenuItem>
-                                                            }
-                                                        })
-                                                        .collect_view()}
-                                                </SubMenu>
-                                            </MenuItem>
-                                        }
-                                    })
-                                    .collect_view()}
-                            </Menu>
+                        // Content area with padding
+                        <div class="p-6 w-full">
+                            <Outlet />
                         </div>
                     </div>
-                </DrawerSide>
-            </Drawer>
+
+                    <DrawerSide>
+                        <label for="drawer-toggle" class="drawer-overlay"></label>
+                        <div class="min-h-full w-64 bg-base-200 text-base-content">
+                            <div class="p-4">
+                                <h2 class="text-lg font-semibold mb-4">"Components"</h2>
+                                <Menu
+                                    selected=selected
+                                    direction=MenuDirection::Vertical
+                                    class="w-full"
+                                >
+                                    {get_menu_categories()
+                                        .into_iter()
+                                        .map(|category| {
+                                            view! {
+                                                <MenuItem is_submenu=true>
+                                                    <MenuTitle>{category.title}</MenuTitle>
+                                                    <SubMenu>
+                                                        {category
+                                                            .items
+                                                            .into_iter()
+                                                            .map(|item| {
+                                                                view! {
+                                                                    <MenuItem href=item.href value=item.value>
+                                                                        {item.name}
+                                                                    </MenuItem>
+                                                                }
+                                                            })
+                                                            .collect_view()}
+                                                    </SubMenu>
+                                                </MenuItem>
+                                            }
+                                        })
+                                        .collect_view()}
+                                </Menu>
+                            </div>
+                        </div>
+                    </DrawerSide>
+                </Drawer>
+            </div>
+
+            // Status footer
+            <div class="w-screen bg-base-300 border-t border-base-content/10 px-4 py-1 flex-none">
+                <div class="flex items-center justify-between text-xs text-base-content/70 font-mono">
+                    <div class="flex items-center gap-4">
+                        <span class="flex items-center gap-1">
+                            <span class="w-3 h-3">
+                                <Icon icon=icondata::AiFolderOutlined />
+                            </span>
+                            {move || location.pathname.get()}
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <span class="w-3 h-3">
+                                <Icon icon=icondata::AiClockCircleOutlined />
+                            </span>
+                            {move || current_time.get()}
+                        </span>
+                    </div>
+                    <span class="flex items-center gap-1">
+                        <span class="w-3 h-3">
+                            <Icon icon=icondata::AiDatabaseOutlined />
+                        </span>
+                        "Memory: "
+                        {move || memory_usage.get()}
+                    </span>
+                </div>
+            </div>
         </div>
     }
 }
