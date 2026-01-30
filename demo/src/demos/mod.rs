@@ -129,6 +129,7 @@ pub use table::*;
 pub use text_rotate::*;
 pub use textarea::*;
 pub use theme_controller::*;
+pub use theming::*;
 pub use timeline::*;
 pub use toast::*;
 pub use toggle::*;

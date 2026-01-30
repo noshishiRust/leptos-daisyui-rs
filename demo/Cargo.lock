@@ -1092,6 +1092,7 @@ dependencies = [
 name = "leptos-daisyui-rs"
 version = "0.0.3"
 dependencies = [
+ "base64",
  "js-sys",
  "leptos",
  "leptos_router",
@@ -1099,6 +1100,7 @@ dependencies = [
  "serde_json",
  "table-rs",
  "wasm-bindgen",
+ "wasm-bindgen-futures",
  "web-sys",
 ]
 
