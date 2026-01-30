@@ -11,4 +11,13 @@
     "files.associations": {
         "*.rs": "rust"
     },
+    // Memory optimization for rust-analyzer
+    "rust-analyzer.cargo.allTargets": false,
+    "rust-analyzer.checkOnSave": false,
+    "rust-analyzer.procMacro.enable": true,
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.inlayHints.maxLength": 25,
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.lens.run.enable": false,
+    "rust-analyzer.lens.debug.enable": false,
 }

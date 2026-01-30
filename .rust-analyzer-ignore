@@ -1,0 +1,7 @@
+# Exclude directories from rust-analyzer indexing to reduce memory usage
+target/
+node_modules/
+demo/target/
+demo/node_modules/
+demo/dist/
+.git/
