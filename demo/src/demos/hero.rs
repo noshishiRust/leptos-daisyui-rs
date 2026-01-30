@@ -51,7 +51,7 @@ pub fn HeroDemo() -> impl IntoView {
                             </p>
                         </div>
                         <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                            <div class="card-body">
+                            <form class="card-body">
                                 <div class="form-control">
                                     <label class="label">
                                         <span class="label-text">"Email"</span>
@@ -74,9 +74,9 @@ pub fn HeroDemo() -> impl IntoView {
                                     </label>
                                 </div>
                                 <div class="form-control mt-6">
-                                    <Button color=ButtonColor::Primary>"Login"</Button>
+                                    <button type="submit" class="btn btn-primary">"Login"</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

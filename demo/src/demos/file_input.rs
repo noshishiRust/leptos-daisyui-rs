@@ -154,29 +154,37 @@ pub fn FileInputDemo() -> impl IntoView {
                                     <div class="avatar">
                                         <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                                             <img
-                                                src="https://picsum.photos/96/96?random=1"
-                                                alt="Current avatar"
+                                                src=move || {
+                                                    preview_url
+                                                        .get()
+                                                        .unwrap_or_else(|| "https://picsum.photos/96/96?random=1".to_string())
+                                                }
+
+                                                alt="Avatar"
                                             />
                                         </div>
                                     </div>
-
                                     {move || {
-                                        preview_url
-                                            .get()
-                                            .map(|url| {
-                                                view! {
-                                                    <div class="flex flex-col items-center gap-2">
-                                                        <div class="text-sm font-semibold text-primary">
-                                                            "Preview:"
-                                                        </div>
-                                                        <div class="avatar">
-                                                            <div class="w-24 rounded-full ring ring-success ring-offset-base-100 ring-offset-2">
-                                                                <img src=url alt="Preview" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }
-                                            })
+                                        preview_url.get().map(|_| {
+                                            view! {
+                                                <div class="badge badge-success gap-2">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        class="inline-block w-4 h-4 stroke-current"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M5 13l4 4L19 7"
+                                                        ></path>
+                                                    </svg>
+                                                    "Image uploaded"
+                                                </div>
+                                            }
+                                        })
                                     }}
                                 </div>
                                 <div class="form-control">
