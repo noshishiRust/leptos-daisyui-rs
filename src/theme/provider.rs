@@ -4,6 +4,7 @@
 //! throughout the component tree.
 
 use leptos::prelude::*;
+use crate::theme::css_injection::inject_css_variables;
 use crate::theme::types::ThemeConfiguration;
 
 /// Theme context that holds the current theme configuration
@@ -25,8 +26,13 @@ impl ThemeContext {
     }
 
     /// Apply a new theme configuration
+    ///
+    /// This also injects the theme CSS variables into the document.
     pub fn apply_theme(&self, theme: ThemeConfiguration) {
-        self.config.set(theme);
+        self.config.set(theme.clone());
+        if let Err(e) = inject_css_variables(&theme) {
+            leptos::logging::error!("Failed to inject CSS variables: {}", e);
+        }
     }
 
     /// Reset to default theme
@@ -52,10 +58,15 @@ impl ThemeContext {
     }
 
     /// Update just the base theme
+    ///
+    /// This also updates the CSS variables in the document.
     pub fn set_base_theme(&self, theme_name: impl Into<String>) {
         self.config.update(|config| {
             config.base_theme = theme_name.into();
         });
+        if let Err(e) = inject_css_variables(&self.config.get()) {
+            leptos::logging::error!("Failed to inject CSS variables: {}", e);
+        }
     }
 }
 
@@ -113,16 +124,25 @@ pub fn ThemeProvider(
     // Provide context to children
     provide_context(context);
 
-    // Save to localStorage when theme changes (if enabled)
-    if load_from_storage {
-        let storage_key_clone = storage_key.clone();
-        Effect::new(move |_| {
-            let config = context.config.get();
-            if let Err(e) = save_theme_to_storage(&storage_key_clone, &config) {
-                leptos::logging::error!("Failed to save theme to localStorage: {}", e);
-            }
-        });
+    // Inject initial CSS variables
+    if let Err(e) = inject_css_variables(&context.config.get()) {
+        leptos::logging::error!("Failed to inject initial CSS variables: {}", e);
     }
+
+    // Watch for theme changes and inject CSS + save to localStorage
+    Effect::new(move |_| {
+        let config = context.config.get();
+
+        // Inject CSS variables
+        if let Err(e) = inject_css_variables(&config) {
+            leptos::logging::error!("Failed to inject CSS variables: {}", e);
+        }
+
+        // Save to localStorage if enabled
+        if load_from_storage && let Err(e) = save_theme_to_storage(&storage_key, &config) {
+            leptos::logging::error!("Failed to save theme to localStorage: {}", e);
+        }
+    });
 
     view! {
         {children()}
@@ -165,6 +185,7 @@ pub fn try_use_theme_context() -> Option<ThemeContext> {
 
 // LocalStorage helpers (WASM-only)
 
+/// Load theme from localStorage (WASM only)
 #[cfg(target_arch = "wasm32")]
 fn load_theme_from_storage(key: &str) -> Option<ThemeConfiguration> {
     use wasm_bindgen::JsValue;
@@ -175,11 +196,13 @@ fn load_theme_from_storage(key: &str) -> Option<ThemeConfiguration> {
     serde_json::from_str(&json).ok()
 }
 
+/// Load theme from localStorage (non-WASM fallback)
 #[cfg(not(target_arch = "wasm32"))]
 fn load_theme_from_storage(_key: &str) -> Option<ThemeConfiguration> {
     None
 }
 
+/// Save theme to localStorage (WASM only)
 #[cfg(target_arch = "wasm32")]
 fn save_theme_to_storage(key: &str, config: &ThemeConfiguration) -> Result<(), String> {
     use web_sys::window;
@@ -200,6 +223,7 @@ fn save_theme_to_storage(key: &str, config: &ThemeConfiguration) -> Result<(), S
     Ok(())
 }
 
+/// Save theme to localStorage (non-WASM fallback)
 #[cfg(not(target_arch = "wasm32"))]
 fn save_theme_to_storage(_key: &str, _config: &ThemeConfiguration) -> Result<(), String> {
     Ok(())

@@ -31,8 +31,10 @@
 //! }
 //! ```
 
+pub mod css_injection;
 pub mod provider;
 pub mod types;
 
+pub use css_injection::*;
 pub use provider::*;
 pub use types::*;
