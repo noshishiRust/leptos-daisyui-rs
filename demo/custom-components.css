@@ -314,3 +314,60 @@
 .hover-gallery:hover > img {
   opacity: 1;
 }
+
+
+/* ==================== Indicator Center Positioning Fix ==================== */
+
+/**
+ * Fix for daisyUI bug where center variants set all 4 positioning properties
+ * to 50%, constraining the indicator-item to 0x0 size. We override with
+ * proper CSS centering using left/top at 50% + transform offset.
+ *
+ * Bug affects: .indicator-top.indicator-center, .indicator-middle.indicator-center,
+ * .indicator-bottom.indicator-center
+ */
+
+/* Top Center - horizontally centered at top */
+.indicator-item.indicator-top.indicator-center {
+  top: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Middle Center - centered both horizontally and vertically */
+.indicator-item.indicator-middle.indicator-center {
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Bottom Center - horizontally centered at bottom */
+.indicator-item.indicator-bottom.indicator-center {
+  top: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 0 !important;
+  transform: translateX(-50%) !important;
+}
+
+
+/* ==================== Accordion Plus Icon Fix ==================== */
+
+/**
+ * Fix for character encoding issue where the daisyUI minus sign (U+2212)
+ * displays as "â^ʹ" due to server Content-Type header not specifying UTF-8.
+ * Replace with ASCII hyphen-minus (U+002D) which doesn't have encoding issues.
+ *
+ * Only override the OPEN/CHECKED states, not the base closed state which
+ * correctly shows "+" already.
+ */
+
+.collapse-plus:focus:not(.collapse-close) > .collapse-title:after,
+.collapse-plus:not(.collapse-close) > input:is([type="checkbox"], [type="radio"]):checked ~ .collapse-title:after,
+.collapse-plus[open] > .collapse-title:after {
+  content: "-" !important;
+}

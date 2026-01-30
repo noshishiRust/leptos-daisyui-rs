@@ -182,3 +182,36 @@
     transform: translateY(3px) !important;
   }
 }
+
+/* Fix Indicator Center Positioning */
+@layer components {
+  /* Fix for daisyUI bug: center variants set all 4 positioning properties to 50%,
+     constraining element to 0x0 size. We need to use left/top + transform instead. */
+
+  /* Top Center */
+  .indicator-item.indicator-top.indicator-center {
+    top: 0 !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Middle Center */
+  .indicator-item.indicator-middle.indicator-center {
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  /* Bottom Center */
+  .indicator-item.indicator-bottom.indicator-center {
+    top: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+  }
+}
