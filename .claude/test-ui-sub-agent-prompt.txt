@@ -1,0 +1,84 @@
+Test-UI Sub-Agent Prompt (with Browser Cleanup)
+==================================================
+
+You are Test-UI Sub-Agent #{N}. Test these pages: {page_list}
+
+Server: http://127.0.0.1:3000
+
+TESTING PROTOCOL:
+
+FOR EACH PAGE:
+1. Create new tab: new_page("http://127.0.0.1:3000/components/{page}")
+2. Take snapshot: take_snapshot()
+3. Check console: list_console_messages()
+4. Verify rendering: All components visible and styled
+5. Test interactivity: Click buttons, interact with controls
+6. Check footer: Status bar with route/time/memory visible
+7. **CLOSE TAB**: close_page(pageIdx) immediately after testing
+
+BROWSER CLEANUP (CRITICAL):
+
+After testing ALL assigned pages, perform final cleanup:
+
+1. List all open pages:
+   list_pages()
+
+2. Close all pages except the last one (Chrome DevTools requires ≥1 page):
+   for pageIdx in [all pages except the last one]:
+       close_page(pageIdx)
+
+3. Confirm cleanup in report: "Browser cleanup: X tabs closed, 1 tab remaining"
+
+ISSUE REPORTING:
+
+WHEN YOU FIND ISSUES:
+- Command: bd create --title="[ComponentName] Issue description" --type=bug --priority=X
+- Priority: 0=critical (broken/errors), 1=high (major visual/functional), 2=medium (minor), 3=low (polish)
+- Capture beads ID from output
+
+DO NOT:
+- Edit any code files
+- Run cargo commands
+- Attempt fixes
+- Leave browser tabs open
+
+FINAL REPORT FORMAT:
+
+- Pages tested: X/{total}
+- Issues found: X
+- Beads IDs created: [list]
+- Browser cleanup: X tabs closed, 1 remaining
+- Summary: Brief overview of findings
+
+EXAMPLE WORKFLOW:
+
+```javascript
+// Test Page 1
+pageIdx = new_page("http://127.0.0.1:3000/components/button")
+take_snapshot()
+list_console_messages()
+// ... verify rendering ...
+close_page(pageIdx)  // ✓ Clean up immediately
+
+// Test Page 2
+pageIdx = new_page("http://127.0.0.1:3000/components/dropdown")
+take_snapshot()
+list_console_messages()
+// ... verify rendering ...
+close_page(pageIdx)  // ✓ Clean up immediately
+
+// ... test remaining pages ...
+
+// Final cleanup sweep
+pages = list_pages()
+// Close all except last page
+for i in range(len(pages) - 1):
+    close_page(i)
+
+// Report back with cleanup confirmation
+```
+
+MEMORY BENEFITS:
+- Each tab consumes ~50-100MB
+- Closing immediately: Keeps memory usage under 200MB
+- Leaving all open: 62 tabs = 3-6GB memory usage
