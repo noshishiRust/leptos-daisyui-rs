@@ -242,6 +242,8 @@ pub fn CarouselNavButtons(
 
 /// Helper function to scroll to a specific carousel item by index.
 ///
+/// Scrolls only within the carousel container without affecting page scroll position.
+///
 /// ## Usage
 /// ```rust,ignore
 /// let carousel_ref = NodeRef::<Div>::new();
@@ -258,9 +260,28 @@ pub fn scroll_to_carousel_item(carousel_ref: NodeRef<Div>, index: usize) {
             && let Some(item) = items.item(index as u32)
             && let Some(element) = item.dyn_ref::<web_sys::Element>()
         {
-            // Use scrollIntoView with inline option to prevent page scroll
-            // This uses the simpler API that's always available
-            element.scroll_into_view_with_bool(true);
+            // Get item position relative to carousel
+            let item_rect = element.get_bounding_client_rect();
+            let carousel_rect = carousel_elem.get_bounding_client_rect();
+
+            // Calculate the scroll offset needed
+            // For horizontal carousels, use scrollLeft
+            // For vertical carousels, use scrollTop
+            if let Some(carousel_html) = carousel.dyn_ref::<web_sys::HtmlElement>() {
+                let current_scroll_left = carousel_html.scroll_left() as f64;
+                let current_scroll_top = carousel_html.scroll_top() as f64;
+
+                // Calculate offset relative to current scroll position
+                let offset_x = item_rect.left() - carousel_rect.left();
+                let offset_y = item_rect.top() - carousel_rect.top();
+
+                let new_scroll_left = current_scroll_left + offset_x;
+                let new_scroll_top = current_scroll_top + offset_y;
+
+                // Scroll the carousel container (not the page)
+                carousel_html.set_scroll_left(new_scroll_left as i32);
+                carousel_html.set_scroll_top(new_scroll_top as i32);
+            }
         }
     }
 }

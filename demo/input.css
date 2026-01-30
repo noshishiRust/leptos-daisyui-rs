@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark, cupcake, cyberpunk, retro, forest, aqua, dracula;
@@ -45,7 +46,26 @@
 /* File-Input */
 @source inline("file-input file-input-ghost file-input-neutral file-input-primary file-input-secondary file-input-accent file-input-info file-input-success file-input-warning file-input-error file-input-xs file-input-sm file-input-md file-input-lg file-input-xl");
 /* FAB (Floating Action Button) */
-@source inline("fab fab-close fab-main-action fab-flower");
+@source inline("fab fab-close fab-main-action fab-flower fab-flower-bottom-right fab-flower-bottom-left fab-flower-top-right fab-flower-top-left");
+
+/* FAB direction variants for responsive flower layout */
+.fab-flower-bottom-left > :nth-child(3) { transform: translate(calc(var(--space, 4rem) * -1), var(--space, 4rem)); }
+.fab-flower-bottom-left > :nth-child(4) { transform: translate(calc(var(--space, 4rem) * -0.707), calc(var(--space, 4rem) * 0.707)); }
+.fab-flower-bottom-left > :nth-child(5) { transform: translate(0, var(--space, 4rem)); }
+.fab-flower-bottom-left > :nth-child(6) { transform: translate(calc(var(--space, 4rem) * 0.707), calc(var(--space, 4rem) * 0.707)); }
+
+.fab-flower-top-right > :nth-child(3) { transform: translate(var(--space, 4rem), calc(var(--space, 4rem) * -1)); }
+.fab-flower-top-right > :nth-child(4) { transform: translate(calc(var(--space, 4rem) * 0.707), calc(var(--space, 4rem) * -0.707)); }
+.fab-flower-top-right > :nth-child(5) { transform: translate(0, calc(var(--space, 4rem) * -1)); }
+.fab-flower-top-right > :nth-child(6) { transform: translate(calc(var(--space, 4rem) * -0.707), calc(var(--space, 4rem) * -0.707)); }
+
+.fab-flower-top-left > :nth-child(3) { transform: translate(calc(var(--space, 4rem) * -1), calc(var(--space, 4rem) * -1)); }
+.fab-flower-top-left > :nth-child(4) { transform: translate(calc(var(--space, 4rem) * -0.707), calc(var(--space, 4rem) * -0.707)); }
+.fab-flower-top-left > :nth-child(5) { transform: translate(0, calc(var(--space, 4rem) * -1)); }
+.fab-flower-top-left > :nth-child(6) { transform: translate(calc(var(--space, 4rem) * 0.707), calc(var(--space, 4rem) * -0.707)); }
+
+/* Default bottom-right direction (matches daisyUI's fab-flower) */
+.fab-flower-bottom-right { /* Uses default fab-flower positioning */ }
 /* Filter */
 @source inline("filter filter-reset");
 /* Footer */

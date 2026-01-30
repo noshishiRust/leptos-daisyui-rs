@@ -5,6 +5,7 @@ use leptos::{
     html::{H2, Li, Ul},
     prelude::*,
 };
+use leptos_router::components::A;
 
 /// # Menu Component
 ///
@@ -109,7 +110,7 @@ pub fn MenuItem(
 ) -> impl IntoView {
     let MenuManager { manual, selected } = MenuManager::expect_context();
 
-    let on_click = move |e: ev::MouseEvent| {
+    let on_anchor_click = move |e: ev::MouseEvent| {
         if disabled.get_untracked() {
             e.prevent_default();
             return;
@@ -121,12 +122,11 @@ pub fn MenuItem(
             e.prevent_default();
         }
 
-        if value.get_untracked().is_empty() {
-            return;
+        if !value.get_untracked().is_empty() {
+            let mut selected = selected.write();
+            *selected = Some(value.get_untracked());
         }
-
-        let mut selected = selected.write();
-        *selected = Some(value.get_untracked());
+        // Note: Don't prevent default for valid URLs - let the <A> component handle navigation
     };
 
     let is_active = move || {
@@ -141,12 +141,12 @@ pub fn MenuItem(
     };
 
     view! {
-        <li node_ref=node_ref on:click=on_click class=class>
+        <li node_ref=node_ref class=class>
             {if !is_submenu {
                 view! {
-                    <a href=href class:menu-active=is_active>
+                    <A href=move || href.get() class:menu-active=is_active on:click=on_anchor_click>
                         {children()}
-                    </a>
+                    </A>
                 }
                     .into_any()
             } else {

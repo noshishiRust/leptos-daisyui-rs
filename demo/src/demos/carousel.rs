@@ -231,11 +231,11 @@ pub fn CarouselDemo() -> impl IntoView {
                         </div>
                     </div>
 
-                    // Vertical carousel
+                    // Vertical carousel (pointer-events-none prevents mouse scroll, only timer-based advance)
                     <Carousel
                         node_ref=vertical_carousel_ref
                         direction=CarouselDirection::Vertical
-                        class="h-96 w-full"
+                        class="h-96 w-full pointer-events-none"
                     >
                         <CarouselItem class="h-full w-full flex items-center justify-center">
                             <img

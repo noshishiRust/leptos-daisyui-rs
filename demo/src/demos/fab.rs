@@ -61,32 +61,153 @@ pub fn FabDemo() -> impl IntoView {
                 </div>
             </Section>
 
-            <Section title="Flower Layout (Quarter Circle)">
-                <div class="relative flex justify-center min-h-96 items-center">
-                    <Fab flower=Signal::derive(|| true)>
-                        <div tabindex="0" role="button">
-                            <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
-                                "+"
-                            </Button>
+            <Section title="Flower Layout (Quarter Circle) - Responsive Directions">
+                <div class="space-y-8">
+                    <div class="alert alert-info">
+                        <div>
+                            <strong>"Responsive Design Tip:"</strong>
+                            " Use the direction prop to control which quadrant the buttons fan out into. "
+                            "This prevents buttons from rendering off-screen when the FAB is near page edges."
                         </div>
-                        <FabClose>
-                            <Button color=ButtonColor::Error shape=ButtonShape::Circle>
-                                "×"
-                            </Button>
-                        </FabClose>
-                        <Button color=ButtonColor::Secondary shape=ButtonShape::Circle>
-                            "A"
-                        </Button>
-                        <Button color=ButtonColor::Accent shape=ButtonShape::Circle>
-                            "B"
-                        </Button>
-                        <Button color=ButtonColor::Info shape=ButtonShape::Circle>
-                            "C"
-                        </Button>
-                        <Button color=ButtonColor::Success shape=ButtonShape::Circle>
-                            "D"
-                        </Button>
-                    </Fab>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8">
+                        // Top-left corner: buttons fan to bottom-right
+                        <div class="relative border border-base-300 rounded-lg p-4 min-h-64">
+                            <div class="text-sm font-semibold mb-2">
+                                "Top-Left: BottomRight Direction"
+                            </div>
+                            <Fab
+                                flower=Signal::derive(|| true)
+                                direction=Signal::derive(|| FabDirection::BottomRight)
+                            >
+                                <div tabindex="0" role="button">
+                                    <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
+                                        "+"
+                                    </Button>
+                                </div>
+                                <FabClose>
+                                    <Button color=ButtonColor::Error shape=ButtonShape::Circle>
+                                        "×"
+                                    </Button>
+                                </FabClose>
+                                <Button color=ButtonColor::Secondary shape=ButtonShape::Circle>
+                                    "A"
+                                </Button>
+                                <Button color=ButtonColor::Accent shape=ButtonShape::Circle>
+                                    "B"
+                                </Button>
+                                <Button color=ButtonColor::Info shape=ButtonShape::Circle>
+                                    "C"
+                                </Button>
+                                <Button color=ButtonColor::Success shape=ButtonShape::Circle>
+                                    "D"
+                                </Button>
+                            </Fab>
+                        </div>
+
+                        // Top-right corner: buttons fan to bottom-left
+                        <div class="relative border border-base-300 rounded-lg p-4 min-h-64 flex justify-end">
+                            <div class="absolute top-4 left-4 text-sm font-semibold">
+                                "Top-Right: BottomLeft Direction"
+                            </div>
+                            <Fab
+                                flower=Signal::derive(|| true)
+                                direction=Signal::derive(|| FabDirection::BottomLeft)
+                            >
+                                <div tabindex="0" role="button">
+                                    <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
+                                        "+"
+                                    </Button>
+                                </div>
+                                <FabClose>
+                                    <Button color=ButtonColor::Error shape=ButtonShape::Circle>
+                                        "×"
+                                    </Button>
+                                </FabClose>
+                                <Button color=ButtonColor::Secondary shape=ButtonShape::Circle>
+                                    "1"
+                                </Button>
+                                <Button color=ButtonColor::Accent shape=ButtonShape::Circle>
+                                    "2"
+                                </Button>
+                                <Button color=ButtonColor::Info shape=ButtonShape::Circle>
+                                    "3"
+                                </Button>
+                                <Button color=ButtonColor::Success shape=ButtonShape::Circle>
+                                    "4"
+                                </Button>
+                            </Fab>
+                        </div>
+
+                        // Bottom-left corner: buttons fan to top-right
+                        <div class="relative border border-base-300 rounded-lg p-4 min-h-64 flex items-end">
+                            <div class="absolute top-4 left-4 text-sm font-semibold">
+                                "Bottom-Left: TopRight Direction"
+                            </div>
+                            <Fab
+                                flower=Signal::derive(|| true)
+                                direction=Signal::derive(|| FabDirection::TopRight)
+                            >
+                                <div tabindex="0" role="button">
+                                    <Button color=ButtonColor::Success shape=ButtonShape::Circle>
+                                        "+"
+                                    </Button>
+                                </div>
+                                <FabClose>
+                                    <Button color=ButtonColor::Error shape=ButtonShape::Circle>
+                                        "×"
+                                    </Button>
+                                </FabClose>
+                                <Button color=ButtonColor::Secondary shape=ButtonShape::Circle>
+                                    "📧"
+                                </Button>
+                                <Button color=ButtonColor::Accent shape=ButtonShape::Circle>
+                                    "🔔"
+                                </Button>
+                                <Button color=ButtonColor::Info shape=ButtonShape::Circle>
+                                    "⚙"
+                                </Button>
+                                <Button color=ButtonColor::Warning shape=ButtonShape::Circle>
+                                    "❤"
+                                </Button>
+                            </Fab>
+                        </div>
+
+                        // Bottom-right corner: buttons fan to top-left
+                        <div class="relative border border-base-300 rounded-lg p-4 min-h-64 flex items-end justify-end">
+                            <div class="absolute top-4 left-4 text-sm font-semibold">
+                                "Bottom-Right: TopLeft Direction"
+                            </div>
+                            <Fab
+                                flower=Signal::derive(|| true)
+                                direction=Signal::derive(|| FabDirection::TopLeft)
+                            >
+                                <div tabindex="0" role="button">
+                                    <Button color=ButtonColor::Accent shape=ButtonShape::Circle>
+                                        "+"
+                                    </Button>
+                                </div>
+                                <FabClose>
+                                    <Button color=ButtonColor::Error shape=ButtonShape::Circle>
+                                        "×"
+                                    </Button>
+                                </FabClose>
+                                <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
+                                    "★"
+                                </Button>
+                                <Button color=ButtonColor::Secondary shape=ButtonShape::Circle>
+                                    "♥"
+                                </Button>
+                                <Button color=ButtonColor::Info shape=ButtonShape::Circle>
+                                    "♦"
+                                </Button>
+                                <Button color=ButtonColor::Success shape=ButtonShape::Circle>
+                                    "♣"
+                                </Button>
+                            </Fab>
+                        </div>
+                    </div>
                 </div>
             </Section>
 

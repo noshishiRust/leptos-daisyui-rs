@@ -1,3 +1,4 @@
+use super::style::FabDirection;
 use crate::merge_classes;
 use leptos::{html::Div, prelude::*};
 
@@ -8,7 +9,7 @@ use leptos::{html::Div, prelude::*};
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("fab fab-close fab-main-action fab-flower");
+/// @source inline("fab fab-close fab-main-action fab-flower fab-flower-bottom-right fab-flower-bottom-left fab-flower-top-right fab-flower-top-left");
 /// ```
 ///
 /// ## Important Notes
@@ -24,6 +25,11 @@ pub fn Fab(
     /// Use flower layout (quarter-circle) instead of vertical stacking
     #[prop(optional, into)]
     flower: Signal<bool>,
+
+    /// Direction for flower layout expansion (controls which quadrant buttons fan out into)
+    /// Essential for responsive design to prevent buttons from rendering off-screen
+    #[prop(optional, into)]
+    direction: Signal<FabDirection>,
 
     /// Additional CSS classes
     #[prop(optional, into)]
@@ -42,6 +48,7 @@ pub fn Fab(
             class=move || {
                 merge_classes!(
                     "fab",
+                    if flower.get() { direction.get().as_str() } else { "" },
                     class
                 )
             }

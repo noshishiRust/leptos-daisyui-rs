@@ -84,10 +84,10 @@ pub fn Layout() -> impl IntoView {
             </Navbar>
 
             <div class="flex-1 overflow-hidden">
-                <Drawer open=breakpoints.ge(BreakpointsTailwind::Lg)>
+                <Drawer class="h-full" open=breakpoints.ge(BreakpointsTailwind::Lg)>
                     <DrawerToggle id="drawer-toggle" checked=breakpoints.ge(BreakpointsTailwind::Lg) />
 
-                    <div class="drawer-content">
+                    <div class="drawer-content overflow-y-auto h-full">
 
                         // Content area with padding
                         <div class="p-6 w-full">
@@ -97,7 +97,7 @@ pub fn Layout() -> impl IntoView {
 
                     <DrawerSide>
                         <label for="drawer-toggle" class="drawer-overlay"></label>
-                        <div class="min-h-full w-64 bg-base-200 text-base-content">
+                        <div class="min-h-full w-64 bg-base-200 text-base-content overflow-y-auto">
                             <div class="p-4">
                                 <h2 class="text-lg font-semibold mb-4">"Components"</h2>
                                 <Menu
