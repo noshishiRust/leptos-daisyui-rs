@@ -1,8 +1,39 @@
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
+use wasm_bindgen::prelude::*;
+use web_sys::{Event, FileReader, HtmlInputElement};
 
 #[component]
 pub fn FileInputDemo() -> impl IntoView {
+    // State for profile picture preview
+    let (preview_url, set_preview_url) = signal(Option::<String>::None);
+
+    // File change handler for profile picture
+    let handle_file_change = move |ev: Event| {
+        let input = ev.target().and_then(|t| t.dyn_into::<HtmlInputElement>().ok());
+
+        if let Some(input) = input {
+            if let Some(files) = input.files() {
+                if let Some(file) = files.get(0) {
+                    let reader = FileReader::new().unwrap();
+                    let reader_clone = reader.clone();
+
+                    let onload = Closure::wrap(Box::new(move || {
+                        if let Ok(result) = reader_clone.result() {
+                            if let Some(data_url) = result.as_string() {
+                                set_preview_url.set(Some(data_url));
+                            }
+                        }
+                    }) as Box<dyn Fn()>);
+
+                    reader.set_onload(Some(onload.as_ref().unchecked_ref()));
+                    let _ = reader.read_as_data_url(&file);
+                    onload.forget();
+                }
+            }
+        }
+    };
+
     view! {
         <div class="space-y-6">
             <h1 class="text-3xl font-bold">"File Input"</h1>
@@ -122,13 +153,34 @@ pub fn FileInputDemo() -> impl IntoView {
                         <CardBody>
                             <h2 class="card-title">"Profile Picture Upload"</h2>
                             <div class="space-y-4">
-                                <div class="avatar">
-                                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img
-                                            src="https://picsum.photos/96/96?random=1"
-                                            alt="Current avatar"
-                                        />
+                                <div class="flex flex-col sm:flex-row gap-4 items-center">
+                                    <div class="avatar">
+                                        <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                            <img
+                                                src="https://picsum.photos/96/96?random=1"
+                                                alt="Current avatar"
+                                            />
+                                        </div>
                                     </div>
+
+                                    {move || {
+                                        preview_url
+                                            .get()
+                                            .map(|url| {
+                                                view! {
+                                                    <div class="flex flex-col items-center gap-2">
+                                                        <div class="text-sm font-semibold text-primary">
+                                                            "Preview:"
+                                                        </div>
+                                                        <div class="avatar">
+                                                            <div class="w-24 rounded-full ring ring-success ring-offset-base-100 ring-offset-2">
+                                                                <img src=url alt="Preview" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            })
+                                    }}
                                 </div>
                                 <div class="form-control">
                                     <label class="label">
@@ -138,6 +190,7 @@ pub fn FileInputDemo() -> impl IntoView {
                                         type="file"
                                         accept="image/*"
                                         class="file-input file-input-bordered file-input-primary w-full"
+                                        on:change=handle_file_change
                                     />
                                     <label class="label">
                                         <span class="label-text-alt">

@@ -5,7 +5,7 @@ This document tracks all issues discovered during visual testing of the leptos-d
 **Testing Date**: 2026-01-29
 **Total Issues Found**: 33
 **Issues Created in Beads**: 33
-**Issues Resolved**: 2 (75e, egz)
+**Issues Resolved**: 3 (75e, egz, 5sc)
 
 ## Recent Fixes (2026-01-29)
 
@@ -14,6 +14,11 @@ This document tracks all issues discovered during visual testing of the leptos-d
 - **leptos-daisyui-rs-egz**: Plus indicator symbol - Fixed CSS class typo ("collapse-opem" → "collapse-open")
 
 See `.github-issues/ACCORDION_FIXES_2026-01-29.md` for detailed fix documentation.
+
+### ✅ Dock Examples Enhanced
+- **leptos-daisyui-rs-5sc**: Dock examples and labels - Added 3 new practical examples (badges/notifications, tooltips, various icon sets), improved section titles and descriptions
+
+See `.github-issues/DOCK_EXAMPLES_COMPLETE_2026-01-29.md` for detailed enhancement documentation.
 
 ## Issue Summary by Priority
 
@@ -53,7 +58,7 @@ Functional bugs and unimplemented features that impact UX.
 | ~~leptos-daisyui-rs-egz~~ | Accordion | ~~Plus indicator shows wrong symbol~~ ✅ FIXED |
 | leptos-daisyui-rs-8jv | Drawer | Close animation shows at wrong position |
 
-### P2 - Medium (4 issues)
+### P2 - Medium (3 issues remaining, 1 resolved)
 Enhancements that improve UX and visual feedback.
 
 | Issue ID | Component | Description |
@@ -61,7 +66,7 @@ Enhancements that improve UX and visual feedback.
 | leptos-daisyui-rs-ow9 | Button | Enhance button push-depth for more pronounced effect |
 | leptos-daisyui-rs-96g | Carousel | Add auto-play timer to Direction Control |
 | leptos-daisyui-rs-7gd | File Input | Add image preview to Profile Picture Upload |
-| leptos-daisyui-rs-5sc | Dock | Add more examples and improve labels |
+| ~~leptos-daisyui-rs-5sc~~ | Dock | ~~Add more examples and improve labels~~ ✅ FIXED |
 
 ### P3 - Low (1 issue)
 Nice-to-have features.
@@ -146,11 +151,11 @@ Components showing "coming soon" placeholders:
 
 **Action**: Implement demo pages for these components.
 
-### Enhancement Requests (5 issues - P2/P3)
+### Enhancement Requests (4 issues remaining, 1 resolved - P2/P3)
 - Button push depth (ow9)
 - Carousel auto-play (96g)
 - File Input preview (7gd)
-- Dock examples (5sc)
+- ~~Dock examples (5sc)~~ ✅ FIXED
 - Demo footer status bar (f5j)
 
 ## Quick Start Commands
@@ -289,7 +294,7 @@ After fixes, verify each component:
 - [ ] Button push effect is more pronounced
 - [ ] Carousel auto-plays (if implemented)
 - [ ] File Input shows image preview (if implemented)
-- [ ] Dock has sufficient examples
+- [x] Dock has sufficient examples ✅
 - [ ] Demo footer shows debug info (if implemented)
 
 ## Notes
