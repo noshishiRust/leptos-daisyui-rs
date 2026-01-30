@@ -157,3 +157,5 @@ pub use upload_file::*;
 pub use validator::*;
 mod typography_customizer;
 pub use typography_customizer::*;
+mod component_customizer;
+pub use component_customizer::*;
