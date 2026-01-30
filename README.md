@@ -1,13 +1,25 @@
 # daisyUI Components for Leptos
 
-This crate is a daisyUI 5 components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components.
+This crate is a daisyUI 5 components library for Leptos, providing type-safe, reactive wrappers for daisyUI 5 components with an advanced runtime theming system.
 
 ""At present, it is assumed to be used for CSR.""
 
-> 🚧 **Work in Progress**  
-> This project is currently under active development.  
-> The design and usage are still evolving, and breaking changes can be expected.  
+> 🚧 **Work in Progress**
+> This project is currently under active development.
+> The design and usage are still evolving, and breaking changes can be expected.
 > Feedback is welcome!
+
+## Features
+
+- ✅ **62/62 daisyUI components** (100% coverage)
+- 🎨 **Advanced Runtime Theming** with customizer UI
+- 🎭 **32 Built-in Themes** from daisyUI
+- 🌈 **Oklahoma LCH Color Space** for perceptual color accuracy
+- 💾 **Theme Persistence** via localStorage
+- 📤 **Import/Export Themes** as JSON
+- 🔗 **Theme Sharing** via URL encoding
+- 🎯 **Type-Safe Props** with Rust enums
+- ⚡ **Reactive Signals** for dynamic updates
 
 ## How to use
 
@@ -136,6 +148,89 @@ Effect::new(move || {
     "Button!"
 </Buttton>
 ```
+
+## Advanced Theming System
+
+This library includes a comprehensive runtime theming system that allows full customization of daisyUI themes.
+
+### Quick Start
+
+Wrap your app with `ThemeProvider`:
+
+```rust,ignore
+use leptos::prelude::*;
+use leptos_daisyui_rs::theme::ThemeProvider;
+
+#[component]
+fn App() -> impl IntoView {
+    view! {
+        <ThemeProvider load_from_storage=true storage_key="my-theme">
+            <YourApp />
+        </ThemeProvider>
+    }
+}
+```
+
+### Using Theme Context
+
+Access and modify themes programmatically:
+
+```rust,ignore
+use leptos_daisyui_rs::theme::use_theme_context;
+
+#[component]
+fn MyComponent() -> impl IntoView {
+    let theme_ctx = use_theme_context();
+
+    let switch_to_dark = move |_| {
+        theme_ctx.set_base_theme("dark");
+    };
+
+    view! {
+        <button on:click=switch_to_dark>"Dark Mode"</button>
+    }
+}
+```
+
+### Pre-built Customizer Components
+
+The library includes ready-to-use UI components for theme customization:
+
+- **`BaseThemeSelector`** - Grid of all 32 daisyUI themes
+- **`ColorCustomizer`** - Color pickers for all semantic colors
+- **`TypographyCustomizer`** - Font family, size, and scale controls
+- **`BorderCustomizer`** - Border width and spacing controls
+- **`ComponentCustomizer`** - Per-component style overrides
+- **`ThemeExportImport`** - JSON export/import functionality
+- **`ThemeShare`** - Generate shareable theme URLs
+- **`PresetThemesGallery`** - 6 curated preset themes
+
+Example usage:
+
+```rust,ignore
+use leptos_daisyui_rs::components::*;
+
+view! {
+    <div class="grid grid-cols-2 gap-4">
+        <BaseThemeSelector />
+        <ColorCustomizer />
+        <TypographyCustomizer />
+        <PresetThemesGallery />
+    </div>
+}
+```
+
+### Features
+
+- **32 Built-in Themes**: All daisyUI themes (light, dark, cupcake, cyberpunk, etc.)
+- **Oklahoma LCH Colors**: Perceptually uniform color space for better color consistency
+- **Runtime Customization**: Change colors, typography, borders, and component styles on the fly
+- **Persistence**: Automatic localStorage saving/loading
+- **Import/Export**: Share themes as JSON files
+- **URL Sharing**: Generate shareable links with embedded theme data
+- **Preset Themes**: 6 professionally designed preset themes included
+
+For complete documentation, see [doc/THEMING.md](./doc/THEMING.md).
 
 ### What you can't do
 

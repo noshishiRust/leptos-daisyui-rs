@@ -1,4 +1,13 @@
-# Component Documentation
+# leptos-daisyui-rs Documentation
+
+Welcome to the comprehensive documentation for leptos-daisyui-rs - a type-safe, reactive daisyUI 5 component library for Leptos.
+
+## Getting Started
+
+- **[Quick Start Guide](./QUICK_START.md)** - Get up and running in minutes
+- **[Theming System](./THEMING.md)** - Comprehensive theming and customization guide
+
+## Component Documentation
 
 This directory contains comprehensive markdown documentation for all leptos-daisyui-rs components. Each component has its own markdown file with examples, props documentation, and best practices.
 

@@ -157,7 +157,8 @@ pub fn ThemeShare() -> impl IntoView {
                             </div>
                         }.into_any()
                     } else {
-                        view! { <></> }.into_any()
+                        let _: () = view! { <></> };
+                        ().into_any()
                     }
                 }}
 
