@@ -46,7 +46,7 @@ pub fn Layout() -> impl IntoView {
             </Navbar>
 
             <Drawer open=breakpoints.ge(BreakpointsTailwind::Lg)>
-                <DrawerToggle id="drawer-toggle" />
+                <DrawerToggle id="drawer-toggle" checked=breakpoints.ge(BreakpointsTailwind::Lg) />
 
                 <div class="drawer-content">
 

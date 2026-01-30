@@ -17,6 +17,7 @@ pub fn DrawerDemo() -> impl IntoView {
                     <Drawer open=drawer_open>
                         <DrawerToggle
                             id="drawer-demo"
+                            checked=drawer_open
                             on:click=move |_| set_drawer_open.update(|open| *open = !*open)
                         />
 
