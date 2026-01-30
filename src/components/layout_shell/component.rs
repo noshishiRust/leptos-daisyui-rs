@@ -8,7 +8,7 @@ use leptos::{html::Div, prelude::*};
 ///
 /// ### Add to `input.css`
 /// ```css
-/// @source inline("drawer drawer-open drawer-mobile min-h-screen");
+/// @source inline("min-h-screen flex flex-col w-full");
 /// ```
 ///
 /// ## Node References
@@ -17,15 +17,15 @@ use leptos::{html::Div, prelude::*};
 pub fn LayoutShell(
     /// Optional header content
     #[prop(optional)]
-    header: Option<Children>,
+    header: Option<ViewFn>,
 
     /// Optional sidebar content
     #[prop(optional)]
-    sidebar: Option<Children>,
+    sidebar: Option<ViewFn>,
 
     /// Optional footer content
     #[prop(optional)]
-    footer: Option<Children>,
+    footer: Option<ViewFn>,
 
     /// Whether sidebar is fixed
     #[prop(optional, into)]
@@ -51,7 +51,7 @@ pub fn LayoutShell(
                 header
                     .as_ref()
                     .map(|h| {
-                        view! { <header class="w-full">{h()}</header> }.into_any()
+                        view! { <header class="w-full">{h.run()}</header> }.into_any()
                     })
             }}
 
@@ -71,7 +71,7 @@ pub fn LayoutShell(
                                     }
                                 >
 
-                                    {s()}
+                                    {s.run()}
                                 </aside>
                             }
                                 .into_any()
@@ -85,7 +85,7 @@ pub fn LayoutShell(
                 footer
                     .as_ref()
                     .map(|f| {
-                        view! { <footer class="w-full">{f()}</footer> }.into_any()
+                        view! { <footer class="w-full">{f.run()}</footer> }.into_any()
                     })
             }}
 
