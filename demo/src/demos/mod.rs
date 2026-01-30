@@ -133,3 +133,5 @@ pub use toast::*;
 pub use toggle::*;
 pub use tooltip::*;
 pub use validator::*;
+pub mod typography_customizer;
+pub use typography_customizer::*;

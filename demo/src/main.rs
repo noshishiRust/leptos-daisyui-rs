@@ -110,6 +110,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/textarea") view=TextareaDemo />
                     <Route path=path!("/theme_controller") view=ThemeControllerDemo />
                     <Route path=path!("/timeline") view=TimelineDemo />
+                    <Route path=path!("/typography_customizer") view=TypographyCustomizerDemo />
                     <Route path=path!("/toast") view=ToastDemo />
                     <Route path=path!("/toggle") view=ToggleDemo />
                     <Route path=path!("/tooltip") view=TooltipDemo />
