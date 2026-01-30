@@ -5,6 +5,7 @@
 
 use leptos::prelude::*;
 use crate::theme::css_injection::inject_css_variables;
+use crate::theme::storage::{load_theme_config_with_key, save_theme_config_with_key};
 use crate::theme::types::ThemeConfiguration;
 
 /// Theme context that holds the current theme configuration
@@ -112,8 +113,10 @@ pub fn ThemeProvider(
 ) -> impl IntoView {
     // Determine initial theme
     let theme = if load_from_storage {
-        load_theme_from_storage(&storage_key)
-            .unwrap_or_else(|| initial_theme.unwrap_or_else(|| ThemeConfiguration::new("light")))
+        load_theme_config_with_key(&storage_key)
+            .ok()
+            .or(initial_theme)
+            .unwrap_or_else(|| ThemeConfiguration::new("light"))
     } else {
         initial_theme.unwrap_or_else(|| ThemeConfiguration::new("light"))
     };
@@ -139,7 +142,7 @@ pub fn ThemeProvider(
         }
 
         // Save to localStorage if enabled
-        if load_from_storage && let Err(e) = save_theme_to_storage(&storage_key, &config) {
+        if load_from_storage && let Err(e) = save_theme_config_with_key(&config, &storage_key) {
             leptos::logging::error!("Failed to save theme to localStorage: {}", e);
         }
     });
@@ -183,51 +186,6 @@ pub fn try_use_theme_context() -> Option<ThemeContext> {
     use_context::<ThemeContext>()
 }
 
-// LocalStorage helpers (WASM-only)
-
-/// Load theme from localStorage (WASM only)
-#[cfg(target_arch = "wasm32")]
-fn load_theme_from_storage(key: &str) -> Option<ThemeConfiguration> {
-    use wasm_bindgen::JsValue;
-    use web_sys::window;
-
-    let storage = window()?.local_storage().ok()??;
-    let json = storage.get_item(key).ok()??;
-    serde_json::from_str(&json).ok()
-}
-
-/// Load theme from localStorage (non-WASM fallback)
-#[cfg(not(target_arch = "wasm32"))]
-fn load_theme_from_storage(_key: &str) -> Option<ThemeConfiguration> {
-    None
-}
-
-/// Save theme to localStorage (WASM only)
-#[cfg(target_arch = "wasm32")]
-fn save_theme_to_storage(key: &str, config: &ThemeConfiguration) -> Result<(), String> {
-    use web_sys::window;
-
-    let storage = window()
-        .ok_or("No window found")?
-        .local_storage()
-        .map_err(|e| format!("Failed to access localStorage: {:?}", e))?
-        .ok_or("localStorage not available")?;
-
-    let json = serde_json::to_string(config)
-        .map_err(|e| format!("Failed to serialize theme: {}", e))?;
-
-    storage
-        .set_item(key, &json)
-        .map_err(|e| format!("Failed to save to localStorage: {:?}", e))?;
-
-    Ok(())
-}
-
-/// Save theme to localStorage (non-WASM fallback)
-#[cfg(not(target_arch = "wasm32"))]
-fn save_theme_to_storage(_key: &str, _config: &ThemeConfiguration) -> Result<(), String> {
-    Ok(())
-}
 
 #[cfg(test)]
 mod tests {

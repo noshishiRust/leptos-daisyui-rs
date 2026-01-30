@@ -33,8 +33,10 @@
 
 pub mod css_injection;
 pub mod provider;
+pub mod storage;
 pub mod types;
 
 pub use css_injection::*;
 pub use provider::*;
+pub use storage::*;
 pub use types::*;
