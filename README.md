@@ -244,6 +244,102 @@ pub fn FullWrapperButton(children: Children) -> impl IntoView {
 **Progress: 62/62 components implemented** 🎉
 
 
+## Known Issues & Workarounds
+
+This section documents known issues with daisyUI 5 that affect this library and their workarounds. All fixes are included in [`demo/custom-components.css`](demo/custom-components.css).
+
+### 1. Indicator Center Positioning Bug
+
+**Problem**: Indicator badges with center positioning variants (`.indicator-top.indicator-center`, `.indicator-middle.indicator-center`, `.indicator-bottom.indicator-center`) are constrained to 0×0 size and don't display correctly.
+
+**Root Cause**: daisyUI sets all four positioning properties (`top: 50%`, `left: 50%`, `right: 50%`, `bottom: 50%`) simultaneously, which constrains the element to 0×0 size in CSS. Proper centering requires only two properties (e.g., `left: 50%` + `transform: translateX(-50%)`).
+
+**Workaround**: Override the positioning with proper two-property centering:
+
+```css
+/* Top Center - horizontally centered at top */
+.indicator-item.indicator-top.indicator-center {
+  top: 0 !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Middle Center - centered both horizontally and vertically */
+.indicator-item.indicator-middle.indicator-center {
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Bottom Center - horizontally centered at bottom */
+.indicator-item.indicator-bottom.indicator-center {
+  top: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 0 !important;
+  transform: translateX(-50%) !important;
+}
+```
+
+See [`demo/custom-components.css`](demo/custom-components.css#L319-L355) for the complete fix.
+
+### 2. Accordion Character Encoding Issue
+
+**Problem**: The accordion minus sign displays as garbled characters "â^ʹ" when the accordion is expanded.
+
+**Root Cause**: daisyUI uses Unicode character U+2212 (MINUS SIGN) in the CSS `content` property. When the server's Content-Type header doesn't specify UTF-8 charset, browsers may misinterpret the UTF-8 byte sequence (E2 88 92) as Windows-1252 or ISO-8859-1, resulting in garbled text.
+
+**Workaround**: Override the open state with ASCII hyphen-minus (U+002D) which doesn't require charset negotiation:
+
+```css
+/* Override only the OPEN/CHECKED states, preserve "+" for closed state */
+.collapse-plus:focus:not(.collapse-close) > .collapse-title:after,
+.collapse-plus:not(.collapse-close) > input:is([type="checkbox"], [type="radio"]):checked ~ .collapse-title:after,
+.collapse-plus[open] > .collapse-title:after {
+  content: "-" !important;
+}
+```
+
+**Alternative**: Ensure your server sends `Content-Type: text/css; charset=UTF-8` header for CSS files.
+
+See [`demo/custom-components.css`](demo/custom-components.css#L358-L373) for the complete fix.
+
+### 3. Drawer Close Animation Positioning Bug
+
+**Problem**: When a drawer is placed inside an `overflow-hidden` container, the close animation slides to the wrong position (viewport left edge instead of container left edge).
+
+**Root Cause**: daisyUI switches `.drawer-side` positioning between states:
+- **Open**: `position: sticky` (container-relative)
+- **Closed**: `position: fixed` (viewport-relative)
+
+This causes the close animation to target the viewport edge instead of the container edge.
+
+**Workaround**: Force `.drawer-side` to use `position: absolute` (container-relative) in both states when inside `overflow-hidden` containers:
+
+```css
+/* Target drawers inside overflow-hidden containers */
+.overflow-hidden > .drawer > .drawer-side {
+  position: absolute !important;
+  inset-inline-start: 0 !important;
+  height: 100% !important;
+}
+
+/* When drawer-open, override sticky positioning to absolute */
+.overflow-hidden > .drawer.drawer-open > .drawer-toggle:checked ~ .drawer-side,
+.overflow-hidden > .drawer.drawer-open > .drawer-side {
+  position: absolute !important;
+}
+```
+
+**Note**: This fix only applies to drawers in containers with `overflow-hidden`. Full-page drawers work correctly without this override.
+
+See [`demo/custom-components.css`](demo/custom-components.css#L376-L400) for the complete fix.
+
+
 ## TODO utility
 - utility hooks
     - [ ] toggle
