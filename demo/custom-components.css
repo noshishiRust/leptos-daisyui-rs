@@ -371,3 +371,30 @@
 .collapse-plus[open] > .collapse-title:after {
   content: "-" !important;
 }
+
+
+/* ==================== Drawer Container-Relative Positioning Fix ==================== */
+
+/**
+ * Fix for drawer close animation appearing at wrong position.
+ *
+ * Root cause: daisyUI sets .drawer-side to position:fixed (viewport-relative) when
+ * closed, but position:sticky (container-relative) when open. This causes the close
+ * animation to slide to viewport left edge instead of container left edge.
+ *
+ * Solution: Force drawer-side to always use position:absolute within overflow-hidden
+ * containers, making it container-relative in both open and closed states.
+ */
+
+/* Target drawers inside overflow-hidden containers (like the demo) */
+.overflow-hidden > .drawer > .drawer-side {
+  position: absolute !important;
+  inset-inline-start: 0 !important;
+  height: 100% !important;
+}
+
+/* When drawer-open, override sticky positioning to absolute */
+.overflow-hidden > .drawer.drawer-open > .drawer-toggle:checked ~ .drawer-side,
+.overflow-hidden > .drawer.drawer-open > .drawer-side {
+  position: absolute !important;
+}
