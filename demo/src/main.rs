@@ -52,6 +52,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/checkbox") view=CheckboxDemo />
                     <Route path=path!("/collapse") view=CollapseDemo />
                     <Route path=path!("/countdown") view=CountdownDemo />
+                    <Route path=path!("/data-table") view=DataTableDemo />
                     <Route path=path!("/diff") view=DiffDemo />
                     <Route path=path!("/divider") view=DividerDemo />
                     <Route path=path!("/dock") view=DockDemo />

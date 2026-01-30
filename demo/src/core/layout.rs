@@ -259,6 +259,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "countdown",
                 },
                 ComponentItem {
+                    name: "DataTable",
+                    href: "/components/data-table",
+                    value: "data-table",
+                },
+                ComponentItem {
                     name: "Diff",
                     href: "/components/diff",
                     value: "diff",
