@@ -88,21 +88,21 @@ pub fn FooterDemo() -> impl IntoView {
                         <h6 class="footer-title">"Social"</h6>
                         <div class="grid grid-flow-col gap-4">
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
                                 <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                             </a>
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
                                 <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                             </a>
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
@@ -124,21 +124,21 @@ pub fn FooterDemo() -> impl IntoView {
                     <nav>
                         <div class="grid grid-flow-col gap-4">
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
                                 <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                             </a>
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
                                 <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                             </a>
                             <a
-                                href="javascript:void(0)"
+                                href="#"
                                 class="link"
                                 on:click=move |e| e.prevent_default()
                             >
@@ -252,21 +252,21 @@ pub fn FooterDemo() -> impl IntoView {
                         <nav class="md:place-self-center md:justify-self-end">
                             <div class="grid grid-flow-col gap-4">
                                 <a
-                                    href="javascript:void(0)"
+                                    href="#"
                                     class="link"
                                     on:click=move |e| e.prevent_default()
                                 >
                                     <Icon icon=icondata::AiTwitterOutlined attr:class="w-6 h-6" />
                                 </a>
                                 <a
-                                    href="javascript:void(0)"
+                                    href="#"
                                     class="link"
                                     on:click=move |e| e.prevent_default()
                                 >
                                     <Icon icon=icondata::AiFacebookOutlined attr:class="w-6 h-6" />
                                 </a>
                                 <a
-                                    href="javascript:void(0)"
+                                    href="#"
                                     class="link"
                                     on:click=move |e| e.prevent_default()
                                 >

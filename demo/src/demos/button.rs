@@ -149,7 +149,7 @@ pub fn ButtonDemo() -> impl IntoView {
             <Section title="Link Button">
                 <div class="flex items-center gap-2">
                     <LinkButton
-                        href="javascript:void(0)"
+                        href="#"
                         color=ButtonColor::Primary
                         on:click=move |e| {
                             e.prevent_default();
@@ -158,7 +158,7 @@ pub fn ButtonDemo() -> impl IntoView {
                         "Primary Link"
                     </LinkButton>
                     <LinkButton
-                        href="javascript:void(0)"
+                        href="#"
                         style=ButtonStyle::Outline
                         on:click=move |e| {
                             e.prevent_default();
@@ -167,7 +167,7 @@ pub fn ButtonDemo() -> impl IntoView {
                         "Outline Link"
                     </LinkButton>
                     <LinkButton
-                        href="javascript:void(0)"
+                        href="#"
                         style=ButtonStyle::Ghost
                         on:click=move |e| {
                             e.prevent_default();
