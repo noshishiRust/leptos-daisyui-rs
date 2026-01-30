@@ -254,6 +254,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "collapse",
                 },
                 ComponentItem {
+                    name: "ConfigProvider",
+                    href: "/components/config-provider",
+                    value: "config-provider",
+                },
+                ComponentItem {
                     name: "Countdown",
                     href: "/components/countdown",
                     value: "countdown",
