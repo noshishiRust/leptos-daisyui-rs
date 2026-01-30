@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_daisyui_rs::*;
+use leptos_daisyui_rs::components::*;
 
 #[component]
 pub fn ConfigProviderDemo() -> impl IntoView {
