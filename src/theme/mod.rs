@@ -32,6 +32,7 @@
 //! ```
 
 pub mod css_injection;
+pub mod export_import;
 pub mod provider;
 pub mod storage;
 pub mod types;
@@ -41,6 +42,7 @@ pub mod utils;
 mod tests;
 
 pub use css_injection::*;
+pub use export_import::*;
 pub use provider::*;
 pub use storage::*;
 pub use types::*;
