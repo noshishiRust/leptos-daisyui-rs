@@ -134,3 +134,31 @@
 @source inline("tooltip tooltip-open tooltip-top tooltip-bottom tooltip-left tooltip-right tooltip-neutral tooltip-primary tooltip-secondary tooltip-accent tooltip-info tooltip-success tooltip-warning tooltip-error");
 /* Validator */
 @source inline("validator validator-hint");
+
+/* Enhanced Button Push Effect */
+@layer components {
+  .btn {
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    /* Enhanced resting shadow for pronounced depth */
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15), 0 3px 6px -2px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .btn:active:not(:disabled):not(.btn-disabled) {
+    /* More pronounced push - 6px down */
+    transform: translateY(6px) !important;
+    /* Flattened shadow when pressed */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* Maintain ghost and link button styles */
+  .btn-ghost:not(:disabled):not(.btn-disabled),
+  .btn-link:not(:disabled):not(.btn-disabled) {
+    box-shadow: none !important;
+  }
+
+  .btn-ghost:active:not(:disabled):not(.btn-disabled),
+  .btn-link:active:not(:disabled):not(.btn-disabled) {
+    transform: translateY(3px) !important;
+  }
+}

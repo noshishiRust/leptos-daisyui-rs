@@ -70,6 +70,21 @@ pub fn ButtonDemo() -> impl IntoView {
                 </Button>
             </Section>
 
+            <Section title="Push Effect Demo">
+                <div class="flex flex-col gap-4">
+                    <p class="text-sm opacity-70">
+                        "Click any button to see the enhanced push-depth effect"
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <Button color=ButtonColor::Primary>"Click Me!"</Button>
+                        <Button color=ButtonColor::Secondary>"Press Me!"</Button>
+                        <Button color=ButtonColor::Accent>"Push Me!"</Button>
+                        <Button style=ButtonStyle::Outline>"Outlined"</Button>
+                        <Button style=ButtonStyle::Ghost>"Ghost"</Button>
+                    </div>
+                </div>
+            </Section>
+
             <Section title="Reactive Examples">
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center gap-2">
