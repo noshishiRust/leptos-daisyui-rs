@@ -94,11 +94,10 @@ pub fn Slider(
             step=move || step.get().to_string()
             disabled=disabled
             on:input=move |ev| {
-                if let Ok(val) = event_target_value(&ev).parse::<f64>() {
-                    if let Some(ref callback) = on_change {
+                if let Ok(val) = event_target_value(&ev).parse::<f64>()
+                    && let Some(ref callback) = on_change {
                         callback.run(val);
                     }
-                }
             }
 
             class=move || {
