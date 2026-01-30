@@ -81,7 +81,7 @@ pub fn PresetThemesGallery() -> impl IntoView {
                                         <p class="text-sm opacity-70">{description}</p>
                                     }.into_any()
                                 } else {
-                                    view! { <></> }.into_any()
+                                    ().into_any()
                                 }}
 
                                 // Color swatches
@@ -115,7 +115,7 @@ pub fn PresetThemesGallery() -> impl IntoView {
                                         </div>
                                     }.into_any()
                                 } else {
-                                    view! { <></> }.into_any()
+                                    ().into_any()
                                 }}
 
                                 <div class="card-actions justify-end mt-2">
