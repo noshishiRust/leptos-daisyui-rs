@@ -60,6 +60,7 @@ pub mod table;
 pub mod text_rotate;
 pub mod textarea;
 pub mod theme_controller;
+pub mod theming;
 pub mod timeline;
 pub mod toast;
 pub mod toggle;
