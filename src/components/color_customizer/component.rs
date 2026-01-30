@@ -154,15 +154,14 @@ pub fn ColorCustomizer() -> impl IntoView {
                                             class="btn btn-ghost btn-sm"
                                             on:click=move |_| {
                                                 theme_ctx.config.update(|config| {
-                                                    if let Some(ref mut overrides) = config.overrides {
-                                                        if let Some(ref mut colors) = overrides.colors {
-                                                            match key_for_reset.as_str() {
-                                                                "primary" => colors.primary = None,
-                                                                "secondary" => colors.secondary = None,
-                                                                "accent" => colors.accent = None,
-                                                                "neutral" => colors.neutral = None,
-                                                                _ => {}
-                                                            }
+                                                    if let Some(ref mut overrides) = config.overrides
+                                                        && let Some(ref mut colors) = overrides.colors {
+                                                        match key_for_reset.as_str() {
+                                                            "primary" => colors.primary = None,
+                                                            "secondary" => colors.secondary = None,
+                                                            "accent" => colors.accent = None,
+                                                            "neutral" => colors.neutral = None,
+                                                            _ => {}
                                                         }
                                                     }
                                                 });
@@ -217,15 +216,14 @@ pub fn ColorCustomizer() -> impl IntoView {
                                             class="btn btn-ghost btn-sm"
                                             on:click=move |_| {
                                                 theme_ctx.config.update(|config| {
-                                                    if let Some(ref mut overrides) = config.overrides {
-                                                        if let Some(ref mut colors) = overrides.colors {
-                                                            match key_for_reset.as_str() {
-                                                                "base_100" => colors.base_100 = None,
-                                                                "base_200" => colors.base_200 = None,
-                                                                "base_300" => colors.base_300 = None,
-                                                                "base_content" => colors.base_content = None,
-                                                                _ => {}
-                                                            }
+                                                    if let Some(ref mut overrides) = config.overrides
+                                                        && let Some(ref mut colors) = overrides.colors {
+                                                        match key_for_reset.as_str() {
+                                                            "base_100" => colors.base_100 = None,
+                                                            "base_200" => colors.base_200 = None,
+                                                            "base_300" => colors.base_300 = None,
+                                                            "base_content" => colors.base_content = None,
+                                                            _ => {}
                                                         }
                                                     }
                                                 });
@@ -280,15 +278,14 @@ pub fn ColorCustomizer() -> impl IntoView {
                                             class="btn btn-ghost btn-sm"
                                             on:click=move |_| {
                                                 theme_ctx.config.update(|config| {
-                                                    if let Some(ref mut overrides) = config.overrides {
-                                                        if let Some(ref mut colors) = overrides.colors {
-                                                            match key_for_reset.as_str() {
-                                                                "info" => colors.info = None,
-                                                                "success" => colors.success = None,
-                                                                "warning" => colors.warning = None,
-                                                                "error" => colors.error = None,
-                                                                _ => {}
-                                                            }
+                                                    if let Some(ref mut overrides) = config.overrides
+                                                        && let Some(ref mut colors) = overrides.colors {
+                                                        match key_for_reset.as_str() {
+                                                            "info" => colors.info = None,
+                                                            "success" => colors.success = None,
+                                                            "warning" => colors.warning = None,
+                                                            "error" => colors.error = None,
+                                                            _ => {}
                                                         }
                                                     }
                                                 });
