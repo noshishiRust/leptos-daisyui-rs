@@ -1,4 +1,4 @@
-use super::style::{AccordionForceModifier, AccordionModifier};
+use super::style::{AccordionForceModifier, AccordionInputType, AccordionModifier};
 use crate::merge_classes;
 use leptos::{
     html::{Div, Input},
@@ -8,8 +8,11 @@ use leptos::{
 /// # Accordion Component
 ///
 /// A reactive Leptos wrapper for daisyUI's accordion/collapse component that allows for collapsible content sections.
-/// When multiple accordions share the same radio input name, only one can be open at a time, creating traditional
-/// accordion behavior.
+///
+/// ## Input Types
+/// - **Radio**: When multiple accordions share the same name, only one can be open at a time (traditional accordion).
+///   Note: Radio inputs cannot be unchecked by clicking them again - only by selecting another radio in the group.
+/// - **Checkbox**: Each accordion can be toggled independently. Can be clicked again to close (supports multiple open).
 ///
 /// ### Add to `input.css`
 /// ```css
@@ -21,18 +24,26 @@ use leptos::{
 /// - `inner_node_ref` - References the inner `<input>` element ([HTMLInputElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement))
 #[component]
 pub fn Accordion(
-    /// Radio input name for grouping accordion sections
+    /// Input type controlling accordion behavior
+    ///
+    /// - `Radio`: Only one accordion open at a time (requires `name` prop), cannot be closed by clicking again
+    /// - `Checkbox`: Accordion can be toggled independently, can be closed by clicking again
+    #[prop(optional, into)]
+    input_type: Signal<AccordionInputType>,
+
+    /// Input name for grouping accordion sections (required for Radio type)
     ///
     /// When multiple accordions share the same name, only one can be open at a time.
     /// Each group should have a unique name to avoid conflicts with other accordion groups.
+    /// Not needed for Checkbox type.
     #[prop(optional)]
     name: Option<&'static str>,
 
-    /// Reactive signal controlling whether the accordion is checked for open
+    /// Reactive signal controlling whether the accordion is checked/open
     #[prop(optional, into)]
     checked: Signal<bool>,
 
-    /// Reactive signal controlling whether the accordion is open/close
+    /// Reactive signal controlling force open/close state
     #[prop(optional, into)]
     force: Signal<AccordionForceModifier>,
 
@@ -48,7 +59,7 @@ pub fn Accordion(
     #[prop(optional)]
     outer_node_ref: NodeRef<Div>,
 
-    /// Node reference for the internal radio `<input>` element
+    /// Node reference for the internal `<input>` element
     #[prop(optional)]
     inner_node_ref: NodeRef<Input>,
 
@@ -67,7 +78,12 @@ pub fn Accordion(
                 )
             }
         >
-            <input node_ref=inner_node_ref type="radio" name=name checked=checked />
+            <input
+                node_ref=inner_node_ref
+                type=move || input_type.get().as_str()
+                name=name
+                checked=checked
+            />
             {children()}
         </div>
     }

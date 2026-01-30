@@ -25,7 +25,7 @@ pub fn DropdownDemo() -> impl IntoView {
             </Section>
 
             <Section title="Dropdown Positions" row=true>
-                <Dropdown>
+                <Dropdown placement=DropdownPlacement::Top>
                     <Button>"Top"</Button>
                     <DropdownContent is_menu=true class="bg-base-100 rounded-box p-2 shadow">
                         <MenuItem>"Item1"</MenuItem>

@@ -9,9 +9,14 @@ pub fn AccordionDemo() -> impl IntoView {
             title="Accordion"
             description="Accordion is used for showing and hiding content but only one item can stay open at a time"
         >
-            <Section title="Basic Accordion">
+            <Section title="Radio Accordion (Only one open at a time)">
+                <p class="text-sm text-base-content/70 mb-4">
+                    "Radio accordions share a name and only allow one item open at a time. "
+                    "Note: Cannot be closed by clicking again - only by opening another item."
+                </p>
                 <div class="max-w-md">
                     <Accordion
+                        input_type=AccordionInputType::Radio
                         name="demo1"
                         checked=true
                         modifier=AccordionModifier::Arrow
@@ -26,6 +31,7 @@ pub fn AccordionDemo() -> impl IntoView {
                     </Accordion>
 
                     <Accordion
+                        input_type=AccordionInputType::Radio
                         name="demo1"
                         modifier=AccordionModifier::Arrow
                         class="border border-base-300"
@@ -40,10 +46,50 @@ pub fn AccordionDemo() -> impl IntoView {
                 </div>
             </Section>
 
-            <Section title="Modifiers">
+            <Section title="Checkbox Collapse (Toggle independently)">
+                <p class="text-sm text-base-content/70 mb-4">
+                    "Checkbox accordions can be toggled independently. Click again to close. Multiple can be open at once."
+                </p>
                 <div class="max-w-md space-y-2">
                     <Accordion
-                        name="demo2"
+                        input_type=AccordionInputType::Checkbox
+                        modifier=AccordionModifier::Plus
+                        class="border border-base-300"
+                    >
+                        <AccordionTitle>"Click to toggle (Plus indicator)"</AccordionTitle>
+                        <AccordionContent>
+                            <p>"This accordion can be opened and closed by clicking the title."</p>
+                        </AccordionContent>
+                    </Accordion>
+
+                    <Accordion
+                        input_type=AccordionInputType::Checkbox
+                        modifier=AccordionModifier::Arrow
+                        class="border border-base-300"
+                    >
+                        <AccordionTitle>"Independent toggle (Arrow indicator)"</AccordionTitle>
+                        <AccordionContent>
+                            <p>"Multiple checkbox accordions can be open at the same time."</p>
+                        </AccordionContent>
+                    </Accordion>
+
+                    <Accordion
+                        input_type=AccordionInputType::Checkbox
+                        modifier=AccordionModifier::Default
+                        class="border border-base-300"
+                    >
+                        <AccordionTitle>"No indicator"</AccordionTitle>
+                        <AccordionContent>
+                            <p>"Still works without visual indicators."</p>
+                        </AccordionContent>
+                    </Accordion>
+                </div>
+            </Section>
+
+            <Section title="Icon Modifiers">
+                <div class="max-w-md space-y-2">
+                    <Accordion
+                        input_type=AccordionInputType::Checkbox
                         modifier=AccordionModifier::Default
                         class="border border-base-300"
                     >
@@ -54,7 +100,7 @@ pub fn AccordionDemo() -> impl IntoView {
                     </Accordion>
 
                     <Accordion
-                        name="demo2"
+                        input_type=AccordionInputType::Checkbox
                         modifier=AccordionModifier::Arrow
                         class="border border-base-300"
                     >
@@ -65,7 +111,7 @@ pub fn AccordionDemo() -> impl IntoView {
                     </Accordion>
 
                     <Accordion
-                        name="demo2"
+                        input_type=AccordionInputType::Checkbox
                         modifier=AccordionModifier::Plus
                         class="border border-base-300"
                     >

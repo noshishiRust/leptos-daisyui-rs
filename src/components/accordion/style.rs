@@ -26,6 +26,31 @@ impl AccordionModifier {
     }
 }
 
+/// # Accordion Input Type
+///
+/// Controls the type of input used for accordion toggle behavior:
+/// - Radio: Only one accordion can be open at a time in a group (cannot be closed by clicking again)
+/// - Checkbox: Accordion can be toggled open/closed independently (can be closed by clicking again)
+#[derive(Clone, Debug, Default)]
+pub enum AccordionInputType {
+    /// Radio button - only one can be open at a time, cannot be closed by clicking again
+    #[default]
+    Radio,
+
+    /// Checkbox - can be toggled open/closed, allows multiple open accordions
+    Checkbox,
+}
+
+impl AccordionInputType {
+    /// Returns the HTML input type string
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            AccordionInputType::Radio => "radio",
+            AccordionInputType::Checkbox => "checkbox",
+        }
+    }
+}
+
 /// # Accordion Open force Modifiers
 #[derive(Clone, Debug, Default)]
 pub enum AccordionForceModifier {
@@ -33,10 +58,10 @@ pub enum AccordionForceModifier {
     #[default]
     Default,
 
-    /// Force openm
+    /// Force open
     Open,
 
-    /// Force clse
+    /// Force close
     Close,
 }
 
@@ -45,7 +70,7 @@ impl AccordionForceModifier {
     pub fn as_str(&self) -> &'static str {
         match self {
             AccordionForceModifier::Default => "",
-            AccordionForceModifier::Open => "collapse-opem",
+            AccordionForceModifier::Open => "collapse-open",
             AccordionForceModifier::Close => "collapse-close",
         }
     }

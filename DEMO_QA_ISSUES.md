@@ -5,6 +5,15 @@ This document tracks all issues discovered during visual testing of the leptos-d
 **Testing Date**: 2026-01-29
 **Total Issues Found**: 33
 **Issues Created in Beads**: 33
+**Issues Resolved**: 2 (75e, egz)
+
+## Recent Fixes (2026-01-29)
+
+### ✅ Accordion Issues Resolved
+- **leptos-daisyui-rs-75e**: Accordion toggle functionality - Added checkbox input type support for proper toggle behavior
+- **leptos-daisyui-rs-egz**: Plus indicator symbol - Fixed CSS class typo ("collapse-opem" → "collapse-open")
+
+See `.github-issues/ACCORDION_FIXES_2026-01-29.md` for detailed fix documentation.
 
 ## Issue Summary by Priority
 
@@ -27,7 +36,7 @@ Issues that prevent components from being usable or visible.
 | leptos-daisyui-rs-dzz | Navbar | Components only show letter 's' |
 | leptos-daisyui-rs-em5 | Indicator | All badges in top-right, not showing various positions |
 
-### P1 - High (11 issues)
+### P1 - High (9 issues remaining, 2 resolved)
 Functional bugs and unimplemented features that impact UX.
 
 | Issue ID | Component | Description |
@@ -40,8 +49,8 @@ Functional bugs and unimplemented features that impact UX.
 | leptos-daisyui-rs-rlk | Footer | Social icons cause page scroll on hover/click |
 | leptos-daisyui-rs-dzw | Dropdown | Top Dropdown opens below instead of above |
 | leptos-daisyui-rs-ugi | FAB | Flower Layout shows buttons off-screen |
-| leptos-daisyui-rs-75e | Accordion | Does not close when clicking up-carat |
-| leptos-daisyui-rs-egz | Accordion | Plus indicator shows wrong symbol |
+| ~~leptos-daisyui-rs-75e~~ | Accordion | ~~Does not close when clicking up-carat~~ ✅ FIXED |
+| ~~leptos-daisyui-rs-egz~~ | Accordion | ~~Plus indicator shows wrong symbol~~ ✅ FIXED |
 | leptos-daisyui-rs-8jv | Drawer | Close animation shows at wrong position |
 
 ### P2 - Medium (4 issues)
@@ -100,24 +109,28 @@ Components appear in wrong location:
 
 **Action**: Review CSS positioning classes and JavaScript positioning logic.
 
-### Functional Issues (4 issues - P0/P1)
+### Functional Issues (2 issues - P0, 2 resolved)
 Components don't work as expected:
 - Pagination not updating (1lk, pt4)
-- Accordion toggle broken (75e)
+- ~~Accordion toggle broken (75e)~~ ✅ FIXED
 - Navbar rendering only 's' (dzz)
 
 **Root Cause**: State management issues or event handlers not wired correctly.
 
 **Action**: Debug event handlers and reactive signals.
 
-### Rendering Issues (2 issues - P0/P1)
+**Fixed**: Accordion now supports both Radio (traditional) and Checkbox (toggle) input types.
+
+### Rendering Issues (1 issue - P0, 1 resolved)
 Visual display problems:
-- Accordion symbol encoding (egz)
+- ~~Accordion symbol encoding (egz)~~ ✅ FIXED
 - Navbar showing only letter 's' (dzz)
 
 **Root Cause**: Character encoding issues or CSS problems.
 
 **Action**: Check Unicode characters and font rendering.
+
+**Fixed**: Typo in CSS class name corrected ("collapse-opem" → "collapse-open").
 
 ### Animation Issues (1 issue - P1)
 - Drawer close animation at wrong position (8jv)
@@ -268,8 +281,8 @@ After fixes, verify each component:
 ### Positioning
 - [ ] Top Dropdown opens above button
 - [ ] FAB Flower Layout stays on screen
-- [ ] Accordion toggle works correctly
-- [ ] Accordion symbols display correctly
+- [x] Accordion toggle works correctly ✅
+- [x] Accordion symbols display correctly ✅
 - [ ] Drawer animation closes at correct position
 
 ### Enhancements

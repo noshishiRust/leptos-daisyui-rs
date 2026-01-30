@@ -10,11 +10,13 @@ pub fn FabDemo() -> impl IntoView {
             description="Floating action buttons with speed dial functionality"
         >
             <Section title="Basic FAB - Vertical Layout">
-                <div class="flex justify-center">
+                <div class="relative flex justify-center min-h-80 items-center">
                     <Fab>
-                        <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
-                            "+"
-                        </Button>
+                        <div tabindex="0" role="button">
+                            <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
+                                "+"
+                            </Button>
+                        </div>
                         <FabClose>
                             <Button color=ButtonColor::Error shape=ButtonShape::Circle>
                                 "×"
@@ -34,11 +36,13 @@ pub fn FabDemo() -> impl IntoView {
             </Section>
 
             <Section title="FAB with Main Action">
-                <div class="flex justify-center">
+                <div class="relative flex justify-center min-h-80 items-center">
                     <Fab>
-                        <Button color=ButtonColor::Success shape=ButtonShape::Circle>
-                            "☰"
-                        </Button>
+                        <div tabindex="0" role="button">
+                            <Button color=ButtonColor::Success shape=ButtonShape::Circle>
+                                "☰"
+                            </Button>
+                        </div>
                         <FabMainAction>
                             <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
                                 "✓"
@@ -58,11 +62,13 @@ pub fn FabDemo() -> impl IntoView {
             </Section>
 
             <Section title="Flower Layout (Quarter Circle)">
-                <div class="flex justify-center">
+                <div class="relative flex justify-center min-h-96 items-center">
                     <Fab flower=Signal::derive(|| true)>
-                        <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
-                            "+"
-                        </Button>
+                        <div tabindex="0" role="button">
+                            <Button color=ButtonColor::Primary shape=ButtonShape::Circle>
+                                "+"
+                            </Button>
+                        </div>
                         <FabClose>
                             <Button color=ButtonColor::Error shape=ButtonShape::Circle>
                                 "×"
@@ -85,15 +91,17 @@ pub fn FabDemo() -> impl IntoView {
             </Section>
 
             <Section title="Different Sizes">
-                <div class="flex gap-8 justify-center items-start">
+                <div class="relative flex gap-8 justify-center items-start min-h-64">
                     <Fab>
-                        <Button
-                            color=ButtonColor::Primary
-                            shape=ButtonShape::Circle
-                            size=ButtonSize::Sm
-                        >
-                            "+"
-                        </Button>
+                        <div tabindex="0" role="button">
+                            <Button
+                                color=ButtonColor::Primary
+                                shape=ButtonShape::Circle
+                                size=ButtonSize::Sm
+                            >
+                                "+"
+                            </Button>
+                        </div>
                         <FabClose>
                             <Button
                                 color=ButtonColor::Error
@@ -113,13 +121,15 @@ pub fn FabDemo() -> impl IntoView {
                     </Fab>
 
                     <Fab>
-                        <Button
-                            color=ButtonColor::Primary
-                            shape=ButtonShape::Circle
-                            size=ButtonSize::Lg
-                        >
-                            "+"
-                        </Button>
+                        <div tabindex="0" role="button">
+                            <Button
+                                color=ButtonColor::Primary
+                                shape=ButtonShape::Circle
+                                size=ButtonSize::Lg
+                            >
+                                "+"
+                            </Button>
+                        </div>
                         <FabClose>
                             <Button
                                 color=ButtonColor::Error
@@ -145,7 +155,8 @@ pub fn FabDemo() -> impl IntoView {
                     <div>
                         <strong>"Tip:"</strong>
                         " Click or focus on the FAB trigger button to expand the speed dial menu. "
-                        "The component uses focusable divs for Safari compatibility."
+                        "The trigger button should be wrapped in a div with tabindex=\"0\" and role=\"button\" for proper accessibility. "
+                        "Flower layout can accommodate 1-4 action buttons arranged in a quarter-circle pattern."
                     </div>
                 </div>
             </Section>

@@ -12,9 +12,10 @@ use leptos::{html::Div, prelude::*};
 /// ```
 ///
 /// ## Important Notes
-/// - Uses a focusable `<div>` with `tabindex="0"` and `role="button"` for browser compatibility
-/// - Safari has a CSS bug preventing `<button>` elements from being focused
-/// - Speed dial buttons display on click/focus of the main trigger
+/// - The FAB container uses `position: fixed` and should be placed at the root level
+/// - First child should be the trigger button (typically with `tabindex="0" role="button"`)
+/// - Flower layout supports 1-4 action buttons (excluding trigger and close/main-action)
+/// - Speed dial buttons display on click/focus of the FAB container
 ///
 /// ## Node References
 /// - `node_ref` - References the FAB container `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
@@ -45,8 +46,6 @@ pub fn Fab(
                 )
             }
             class:fab-flower=flower
-            tabindex="0"
-            role="button"
         >
             {children()}
         </div>

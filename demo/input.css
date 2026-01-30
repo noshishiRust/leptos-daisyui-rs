@@ -45,7 +45,7 @@
 /* File-Input */
 @source inline("file-input file-input-ghost file-input-neutral file-input-primary file-input-secondary file-input-accent file-input-info file-input-success file-input-warning file-input-error file-input-xs file-input-sm file-input-md file-input-lg file-input-xl");
 /* FAB (Floating Action Button) */
-@source inline("fab fab-trigger fab-actions fab-action fab-vertical fab-flower fab-xs fab-sm fab-md fab-lg fab-xl");
+@source inline("fab fab-close fab-main-action fab-flower");
 /* Filter */
 @source inline("filter filter-reset");
 /* Footer */
