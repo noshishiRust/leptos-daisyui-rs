@@ -37,6 +37,9 @@ pub mod storage;
 pub mod types;
 pub mod utils;
 
+#[cfg(test)]
+mod tests;
+
 pub use css_injection::*;
 pub use provider::*;
 pub use storage::*;
