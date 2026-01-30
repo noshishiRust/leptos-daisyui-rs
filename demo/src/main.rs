@@ -6,6 +6,7 @@ use demos::*;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
+use leptos_daisyui_rs::theme::{ThemeProvider, use_theme_context};
 use leptos_icons::Icon;
 use leptos_meta::*;
 use leptos_router::{
@@ -26,12 +27,19 @@ fn main() {
 fn App() -> impl IntoView {
     provide_meta_context();
 
-    // Global theme state
-    let (theme, set_theme) = signal("light".to_string());
-    provide_context(set_theme);
+    view! {
+        <ThemeProvider load_from_storage=true storage_key="leptos-daisyui-demo-theme">
+            <AppInner />
+        </ThemeProvider>
+    }
+}
+
+#[component]
+fn AppInner() -> impl IntoView {
+    let theme_ctx = use_theme_context();
 
     view! {
-        <Html attr:data-theme=move || theme.get() />
+        <Html attr:data-theme=move || theme_ctx.base_theme() />
         <Title text="Leptos x daisyUI" />
 
         <Router>
@@ -43,6 +51,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/alert") view=AlertDemo />
                     <Route path=path!("/avatar") view=AvatarDemo />
                     <Route path=path!("/badge") view=BadgeDemo />
+                    <Route path=path!("/base_theme_selector") view=BaseThemeSelectorDemo />
                     <Route path=path!("/breadcrumbs") view=BreadcrumbsDemo />
                     <Route path=path!("/button") view=ButtonDemo />
                     <Route path=path!("/calendar") view=CalendarDemo />

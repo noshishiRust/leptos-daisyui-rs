@@ -119,7 +119,7 @@ pub fn DataTableDemo() -> impl IntoView {
                 <div class="space-y-4">
                     <h2 class="text-xl font-semibold">"Empty State"</h2>
                     <DataTable
-                        data=Signal::derive(move || Vec::<HashMap<&'static str, String>>::new())
+                        data=Signal::derive(Vec::<HashMap<&'static str, String>>::new)
                         columns=Signal::derive(move || cols_for_empty.clone())
                         page_size=5
                     />
