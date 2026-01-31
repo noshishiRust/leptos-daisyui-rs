@@ -2,7 +2,6 @@
 ///
 /// Tests ARIA attributes, keyboard navigation, screen reader announcements,
 /// and focus management to ensure WCAG 2.2 compliance.
-
 #[cfg(test)]
 mod tests {
     use super::super::*;
