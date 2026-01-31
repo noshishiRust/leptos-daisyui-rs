@@ -87,6 +87,7 @@ pub use carousel::*;
 pub use chat::*;
 pub use checkbox::*;
 pub use collapse::*;
+pub use color_picker::*;
 pub use config_provider::*;
 pub use countdown::*;
 pub use data_table::*;

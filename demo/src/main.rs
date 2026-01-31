@@ -49,6 +49,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/") view=AccordionDemo />
                     <Route path=path!("/accordion") view=AccordionDemo />
                     <Route path=path!("/alert") view=AlertDemo />
+                    <Route path=path!("/auto-complete") view=AutoCompleteDemo />
                     <Route path=path!("/avatar") view=AvatarDemo />
                     <Route path=path!("/badge") view=BadgeDemo />
                     <Route path=path!("/base_theme_selector") view=BaseThemeSelectorDemo />
@@ -61,6 +62,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/chat") view=ChatDemo />
                     <Route path=path!("/checkbox") view=CheckboxDemo />
                     <Route path=path!("/collapse") view=CollapseDemo />
+                    <Route path=path!("/color-picker") view=ColorPickerDemo />
                     <Route path=path!("/config-provider") view=ConfigProviderDemo />
                     <Route path=path!("/countdown") view=CountdownDemo />
                     <Route path=path!("/data-table") view=DataTableDemo />
