@@ -33,6 +33,7 @@ pub mod icon;
 pub mod indicator;
 pub mod input;
 pub mod join;
+pub mod gantt;
 pub mod kanban;
 pub mod kbd;
 pub mod label;
