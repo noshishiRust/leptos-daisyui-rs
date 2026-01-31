@@ -1,8 +1,9 @@
 use leptos::prelude::*;
+use web_sys::DragEvent;
 
 use super::types::*;
 
-/// Kanban card component
+/// Kanban card component with drag support
 #[component]
 pub fn KanbanCardView(
     /// Card data
@@ -16,6 +17,14 @@ pub fn KanbanCardView(
     /// Callback when card should be deleted
     #[prop(into)]
     on_delete: Option<Callback<String>>,
+
+    /// Callback when drag starts
+    #[prop(into)]
+    on_drag_start: Option<Callback<String>>,
+
+    /// Whether this card is currently being dragged
+    #[prop(optional, into, default=false.into())]
+    is_dragging: Signal<bool>,
 ) -> impl IntoView {
     let card_id = Signal::derive(move || card.get().card_id.clone());
     let is_overdue = Signal::derive(move || card.get().is_overdue());
@@ -25,9 +34,22 @@ pub fn KanbanCardView(
             class="kanban-card bg-base-100 rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
             class:border-l-4=move || is_overdue.get()
             class:border-error=move || is_overdue.get()
+            class:opacity-50=move || is_dragging.get()
+            draggable="true"
             on:click=move |_| {
                 if let Some(ref cb) = on_click {
                     cb.run(card_id.get());
+                }
+            }
+            on:dragstart=move |ev: DragEvent| {
+                ev.prevent_default();
+                if let Some(ref cb) = on_drag_start {
+                    cb.run(card_id.get());
+                }
+                // Set drag data
+                if let Some(dt) = ev.data_transfer() {
+                    let _ = dt.set_data("text/plain", &card_id.get());
+                    dt.set_effect_allowed("move");
                 }
             }
         >

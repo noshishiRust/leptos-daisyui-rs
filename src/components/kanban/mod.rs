@@ -13,19 +13,20 @@
 ///
 /// ```rust
 /// use leptos::prelude::*;
-/// use leptos_daisyui_rs::components::*;
+/// use leptos_daisyui_rs::components::kanban::{KanbanBoard, KanbanColumn};
 ///
 /// #[component]
 /// pub fn App() -> impl IntoView {
-///     let columns = vec![
+///     let columns = Signal::derive(|| vec![
 ///         KanbanColumn::new("todo", "To Do"),
 ///         KanbanColumn::new("in-progress", "In Progress"),
 ///         KanbanColumn::new("done", "Done"),
-///     ];
+///     ]);
 ///
 ///     view! {
 ///         <KanbanBoard
-///             board_id="my-board"
+///             _board_id="my-board"
+///             title="My Board"
 ///             columns=columns
 ///         />
 ///     }
@@ -37,12 +38,14 @@ mod column;
 mod card;
 mod types;
 mod filters;
+mod drag;
 
 pub use board::*;
 pub use column::*;
 pub use card::*;
 pub use types::*;
 pub use filters::*;
+pub use drag::*;
 
 #[cfg(test)]
 mod tests;

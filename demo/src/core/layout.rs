@@ -289,6 +289,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "icon",
                 },
                 ComponentItem {
+                    name: "Kanban",
+                    href: "/components/kanban",
+                    value: "kanban",
+                },
+                ComponentItem {
                     name: "Kbd",
                     href: "/components/kbd",
                     value: "kbd",

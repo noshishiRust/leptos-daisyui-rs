@@ -1,14 +1,36 @@
 use leptos::prelude::*;
+use web_sys::DragEvent;
 
 use super::types::*;
 use super::card::KanbanCardView;
+use super::drag::*;
 
-/// Kanban column component
+/// Kanban column component with drag-and-drop support
 #[component]
 pub fn KanbanColumnView(
     /// Column data
     #[prop(into)]
     column: Signal<KanbanColumn>,
+
+    /// Drag state signal
+    #[prop(into)]
+    drag_state: Signal<DragState>,
+
+    /// Callback when drag starts from this column
+    #[prop(into)]
+    on_drag_start: Option<Callback<String>>,
+
+    /// Callback when something is dragged over this column
+    #[prop(into)]
+    on_drag_over: Option<Callback<Option<usize>>>,
+
+    /// Callback when drag leaves this column
+    #[prop(into)]
+    on_drag_leave: Option<Callback<()>>,
+
+    /// Callback when something is dropped in this column
+    #[prop(into)]
+    on_drop: Option<Callback<usize>>,
 
     /// Callback when a card is clicked
     #[prop(into)]
@@ -97,15 +119,50 @@ pub fn KanbanColumnView(
                 <div
                     class="kanban-cards p-4 space-y-2"
                     class:overflow-y-auto=move || column.get().scrollable
-                    style="max-height: 500px;"
+                    class:bg-primary=move || {
+                        drag_state.get().is_drop_target(&column_id.get())
+                    }
+                    class:bg-opacity-10=move || {
+                        drag_state.get().is_drop_target(&column_id.get())
+                    }
+                    style="max-height: 500px; min-height: 200px;"
+                    on:dragover=move |ev: DragEvent| {
+                        ev.prevent_default();
+                        if let Some(ref cb) = on_drag_over {
+                            // For now, we'll drop at the end of the column
+                            cb.run(Some(column.get().cards.len()));
+                        }
+                        if let Some(dt) = ev.data_transfer() {
+                            dt.set_drop_effect("move");
+                        }
+                    }
+                    on:dragleave=move |_ev: DragEvent| {
+                        if let Some(ref cb) = on_drag_leave {
+                            cb.run(());
+                        }
+                    }
+                    on:drop=move |ev: DragEvent| {
+                        ev.prevent_default();
+                        if let Some(ref cb) = on_drop {
+                            // Drop at the end of the column
+                            cb.run(column.get().cards.len());
+                        }
+                    }
                 >
                     <For
                         each=move || column.get().cards
                         key=|card| card.card_id.clone()
                         children=move |card| {
+                            let card_id = card.card_id.clone();
+                            let is_dragging = Signal::derive(move || {
+                                drag_state.get().dragged_card.as_ref() == Some(&card_id)
+                            });
+
                             view! {
                                 <KanbanCardView
                                     card=Signal::derive(move || card.clone())
+                                    is_dragging=is_dragging
+                                    on_drag_start=on_drag_start.clone()
                                     on_click=on_card_click.clone()
                                     on_delete=on_card_delete.clone()
                                 />
