@@ -1,6 +1,6 @@
 //! # daisyUI Menu Component
 //!
-//! For more information, see: https://daisyui.com/components/menu/
+//! For more information, see: <https://daisyui.com/components/menu/>
 
 mod component;
 mod style;

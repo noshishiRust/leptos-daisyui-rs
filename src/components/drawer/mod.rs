@@ -1,6 +1,6 @@
 //! # daisyUI Drawer Component
 //!
-//! For more information, see: https://daisyui.com/components/drawer/
+//! For more information, see: <https://daisyui.com/components/drawer/>
 
 mod component;
 mod style;

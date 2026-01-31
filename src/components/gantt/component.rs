@@ -1,6 +1,6 @@
 use chrono::Utc;
 use leptos::prelude::*;
-use leptos::ev::MouseEvent;
+use leptos::ev::{KeyboardEvent, MouseEvent};
 use web_sys::WheelEvent;
 
 use crate::components::gantt::{
@@ -43,6 +43,10 @@ pub fn GanttChart(
     #[prop(optional)]
     on_view_mode_change: Option<Callback<ViewMode>>,
 
+    /// Callback when a task should be deleted
+    #[prop(optional)]
+    on_task_delete: Option<Callback<String>>,
+
     /// NodeRef for accessing the underlying DOM element
     #[prop(optional)]
     _node_ref: NodeRef<leptos::html::Div>,
@@ -82,6 +86,7 @@ pub fn GanttChart(
 
     // Selection state management
     let (selected_task_id, set_selected_task_id) = signal::<Option<String>>(None);
+    let (focused_task_index, set_focused_task_index) = signal::<Option<usize>>(None);
 
     // View mode state management
     let (view_mode, set_view_mode) = signal(initial_view_mode.get());

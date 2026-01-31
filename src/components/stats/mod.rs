@@ -1,6 +1,6 @@
 //! # daisyUI Stats Component
 //!
-//! For more information, see: https://daisyui.com/components/stats/
+//! For more information, see: <https://daisyui.com/components/stats/>
 
 mod component;
 

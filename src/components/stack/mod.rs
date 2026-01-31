@@ -1,6 +1,6 @@
 //! # daisyUI Stack Component
 //!
-//! For more information, see: https://daisyui.com/components/stack/
+//! For more information, see: <https://daisyui.com/components/stack/>
 
 mod component;
 mod style;

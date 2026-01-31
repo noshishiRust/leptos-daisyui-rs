@@ -1,6 +1,6 @@
 //! # Divider Component
 //!
-//! For more information, see: https://daisyui.com/components/divider/
+//! For more information, see: <https://daisyui.com/components/divider/>
 
 mod component;
 mod style;

@@ -1,6 +1,6 @@
 //! # Toggle Component
 //!
-//! For more information, see: https://daisyui.com/components/toggle/
+//! For more information, see: <https://daisyui.com/components/toggle/>
 
 mod component;
 mod style;

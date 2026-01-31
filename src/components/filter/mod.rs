@@ -1,6 +1,6 @@
 //! # daisyUI Filter Component
 //!
-//! For more information, see: https://daisyui.com/components/filter/
+//! For more information, see: <https://daisyui.com/components/filter/>
 
 mod component;
 

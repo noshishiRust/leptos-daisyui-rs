@@ -1,6 +1,6 @@
 //! # daisyUI Indicator Component
 //!
-//! For more information, see: https://daisyui.com/components/indicator/
+//! For more information, see: <https://daisyui.com/components/indicator/>
 
 mod component;
 mod style;

@@ -1,6 +1,6 @@
 //! # daisyUI Tab Component
 //!
-//! For more information, see: https://daisyui.com/components/tab/
+//! For more information, see: <https://daisyui.com/components/tab/>
 
 mod component;
 mod style;

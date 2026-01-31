@@ -1,6 +1,6 @@
 //! # daisyUI Toast Component
 //!
-//! For more information, see: https://daisyui.com/components/toast/
+//! For more information, see: <https://daisyui.com/components/toast/>
 
 mod component;
 mod style;
