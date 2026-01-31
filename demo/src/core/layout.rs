@@ -414,6 +414,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
             title: "Data Input",
             items: vec![
                 ComponentItem {
+                    name: "AutoComplete",
+                    href: "/components/auto-complete",
+                    value: "auto-complete",
+                },
+                ComponentItem {
                     name: "Calendar",
                     href: "/components/calendar",
                     value: "calendar",
@@ -422,6 +427,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "Checkbox",
                     href: "/components/checkbox",
                     value: "checkbox",
+                },
+                ComponentItem {
+                    name: "ColorPicker",
+                    href: "/components/color-picker",
+                    value: "color-picker",
                 },
                 ComponentItem {
                     name: "Fieldset",
