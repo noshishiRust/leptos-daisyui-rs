@@ -1,8 +1,5 @@
 use super::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
 
     // AvatarModifier tests
     #[test]
@@ -56,4 +53,3 @@ mod tests {
             assert_eq!(modifier.as_str(), expected);
         }
     }
-}

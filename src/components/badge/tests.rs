@@ -1,8 +1,5 @@
 use super::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
 
     // BadgeStyle tests
     #[test]
@@ -215,4 +212,3 @@ mod tests {
             assert_eq!(size.as_str(), expected);
         }
     }
-}

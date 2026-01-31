@@ -1,8 +1,5 @@
 use super::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
 
     // AlertStyle tests
     #[test]
@@ -160,4 +157,3 @@ mod tests {
             assert_eq!(direction.as_str(), expected);
         }
     }
-}

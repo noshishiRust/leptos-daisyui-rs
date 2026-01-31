@@ -1,8 +1,5 @@
 use super::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
 
     // AccordionModifier tests
     #[test]
@@ -99,4 +96,3 @@ mod tests {
         let force = AccordionForceModifier::Open;
         assert!(format!("{:?}", force).contains("Open"));
     }
-}
