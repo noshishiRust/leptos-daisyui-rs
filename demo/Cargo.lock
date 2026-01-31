@@ -156,6 +156,7 @@ dependencies = [
  "iana-time-zone",
  "js-sys",
  "num-traits",
+ "serde",
  "wasm-bindgen",
  "windows-link",
 ]
@@ -1093,6 +1094,7 @@ name = "leptos-daisyui-rs"
 version = "0.0.3"
 dependencies = [
  "base64",
+ "chrono",
  "js-sys",
  "leptos",
  "leptos_router",

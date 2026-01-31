@@ -29,8 +29,8 @@ mod drawer;
 mod dropdown;
 mod fab;
 mod field;
-// TODO: Re-enable when gantt module compilation is fixed
-// pub mod gantt;
+/// Gantt chart component for project timeline visualization
+pub mod gantt;
 mod fieldset;
 mod file_input;
 mod filter;

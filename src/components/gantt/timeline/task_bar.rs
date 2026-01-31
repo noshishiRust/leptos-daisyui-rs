@@ -95,6 +95,7 @@ fn calculate_bar_position(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use chrono::TimeZone;
 
     #[test]
     fn test_calculate_bar_position() {

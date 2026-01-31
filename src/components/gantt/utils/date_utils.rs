@@ -107,7 +107,7 @@ pub fn add_working_days(start: DateTime<Utc>, days: i64) -> DateTime<Utc> {
     let mut remaining = days;
 
     while remaining > 0 {
-        current = current + Duration::days(1);
+        current += Duration::days(1);
         if !is_weekend(current.weekday()) {
             remaining -= 1;
         }

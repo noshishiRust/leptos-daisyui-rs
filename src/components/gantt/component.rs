@@ -133,11 +133,12 @@ pub fn GanttChart(
                                     each=move || tasks.get()
                                     key=|task| task.id.clone()
                                     children=move |task| {
+                                        let task_id = task.id.clone();
                                         let task_signal = Signal::derive(move || task.clone());
                                         let tasks_list = tasks.get();
                                         let task_idx = tasks_list
                                             .iter()
-                                            .position(|t| t.id == task.id)
+                                            .position(|t| t.id == task_id)
                                             .unwrap_or(0);
                                         let y_pos = Signal::derive(move || (task_idx as u32) * 50);
 

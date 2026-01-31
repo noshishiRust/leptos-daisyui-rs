@@ -160,7 +160,7 @@ fn generate_weekend_shading(
             });
         }
 
-        current = current + chrono::Duration::days(1);
+        current += chrono::Duration::days(1);
         x += column_width;
     }
 
@@ -175,7 +175,8 @@ fn advance_by_view_mode(dt: DateTime<Utc>, mode: ViewMode) -> DateTime<Utc> {
         ViewMode::Day => dt + Duration::days(1),
         ViewMode::Week => dt + Duration::weeks(1),
         ViewMode::Month => {
-            let next_month = if dt.month() == 12 {
+            
+            if dt.month() == 12 {
                 chrono::Utc
                     .with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0)
                     .unwrap()
@@ -183,8 +184,7 @@ fn advance_by_view_mode(dt: DateTime<Utc>, mode: ViewMode) -> DateTime<Utc> {
                 chrono::Utc
                     .with_ymd_and_hms(dt.year(), dt.month() + 1, 1, 0, 0, 0)
                     .unwrap()
-            };
-            next_month
+            }
         }
         ViewMode::Quarter => dt + Duration::days(90),
         ViewMode::Year => chrono::Utc

@@ -106,7 +106,7 @@ fn generate_major_headers(
                     label: day_label,
                     width: column_width * hours_in_day,
                 });
-                current = current + chrono::Duration::days(1);
+                current += chrono::Duration::days(1);
             }
         }
         ViewMode::Day => {
@@ -130,7 +130,7 @@ fn generate_major_headers(
                     label: quarter_label,
                     width: column_width * 13, // ~13 weeks per quarter
                 });
-                current = current + chrono::Duration::days(90);
+                current += chrono::Duration::days(90);
             }
         }
         ViewMode::Month => {
@@ -192,7 +192,7 @@ fn generate_minor_headers(
                     label: current.format("%H:%M").to_string(),
                     width: column_width,
                 });
-                current = current + chrono::Duration::hours(1);
+                current += chrono::Duration::hours(1);
             }
         }
         ViewMode::Day => {
@@ -201,7 +201,7 @@ fn generate_minor_headers(
                     label: current.format("%d").to_string(),
                     width: column_width,
                 });
-                current = current + chrono::Duration::days(1);
+                current += chrono::Duration::days(1);
             }
         }
         ViewMode::Week => {
@@ -211,7 +211,7 @@ fn generate_minor_headers(
                     label: format!("W{}", week_num),
                     width: column_width,
                 });
-                current = current + chrono::Duration::weeks(1);
+                current += chrono::Duration::weeks(1);
             }
         }
         ViewMode::Month => {
@@ -230,7 +230,7 @@ fn generate_minor_headers(
                     label: format!("Q{}", quarter),
                     width: column_width,
                 });
-                current = current + chrono::Duration::days(90);
+                current += chrono::Duration::days(90);
             }
         }
         ViewMode::Year => {
