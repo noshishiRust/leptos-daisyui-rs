@@ -161,7 +161,7 @@ pub fn download_json(config: &ThemeConfiguration, filename: &str) -> Result<(), 
     blob_parts.push(&JsValue::from_str(&json));
 
     let mut blob_props = BlobPropertyBag::new();
-    blob_props.type_("application/json");
+    blob_props.set_type("application/json");
 
     let blob = Blob::new_with_str_sequence_and_options(&blob_parts, &blob_props)
         .map_err(|e| format!("Failed to create blob: {:?}", e))?;
