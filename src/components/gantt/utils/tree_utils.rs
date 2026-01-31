@@ -315,6 +315,7 @@ mod tests {
             dependencies: Vec::new(),
             assignees: Vec::new(),
             color: None,
+            read_only: false,
             metadata: HashMap::new(),
         }
     }
@@ -411,6 +412,7 @@ mod tests {
                 dependencies: Vec::new(),
                 assignees: Vec::new(),
                 color: None,
+                read_only: false,
                 metadata: HashMap::new(),
             },
             GanttTask {
@@ -424,6 +426,7 @@ mod tests {
                 dependencies: Vec::new(),
                 assignees: Vec::new(),
                 color: None,
+                read_only: false,
                 metadata: HashMap::new(),
             },
             GanttTask {
@@ -437,6 +440,7 @@ mod tests {
                 dependencies: Vec::new(),
                 assignees: Vec::new(),
                 color: None,
+                read_only: false,
                 metadata: HashMap::new(),
             },
         ];

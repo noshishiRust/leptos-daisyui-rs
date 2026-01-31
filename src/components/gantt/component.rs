@@ -184,6 +184,69 @@ pub fn GanttChart(
         }
     };
 
+    // Keyboard navigation handler
+    let on_keydown = move |e: KeyboardEvent| {
+        let task_list = tasks.get();
+        if task_list.is_empty() {
+            return;
+        }
+
+        let key = e.key();
+        match key.as_str() {
+            "ArrowDown" => {
+                e.prevent_default();
+                let current_idx = focused_task_index.get().unwrap_or(0);
+                let new_idx = (current_idx + 1).min(task_list.len() - 1);
+                set_focused_task_index.set(Some(new_idx));
+            }
+            "ArrowUp" => {
+                e.prevent_default();
+                if let Some(current_idx) = focused_task_index.get() {
+                    let new_idx = current_idx.saturating_sub(1);
+                    set_focused_task_index.set(Some(new_idx));
+                }
+            }
+            " " => {
+                // Space key - select focused task
+                e.prevent_default();
+                if let Some(idx) = focused_task_index.get() {
+                    if let Some(task) = task_list.get(idx) {
+                        let task_id = task.id.clone();
+                        set_selected_task_id.set(Some(task_id.clone()));
+                        if let Some(ref cb) = on_task_select {
+                            cb.run(task_id);
+                        }
+                    }
+                }
+            }
+            "Enter" => {
+                // Enter key - trigger click callback on focused task
+                e.prevent_default();
+                if let Some(idx) = focused_task_index.get() {
+                    if let Some(task) = task_list.get(idx) {
+                        let task_id = task.id.clone();
+                        if let Some(ref cb) = on_task_click {
+                            cb.run(task_id);
+                        }
+                    }
+                }
+            }
+            "Delete" => {
+                // Delete key - remove focused task
+                e.prevent_default();
+                if let Some(idx) = focused_task_index.get() {
+                    if let Some(task) = task_list.get(idx) {
+                        let task_id = task.id.clone();
+                        if let Some(ref cb) = on_task_delete {
+                            cb.run(task_id);
+                        }
+                    }
+                }
+            }
+            _ => {}
+        }
+    };
+
     view! {
         <div
             node_ref=container_ref

@@ -37,6 +37,10 @@ pub struct GanttTask {
     /// Custom color for the task bar (hex color)
     pub color: Option<String>,
 
+    /// Per-task read-only flag (overrides global read-only mode)
+    #[serde(default)]
+    pub read_only: bool,
+
     /// Additional metadata for custom extensions
     pub metadata: HashMap<String, String>,
 }
@@ -99,6 +103,7 @@ impl Default for GanttTask {
             dependencies: Vec::new(),
             assignees: Vec::new(),
             color: None,
+            read_only: false,
             metadata: HashMap::new(),
         }
     }
@@ -140,6 +145,7 @@ mod tests {
             dependencies: vec!["dep-1".to_string()],
             assignees: vec!["user1".to_string(), "user2".to_string()],
             color: Some("#ff0000".to_string()),
+            read_only: false,
             metadata: HashMap::from([("category".to_string(), "development".to_string())]),
         };
 
@@ -207,6 +213,7 @@ mod tests {
             dependencies: vec![],
             assignees: vec!["user1".to_string()],
             color: None,
+            read_only: false,
             metadata: HashMap::new(),
         };
 

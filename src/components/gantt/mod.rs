@@ -6,6 +6,8 @@ mod style;
 pub mod dialogs;
 /// Interaction handlers for drag, resize, and user input
 pub mod interactions;
+/// Read-only mode and permission system
+pub mod readonly;
 /// Task list panel component and utilities
 pub mod task_list;
 /// Timeline rendering and visualization
@@ -15,4 +17,5 @@ pub mod utils;
 
 pub use component::*;
 pub use models::*;
+pub use readonly::*;
 pub use style::*;
