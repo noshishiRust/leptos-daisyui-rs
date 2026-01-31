@@ -48,6 +48,7 @@ pub fn ThemeExportImport() -> impl IntoView {
                 // Create and download file
                 #[cfg(target_arch = "wasm32")]
                 {
+                    let _ = json;
                     use crate::theme::download_theme;
                     let config = theme_ctx.config.get();
                     match download_theme(&config, Some("my-theme.json")) {
@@ -82,7 +83,6 @@ pub fn ThemeExportImport() -> impl IntoView {
             Ok(json) => {
                 #[cfg(target_arch = "wasm32")]
                 {
-                    use wasm_bindgen::JsCast;
                     if let Some(window) = web_sys::window() {
                         let clipboard = window.navigator().clipboard();
                         let promise = clipboard.write_text(&json);
@@ -119,8 +119,6 @@ pub fn ThemeExportImport() -> impl IntoView {
     // Import theme from file
     #[cfg(target_arch = "wasm32")]
     let handle_import = move |ev: Event| {
-        use web_sys::FileList;
-
         if let Some(target) = ev.target() {
             if let Ok(input) = target.dyn_into::<HtmlInputElement>() {
                 if let Some(files) = input.files() {

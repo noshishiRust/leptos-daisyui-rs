@@ -160,7 +160,7 @@ pub fn download_json(config: &ThemeConfiguration, filename: &str) -> Result<(), 
     let blob_parts = js_sys::Array::new();
     blob_parts.push(&JsValue::from_str(&json));
 
-    let mut blob_props = BlobPropertyBag::new();
+    let blob_props = BlobPropertyBag::new();
     blob_props.set_type("application/json");
 
     let blob = Blob::new_with_str_sequence_and_options(&blob_parts, &blob_props)
