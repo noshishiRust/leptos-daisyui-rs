@@ -172,8 +172,10 @@ pub fn GanttChart(
                                         }
                                     >
                                         <div class="font-medium">{task.name.clone()}</div>
-                                        <div class="text-xs text-base-content/60"
-                                            class:text-primary-content/80=move || is_selected.get()
+                                        <div class="text-xs"
+                                            class:text-base-content=move || !is_selected.get()
+                                            class:opacity-60=move || !is_selected.get()
+                                            class:text-primary-content=move || is_selected.get()
                                         >
                                             {format!("Progress: {:.0}%", task.progress * 100.0)}
                                         </div>
@@ -226,7 +228,6 @@ pub fn GanttChart(
                                     children=move |task| {
                                         let task_id = task.id.clone();
                                         let task_id_for_check = task_id.clone();
-                                        let task_id_for_select = task_id.clone();
                                         let task_signal = Signal::derive(move || task.clone());
                                         let tasks_list = tasks.get();
                                         let task_idx = tasks_list

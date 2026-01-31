@@ -29,6 +29,10 @@ pub fn TaskBar(
     /// Callback when the task bar is clicked
     #[prop(into, default=None)]
     on_click: Option<Callback<String>>,
+
+    /// Whether this task is currently selected
+    #[prop(into, default=Signal::derive(|| false))]
+    is_selected: Signal<bool>,
 ) -> impl IntoView {
     let position_width = Signal::derive(move || {
         let t = task.get();
@@ -47,7 +51,11 @@ pub fn TaskBar(
 
     view! {
         <div
-            class="task-bar absolute cursor-pointer rounded transition-shadow hover:shadow-lg"
+            class="task-bar absolute cursor-pointer rounded transition-all hover:shadow-lg"
+            class:ring-2=move || is_selected.get()
+            class:ring-primary=move || is_selected.get()
+            class:ring-offset-2=move || is_selected.get()
+            class:shadow-xl=move || is_selected.get()
             style:left=move || format!("{}px", position_width.get().0)
             style:width=move || format!("{}px", position_width.get().1)
             style:top=move || format!("{}px", y_position.get())
