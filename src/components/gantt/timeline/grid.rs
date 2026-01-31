@@ -25,6 +25,14 @@ pub fn TimelineGrid(
     /// Height of the grid
     #[prop(into, default=Signal::derive(|| 600))]
     height: Signal<u32>,
+
+    /// Custom holiday dates to shade (in addition to weekends)
+    #[prop(into, default=Signal::derive(|| Vec::new()))]
+    holidays: Signal<Vec<DateTime<Utc>>>,
+
+    /// Show today marker line
+    #[prop(into, default=Signal::derive(|| true))]
+    show_today_marker: Signal<bool>,
 ) -> impl IntoView {
     let grid_lines = Signal::derive(move || {
         let start = start_date.get();
@@ -39,8 +47,27 @@ pub fn TimelineGrid(
         let start = start_date.get();
         let end = end_date.get();
         let width = column_width.get();
+        let holiday_dates = holidays.get();
 
-        generate_weekend_shading(start, end, width)
+        generate_weekend_and_holiday_shading(start, end, width, &holiday_dates)
+    });
+
+    let today_marker_position = Signal::derive(move || {
+        if !show_today_marker.get() {
+            return None;
+        }
+
+        let start = start_date.get();
+        let end = end_date.get();
+        let now = Utc::now();
+        let width = column_width.get();
+
+        if now < start || now > end {
+            return None;
+        }
+
+        let days_from_start = (now - start).num_days();
+        Some((days_from_start as u32) * width)
     });
 
     let total_width = Signal::derive(move || {
@@ -98,6 +125,44 @@ pub fn TimelineGrid(
                     }
                 }
             />
+
+            // Today marker line
+            <Show when=move || today_marker_position.get().is_some()>
+                {
+                    let x_pos = today_marker_position.get().unwrap_or(0);
+                    view! {
+                        <g class="today-marker">
+                            <line
+                                x1=x_pos
+                                y1=0
+                                x2=x_pos
+                                y2=move || height.get()
+                                stroke="#ef4444"
+                                stroke-width=2
+                                opacity=0.8
+                            />
+                            <rect
+                                x=x_pos - 25
+                                y=5
+                                width=50
+                                height=18
+                                rx=3
+                                fill="#ef4444"
+                            />
+                            <text
+                                x=x_pos
+                                y=17
+                                text-anchor="middle"
+                                fill="white"
+                                font-size="10"
+                                font-weight="600"
+                            >
+                                "TODAY"
+                            </text>
+                        </g>
+                    }
+                }
+            </Show>
         </svg>
     }
 }
@@ -143,17 +208,22 @@ fn generate_grid_lines(
     lines
 }
 
-fn generate_weekend_shading(
+fn generate_weekend_and_holiday_shading(
     start: DateTime<Utc>,
     end: DateTime<Utc>,
     column_width: u32,
+    holidays: &[DateTime<Utc>],
 ) -> Vec<WeekendShade> {
     let mut shading = Vec::new();
     let mut current = start;
     let mut x = 0;
 
     while current <= end {
-        if is_weekend(current.weekday()) {
+        let is_holiday = holidays.iter().any(|h| {
+            h.date_naive() == current.date_naive()
+        });
+
+        if is_weekend(current.weekday()) || is_holiday {
             shading.push(WeekendShade {
                 x,
                 width: column_width,
