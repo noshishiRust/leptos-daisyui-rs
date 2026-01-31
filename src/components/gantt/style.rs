@@ -60,6 +60,40 @@ impl ViewMode {
             ViewMode::Year => "year",
         }
     }
+
+    /// Zoom in to a more detailed view mode (if possible)
+    pub fn zoom_in(self) -> Self {
+        match self {
+            ViewMode::Year => ViewMode::Quarter,
+            ViewMode::Quarter => ViewMode::Month,
+            ViewMode::Month => ViewMode::Week,
+            ViewMode::Week => ViewMode::Day,
+            ViewMode::Day => ViewMode::Hour,
+            ViewMode::Hour => ViewMode::Hour, // Already at maximum zoom
+        }
+    }
+
+    /// Zoom out to a less detailed view mode (if possible)
+    pub fn zoom_out(self) -> Self {
+        match self {
+            ViewMode::Hour => ViewMode::Day,
+            ViewMode::Day => ViewMode::Week,
+            ViewMode::Week => ViewMode::Month,
+            ViewMode::Month => ViewMode::Quarter,
+            ViewMode::Quarter => ViewMode::Year,
+            ViewMode::Year => ViewMode::Year, // Already at minimum zoom
+        }
+    }
+
+    /// Check if zooming in is possible
+    pub fn can_zoom_in(self) -> bool {
+        !matches!(self, ViewMode::Hour)
+    }
+
+    /// Check if zooming out is possible
+    pub fn can_zoom_out(self) -> bool {
+        !matches!(self, ViewMode::Year)
+    }
 }
 
 /// Height/density setting for task bars

@@ -1,6 +1,7 @@
 use chrono::Utc;
 use leptos::prelude::*;
 use leptos::ev::MouseEvent;
+use web_sys::WheelEvent;
 
 use crate::components::gantt::{
     timeline::{TaskBar, TimelineGrid, TimelineScale},
@@ -14,9 +15,9 @@ pub fn GanttChart(
     #[prop(into)]
     tasks: Signal<Vec<GanttTask>>,
 
-    /// View mode for the timeline (Hour/Day/Week/Month/Quarter/Year)
+    /// Initial view mode for the timeline (Hour/Day/Week/Month/Quarter/Year)
     #[prop(optional, into, default=Signal::derive(|| ViewMode::Day))]
-    view_mode: Signal<ViewMode>,
+    initial_view_mode: Signal<ViewMode>,
 
     /// Task bar height/density setting
     #[prop(optional, into, default=Signal::derive(|| GanttTaskHeight::Medium))]
@@ -37,6 +38,10 @@ pub fn GanttChart(
     /// Callback when a task is selected
     #[prop(optional)]
     on_task_select: Option<Callback<String>>,
+
+    /// Callback when the view mode changes (zoom)
+    #[prop(optional)]
+    on_view_mode_change: Option<Callback<ViewMode>>,
 
     /// NodeRef for accessing the underlying DOM element
     #[prop(optional)]
@@ -78,6 +83,32 @@ pub fn GanttChart(
     // Selection state management
     let (selected_task_id, set_selected_task_id) = signal::<Option<String>>(None);
 
+    // View mode state management
+    let (view_mode, set_view_mode) = signal(initial_view_mode.get());
+
+    // Zoom controls
+    let zoom_in = move |_| {
+        let current = view_mode.get();
+        if current.can_zoom_in() {
+            let new_mode = current.zoom_in();
+            set_view_mode.set(new_mode);
+            if let Some(ref cb) = on_view_mode_change {
+                cb.run(new_mode);
+            }
+        }
+    };
+
+    let zoom_out = move |_| {
+        let current = view_mode.get();
+        if current.can_zoom_out() {
+            let new_mode = current.zoom_out();
+            set_view_mode.set(new_mode);
+            if let Some(ref cb) = on_view_mode_change {
+                cb.run(new_mode);
+            }
+        }
+    };
+
     // Split panel state management
     let (split_ratio, set_split_ratio) = signal(initial_split_ratio);
     let (is_dragging, set_is_dragging) = signal(false);
@@ -94,8 +125,8 @@ pub fn GanttChart(
     };
 
     let on_container_mousemove = move |e: MouseEvent| {
-        if is_dragging.get() {
-            if let Some(container) = container_ref.get() {
+        if is_dragging.get()
+            && let Some(container) = container_ref.get() {
                 let rect = container.get_bounding_client_rect();
                 let container_width = rect.width();
                 let mouse_x = e.client_x() as f64 - rect.left();
@@ -111,7 +142,6 @@ pub fn GanttChart(
 
                 set_split_ratio.set(new_ratio);
             }
-        }
     };
 
     let on_container_mouseup = move |_e: MouseEvent| {
@@ -120,6 +150,33 @@ pub fn GanttChart(
 
     let on_container_mouseleave = move |_e: MouseEvent| {
         set_is_dragging.set(false);
+    };
+
+    // Mouse wheel zoom handler
+    let on_wheel_zoom = move |e: WheelEvent| {
+        // Only zoom when Ctrl is held (standard zoom behavior)
+        if e.ctrl_key() {
+            e.prevent_default();
+
+            let delta_y = e.delta_y();
+            let current = view_mode.get();
+
+            if delta_y < 0.0 && current.can_zoom_in() {
+                // Scroll up = zoom in
+                let new_mode = current.zoom_in();
+                set_view_mode.set(new_mode);
+                if let Some(ref cb) = on_view_mode_change {
+                    cb.run(new_mode);
+                }
+            } else if delta_y > 0.0 && current.can_zoom_out() {
+                // Scroll down = zoom out
+                let new_mode = current.zoom_out();
+                set_view_mode.set(new_mode);
+                if let Some(ref cb) = on_view_mode_change {
+                    cb.run(new_mode);
+                }
+            }
+        }
     };
 
     view! {
@@ -202,13 +259,48 @@ pub fn GanttChart(
 
             // Timeline panel (right side)
             <Show when=move || show_timeline.get()>
-                <div class="gantt-timeline flex-1 bg-base-100">
-                    // Timeline scale headers
-                    <TimelineScale
-                        start_date=start_date
-                        end_date=end_date
-                        view_mode=view_mode
-                    />
+                <div
+                    class="gantt-timeline flex-1 bg-base-100 flex flex-col"
+                    on:wheel=on_wheel_zoom
+                >
+                    // Zoom controls and timeline scale container
+                    <div class="relative">
+                        // Zoom controls (floating on top-right)
+                        <div class="absolute top-2 right-2 z-20 flex gap-1">
+                            <button
+                                class="btn btn-sm btn-circle"
+                                class:btn-disabled=move || !view_mode.get().can_zoom_in()
+                                disabled=move || !view_mode.get().can_zoom_in()
+                                on:click=zoom_in
+                                title="Zoom in"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </button>
+                            <button
+                                class="btn btn-sm btn-circle"
+                                class:btn-disabled=move || !view_mode.get().can_zoom_out()
+                                disabled=move || !view_mode.get().can_zoom_out()
+                                on:click=zoom_out
+                                title="Zoom out"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+                                </svg>
+                            </button>
+                            <div class="badge badge-sm ml-1 self-center">
+                                {move || view_mode.get().as_str().to_uppercase()}
+                            </div>
+                        </div>
+
+                        // Timeline scale headers
+                        <TimelineScale
+                            start_date=start_date
+                            end_date=end_date
+                            view_mode=Signal::derive(move || view_mode.get())
+                        />
+                    </div>
 
                     // Timeline content with grid and task bars
                     <div class="overflow-auto" style="height: calc(100vh - 200px)">
