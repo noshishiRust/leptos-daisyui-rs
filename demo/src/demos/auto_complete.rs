@@ -96,9 +96,9 @@ pub fn AutoCompleteDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Basic AutoComplete"</h3>
                 <p class="text-sm text-base-content/70">"Search for countries"</p>
                 <AutoComplete
-                    value=country_value.into()
+                    value=Signal::derive(move || country_value.get())
                     suggestions=Signal::derive(move || countries.clone())
-                    placeholder="Type to search countries...".into()
+                    placeholder=Signal::derive(|| "Type to search countries...".to_string())
                     on_select=Callback::new(move |value: String| {
                         set_country_value.set(value.clone());
                         set_selected_item.set(format!("Country: {}", value));
@@ -115,9 +115,9 @@ pub fn AutoCompleteDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Programming Languages"</h3>
                 <p class="text-sm text-base-content/70">"Search for your favorite language"</p>
                 <AutoComplete
-                    value=programming_value.into()
+                    value=Signal::derive(move || programming_value.get())
                     suggestions=Signal::derive(move || programming_languages.clone())
-                    placeholder="Type to search languages...".into()
+                    placeholder=Signal::derive(|| "Type to search languages...".to_string())
                     on_select=Callback::new(move |value: String| {
                         set_programming_value.set(value.clone());
                         set_selected_item.set(format!("Language: {}", value));
@@ -134,9 +134,9 @@ pub fn AutoCompleteDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Fruits AutoComplete"</h3>
                 <p class="text-sm text-base-content/70">"Search for fruits"</p>
                 <AutoComplete
-                    value=fruit_value.into()
+                    value=Signal::derive(move || fruit_value.get())
                     suggestions=Signal::derive(move || fruits.clone())
-                    placeholder="Type to search fruits...".into()
+                    placeholder=Signal::derive(|| "Type to search fruits...".to_string())
                     on_select=Callback::new(move |value: String| {
                         set_fruit_value.set(value.clone());
                         set_selected_item.set(format!("Fruit: {}", value));
@@ -152,10 +152,10 @@ pub fn AutoCompleteDemo() -> impl IntoView {
             <div class="space-y-2">
                 <h3 class="text-xl font-semibold">"Disabled State"</h3>
                 <AutoComplete
-                    value="Disabled".into()
-                    suggestions=Signal::derive(move || vec![])
-                    placeholder="This is disabled".into()
-                    disabled=true.into()
+                    value=Signal::derive(|| "Disabled".to_string())
+                    suggestions=Signal::derive(|| vec![])
+                    placeholder=Signal::derive(|| "This is disabled".to_string())
+                    disabled=Signal::derive(|| true)
                 />
             </div>
 

@@ -56,12 +56,12 @@ pub fn ColorPickerDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Primary Color"</h3>
                 <p class="text-sm text-base-content/70">"Select the primary color for headings"</p>
                 <ColorPicker
-                    value=primary_color.into()
+                    value=Signal::derive(move || primary_color.get())
                     on_change=Callback::new(move |color: String| {
                         set_primary_color.set(color);
                     })
 
-                    show_value=true.into()
+                    show_value=true
                 />
             </div>
 
@@ -70,12 +70,12 @@ pub fn ColorPickerDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Secondary Color"</h3>
                 <p class="text-sm text-base-content/70">"Select the secondary color for buttons"</p>
                 <ColorPicker
-                    value=secondary_color.into()
+                    value=Signal::derive(move || secondary_color.get())
                     on_change=Callback::new(move |color: String| {
                         set_secondary_color.set(color);
                     })
 
-                    show_value=true.into()
+                    show_value=true
                 />
             </div>
 
@@ -84,12 +84,12 @@ pub fn ColorPickerDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Background Color"</h3>
                 <p class="text-sm text-base-content/70">"Select the background color"</p>
                 <ColorPicker
-                    value=background_color.into()
+                    value=Signal::derive(move || background_color.get())
                     on_change=Callback::new(move |color: String| {
                         set_background_color.set(color);
                     })
 
-                    show_value=true.into()
+                    show_value=true
                 />
             </div>
 
@@ -98,12 +98,12 @@ pub fn ColorPickerDemo() -> impl IntoView {
                 <h3 class="text-xl font-semibold">"Text Color"</h3>
                 <p class="text-sm text-base-content/70">"Select the text color"</p>
                 <ColorPicker
-                    value=text_color.into()
+                    value=Signal::derive(move || text_color.get())
                     on_change=Callback::new(move |color: String| {
                         set_text_color.set(color);
                     })
 
-                    show_value=true.into()
+                    show_value=true
                 />
             </div>
 
@@ -111,8 +111,8 @@ pub fn ColorPickerDemo() -> impl IntoView {
             <div class="space-y-2">
                 <h3 class="text-xl font-semibold">"Without Value Display"</h3>
                 <ColorPicker
-                    value="#06b6d4".into()
-                    show_value=false.into()
+                    value=Signal::derive(|| "#06b6d4".to_string())
+                    show_value=false
                     on_change=Callback::new(move |_color: String| {})
                 />
             </div>
@@ -121,9 +121,9 @@ pub fn ColorPickerDemo() -> impl IntoView {
             <div class="space-y-2">
                 <h3 class="text-xl font-semibold">"Disabled State"</h3>
                 <ColorPicker
-                    value="#9ca3af".into()
-                    disabled=true.into()
-                    show_value=true.into()
+                    value=Signal::derive(|| "#9ca3af".to_string())
+                    disabled=Signal::derive(|| true)
+                    show_value=true
                 />
             </div>
 
@@ -200,13 +200,13 @@ pub fn ColorPickerDemo() -> impl IntoView {
                         <code>"<ColorPicker"</code>
                     </pre>
                     <pre data-prefix=">">
-                        <code>"  value=color.into()"</code>
+                        <code>"  value=color"</code>
                     </pre>
                     <pre data-prefix=">">
                         <code>"  on_change=Callback::new(move |c| set_color.set(c))"</code>
                     </pre>
                     <pre data-prefix=">">
-                        <code>"  show_value=true.into()"</code>
+                        <code>"  show_value=true"</code>
                     </pre>
                     <pre data-prefix=">">
                         <code>"/>"</code>
