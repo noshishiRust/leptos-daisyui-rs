@@ -129,3 +129,156 @@ impl GanttTaskHeight {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // TaskType tests
+    #[test]
+    fn test_task_type_as_str() {
+        assert_eq!(TaskType::Task.as_str(), "task");
+        assert_eq!(TaskType::Milestone.as_str(), "milestone");
+        assert_eq!(TaskType::Project.as_str(), "project");
+    }
+
+    #[test]
+    fn test_task_type_default() {
+        assert_eq!(TaskType::default(), TaskType::Task);
+    }
+
+    #[test]
+    fn test_task_type_serialization() {
+        let task_type = TaskType::Milestone;
+        let json = serde_json::to_string(&task_type).unwrap();
+        let deserialized: TaskType = serde_json::from_str(&json).unwrap();
+        assert_eq!(deserialized, task_type);
+    }
+
+    // ViewMode tests
+    #[test]
+    fn test_view_mode_as_str() {
+        assert_eq!(ViewMode::Hour.as_str(), "hour");
+        assert_eq!(ViewMode::Day.as_str(), "day");
+        assert_eq!(ViewMode::Week.as_str(), "week");
+        assert_eq!(ViewMode::Month.as_str(), "month");
+        assert_eq!(ViewMode::Quarter.as_str(), "quarter");
+        assert_eq!(ViewMode::Year.as_str(), "year");
+    }
+
+    #[test]
+    fn test_view_mode_default() {
+        assert_eq!(ViewMode::default(), ViewMode::Day);
+    }
+
+    #[test]
+    fn test_view_mode_zoom_in() {
+        assert_eq!(ViewMode::Year.zoom_in(), ViewMode::Quarter);
+        assert_eq!(ViewMode::Quarter.zoom_in(), ViewMode::Month);
+        assert_eq!(ViewMode::Month.zoom_in(), ViewMode::Week);
+        assert_eq!(ViewMode::Week.zoom_in(), ViewMode::Day);
+        assert_eq!(ViewMode::Day.zoom_in(), ViewMode::Hour);
+        assert_eq!(ViewMode::Hour.zoom_in(), ViewMode::Hour); // Max zoom
+    }
+
+    #[test]
+    fn test_view_mode_zoom_out() {
+        assert_eq!(ViewMode::Hour.zoom_out(), ViewMode::Day);
+        assert_eq!(ViewMode::Day.zoom_out(), ViewMode::Week);
+        assert_eq!(ViewMode::Week.zoom_out(), ViewMode::Month);
+        assert_eq!(ViewMode::Month.zoom_out(), ViewMode::Quarter);
+        assert_eq!(ViewMode::Quarter.zoom_out(), ViewMode::Year);
+        assert_eq!(ViewMode::Year.zoom_out(), ViewMode::Year); // Min zoom
+    }
+
+    #[test]
+    fn test_view_mode_can_zoom_in() {
+        assert!(ViewMode::Year.can_zoom_in());
+        assert!(ViewMode::Quarter.can_zoom_in());
+        assert!(ViewMode::Month.can_zoom_in());
+        assert!(ViewMode::Week.can_zoom_in());
+        assert!(ViewMode::Day.can_zoom_in());
+        assert!(!ViewMode::Hour.can_zoom_in()); // Cannot zoom in from Hour
+    }
+
+    #[test]
+    fn test_view_mode_can_zoom_out() {
+        assert!(!ViewMode::Year.can_zoom_out()); // Cannot zoom out from Year
+        assert!(ViewMode::Quarter.can_zoom_out());
+        assert!(ViewMode::Month.can_zoom_out());
+        assert!(ViewMode::Week.can_zoom_out());
+        assert!(ViewMode::Day.can_zoom_out());
+        assert!(ViewMode::Hour.can_zoom_out());
+    }
+
+    #[test]
+    fn test_view_mode_zoom_sequence() {
+        // Test full zoom in sequence
+        let mut mode = ViewMode::Year;
+        mode = mode.zoom_in();
+        assert_eq!(mode, ViewMode::Quarter);
+        mode = mode.zoom_in();
+        assert_eq!(mode, ViewMode::Month);
+        mode = mode.zoom_in();
+        assert_eq!(mode, ViewMode::Week);
+        mode = mode.zoom_in();
+        assert_eq!(mode, ViewMode::Day);
+        mode = mode.zoom_in();
+        assert_eq!(mode, ViewMode::Hour);
+
+        // Test full zoom out sequence
+        mode = mode.zoom_out();
+        assert_eq!(mode, ViewMode::Day);
+        mode = mode.zoom_out();
+        assert_eq!(mode, ViewMode::Week);
+        mode = mode.zoom_out();
+        assert_eq!(mode, ViewMode::Month);
+        mode = mode.zoom_out();
+        assert_eq!(mode, ViewMode::Quarter);
+        mode = mode.zoom_out();
+        assert_eq!(mode, ViewMode::Year);
+    }
+
+    #[test]
+    fn test_view_mode_serialization() {
+        let mode = ViewMode::Week;
+        let json = serde_json::to_string(&mode).unwrap();
+        let deserialized: ViewMode = serde_json::from_str(&json).unwrap();
+        assert_eq!(deserialized, mode);
+    }
+
+    // GanttTaskHeight tests
+    #[test]
+    fn test_gantt_task_height_as_str() {
+        assert_eq!(GanttTaskHeight::Compact.as_str(), "compact");
+        assert_eq!(GanttTaskHeight::Medium.as_str(), "medium");
+        assert_eq!(GanttTaskHeight::Comfortable.as_str(), "comfortable");
+    }
+
+    #[test]
+    fn test_gantt_task_height_default() {
+        assert_eq!(GanttTaskHeight::default(), GanttTaskHeight::Medium);
+    }
+
+    #[test]
+    fn test_gantt_task_height_height_px() {
+        assert_eq!(GanttTaskHeight::Compact.height_px(), 20);
+        assert_eq!(GanttTaskHeight::Medium.height_px(), 30);
+        assert_eq!(GanttTaskHeight::Comfortable.height_px(), 40);
+    }
+
+    #[test]
+    fn test_gantt_task_height_serialization() {
+        let height = GanttTaskHeight::Comfortable;
+        let json = serde_json::to_string(&height).unwrap();
+        let deserialized: GanttTaskHeight = serde_json::from_str(&json).unwrap();
+        assert_eq!(deserialized, height);
+    }
+
+    #[test]
+    fn test_gantt_task_height_ordering() {
+        // Verify height progression
+        assert!(GanttTaskHeight::Compact.height_px() < GanttTaskHeight::Medium.height_px());
+        assert!(GanttTaskHeight::Medium.height_px() < GanttTaskHeight::Comfortable.height_px());
+    }
+}

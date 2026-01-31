@@ -103,7 +103,7 @@ impl DragState {
 
     /// Check if currently dragging a specific task
     pub fn is_dragging_task(&self, task_id: &str) -> bool {
-        self.is_dragging && self.task_id.as_ref().map(|id| id.as_str()) == Some(task_id)
+        self.is_dragging && self.task_id.as_deref() == Some(task_id)
     }
 }
 

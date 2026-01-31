@@ -4,23 +4,186 @@
 /// Supports full read-only, timeline-only editing, grid-only editing, custom logic,
 /// and per-task/per-column read-only flags.
 ///
-/// # Examples
+/// # Basic Usage
+///
+/// ## Simple Read-Only Mode
+///
+/// ```rust,no_run
+/// use leptos::prelude::*;
+/// use leptos_daisyui_rs::components::gantt::{GanttChart, ReadOnlyMode};
+///
+/// #[component]
+/// fn App() -> impl IntoView {
+///     let tasks = Signal::derive(|| vec![/* tasks */]);
+///
+///     view! {
+///         // Full read-only mode (no edits allowed)
+///         <GanttChart
+///             tasks=tasks
+///             read_only=true
+///         />
+///     }
+/// }
+/// ```
+///
+/// ## Granular Read-Only Modes
+///
+/// ```rust,no_run
+/// use leptos::prelude::*;
+/// use leptos_daisyui_rs::components::gantt::{GanttChart, ReadOnlyMode};
+///
+/// #[component]
+/// fn App() -> impl IntoView {
+///     let tasks = Signal::derive(|| vec![/* tasks */]);
+///
+///     // Timeline-only editing (users can change dates but not task properties)
+///     let mode = Signal::derive(|| ReadOnlyMode::TimelineOnly);
+///
+///     view! {
+///         <GanttChart
+///             tasks=tasks
+///             read_only_mode=mode
+///         />
+///     }
+/// }
+/// ```
+///
+/// # Role-Based Access Control (RBAC)
+///
+/// ```rust
+/// use leptos_daisyui_rs::components::gantt::{ReadOnlyMode, EditContext, ReadOnlyBuilder};
+///
+/// // Simple role check
+/// let mode = ReadOnlyMode::custom(|ctx: &EditContext| {
+///     match ctx.user_role.as_deref() {
+///         Some("admin") => true,          // Admins can edit everything
+///         Some("editor") => true,         // Editors can edit
+///         Some("viewer") => false,        // Viewers cannot edit
+///         _ => false,                     // Default: no edit
+///     }
+/// });
+///
+/// // Complex permissions with builder
+/// let mode = ReadOnlyBuilder::new()
+///     .require_role("editor")              // Only editors and above
+///     .allow_task_deletion(false)          // But deletion disabled for everyone
+///     .allow_timeline_edits(true)          // Timeline edits allowed
+///     .allow_property_edits(true)          // Property edits allowed
+///     .build();
+/// ```
+///
+/// # Per-Task Read-Only Flags
+///
+/// ```rust
+/// use leptos_daisyui_rs::components::gantt::GanttTask;
+/// use chrono::Utc;
+///
+/// // Mark specific tasks as read-only
+/// let task = GanttTask {
+///     id: "task-1".to_string(),
+///     name: "Locked Task".to_string(),
+///     start: Utc::now(),
+///     end: Utc::now(),
+///     read_only: true,  // This task is locked
+///     ..Default::default()
+/// };
+///
+/// // Per-task flags override global read-only mode
+/// // Even in Editable mode, this task cannot be edited
+/// ```
+///
+/// # Advanced Custom Logic
 ///
 /// ```rust
 /// use leptos_daisyui_rs::components::gantt::{ReadOnlyMode, EditContext, EditType};
 ///
-/// // Full read-only mode (no editing allowed)
-/// let mode = ReadOnlyMode::Full;
-///
-/// // Timeline-only editing (dates can be changed, but not task properties)
-/// let mode = ReadOnlyMode::TimelineOnly;
-///
-/// // Custom read-only logic based on user role
 /// let mode = ReadOnlyMode::custom(|ctx: &EditContext| {
-///     // Only admins can edit critical tasks
+///     // Multi-level permission logic
+///     match ctx.user_role.as_deref() {
+///         Some("admin") => true,  // Admins can do anything
+///
+///         Some("project-manager") => {
+///             // PMs can edit most things except deletion
+///             !matches!(ctx.edit_type, EditType::DeleteTask)
+///         },
+///
+///         Some("team-member") => {
+///             // Team members can only update progress and properties
+///             matches!(ctx.edit_type,
+///                 EditType::Progress | EditType::TaskProperties
+///             )
+///         },
+///
+///         _ => false,  // Default: read-only
+///     }
+/// });
+/// ```
+///
+/// # Best Practices
+///
+/// ## Security Considerations
+///
+/// **Important**: Read-only mode is a UI-level protection. Always validate
+/// permissions on the backend/server. Never rely solely on client-side checks
+/// for security-critical operations.
+///
+/// ```rust,ignore
+/// // ✅ Good: Server validates permissions
+/// // Client read-only mode provides good UX by preventing invalid attempts
+/// let mode = ReadOnlyMode::custom(|ctx| check_client_role(ctx));
+///
+/// // On server/backend:
+/// // verify_user_permission(user_id, operation) before applying changes
+/// ```
+///
+/// ## Performance Considerations
+///
+/// Custom callbacks are evaluated frequently. Keep them fast:
+///
+/// ```rust
+/// use leptos_daisyui_rs::components::gantt::ReadOnlyMode;
+///
+/// // ✅ Good: Fast lookup
+/// let mode = ReadOnlyMode::custom(|ctx| {
 ///     ctx.user_role == Some("admin".to_string())
 /// });
 /// ```
+///
+/// ```rust,ignore
+/// // ❌ Bad: Expensive operation in callback
+/// let mode = ReadOnlyMode::custom(|ctx| {
+///     // Don't do: database queries, API calls, heavy computation
+///     fetch_permissions_from_api(&ctx.user_id)  // Too slow!
+/// });
+/// ```
+///
+/// ## When to Use Each Mode
+///
+/// - **`ReadOnlyMode::Full`**: Presentation/review mode, archived projects
+/// - **`ReadOnlyMode::TimelineOnly`**: Schedule-only updates, resource planning
+/// - **`ReadOnlyMode::GridOnly`**: Status updates without schedule changes
+/// - **`ReadOnlyMode::Custom`**: RBAC, complex business rules, multi-user workflows
+/// - **Per-task `read_only`**: Locked milestones, completed tasks, external dependencies
+///
+/// ## Migration Guide
+///
+/// Existing Gantt charts without read-only mode continue to work (fully editable by default).
+/// Add read-only support incrementally:
+///
+/// ```rust,ignore
+/// // Step 1: Add simple read-only prop
+/// <GanttChart tasks=tasks read_only=is_readonly_signal />
+///
+/// // Step 2: Upgrade to mode-based control
+/// <GanttChart
+///     tasks=tasks
+///     read_only_mode=read_only_mode_signal
+/// />
+///
+/// // Step 3: Add per-task flags as needed
+/// // (Update GanttTask structs to include read_only: bool field)
+/// ```
+///
 use std::sync::Arc;
 
 /// Type of edit operation being attempted
