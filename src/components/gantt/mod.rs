@@ -4,6 +4,8 @@ mod style;
 
 /// Dialog components for task editing and configuration
 pub mod dialogs;
+/// Drag and drop state management
+pub mod drag;
 /// Interaction handlers for drag, resize, and user input
 pub mod interactions;
 /// Read-only mode and permission system
@@ -14,6 +16,9 @@ pub mod task_list;
 pub mod timeline;
 /// Utility functions for date/time calculations
 pub mod utils;
+
+#[cfg(test)]
+mod readonly_tests;
 
 pub use component::*;
 pub use models::*;
