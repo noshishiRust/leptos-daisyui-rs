@@ -130,11 +130,10 @@ pub fn TodayButton(
     });
 
     let handle_click = move |_| {
-        if !is_disabled.get() {
-            if let Some(ref cb) = on_navigate_to_today {
+        if !is_disabled.get()
+            && let Some(ref cb) = on_navigate_to_today {
                 cb.run(());
             }
-        }
     };
 
     view! {
