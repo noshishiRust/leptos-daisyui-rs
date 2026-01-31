@@ -19,6 +19,8 @@ pub mod timeline;
 pub mod utils;
 
 #[cfg(test)]
+mod a11y_tests;
+#[cfg(test)]
 mod readonly_tests;
 
 pub use component::*;

@@ -5,6 +5,7 @@ use web_sys::WheelEvent;
 
 use crate::components::gantt::{
     timeline::{TaskBar, TimelineGrid, TimelineScale},
+    utils::{AccessibleAnnouncement, LiveRegion, task_aria_label, zoom_aria_label},
     EditContext, EditType, GanttTask, GanttTaskHeight, ReadOnlyMode, ViewMode,
 };
 
@@ -96,6 +97,9 @@ pub fn GanttChart(
     let (selected_task_id, set_selected_task_id) = signal::<Option<String>>(None);
     let (focused_task_index, set_focused_task_index) = signal::<Option<usize>>(None);
 
+    // Screen reader announcements
+    let (announcement, set_announcement) = signal::<Option<AccessibleAnnouncement>>(None);
+
     // View mode state management
     let (view_mode, set_view_mode) = signal(initial_view_mode.get());
 
@@ -127,6 +131,11 @@ pub fn GanttChart(
         if current.can_zoom_in() {
             let new_mode = current.zoom_in();
             set_view_mode.set(new_mode);
+
+            // Announce zoom change to screen readers
+            let message = format!("Zoomed in to {} view", new_mode.as_str());
+            set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+
             if let Some(ref cb) = on_view_mode_change {
                 cb.run(new_mode);
             }
@@ -138,6 +147,11 @@ pub fn GanttChart(
         if current.can_zoom_out() {
             let new_mode = current.zoom_out();
             set_view_mode.set(new_mode);
+
+            // Announce zoom change to screen readers
+            let message = format!("Zoomed out to {} view", new_mode.as_str());
+            set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+
             if let Some(ref cb) = on_view_mode_change {
                 cb.run(new_mode);
             }
@@ -228,12 +242,43 @@ pub fn GanttChart(
                 let current_idx = focused_task_index.get().unwrap_or(0);
                 let new_idx = (current_idx + 1).min(task_list.len() - 1);
                 set_focused_task_index.set(Some(new_idx));
+
+                // Announce focused task
+                if let Some(task) = task_list.get(new_idx) {
+                    let message = format!("Focused on task: {}", task.name);
+                    set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+                }
             }
             "ArrowUp" => {
                 e.prevent_default();
                 if let Some(current_idx) = focused_task_index.get() {
                     let new_idx = current_idx.saturating_sub(1);
                     set_focused_task_index.set(Some(new_idx));
+
+                    // Announce focused task
+                    if let Some(task) = task_list.get(new_idx) {
+                        let message = format!("Focused on task: {}", task.name);
+                        set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+                    }
+                }
+            }
+            "Home" => {
+                // Home key - focus first task
+                e.prevent_default();
+                set_focused_task_index.set(Some(0));
+                if let Some(task) = task_list.first() {
+                    let message = format!("Focused on first task: {}", task.name);
+                    set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+                }
+            }
+            "End" => {
+                // End key - focus last task
+                e.prevent_default();
+                let last_idx = task_list.len().saturating_sub(1);
+                set_focused_task_index.set(Some(last_idx));
+                if let Some(task) = task_list.get(last_idx) {
+                    let message = format!("Focused on last task: {}", task.name);
+                    set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
                 }
             }
             " " => {
@@ -243,6 +288,11 @@ pub fn GanttChart(
                     && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
                         set_selected_task_id.set(Some(task_id.clone()));
+
+                        // Announce selection
+                        let message = format!("Selected task: {}", task.name);
+                        set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+
                         if let Some(ref cb) = on_task_select {
                             cb.run(task_id);
                         }
@@ -254,10 +304,21 @@ pub fn GanttChart(
                 if let Some(idx) = focused_task_index.get()
                     && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
+
+                        // Announce action
+                        let message = format!("Opening task: {}", task.name);
+                        set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+
                         if let Some(ref cb) = on_task_click {
                             cb.run(task_id);
                         }
                     }
+            }
+            "Escape" => {
+                // Escape key - deselect task
+                e.prevent_default();
+                set_selected_task_id.set(None);
+                set_announcement.set(Some(AccessibleAnnouncement::polite("Selection cleared")));
             }
             "Delete" => {
                 // Delete key - remove focused task
@@ -265,6 +326,12 @@ pub fn GanttChart(
                 if let Some(idx) = focused_task_index.get()
                     && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
+                        let task_name = task.name.clone();
+
+                        // Announce deletion
+                        let message = format!("Deleting task: {}", task_name);
+                        set_announcement.set(Some(AccessibleAnnouncement::assertive(message)));
+
                         if let Some(ref cb) = on_task_delete {
                             cb.run(task_id);
                         }
@@ -278,12 +345,22 @@ pub fn GanttChart(
         <div
             node_ref=container_ref
             class=format!("gantt-chart flex h-full w-full overflow-hidden select-none {}", class)
+            role="application"
+            aria-label="Gantt Chart"
+            aria-describedby="gantt-instructions"
             tabindex="0"
             on:mousemove=on_container_mousemove
             on:mouseup=on_container_mouseup
             on:mouseleave=on_container_mouseleave
             on:keydown=on_keydown
         >
+            // Screen reader live region for announcements
+            <LiveRegion announcement=Signal::derive(move || announcement.get()) />
+
+            // Hidden instructions for screen readers
+            <div id="gantt-instructions" class="sr-only">
+                "Gantt chart for project planning. Use arrow keys to navigate tasks, Space to select, Enter to open, Delete to remove, Home and End to jump to first or last task, Escape to deselect."
+            </div>
             // Task list panel (left side)
             <Show when=move || show_task_list.get()>
                 <div
@@ -291,9 +368,14 @@ pub fn GanttChart(
                     style=move || format!("width: {}%; flex-shrink: 0;", split_ratio.get() * 100.0)
                 >
                     <div class="border-b border-base-300 bg-base-200 p-4">
-                        <h3 class="text-lg font-semibold">"Tasks"</h3>
+                        <h3 id="task-list-heading" class="text-lg font-semibold">"Tasks"</h3>
                     </div>
-                    <div class="overflow-y-auto" style="height: calc(100vh - 200px)">
+                    <div
+                        class="overflow-y-auto"
+                        role="list"
+                        aria-labelledby="task-list-heading"
+                        style="height: calc(100vh - 200px)"
+                    >
                         <For
                             each=move || tasks.get()
                             key=|task| task.id.clone()
@@ -301,6 +383,8 @@ pub fn GanttChart(
                                 let task_id = task.id.clone();
                                 let task_id_for_select = task_id.clone();
                                 let task_id_for_check = task_id.clone();
+                                let task_id_for_aria1 = task_id.clone();
+                                let task_id_for_aria2 = task_id.clone();
                                 let on_click_cb = on_task_click;
                                 let on_select_cb = on_task_select;
 
@@ -308,12 +392,43 @@ pub fn GanttChart(
                                     selected_task_id.get().as_ref() == Some(&task_id_for_check)
                                 });
 
+                                // Generate ARIA label for this task
+                                let task_name = task.name.clone();
+                                let task_start = task.start.format("%Y-%m-%d").to_string();
+                                let task_end = task.end.format("%Y-%m-%d").to_string();
+                                let task_progress = task.progress;
+                                let task_readonly = task.read_only;
+
                                 view! {
                                     <div
                                         class="cursor-pointer border-b border-base-200 p-3 transition-colors"
                                         class:bg-primary=move || is_selected.get()
                                         class:text-primary-content=move || is_selected.get()
                                         class:hover:bg-base-200=move || !is_selected.get()
+                                        class:ring-2=move || {
+                                            if let Some(focused_idx) = focused_task_index.get() {
+                                                tasks.get().get(focused_idx).map(|t| t.id == task_id_for_aria1).unwrap_or(false)
+                                            } else {
+                                                false
+                                            }
+                                        }
+                                        class:ring-offset-2=move || {
+                                            if let Some(focused_idx) = focused_task_index.get() {
+                                                tasks.get().get(focused_idx).map(|t| t.id == task_id_for_aria2).unwrap_or(false)
+                                            } else {
+                                                false
+                                            }
+                                        }
+                                        role="listitem"
+                                        aria-label=task_aria_label(
+                                            &task_name,
+                                            &task_start,
+                                            &task_end,
+                                            task_progress,
+                                            is_selected.get_untracked(),
+                                            task_readonly
+                                        )
+                                        aria-selected=move || is_selected.get().to_string()
                                         style="height: 50px"
                                         on:click=move |_| {
                                             set_selected_task_id.set(Some(task_id_for_select.clone()));
@@ -370,6 +485,7 @@ pub fn GanttChart(
                                 disabled=move || !view_mode.get().can_zoom_in()
                                 on:click=zoom_in
                                 title="Zoom in"
+                                aria-label=move || zoom_aria_label("in", view_mode.get().can_zoom_in(), view_mode.get().as_str())
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
@@ -381,6 +497,7 @@ pub fn GanttChart(
                                 disabled=move || !view_mode.get().can_zoom_out()
                                 on:click=zoom_out
                                 title="Zoom out"
+                                aria-label=move || zoom_aria_label("out", view_mode.get().can_zoom_out(), view_mode.get().as_str())
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
