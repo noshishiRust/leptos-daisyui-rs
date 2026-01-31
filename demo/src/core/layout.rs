@@ -8,8 +8,8 @@ use wasm_bindgen::prelude::*;
 // External JavaScript interface for performance.memory (Chrome only)
 #[wasm_bindgen]
 extern "C" {
-    #[wasm_bindgen(js_namespace = ["performance", "memory"], js_name = usedJSHeapSize, catch)]
-    fn used_js_heap_size() -> Result<JsValue, JsValue>;
+    #[wasm_bindgen(js_namespace = performance, js_name = memory, getter)]
+    fn get_memory() -> JsValue;
 }
 
 /// Layout component for the demos
@@ -48,10 +48,29 @@ pub fn Layout() -> impl IntoView {
             set_current_time.set(time_str);
 
             // Update memory usage (Chrome only, graceful degradation)
-            if let Ok(heap_size) = used_js_heap_size() {
-                if let Some(bytes) = heap_size.as_f64() {
-                    let mb = bytes / 1_048_576.0; // Convert to MB
-                    set_memory_usage.set(format!("{:.2} MB", mb));
+            let memory_obj = get_memory();
+            if !memory_obj.is_undefined() && !memory_obj.is_null() {
+                // Try to get usedJSHeapSize and jsHeapSizeLimit
+                if let Ok(used) = js_sys::Reflect::get(&memory_obj, &JsValue::from_str("usedJSHeapSize")) {
+                    if let Some(used_bytes) = used.as_f64() {
+                        let used_mb = used_bytes / 1_048_576.0;
+
+                        // Also try to get heap limit
+                        if let Ok(limit) = js_sys::Reflect::get(&memory_obj, &JsValue::from_str("jsHeapSizeLimit")) {
+                            if let Some(limit_bytes) = limit.as_f64() {
+                                let limit_mb = limit_bytes / 1_048_576.0;
+                                set_memory_usage.set(format!("{:.1}/{:.1} MB", used_mb, limit_mb));
+                            } else {
+                                set_memory_usage.set(format!("{:.1} MB", used_mb));
+                            }
+                        } else {
+                            set_memory_usage.set(format!("{:.1} MB", used_mb));
+                        }
+                    } else {
+                        set_memory_usage.set("N/A".to_string());
+                    }
+                } else {
+                    set_memory_usage.set("N/A".to_string());
                 }
             } else {
                 set_memory_usage.set("N/A".to_string());
@@ -137,27 +156,32 @@ pub fn Layout() -> impl IntoView {
 
             // Status footer
             <div class="w-screen bg-base-300 border-t border-base-content/10 px-4 py-1 flex-none">
-                <div class="flex items-center justify-between text-xs text-base-content/70 font-mono">
-                    <div class="flex items-center gap-4">
-                        <span class="flex items-center gap-1">
-                            <span class="w-3 h-3">
-                                <Icon icon=icondata::AiFolderOutlined />
-                            </span>
-                            {move || location.pathname.get()}
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <span class="w-3 h-3">
-                                <Icon icon=icondata::AiClockCircleOutlined />
-                            </span>
-                            {move || current_time.get()}
-                        </span>
-                    </div>
+                <div class="flex items-center text-xs text-base-content/70 font-mono">
+                    // Left: Path
                     <span class="flex items-center gap-1">
                         <span class="w-3 h-3">
-                            <Icon icon=icondata::AiDatabaseOutlined />
+                            <Icon icon=icondata::AiFolderOutlined />
                         </span>
-                        "Memory: "
-                        {move || memory_usage.get()}
+                        {move || location.pathname.get()}
+                    </span>
+
+                    // Center: Memory (with flex-1 to take remaining space and center content)
+                    <div class="flex-1 flex justify-center">
+                        <span class="flex items-center gap-1">
+                            <span class="w-3 h-3">
+                                <Icon icon=icondata::AiDatabaseOutlined />
+                            </span>
+                            "Memory: "
+                            {move || memory_usage.get()}
+                        </span>
+                    </div>
+
+                    // Right: Clock
+                    <span class="flex items-center gap-1">
+                        <span class="w-3 h-3">
+                            <Icon icon=icondata::AiClockCircleOutlined />
+                        </span>
+                        {move || current_time.get()}
                     </span>
                 </div>
             </div>
