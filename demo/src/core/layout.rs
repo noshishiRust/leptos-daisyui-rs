@@ -284,6 +284,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     value: "hover_gallery",
                 },
                 ComponentItem {
+                    name: "Icon",
+                    href: "/components/icon",
+                    value: "icon",
+                },
+                ComponentItem {
                     name: "Kbd",
                     href: "/components/kbd",
                     value: "kbd",
@@ -292,6 +297,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "List",
                     href: "/components/list",
                     value: "list",
+                },
+                ComponentItem {
+                    name: "Persona",
+                    href: "/components/persona",
+                    value: "persona",
                 },
                 ComponentItem {
                     name: "Stats",
@@ -307,6 +317,11 @@ fn get_menu_categories() -> Vec<MenuCategory> {
                     name: "Table",
                     href: "/components/table",
                     value: "table",
+                },
+                ComponentItem {
+                    name: "Tag",
+                    href: "/components/tag",
+                    value: "tag",
                 },
                 ComponentItem {
                     name: "Text Rotate",

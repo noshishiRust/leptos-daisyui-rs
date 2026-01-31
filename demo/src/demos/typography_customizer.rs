@@ -1,11 +1,8 @@
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::TypographyCustomizer;
-use leptos_daisyui_rs::theme::use_theme_context;
 
 #[component]
 pub fn TypographyCustomizerDemo() -> impl IntoView {
-    let theme_ctx = use_theme_context();
-    
     view! {
         <div class="space-y-8 p-8">
             <div class="space-y-4">

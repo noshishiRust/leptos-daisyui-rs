@@ -77,6 +77,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/hero") view=HeroDemo />
                     <Route path=path!("/hover_3d") view=Hover3dDemo />
                     <Route path=path!("/hover_gallery") view=HoverGalleryDemo />
+                    <Route path=path!("/icon") view=IconDemo />
                     <Route path=path!("/indicator") view=IndicatorDemo />
                     <Route path=path!("/input") view=InputDemo />
                     <Route path=path!("/join") view=JoinDemo />
@@ -94,6 +95,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/modal") view=ModalDemo />
                     <Route path=path!("/navbar") view=NavbarDemo />
                     <Route path=path!("/pagination") view=PaginationDemo />
+                    <Route path=path!("/persona") view=PersonaDemo />
                     <Route path=path!("/progress") view=ProgressDemo />
                     <Route path=path!("/radial_progress") view=RadialProgressDemo />
                     <Route path=path!("/radio") view=RadioDemo />
@@ -108,6 +110,7 @@ fn AppInner() -> impl IntoView {
                     <Route path=path!("/swap") view=SwapDemo />
                     <Route path=path!("/tab") view=TabDemo />
                     <Route path=path!("/table") view=TableDemo />
+                    <Route path=path!("/tag") view=TagDemo />
                     <Route path=path!("/text_rotate") view=TextRotateDemo />
                     <Route path=path!("/textarea") view=TextareaDemo />
                     <Route path=path!("/theme_controller") view=ThemeControllerDemo />
