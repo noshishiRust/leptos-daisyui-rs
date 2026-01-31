@@ -17,27 +17,27 @@ pub fn CountdownDemo() -> impl IntoView {
             <Section title="Basic Countdown" col=true>
                 <div class="grid grid-flow-col gap-5 text-center auto-cols-max">
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style=move || format!("--value:{};", days.get())></span>
-                        </span>
+                        <Countdown class="font-mono text-5xl">
+                            <CountdownValue value=days.into() />
+                        </Countdown>
                         "days"
                     </div>
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style=move || format!("--value:{};", hours.get())></span>
-                        </span>
+                        <Countdown class="font-mono text-5xl">
+                            <CountdownValue value=hours.into() />
+                        </Countdown>
                         "hours"
                     </div>
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style=move || format!("--value:{};", minutes.get())></span>
-                        </span>
+                        <Countdown class="font-mono text-5xl">
+                            <CountdownValue value=minutes.into() />
+                        </Countdown>
                         "min"
                     </div>
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style=move || format!("--value:{};", seconds.get())></span>
-                        </span>
+                        <Countdown class="font-mono text-5xl">
+                            <CountdownValue value=seconds.into() />
+                        </Countdown>
                         "sec"
                     </div>
                 </div>
@@ -72,21 +72,21 @@ pub fn CountdownDemo() -> impl IntoView {
             <Section title="Size Variations" row=true>
                 <div class="grid grid-flow-col gap-2 text-center auto-cols-max">
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-2xl">
-                            <span style="--value:7;"></span>
-                        </span>
+                        <Countdown class="font-mono text-2xl">
+                            <CountdownValue value=Signal::derive(|| 7) />
+                        </Countdown>
                         <span class="text-xs">"Small"</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-4xl">
-                            <span style="--value:18;"></span>
-                        </span>
+                        <Countdown class="font-mono text-4xl">
+                            <CountdownValue value=Signal::derive(|| 18) />
+                        </Countdown>
                         <span class="text-sm">"Medium"</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="countdown font-mono text-6xl">
-                            <span style="--value:32;"></span>
-                        </span>
+                        <Countdown class="font-mono text-6xl">
+                            <CountdownValue value=Signal::derive(|| 32) />
+                        </Countdown>
                         <span class="text-base">"Large"</span>
                     </div>
                 </div>
@@ -94,21 +94,21 @@ pub fn CountdownDemo() -> impl IntoView {
 
             <Section title="Colored Variations" row=true>
                 <div class="flex flex-col p-2 bg-primary rounded-box text-primary-content">
-                    <span class="countdown font-mono text-3xl">
-                        <span style="--value:30;"></span>
-                    </span>
+                    <Countdown class="font-mono text-3xl">
+                        <CountdownValue value=Signal::derive(|| 30) />
+                    </Countdown>
                     "Primary"
                 </div>
                 <div class="flex flex-col p-2 bg-secondary rounded-box text-secondary-content">
-                    <span class="countdown font-mono text-3xl">
-                        <span style="--value:12;"></span>
-                    </span>
+                    <Countdown class="font-mono text-3xl">
+                        <CountdownValue value=Signal::derive(|| 12) />
+                    </Countdown>
                     "Secondary"
                 </div>
                 <div class="flex flex-col p-2 bg-accent rounded-box text-accent-content">
-                    <span class="countdown font-mono text-3xl">
-                        <span style="--value:45;"></span>
-                    </span>
+                    <Countdown class="font-mono text-3xl">
+                        <CountdownValue value=Signal::derive(|| 45) />
+                    </Countdown>
                     "Accent"
                 </div>
             </Section>

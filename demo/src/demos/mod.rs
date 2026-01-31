@@ -110,6 +110,7 @@ pub use icon::*;
 pub use indicator::*;
 pub use input::*;
 pub use join::*;
+pub use gantt::*;
 pub use kanban::*;
 pub use kbd::*;
 pub use label::*;

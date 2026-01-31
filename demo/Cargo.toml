@@ -20,3 +20,4 @@ web-sys = { version = "0.3", features = ["File", "FileList", "FileReader", "Html
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
 log = "0.4.27"
+chrono = "0.4"

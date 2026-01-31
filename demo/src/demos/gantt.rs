@@ -63,10 +63,8 @@ pub fn GanttDemo() -> impl IntoView {
                     <div style="height: 600px">
                         <GanttChart
                             tasks=tasks
-                            view_mode=view_mode
+                            initial_view_mode=view_mode
                             show_task_list=true
-                            show_dependencies=false
-                            show_today_marker=true
                         />
                     </div>
                 </div>
