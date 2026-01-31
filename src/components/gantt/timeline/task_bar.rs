@@ -71,11 +71,10 @@ pub fn TaskBar(
             style:background-color=move || bar_color.get()
             attr:aria-readonly=move || is_read_only.get().to_string()
             on:click=move |_| {
-                if !is_read_only.get() {
-                    if let Some(ref cb) = on_click {
+                if !is_read_only.get()
+                    && let Some(ref cb) = on_click {
                         cb.run(task.get().id.clone());
                     }
-                }
             }
         >
             <div class="relative h-full">

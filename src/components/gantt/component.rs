@@ -111,11 +111,10 @@ pub fn GanttChart(
     // Helper to check if a task edit is allowed
     let is_edit_allowed = move |task_id: &str, edit_type: EditType| {
         // Check per-task read_only flag first
-        if let Some(task) = tasks.get().iter().find(|t| t.id == task_id) {
-            if task.read_only {
+        if let Some(task) = tasks.get().iter().find(|t| t.id == task_id)
+            && task.read_only {
                 return false;
             }
-        }
 
         // Check global read-only mode
         let context = EditContext::new(task_id.to_string(), edit_type);
@@ -240,39 +239,36 @@ pub fn GanttChart(
             " " => {
                 // Space key - select focused task
                 e.prevent_default();
-                if let Some(idx) = focused_task_index.get() {
-                    if let Some(task) = task_list.get(idx) {
+                if let Some(idx) = focused_task_index.get()
+                    && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
                         set_selected_task_id.set(Some(task_id.clone()));
                         if let Some(ref cb) = on_task_select {
                             cb.run(task_id);
                         }
                     }
-                }
             }
             "Enter" => {
                 // Enter key - trigger click callback on focused task
                 e.prevent_default();
-                if let Some(idx) = focused_task_index.get() {
-                    if let Some(task) = task_list.get(idx) {
+                if let Some(idx) = focused_task_index.get()
+                    && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
                         if let Some(ref cb) = on_task_click {
                             cb.run(task_id);
                         }
                     }
-                }
             }
             "Delete" => {
                 // Delete key - remove focused task
                 e.prevent_default();
-                if let Some(idx) = focused_task_index.get() {
-                    if let Some(task) = task_list.get(idx) {
+                if let Some(idx) = focused_task_index.get()
+                    && let Some(task) = task_list.get(idx) {
                         let task_id = task.id.clone();
                         if let Some(ref cb) = on_task_delete {
                             cb.run(task_id);
                         }
                     }
-                }
             }
             _ => {}
         }
