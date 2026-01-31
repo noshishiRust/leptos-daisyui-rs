@@ -1,7 +1,7 @@
 # Component Library Catalog
 
-**Last Updated:** 2026-01-30
-**Total Components:** 89
+**Last Updated:** 2026-01-31
+**Total Components:** 90
 **Theme-Enhanced Components:** 10
 
 ---
@@ -130,6 +130,22 @@ Components for presenting information to users.
 **Code:** [src/components/diff/component.rs](src/components/diff/component.rs)
 **Tests:** Not implemented
 **Theme Support:** ❌ Standard daisyUI theming
+
+### Gantt
+**Purpose:** Production-ready Gantt chart for project management and task scheduling with timeline visualization, task dependencies, and interactive features
+**Code:** [src/components/gantt/component.rs](src/components/gantt/component.rs)
+**Tests:** ✅ Comprehensive (329 tests including accessibility, dependencies, interactions)
+**Theme Support:** ❌ Standard daisyUI theming
+**Key Features:**
+- Interactive timeline with multiple view modes (Hour/Day/Week/Month/Quarter/Year)
+- Task dependencies with SVG visualization (FS/SS/FF/SF types)
+- Drag-and-drop interactions (move, resize start/end, progress)
+- Read-only modes with granular permission control
+- WCAG 2.2 compliant accessibility (ARIA, keyboard nav, screen readers)
+- Split-panel layout with resizable task list
+- Progress tracking with visual overlays
+- Zoom controls (Ctrl+wheel, buttons)
+- Focus management and selection state
 
 ### Hover3D
 **Purpose:** 3D tilt effect on mouse hover for interactive elements
@@ -612,14 +628,14 @@ Components for theme management and UI customization.
 | Category | Count |
 |----------|-------|
 | Action | 6 |
-| Data Display | 22 |
+| Data Display | 23 |
 | Navigation | 6 |
 | Feedback | 9 |
 | Data Input | 24 |
 | Layout | 10 |
 | Mockup | 4 |
 | Theme & Customization | 8 |
-| **Total** | **89** |
+| **Total** | **90** |
 
 ### Theme Support Status
 
