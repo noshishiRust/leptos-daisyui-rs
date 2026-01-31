@@ -283,7 +283,7 @@ pub fn calculate_critical_path(
     }
 
     // Build critical path by following critical tasks through dependencies
-    let critical_path = build_critical_path_sequence(&critical_tasks, dependencies, &graph);
+    let critical_path = build_critical_path_sequence(&critical_tasks, &graph);
 
     Ok(CriticalPathAnalysis {
         task_schedules,
@@ -297,7 +297,6 @@ pub fn calculate_critical_path(
 /// Build ordered sequence of critical path tasks
 fn build_critical_path_sequence(
     critical_tasks: &[String],
-    dependencies: &[TaskDependency],
     graph: &DependencyGraph,
 ) -> Vec<String> {
     if critical_tasks.is_empty() {
@@ -325,7 +324,7 @@ fn build_critical_path_sequence(
     let mut path = Vec::new();
 
     for start in &start_tasks {
-        build_path_dfs(start, &critical_set, dependencies, graph, &mut visited, &mut path);
+        build_path_dfs(start, &critical_set, graph, &mut visited, &mut path);
     }
 
     path
@@ -335,7 +334,6 @@ fn build_critical_path_sequence(
 fn build_path_dfs(
     task_id: &str,
     critical_set: &HashSet<&String>,
-    dependencies: &[TaskDependency],
     graph: &DependencyGraph,
     visited: &mut HashSet<String>,
     path: &mut Vec<String>,
@@ -351,7 +349,7 @@ fn build_path_dfs(
     if let Ok(successors) = graph.get_dependents(task_id) {
         for succ in successors {
             if critical_set.contains(&succ) {
-                build_path_dfs(&succ, critical_set, dependencies, graph, visited, path);
+                build_path_dfs(&succ, critical_set, graph, visited, path);
             }
         }
     }
