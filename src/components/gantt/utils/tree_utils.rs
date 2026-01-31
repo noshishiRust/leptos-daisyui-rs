@@ -73,16 +73,14 @@ impl TreeBuilder {
         // Second pass: Build parent-child relationships and calculate depth
         let node_ids: Vec<String> = builder.nodes.keys().cloned().collect();
         for id in node_ids {
-            if let Some(node) = builder.nodes.get(&id).cloned() {
-                if let Some(parent_id) = &node.task.parent_id {
+            if let Some(node) = builder.nodes.get(&id).cloned()
+                && let Some(parent_id) = &node.task.parent_id {
                     // Add this task to parent's children
-                    if let Some(parent) = builder.nodes.get_mut(parent_id) {
-                        if !parent.children.contains(&id) {
+                    if let Some(parent) = builder.nodes.get_mut(parent_id)
+                        && !parent.children.contains(&id) {
                             parent.children.push(id.clone());
                         }
-                    }
                 }
-            }
         }
 
         // Third pass: Calculate depths
@@ -266,13 +264,12 @@ impl TaskTree {
         // Check if this node is expanded
         let is_expanded = expanded_state.get(id).copied().unwrap_or(true);
 
-        if is_expanded {
-            if let Some(node) = self.nodes.get(id) {
+        if is_expanded
+            && let Some(node) = self.nodes.get(id) {
                 for child_id in &node.children {
                     self.add_to_display_order(child_id, result, expanded_state);
                 }
             }
-        }
     }
 
     /// Toggle expand/collapse state for a task

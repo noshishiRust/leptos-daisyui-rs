@@ -2,6 +2,7 @@ use std::rc::Rc;
 
 /// Drag state for managing card dragging operations
 #[derive(Clone, Debug)]
+#[derive(Default)]
 pub struct DragState {
     /// The card currently being dragged (card_id)
     pub dragged_card: Option<String>,
@@ -13,16 +14,6 @@ pub struct DragState {
     pub target_position: Option<usize>,
 }
 
-impl Default for DragState {
-    fn default() -> Self {
-        Self {
-            dragged_card: None,
-            source_column: None,
-            target_column: None,
-            target_position: None,
-        }
-    }
-}
 
 impl DragState {
     /// Check if a card is currently being dragged
@@ -81,6 +72,7 @@ pub struct DragOperation {
 }
 
 impl DragOperation {
+    /// Create a new drag operation
     pub fn new(
         card_id: String,
         from_column: String,

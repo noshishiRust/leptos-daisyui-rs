@@ -4,20 +4,22 @@ use std::collections::HashMap;
 
 /// Priority level for kanban cards
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum Priority {
+    /// Low priority
     Low,
+    /// Medium priority (default)
+    #[default]
     Medium,
+    /// High priority
     High,
+    /// Critical priority
     Critical,
 }
 
-impl Default for Priority {
-    fn default() -> Self {
-        Self::Medium
-    }
-}
 
 impl Priority {
+    /// Get the string representation of the priority
     pub fn as_str(&self) -> &'static str {
         match self {
             Self::Low => "low",
@@ -27,6 +29,7 @@ impl Priority {
         }
     }
 
+    /// Get the daisyUI badge color class for this priority
     pub fn color_class(&self) -> &'static str {
         match self {
             Self::Low => "badge-info",
@@ -40,12 +43,16 @@ impl Priority {
 /// Label/tag for categorizing cards
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Label {
+    /// Unique identifier for the label
     pub id: String,
+    /// Display name of the label
     pub name: String,
+    /// Optional color for the label
     pub color: Option<String>,
 }
 
 impl Label {
+    /// Create a new label with the given ID and name
     pub fn new(id: impl Into<String>, name: impl Into<String>) -> Self {
         Self {
             id: id.into(),
@@ -54,6 +61,7 @@ impl Label {
         }
     }
 
+    /// Set the label color
     pub fn with_color(mut self, color: impl Into<String>) -> Self {
         self.color = Some(color.into());
         self
@@ -63,13 +71,18 @@ impl Label {
 /// Assignee information for a card
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Assignee {
+    /// Unique identifier for the assignee
     pub id: String,
+    /// Display name of the assignee
     pub name: String,
+    /// Optional avatar URL
     pub avatar_url: Option<String>,
+    /// Automatically generated initials from name
     pub initials: String,
 }
 
 impl Assignee {
+    /// Create a new assignee with auto-generated initials
     pub fn new(id: impl Into<String>, name: impl Into<String>) -> Self {
         let name_str = name.into();
         let initials = name_str
@@ -87,6 +100,7 @@ impl Assignee {
         }
     }
 
+    /// Set the assignee avatar URL
     pub fn with_avatar(mut self, avatar_url: impl Into<String>) -> Self {
         self.avatar_url = Some(avatar_url.into());
         self
@@ -96,18 +110,28 @@ impl Assignee {
 /// A kanban card representing a task or item
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct KanbanCard {
+    /// Unique identifier for the card
     pub card_id: String,
+    /// Card title
     pub title: String,
+    /// Optional card description
     pub description: Option<String>,
+    /// Labels/tags for categorizing the card
     pub labels: Vec<Label>,
+    /// Assigned users
     pub assignees: Vec<Assignee>,
+    /// Priority level
     pub priority: Priority,
+    /// Optional due date
     pub due_date: Option<NaiveDate>,
+    /// Creation timestamp
     pub created_at: chrono::DateTime<chrono::Utc>,
+    /// Additional metadata for extensibility
     pub metadata: HashMap<String, String>,
 }
 
 impl KanbanCard {
+    /// Create a new card with the given ID and title
     pub fn new(card_id: impl Into<String>, title: impl Into<String>) -> Self {
         Self {
             card_id: card_id.into(),
@@ -122,31 +146,37 @@ impl KanbanCard {
         }
     }
 
+    /// Set the card description
     pub fn with_description(mut self, description: impl Into<String>) -> Self {
         self.description = Some(description.into());
         self
     }
 
+    /// Set the card priority
     pub fn with_priority(mut self, priority: Priority) -> Self {
         self.priority = priority;
         self
     }
 
+    /// Add a label to the card
     pub fn with_label(mut self, label: Label) -> Self {
         self.labels.push(label);
         self
     }
 
+    /// Add an assignee to the card
     pub fn with_assignee(mut self, assignee: Assignee) -> Self {
         self.assignees.push(assignee);
         self
     }
 
+    /// Set the card due date
     pub fn with_due_date(mut self, due_date: NaiveDate) -> Self {
         self.due_date = Some(due_date);
         self
     }
 
+    /// Check if the card is overdue
     pub fn is_overdue(&self) -> bool {
         if let Some(due) = self.due_date {
             due < chrono::Local::now().date_naive()
@@ -205,17 +235,26 @@ impl KanbanCard {
 /// A kanban column containing cards
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct KanbanColumn {
+    /// Unique identifier for the column
     pub column_id: String,
+    /// Display title of the column
     pub title: String,
+    /// Optional color for the column header
     pub color: Option<String>,
+    /// Maximum number of cards allowed in this column (WIP limit)
     pub card_limit: Option<usize>,
+    /// Cards in this column
     pub cards: Vec<KanbanCard>,
+    /// Whether the column is currently collapsed
     pub collapsed: bool,
+    /// Whether the column can be collapsed
     pub collapsible: bool,
+    /// Whether the column has independent scrolling
     pub scrollable: bool,
 }
 
 impl KanbanColumn {
+    /// Create a new column with the given ID and title
     pub fn new(column_id: impl Into<String>, title: impl Into<String>) -> Self {
         Self {
             column_id: column_id.into(),
@@ -229,26 +268,31 @@ impl KanbanColumn {
         }
     }
 
+    /// Set the column header color
     pub fn with_color(mut self, color: impl Into<String>) -> Self {
         self.color = Some(color.into());
         self
     }
 
+    /// Set the WIP (Work In Progress) limit for this column
     pub fn with_card_limit(mut self, limit: usize) -> Self {
         self.card_limit = Some(limit);
         self
     }
 
+    /// Add a single card to this column
     pub fn with_card(mut self, card: KanbanCard) -> Self {
         self.cards.push(card);
         self
     }
 
+    /// Set all cards in this column
     pub fn with_cards(mut self, cards: Vec<KanbanCard>) -> Self {
         self.cards = cards;
         self
     }
 
+    /// Check if the column has exceeded its WIP limit
     pub fn is_over_limit(&self) -> bool {
         if let Some(limit) = self.card_limit {
             self.cards.len() > limit
@@ -257,6 +301,7 @@ impl KanbanColumn {
         }
     }
 
+    /// Get the number of cards in this column
     pub fn card_count(&self) -> usize {
         self.cards.len()
     }
@@ -265,34 +310,39 @@ impl KanbanColumn {
 /// Filter criteria for kanban cards
 #[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct KanbanFilters {
+    /// Filter by assignee IDs
     pub assignee_ids: Vec<String>,
+    /// Filter by label IDs
     pub label_ids: Vec<String>,
+    /// Filter by priority levels
     pub priorities: Vec<Priority>,
+    /// Filter by due date range (start, end)
     pub due_date_range: Option<(Option<NaiveDate>, Option<NaiveDate>)>,
+    /// Search query for card title and description
     pub search_query: Option<String>,
+    /// Logic for combining filters (AND/OR)
     pub filter_logic: FilterLogic,
 }
 
 /// Logic for combining multiple filters
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum FilterLogic {
     /// All filters must match (AND)
+    #[default]
     And,
     /// Any filter can match (OR)
     Or,
 }
 
-impl Default for FilterLogic {
-    fn default() -> Self {
-        Self::And
-    }
-}
 
 impl KanbanFilters {
+    /// Create a new empty filter set
     pub fn new() -> Self {
         Self::default()
     }
 
+    /// Check if a card matches the current filters
     pub fn matches_card(&self, card: &KanbanCard) -> bool {
         let filters_active = !self.assignee_ids.is_empty()
             || !self.label_ids.is_empty()
@@ -332,8 +382,8 @@ impl KanbanFilters {
         // Due date filter
         if let Some((start, end)) = self.due_date_range {
             if let Some(due) = card.due_date {
-                let after_start = start.map_or(true, |s| due >= s);
-                let before_end = end.map_or(true, |e| due <= e);
+                let after_start = start.is_none_or(|s| due >= s);
+                let before_end = end.is_none_or(|e| due <= e);
                 matches.push(after_start && before_end);
             } else {
                 matches.push(false);
@@ -347,7 +397,7 @@ impl KanbanFilters {
             let matches_desc = card
                 .description
                 .as_ref()
-                .map_or(false, |d| d.to_lowercase().contains(&query_lower));
+                .is_some_and(|d| d.to_lowercase().contains(&query_lower));
             let matches_label = card
                 .labels
                 .iter()
@@ -371,22 +421,34 @@ impl KanbanFilters {
 /// Event data for card movement
 #[derive(Clone, Debug, PartialEq)]
 pub struct CardMoveEvent {
+    /// ID of the card being moved
     pub card_id: String,
+    /// ID of the source column
     pub from_column_id: String,
+    /// ID of the destination column
     pub to_column_id: String,
+    /// Original position in the source column
     pub from_index: usize,
+    /// New position in the destination column
     pub to_index: usize,
 }
 
 /// Configuration for the kanban board
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct KanbanConfig {
+    /// Maximum height for the board
     pub max_height: Option<String>,
+    /// Enable drag-and-drop functionality
     pub enable_drag_drop: bool,
+    /// Enable filtering functionality
     pub enable_filters: bool,
+    /// Enable search functionality
     pub enable_search: bool,
+    /// Search debounce delay in milliseconds
     pub search_debounce_ms: u64,
+    /// Persist state to localStorage
     pub persist_state: bool,
+    /// localStorage key for persisted state
     pub storage_key: String,
 }
 

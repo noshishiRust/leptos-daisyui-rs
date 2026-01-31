@@ -32,7 +32,6 @@
 ///     }
 /// }
 /// ```
-
 mod board;
 mod column;
 mod card;

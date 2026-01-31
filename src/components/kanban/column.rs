@@ -171,9 +171,9 @@ pub fn KanbanColumnView(
                                 <KanbanCardView
                                     card=Signal::derive(move || card.clone())
                                     is_dragging=is_dragging
-                                    on_drag_start=on_drag_start.clone()
-                                    on_click=on_card_click.clone()
-                                    on_delete=on_card_delete.clone()
+                                    on_drag_start=on_drag_start
+                                    on_click=on_card_click
+                                    on_delete=on_card_delete
                                 />
                             }
                         }

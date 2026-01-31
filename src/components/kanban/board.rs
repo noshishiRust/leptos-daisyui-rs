@@ -175,21 +175,20 @@ pub fn KanbanBoard(
                                             true
                                         };
 
-                                        if is_valid {
-                                            if let Some(ref callback) = on_card_move {
+                                        if is_valid
+                                            && let Some(ref callback) = on_card_move {
                                                 callback.run(operation);
                                             }
-                                        }
                                     }
 
                                     set_drag_state.update(|state| {
                                         state.end_drag();
                                     });
                                 }))
-                                on_card_click=on_card_click.clone()
-                                on_card_delete=on_card_delete.clone()
-                                on_card_create=on_card_create.clone()
-                                on_toggle_collapse=on_column_toggle.clone()
+                                on_card_click=on_card_click
+                                on_card_delete=on_card_delete
+                                on_card_create=on_card_create
+                                on_toggle_collapse=on_column_toggle
                             />
                         }
                     }
