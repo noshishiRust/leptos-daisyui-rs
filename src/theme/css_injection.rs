@@ -5,6 +5,9 @@
 
 use crate::theme::types::*;
 
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::JsCast;
+
 /// Inject CSS variables from theme configuration into the document
 ///
 /// This function takes a theme configuration and injects all overrides as CSS custom properties

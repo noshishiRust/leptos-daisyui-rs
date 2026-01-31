@@ -5,6 +5,9 @@
 
 use crate::theme::types::ThemeConfiguration;
 
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::JsCast;
+
 /// Convert hex color to Oklahoma LCH format
 ///
 /// This function converts a hex color string (e.g., "#3b82f6") to Oklahoma LCH

@@ -85,17 +85,14 @@ pub fn ThemeShare() -> impl IntoView {
         #[cfg(target_arch = "wasm32")]
         {
             if let Some(window) = web_sys::window() {
-                if let Some(navigator) = window.navigator().clipboard() {
-                    let promise = navigator.write_text(&url);
-                    wasm_bindgen_futures::spawn_local(async move {
-                        match wasm_bindgen_futures::JsFuture::from(promise).await {
-                            Ok(_) => set_share_status.set(Some("Share URL copied to clipboard!".to_string())),
-                            Err(_) => set_share_status.set(Some("Failed to copy to clipboard".to_string())),
-                        }
-                    });
-                } else {
-                    set_share_status.set(Some("Clipboard API not available".to_string()));
-                }
+                let clipboard = window.navigator().clipboard();
+                let promise = clipboard.write_text(&url);
+                wasm_bindgen_futures::spawn_local(async move {
+                    match wasm_bindgen_futures::JsFuture::from(promise).await {
+                        Ok(_) => set_share_status.set(Some("Share URL copied to clipboard!".to_string())),
+                        Err(_) => set_share_status.set(Some("Failed to copy to clipboard".to_string())),
+                    }
+                });
             }
         }
 
