@@ -6,7 +6,6 @@
 /// - Visual indicator rendering
 /// - Event handling with read-only state
 /// - ARIA accessibility attributes
-
 #[cfg(test)]
 mod tests {
     use super::super::*;

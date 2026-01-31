@@ -650,8 +650,10 @@ mod tests {
 
     #[test]
     fn test_snap_to_grid() {
-        let mut state = DragState::default();
-        state.snap_to_grid = true;
+        let mut state = DragState {
+            snap_to_grid: true,
+            ..Default::default()
+        };
 
         let start = Utc.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
         let end = Utc.with_ymd_and_hms(2024, 1, 5, 0, 0, 0).unwrap();

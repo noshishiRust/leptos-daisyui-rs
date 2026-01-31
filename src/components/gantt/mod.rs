@@ -1,4 +1,5 @@
 mod component;
+mod dependency_validation;
 mod models;
 mod style;
 
@@ -21,6 +22,7 @@ pub mod utils;
 mod readonly_tests;
 
 pub use component::*;
+pub use dependency_validation::*;
 pub use interactions::{
     DateValidator, DragConstraints, DragHistory, DragMode as InteractionDragMode,
     DragResult as InteractionDragResult, DragState as InteractionDragState,

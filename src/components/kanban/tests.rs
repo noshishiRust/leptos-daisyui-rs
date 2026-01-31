@@ -6,7 +6,6 @@
 /// - KanbanCard builder methods and filter matching
 /// - KanbanColumn WIP limits and card counting
 /// - Filter logic (AND/OR) with search, priority, assignee, and label filters
-
 use chrono::NaiveDate;
 use super::types::*;
 
