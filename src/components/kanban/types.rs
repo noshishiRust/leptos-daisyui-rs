@@ -154,6 +154,52 @@ impl KanbanCard {
             false
         }
     }
+
+    /// Check if card matches the provided filters
+    pub fn matches_filters(&self, filters: &KanbanFilters) -> bool {
+        let mut conditions = Vec::new();
+
+        // Search query filter
+        if let Some(ref query) = filters.search_query {
+            let query_lower = query.to_lowercase();
+            let matches = self.title.to_lowercase().contains(&query_lower)
+                || self.description.as_ref().map(|d| d.to_lowercase().contains(&query_lower)).unwrap_or(false);
+            conditions.push(matches);
+        }
+
+        // Priority filter
+        if !filters.priorities.is_empty() {
+            conditions.push(filters.priorities.contains(&self.priority));
+        }
+
+        // Assignee filter
+        if !filters.assignee_ids.is_empty() {
+            let has_assignee = self.assignees.iter().any(|a| filters.assignee_ids.contains(&a.id));
+            conditions.push(has_assignee);
+        }
+
+        // Label filter
+        if !filters.label_ids.is_empty() {
+            let has_label = self.labels.iter().any(|l| filters.label_ids.contains(&l.id));
+            conditions.push(has_label);
+        }
+
+        // Due date range filter
+        if filters.due_date_range.is_some() {
+            // Placeholder for due date range logic
+            conditions.push(true);
+        }
+
+        // Apply filter logic (AND/OR)
+        if conditions.is_empty() {
+            return true; // No filters applied
+        }
+
+        match filters.filter_logic {
+            FilterLogic::And => conditions.iter().all(|&c| c),
+            FilterLogic::Or => conditions.iter().any(|&c| c),
+        }
+    }
 }
 
 /// A kanban column containing cards

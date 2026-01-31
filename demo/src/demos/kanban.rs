@@ -149,6 +149,7 @@ pub fn KanbanDemo() -> impl IntoView {
                         on_card_delete=handle_card_delete
                         on_column_toggle=handle_column_toggle
                         on_card_create=handle_card_create
+                        enable_filters=true
                     />
                 </div>
             </div>

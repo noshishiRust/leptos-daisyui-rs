@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use super::types::*;
 use super::column::KanbanColumnView;
 use super::drag::*;
+use super::filters::KanbanFilterBar;
 
 /// Main Kanban board component with drag-and-drop support
 #[component]
@@ -50,9 +51,58 @@ pub fn KanbanBoard(
     /// Callback when a new card should be created
     #[prop(optional)]
     on_card_create: Option<Callback<String>>,
+
+    /// Enable filtering functionality
+    #[prop(optional, default = false)]
+    enable_filters: bool,
 ) -> impl IntoView {
     // Drag state management
     let (drag_state, set_drag_state) = signal(DragState::default());
+
+    // Filter state management
+    let (filters, set_filters) = signal(KanbanFilters::new());
+
+    // Collect all available assignees and labels from cards
+    let available_assignees = Signal::derive(move || {
+        let mut assignees = Vec::new();
+        for column in columns.get() {
+            for card in column.cards {
+                for assignee in card.assignees {
+                    if !assignees.iter().any(|a: &Assignee| a.id == assignee.id) {
+                        assignees.push(assignee);
+                    }
+                }
+            }
+        }
+        assignees
+    });
+
+    let available_labels = Signal::derive(move || {
+        let mut labels = Vec::new();
+        for column in columns.get() {
+            for card in column.cards {
+                for label in card.labels {
+                    if !labels.iter().any(|l: &Label| l.id == label.id) {
+                        labels.push(label);
+                    }
+                }
+            }
+        }
+        labels
+    });
+
+    // Apply filters to columns
+    let filtered_columns = Signal::derive(move || {
+        if !enable_filters {
+            return columns.get();
+        }
+
+        let current_filters = filters.get();
+        columns.get().into_iter().map(|mut column| {
+            column.cards.retain(|card| card.matches_filters(&current_filters));
+            column
+        }).collect()
+    });
     view! {
         <div
             node_ref=node_ref
@@ -67,10 +117,20 @@ pub fn KanbanBoard(
                 }
             })}
 
+            // Filter bar
+            <Show when=move || enable_filters>
+                <KanbanFilterBar
+                    filters=filters
+                    set_filters=set_filters
+                    available_assignees=available_assignees
+                    available_labels=available_labels
+                />
+            </Show>
+
             // Columns container
             <div class="kanban-columns flex gap-4 overflow-x-auto pb-4">
                 <For
-                    each=move || columns.get()
+                    each=move || filtered_columns.get()
                     key=|col| col.column_id.clone()
                     children=move |column| {
                         let column_id = column.column_id.clone();
