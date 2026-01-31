@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Type of task in the Gantt chart
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum TaskType {
     /// Regular task with start and end dates
     #[default]
@@ -26,7 +26,7 @@ impl TaskType {
 }
 
 /// View mode for the Gantt chart timeline
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum ViewMode {
     /// Hourly view (1 hour per column)
     Hour,
@@ -63,7 +63,7 @@ impl ViewMode {
 }
 
 /// Height/density setting for task bars
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum GanttTaskHeight {
     /// Compact view (20px task bars)
     Compact,

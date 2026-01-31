@@ -1,1 +1,7 @@
-// Timeline panel component (to be implemented in Phase 2)
+mod grid;
+mod scale;
+mod task_bar;
+
+pub use grid::*;
+pub use scale::*;
+pub use task_bar::*;

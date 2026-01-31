@@ -58,7 +58,7 @@ pub struct TaskDependency {
 }
 
 /// Type of dependency relationship between tasks
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum DependencyType {
     /// Finish-to-Start: Source task must finish before target can start
     #[default]
