@@ -1,6 +1,5 @@
 use super::*;
 
-
 // CheckboxColor tests
 #[test]
 fn test_checkbox_color_default() {

@@ -1,4 +1,3 @@
-use leptos::{html::Div, prelude::*};
 use crate::components::data_table::body::DataTableBody;
 use crate::components::data_table::controls::DataTableControls;
 use crate::components::data_table::header::DataTableHeader;
@@ -7,6 +6,7 @@ use crate::components::data_table::types::{
 };
 use crate::components::table::{Table, TableSize};
 use crate::merge_classes;
+use leptos::{html::Div, prelude::*};
 
 /// # DataTable Component
 ///
@@ -117,21 +117,13 @@ pub fn DataTable(
     // Default page size to 10 if not set
     let page_size = Signal::derive(move || {
         let size = page_size.get();
-        if size == 0 {
-            10
-        } else {
-            size
-        }
+        if size == 0 { 10 } else { size }
     });
 
     // Default paginate to true
     let paginate = Signal::derive(move || {
         let p = paginate.get();
-        if p {
-            p
-        } else {
-            true
-        }
+        if p { p } else { true }
     });
 
     // Pagination state

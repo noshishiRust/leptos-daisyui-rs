@@ -20,11 +20,7 @@ fn test_tag_color_count() {
 
 #[test]
 fn test_tag_size_count() {
-    let sizes = [
-        TagSize::Small,
-        TagSize::Medium,
-        TagSize::Large,
-    ];
+    let sizes = [TagSize::Small, TagSize::Medium, TagSize::Large];
 
     assert_eq!(sizes.len(), 3, "Should have 3 tag sizes");
 }
@@ -50,12 +46,20 @@ fn test_tag_size_css_classes() {
 
 #[test]
 fn test_tag_color_default() {
-    assert_eq!(TagColor::default(), TagColor::Neutral, "Default color should be Neutral");
+    assert_eq!(
+        TagColor::default(),
+        TagColor::Neutral,
+        "Default color should be Neutral"
+    );
 }
 
 #[test]
 fn test_tag_size_default() {
-    assert_eq!(TagSize::default(), TagSize::Medium, "Default size should be Medium");
+    assert_eq!(
+        TagSize::default(),
+        TagSize::Medium,
+        "Default size should be Medium"
+    );
 }
 
 #[test]
@@ -76,14 +80,20 @@ fn test_tag_size_clone() {
 fn test_tag_color_debug() {
     let color = TagColor::Success;
     let debug_str = format!("{:?}", color);
-    assert!(debug_str.contains("Success"), "Debug output should contain color name");
+    assert!(
+        debug_str.contains("Success"),
+        "Debug output should contain color name"
+    );
 }
 
 #[test]
 fn test_tag_size_debug() {
     let size = TagSize::Small;
     let debug_str = format!("{:?}", size);
-    assert!(debug_str.contains("Small"), "Debug output should contain size name");
+    assert!(
+        debug_str.contains("Small"),
+        "Debug output should contain size name"
+    );
 }
 
 #[test]

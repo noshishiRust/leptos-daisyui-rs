@@ -1,6 +1,5 @@
 use super::*;
 
-
 // ButtonColor tests
 #[test]
 fn test_button_color_default() {

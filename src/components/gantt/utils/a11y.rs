@@ -101,9 +101,10 @@ pub fn zoom_aria_label(direction: &str, can_zoom: bool, current_mode: &str) -> S
 pub fn focus_element_by_id(id: &str) {
     if let Some(document) = web_sys::window().and_then(|w| w.document())
         && let Some(element) = document.get_element_by_id(id)
-            && let Some(html_element) = element.dyn_ref::<HtmlElement>() {
-                let _ = html_element.focus();
-            }
+        && let Some(html_element) = element.dyn_ref::<HtmlElement>()
+    {
+        let _ = html_element.focus();
+    }
 }
 
 /// Announce a message to screen readers
@@ -152,30 +153,13 @@ mod tests {
 
     #[test]
     fn test_task_aria_label_basic() {
-        let label = task_aria_label(
-            "Task 1",
-            "2024-01-01",
-            "2024-01-05",
-            0.5,
-            false,
-            false,
-        );
-        assert_eq!(
-            label,
-            "Task 1, from 2024-01-01 to 2024-01-05, 50% complete"
-        );
+        let label = task_aria_label("Task 1", "2024-01-01", "2024-01-05", 0.5, false, false);
+        assert_eq!(label, "Task 1, from 2024-01-01 to 2024-01-05, 50% complete");
     }
 
     #[test]
     fn test_task_aria_label_selected() {
-        let label = task_aria_label(
-            "Task 1",
-            "2024-01-01",
-            "2024-01-05",
-            0.75,
-            true,
-            false,
-        );
+        let label = task_aria_label("Task 1", "2024-01-01", "2024-01-05", 0.75, true, false);
         assert_eq!(
             label,
             "Task 1, from 2024-01-01 to 2024-01-05, 75% complete, selected"
@@ -184,14 +168,7 @@ mod tests {
 
     #[test]
     fn test_task_aria_label_readonly() {
-        let label = task_aria_label(
-            "Task 1",
-            "2024-01-01",
-            "2024-01-05",
-            1.0,
-            false,
-            true,
-        );
+        let label = task_aria_label("Task 1", "2024-01-01", "2024-01-05", 1.0, false, true);
         assert_eq!(
             label,
             "Task 1, from 2024-01-01 to 2024-01-05, 100% complete, read-only"

@@ -69,9 +69,7 @@ pub fn calculate_today_offset(
     time_unit_days: i64,
 ) -> f64 {
     let today = today.unwrap_or_else(Utc::now);
-    let days_from_start = today
-        .signed_duration_since(timeline_start)
-        .num_days();
+    let days_from_start = today.signed_duration_since(timeline_start).num_days();
 
     let time_units_from_start = days_from_start as f64 / time_unit_days as f64;
     time_units_from_start * column_width
@@ -131,9 +129,10 @@ pub fn TodayButton(
 
     let handle_click = move |_| {
         if !is_disabled.get()
-            && let Some(ref cb) = on_navigate_to_today {
-                cb.run(());
-            }
+            && let Some(ref cb) = on_navigate_to_today
+        {
+            cb.run(());
+        }
     };
 
     view! {
@@ -221,27 +220,19 @@ pub fn TodayMarker(
 /// Check if a given date is today
 pub fn is_date_today(date: DateTime<Utc>) -> bool {
     let today = Utc::now();
-    date.year() == today.year()
-        && date.month() == today.month()
-        && date.day() == today.day()
+    date.year() == today.year() && date.month() == today.month() && date.day() == today.day()
 }
 
 /// Get the start of today (midnight UTC)
 pub fn get_today_start() -> DateTime<Utc> {
     let now = Utc::now();
-    now.date_naive()
-        .and_hms_opt(0, 0, 0)
-        .unwrap()
-        .and_utc()
+    now.date_naive().and_hms_opt(0, 0, 0).unwrap().and_utc()
 }
 
 /// Get the end of today (23:59:59 UTC)
 pub fn get_today_end() -> DateTime<Utc> {
     let now = Utc::now();
-    now.date_naive()
-        .and_hms_opt(23, 59, 59)
-        .unwrap()
-        .and_utc()
+    now.date_naive().and_hms_opt(23, 59, 59).unwrap().and_utc()
 }
 
 #[cfg(test)]

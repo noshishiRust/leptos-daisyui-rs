@@ -5,8 +5,8 @@
 use chrono::{DateTime, Utc};
 use std::collections::{HashMap, HashSet};
 
-use crate::components::gantt::{DependencyType, GanttTask, TaskDependency};
 use super::dependency_graph::DependencyGraph;
+use crate::components::gantt::{DependencyType, GanttTask, TaskDependency};
 
 /// Result of critical path calculation for a single task
 #[derive(Clone, Debug, PartialEq)]
@@ -107,38 +107,37 @@ pub fn calculate_critical_path(
     }
 
     // Get topological order for forward pass
-    let topo_order = graph.topological_sort()
+    let topo_order = graph
+        .topological_sort()
         .map_err(|e| format!("Topological sort failed: {}", e))?;
 
     // Create task lookup map
-    let task_map: HashMap<String, &GanttTask> = tasks
-        .iter()
-        .map(|t| (t.id.clone(), t))
-        .collect();
+    let task_map: HashMap<String, &GanttTask> = tasks.iter().map(|t| (t.id.clone(), t)).collect();
 
     // Forward pass: Calculate early start and early finish
     let mut early_start: HashMap<String, DateTime<Utc>> = HashMap::new();
     let mut early_finish: HashMap<String, DateTime<Utc>> = HashMap::new();
 
     for task_id in &topo_order {
-        let task = task_map.get(task_id)
+        let task = task_map
+            .get(task_id)
             .ok_or_else(|| format!("Task {} not found", task_id))?;
 
         // Find maximum early finish of all predecessors
-        let predecessors = graph.get_dependencies(task_id)
-            .unwrap_or_default();
+        let predecessors = graph.get_dependencies(task_id).unwrap_or_default();
 
         let es = if predecessors.is_empty() {
             // No predecessors: start at task's scheduled start
             task.start
         } else {
             // Start after all predecessors finish (considering dependency types and lag)
-            predecessors.iter()
+            predecessors
+                .iter()
                 .filter_map(|pred_id| {
                     let pred_ef = early_finish.get(pred_id)?;
-                    let dep = dependencies.iter().find(|d|
-                        &d.source_id == pred_id && &d.target_id == task_id
-                    )?;
+                    let dep = dependencies
+                        .iter()
+                        .find(|d| &d.source_id == pred_id && &d.target_id == task_id)?;
 
                     // Apply lag time
                     let lag = chrono::Duration::days(dep.lag_days as i64);
@@ -167,7 +166,8 @@ pub fn calculate_critical_path(
     }
 
     // Find project early finish (maximum early finish across all tasks)
-    let project_early_finish = early_finish.values()
+    let project_early_finish = early_finish
+        .values()
         .max()
         .copied()
         .ok_or_else(|| "No tasks found".to_string())?;
@@ -178,8 +178,7 @@ pub fn calculate_critical_path(
 
     // Initialize tasks without successors
     for task_id in tasks.iter().map(|t| &t.id) {
-        let successors = graph.get_dependents(task_id)
-            .unwrap_or_default();
+        let successors = graph.get_dependents(task_id).unwrap_or_default();
 
         if successors.is_empty() {
             // No successors: late finish = project early finish
@@ -201,15 +200,15 @@ pub fn calculate_critical_path(
         let duration = task.end.signed_duration_since(task.start);
 
         // Find minimum late start of all successors
-        let successors = graph.get_dependents(task_id)
-            .unwrap_or_default();
+        let successors = graph.get_dependents(task_id).unwrap_or_default();
 
-        let lf = successors.iter()
+        let lf = successors
+            .iter()
             .filter_map(|succ_id| {
                 let succ_ls = late_start.get(succ_id)?;
-                let dep = dependencies.iter().find(|d|
-                    &d.source_id == task_id && &d.target_id == succ_id
-                )?;
+                let dep = dependencies
+                    .iter()
+                    .find(|d| &d.source_id == task_id && &d.target_id == succ_id)?;
 
                 let lag = chrono::Duration::days(dep.lag_days as i64);
 
@@ -238,12 +237,14 @@ pub fn calculate_critical_path(
     let mut critical_tasks = Vec::new();
 
     for task_id in tasks.iter().map(|t| &t.id) {
-        let es = early_start.get(task_id).copied().unwrap_or_else(|| {
-            task_map.get(task_id).unwrap().start
-        });
-        let ef = early_finish.get(task_id).copied().unwrap_or_else(|| {
-            task_map.get(task_id).unwrap().end
-        });
+        let es = early_start
+            .get(task_id)
+            .copied()
+            .unwrap_or_else(|| task_map.get(task_id).unwrap().start);
+        let ef = early_finish
+            .get(task_id)
+            .copied()
+            .unwrap_or_else(|| task_map.get(task_id).unwrap().end);
         let ls = late_start.get(task_id).copied().unwrap_or(es);
         let lf = late_finish.get(task_id).copied().unwrap_or(ef);
 
@@ -254,7 +255,8 @@ pub fn calculate_critical_path(
         let free_slack_days = if successors.is_empty() {
             slack_days
         } else {
-            successors.iter()
+            successors
+                .iter()
                 .filter_map(|succ_id| early_start.get(succ_id))
                 .map(|&succ_es| succ_es.signed_duration_since(ef).num_days())
                 .min()
@@ -295,10 +297,7 @@ pub fn calculate_critical_path(
 }
 
 /// Build ordered sequence of critical path tasks
-fn build_critical_path_sequence(
-    critical_tasks: &[String],
-    graph: &DependencyGraph,
-) -> Vec<String> {
+fn build_critical_path_sequence(critical_tasks: &[String], graph: &DependencyGraph) -> Vec<String> {
     if critical_tasks.is_empty() {
         return Vec::new();
     }
@@ -306,7 +305,8 @@ fn build_critical_path_sequence(
     // Find start tasks (critical tasks with no critical predecessors)
     let critical_set: HashSet<_> = critical_tasks.iter().collect();
 
-    let mut start_tasks: Vec<String> = critical_tasks.iter()
+    let mut start_tasks: Vec<String> = critical_tasks
+        .iter()
         .filter(|&task_id| {
             let predecessors = graph.get_dependencies(task_id).unwrap_or_default();
             !predecessors.iter().any(|pred| critical_set.contains(pred))
@@ -363,7 +363,9 @@ mod tests {
     use std::collections::HashMap;
 
     fn create_test_task(id: &str, start_day: i64, duration_days: i64) -> GanttTask {
-        let start = Utc.with_ymd_and_hms(2024, 1, start_day as u32, 0, 0, 0).unwrap();
+        let start = Utc
+            .with_ymd_and_hms(2024, 1, start_day as u32, 0, 0, 0)
+            .unwrap();
         let end = start + chrono::Duration::days(duration_days);
 
         GanttTask {
@@ -400,10 +402,7 @@ mod tests {
             create_test_task("C", 6, 1),
         ];
 
-        let dependencies = vec![
-            create_dependency("A", "B"),
-            create_dependency("B", "C"),
-        ];
+        let dependencies = vec![create_dependency("A", "B"), create_dependency("B", "C")];
 
         let result = calculate_critical_path(&tasks, &dependencies).unwrap();
 
@@ -416,7 +415,11 @@ mod tests {
         // Check slack
         for task_id in &["A", "B", "C"] {
             let schedule = result.get_task_schedule(task_id).unwrap();
-            assert_eq!(schedule.slack_days, 0, "Task {} should have 0 slack", task_id);
+            assert_eq!(
+                schedule.slack_days, 0,
+                "Task {} should have 0 slack",
+                task_id
+            );
         }
     }
 
@@ -431,10 +434,7 @@ mod tests {
             create_test_task("C", 6, 2),
         ];
 
-        let dependencies = vec![
-            create_dependency("A", "C"),
-            create_dependency("B", "C"),
-        ];
+        let dependencies = vec![create_dependency("A", "C"), create_dependency("B", "C")];
 
         let result = calculate_critical_path(&tasks, &dependencies).unwrap();
 
@@ -444,7 +444,10 @@ mod tests {
 
         // B should have slack
         let schedule_b = result.get_task_schedule("B").unwrap();
-        assert!(schedule_b.slack_days > 0, "Task B should have positive slack");
+        assert!(
+            schedule_b.slack_days > 0,
+            "Task B should have positive slack"
+        );
         assert!(!schedule_b.is_critical);
     }
 
@@ -478,19 +481,14 @@ mod tests {
 
     #[test]
     fn test_task_with_lag() {
-        let tasks = vec![
-            create_test_task("A", 1, 3),
-            create_test_task("B", 4, 2),
-        ];
+        let tasks = vec![create_test_task("A", 1, 3), create_test_task("B", 4, 2)];
 
-        let dependencies = vec![
-            TaskDependency {
-                source_id: "A".to_string(),
-                target_id: "B".to_string(),
-                dependency_type: DependencyType::FS,
-                lag_days: 2, // 2-day lag
-            },
-        ];
+        let dependencies = vec![TaskDependency {
+            source_id: "A".to_string(),
+            target_id: "B".to_string(),
+            dependency_type: DependencyType::FS,
+            lag_days: 2, // 2-day lag
+        }];
 
         let result = calculate_critical_path(&tasks, &dependencies).unwrap();
 

@@ -29,12 +29,12 @@ impl MarkerType {
     /// Get the default color for this marker type
     pub fn default_color(&self) -> &'static str {
         match self {
-            MarkerType::Today => "#3b82f6",         // Blue
-            MarkerType::Release => "#10b981",       // Green
-            MarkerType::Sprint => "#8b5cf6",        // Purple
-            MarkerType::Holiday => "#f59e0b",       // Amber
-            MarkerType::Deadline => "#ef4444",      // Red
-            MarkerType::Custom(_) => "#6b7280",     // Gray
+            MarkerType::Today => "#3b82f6",     // Blue
+            MarkerType::Release => "#10b981",   // Green
+            MarkerType::Sprint => "#8b5cf6",    // Purple
+            MarkerType::Holiday => "#f59e0b",   // Amber
+            MarkerType::Deadline => "#ef4444",  // Red
+            MarkerType::Custom(_) => "#6b7280", // Gray
         }
     }
 
@@ -184,16 +184,29 @@ impl TimelineMarker {
 
     /// Create a release marker
     pub fn release(id: impl Into<String>, date: DateTime<Utc>, version: impl Into<String>) -> Self {
-        Self::new(id, date, format!("Release {}", version.into()), MarkerType::Release)
+        Self::new(
+            id,
+            date,
+            format!("Release {}", version.into()),
+            MarkerType::Release,
+        )
     }
 
     /// Create a sprint marker
-    pub fn sprint(id: impl Into<String>, date: DateTime<Utc>, sprint_name: impl Into<String>) -> Self {
+    pub fn sprint(
+        id: impl Into<String>,
+        date: DateTime<Utc>,
+        sprint_name: impl Into<String>,
+    ) -> Self {
         Self::new(id, date, sprint_name, MarkerType::Sprint)
     }
 
     /// Create a holiday marker
-    pub fn holiday(id: impl Into<String>, date: DateTime<Utc>, holiday_name: impl Into<String>) -> Self {
+    pub fn holiday(
+        id: impl Into<String>,
+        date: DateTime<Utc>,
+        holiday_name: impl Into<String>,
+    ) -> Self {
         Self::new(id, date, holiday_name, MarkerType::Holiday)
     }
 
@@ -312,7 +325,11 @@ impl MarkerCollection {
     /// Detect markers that are too close together (collision detection)
     ///
     /// Returns groups of marker IDs that are within `threshold_pixels` of each other
-    pub fn detect_collisions(&self, threshold_pixels: f64, pixels_per_day: f64) -> Vec<Vec<String>> {
+    pub fn detect_collisions(
+        &self,
+        threshold_pixels: f64,
+        pixels_per_day: f64,
+    ) -> Vec<Vec<String>> {
         let threshold_days = threshold_pixels / pixels_per_day;
         let mut groups = Vec::new();
         let mut sorted_markers: Vec<_> = self.visible_markers();
@@ -355,9 +372,8 @@ impl MarkerCollection {
 
     /// Sort markers by date and z-index
     fn sort_markers(&mut self) {
-        self.markers.sort_by(|a, b| {
-            a.date.cmp(&b.date).then(a.z_index.cmp(&b.z_index))
-        });
+        self.markers
+            .sort_by(|a, b| a.date.cmp(&b.date).then(a.z_index.cmp(&b.z_index)));
     }
 
     /// Get all markers (sorted)
@@ -383,9 +399,7 @@ pub fn calculate_marker_position(
     column_width: f64,
     time_unit_days: i64,
 ) -> f64 {
-    let days_from_start = marker_date
-        .signed_duration_since(timeline_start)
-        .num_days();
+    let days_from_start = marker_date.signed_duration_since(timeline_start).num_days();
 
     let time_units_from_start = days_from_start as f64 / time_unit_days as f64;
     time_units_from_start * column_width
@@ -529,12 +543,13 @@ mod tests {
     #[test]
     fn test_timeline_marker_builder() {
         let date = Utc.with_ymd_and_hms(2024, 6, 15, 0, 0, 0).unwrap();
-        let marker = TimelineMarker::new("marker1", date, "Test", MarkerType::Custom("test".into()))
-            .with_color("#ff0000")
-            .with_style(MarkerStyle::Dashed)
-            .with_z_index(5)
-            .with_tooltip("Test tooltip")
-            .with_visibility(false);
+        let marker =
+            TimelineMarker::new("marker1", date, "Test", MarkerType::Custom("test".into()))
+                .with_color("#ff0000")
+                .with_style(MarkerStyle::Dashed)
+                .with_z_index(5)
+                .with_tooltip("Test tooltip")
+                .with_visibility(false);
 
         assert_eq!(marker.color, Some("#ff0000".to_string()));
         assert!(matches!(marker.style, MarkerStyle::Dashed));
@@ -565,7 +580,12 @@ mod tests {
         let mut collection = MarkerCollection::new();
         let date = Utc.with_ymd_and_hms(2024, 6, 15, 0, 0, 0).unwrap();
 
-        collection.add(TimelineMarker::new("marker1", date, "Visible", MarkerType::Release));
+        collection.add(TimelineMarker::new(
+            "marker1",
+            date,
+            "Visible",
+            MarkerType::Release,
+        ));
         collection.add(
             TimelineMarker::new("marker2", date, "Hidden", MarkerType::Sprint)
                 .with_visibility(false),
@@ -583,9 +603,24 @@ mod tests {
         let date2 = Utc.with_ymd_and_hms(2024, 6, 20, 0, 0, 0).unwrap();
         let date3 = Utc.with_ymd_and_hms(2024, 6, 30, 0, 0, 0).unwrap();
 
-        collection.add(TimelineMarker::new("marker1", date1, "M1", MarkerType::Release));
-        collection.add(TimelineMarker::new("marker2", date2, "M2", MarkerType::Sprint));
-        collection.add(TimelineMarker::new("marker3", date3, "M3", MarkerType::Holiday));
+        collection.add(TimelineMarker::new(
+            "marker1",
+            date1,
+            "M1",
+            MarkerType::Release,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker2",
+            date2,
+            "M2",
+            MarkerType::Sprint,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker3",
+            date3,
+            "M3",
+            MarkerType::Holiday,
+        ));
 
         let start = Utc.with_ymd_and_hms(2024, 6, 15, 0, 0, 0).unwrap();
         let end = Utc.with_ymd_and_hms(2024, 6, 25, 0, 0, 0).unwrap();
@@ -600,9 +635,24 @@ mod tests {
         let mut collection = MarkerCollection::new();
         let date = Utc.with_ymd_and_hms(2024, 6, 15, 0, 0, 0).unwrap();
 
-        collection.add(TimelineMarker::new("marker1", date, "R1", MarkerType::Release));
-        collection.add(TimelineMarker::new("marker2", date, "R2", MarkerType::Release));
-        collection.add(TimelineMarker::new("marker3", date, "S1", MarkerType::Sprint));
+        collection.add(TimelineMarker::new(
+            "marker1",
+            date,
+            "R1",
+            MarkerType::Release,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker2",
+            date,
+            "R2",
+            MarkerType::Release,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker3",
+            date,
+            "S1",
+            MarkerType::Sprint,
+        ));
 
         let releases = collection.markers_by_type(&MarkerType::Release);
         assert_eq!(releases.len(), 2);
@@ -615,9 +665,24 @@ mod tests {
         let date2 = Utc.with_ymd_and_hms(2024, 6, 11, 0, 0, 0).unwrap(); // 1 day apart
         let date3 = Utc.with_ymd_and_hms(2024, 6, 20, 0, 0, 0).unwrap(); // Far apart
 
-        collection.add(TimelineMarker::new("marker1", date1, "M1", MarkerType::Release));
-        collection.add(TimelineMarker::new("marker2", date2, "M2", MarkerType::Sprint));
-        collection.add(TimelineMarker::new("marker3", date3, "M3", MarkerType::Holiday));
+        collection.add(TimelineMarker::new(
+            "marker1",
+            date1,
+            "M1",
+            MarkerType::Release,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker2",
+            date2,
+            "M2",
+            MarkerType::Sprint,
+        ));
+        collection.add(TimelineMarker::new(
+            "marker3",
+            date3,
+            "M3",
+            MarkerType::Holiday,
+        ));
 
         // With 60 pixels per day and 30 pixel threshold, markers within 0.5 days collide
         let collisions = collection.detect_collisions(30.0, 60.0);
@@ -638,12 +703,8 @@ mod tests {
         let column_width = 60.0;
         let time_unit_days = 1;
 
-        let position = calculate_marker_position(
-            marker_date,
-            timeline_start,
-            column_width,
-            time_unit_days,
-        );
+        let position =
+            calculate_marker_position(marker_date, timeline_start, column_width, time_unit_days);
 
         // 14 days from start
         assert_eq!(position, 14.0 * 60.0);

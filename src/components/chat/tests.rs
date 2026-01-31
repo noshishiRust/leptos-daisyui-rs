@@ -1,6 +1,5 @@
 use super::*;
 
-
 // ChatPlacement tests
 #[test]
 fn test_chat_placement_default() {

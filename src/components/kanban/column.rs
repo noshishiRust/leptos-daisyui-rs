@@ -1,9 +1,9 @@
 use leptos::prelude::*;
 use web_sys::DragEvent;
 
-use super::types::*;
 use super::card::KanbanCardView;
 use super::drag::*;
+use super::types::*;
 
 /// Kanban column component with drag-and-drop support
 #[component]

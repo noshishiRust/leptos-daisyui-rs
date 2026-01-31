@@ -1,6 +1,5 @@
 use super::*;
 
-
 // CarouselModifier tests
 #[test]
 fn test_carousel_modifier_default() {

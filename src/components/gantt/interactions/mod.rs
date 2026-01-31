@@ -5,7 +5,7 @@
 /// - Resizing tasks (changing start/end dates)
 /// - Dragging progress indicator
 /// - Visual feedback and constraints
-use chrono::{Datelike, DateTime, Duration, Utc};
+use chrono::{DateTime, Datelike, Duration, Utc};
 use serde::{Deserialize, Serialize};
 
 /// Mode of drag operation being performed
@@ -123,12 +123,7 @@ impl DragState {
     }
 
     /// Start a dependency creation drag
-    pub fn start_dependency_drag(
-        &mut self,
-        source_task_id: String,
-        start_x: f64,
-        start_y: f64,
-    ) {
+    pub fn start_dependency_drag(&mut self, source_task_id: String, start_x: f64, start_y: f64) {
         self.is_dragging = true;
         self.task_id = Some(source_task_id);
         self.drag_mode = Some(DragMode::CreateDependency);
@@ -307,23 +302,23 @@ impl DragConstraints {
 
         // Check maximum duration
         if let Some(max_days) = self.max_duration_days
-            && duration > Duration::days(max_days) {
-                return Err(format!(
-                    "Task duration cannot exceed {} days",
-                    max_days
-                ));
-            }
+            && duration > Duration::days(max_days)
+        {
+            return Err(format!("Task duration cannot exceed {} days", max_days));
+        }
 
         // Check min/max dates
         if let Some(min_date) = self.min_date
-            && new_start < min_date {
-                return Err("Start date is before minimum allowed date".to_string());
-            }
+            && new_start < min_date
+        {
+            return Err("Start date is before minimum allowed date".to_string());
+        }
 
         if let Some(max_date) = self.max_date
-            && new_end > max_date {
-                return Err("End date is after maximum allowed date".to_string());
-            }
+            && new_end > max_date
+        {
+            return Err("End date is after maximum allowed date".to_string());
+        }
 
         // Apply working days constraint
         let (validated_start, validated_end) = if self.working_days_only {

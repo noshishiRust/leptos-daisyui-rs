@@ -264,8 +264,7 @@ impl EditContext {
 pub type ReadOnlyEvaluator = Arc<dyn Fn(&EditContext) -> bool + Send + Sync>;
 
 /// Read-only mode configuration for Gantt chart
-#[derive(Clone)]
-#[derive(Default)]
+#[derive(Clone, Default)]
 pub enum ReadOnlyMode {
     /// Fully editable (no restrictions)
     #[default]
@@ -293,15 +292,10 @@ impl ReadOnlyMode {
         match self {
             ReadOnlyMode::Editable => true,
             ReadOnlyMode::Full => false,
-            ReadOnlyMode::TimelineOnly => matches!(
-                context.edit_type,
-                EditType::Timeline
-            ),
+            ReadOnlyMode::TimelineOnly => matches!(context.edit_type, EditType::Timeline),
             ReadOnlyMode::GridOnly => matches!(
                 context.edit_type,
-                EditType::TaskProperties
-                    | EditType::Progress
-                    | EditType::Metadata
+                EditType::TaskProperties | EditType::Progress | EditType::Metadata
             ),
             ReadOnlyMode::Custom(evaluator) => evaluator(context),
         }
@@ -315,7 +309,6 @@ impl ReadOnlyMode {
         ReadOnlyMode::Custom(Arc::new(f))
     }
 }
-
 
 impl std::fmt::Debug for ReadOnlyMode {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -430,9 +423,10 @@ impl ReadOnlyBuilder {
         ReadOnlyMode::custom(move |ctx| {
             // Check role if required
             if let Some(ref role) = required_role
-                && ctx.user_role.as_ref() != Some(role) {
-                    return false;
-                }
+                && ctx.user_role.as_ref() != Some(role)
+            {
+                return false;
+            }
 
             // Check edit type permissions
             match ctx.edit_type {
@@ -491,16 +485,14 @@ mod tests {
 
     #[test]
     fn test_read_only_mode_custom() {
-        let mode = ReadOnlyMode::custom(|ctx| {
-            ctx.user_role == Some("admin".to_string())
-        });
+        let mode = ReadOnlyMode::custom(|ctx| ctx.user_role == Some("admin".to_string()));
 
-        let admin_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("admin".into());
+        let admin_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("admin".into());
         assert!(mode.is_edit_allowed(&admin_ctx));
 
-        let user_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("user".into());
+        let user_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("user".into());
         assert!(!mode.is_edit_allowed(&user_ctx));
     }
 
@@ -520,16 +512,14 @@ mod tests {
 
     #[test]
     fn test_read_only_builder_with_role() {
-        let mode = ReadOnlyBuilder::new()
-            .require_role("editor")
-            .build();
+        let mode = ReadOnlyBuilder::new().require_role("editor").build();
 
-        let editor_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("editor".into());
+        let editor_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("editor".into());
         assert!(mode.is_edit_allowed(&editor_ctx));
 
-        let viewer_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("viewer".into());
+        let viewer_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("viewer".into());
         assert!(!mode.is_edit_allowed(&viewer_ctx));
     }
 }

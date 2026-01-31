@@ -1,5 +1,5 @@
+use crate::theme::{ComponentOverrides, use_theme_context};
 use leptos::prelude::*;
-use crate::theme::{use_theme_context, ComponentOverrides};
 
 /// Component Customizer
 ///
@@ -63,7 +63,9 @@ pub fn ComponentCustomizer() -> impl IntoView {
 
     // Get current component overrides
     let current_components = move || {
-        theme_ctx.config.get()
+        theme_ctx
+            .config
+            .get()
             .overrides
             .and_then(|o| o.components)
             .unwrap_or_default()

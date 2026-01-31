@@ -49,11 +49,7 @@ pub fn SpinButton(
 ) -> impl IntoView {
     let step = Signal::derive(move || {
         let s = step.get();
-        if s == 0.0 {
-            1.0
-        } else {
-            s
-        }
+        if s == 0.0 { 1.0 } else { s }
     });
 
     let can_decrement = Signal::derive(move || {
@@ -92,9 +88,10 @@ pub fn SpinButton(
 
     let handle_input = move |ev| {
         if let Ok(val) = event_target_value(&ev).parse::<f64>()
-            && let Some(ref callback) = on_change {
-                callback.run(val);
-            }
+            && let Some(ref callback) = on_change
+        {
+            callback.run(val);
+        }
     };
 
     view! {

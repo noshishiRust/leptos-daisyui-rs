@@ -1,6 +1,6 @@
-use leptos::prelude::*;
 use crate::components::data_table::types::{Column, SortOrder};
 use crate::merge_classes;
+use leptos::prelude::*;
 
 /// DataTable header component with sortable columns
 #[component]

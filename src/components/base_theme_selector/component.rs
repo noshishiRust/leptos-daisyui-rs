@@ -1,5 +1,5 @@
+use crate::theme::{get_available_themes, use_theme_context};
 use leptos::prelude::*;
-use crate::theme::{use_theme_context, get_available_themes};
 
 /// Base Theme Selector Component
 ///

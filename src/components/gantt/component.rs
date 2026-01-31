@@ -1,12 +1,12 @@
 use chrono::Utc;
-use leptos::prelude::*;
 use leptos::ev::{KeyboardEvent, MouseEvent};
+use leptos::prelude::*;
 use web_sys::WheelEvent;
 
 use crate::components::gantt::{
+    EditContext, EditType, GanttTask, GanttTaskHeight, ReadOnlyMode, ViewMode,
     timeline::{TaskBar, TimelineGrid, TimelineScale},
     utils::{AccessibleAnnouncement, LiveRegion, task_aria_label, zoom_aria_label},
-    EditContext, EditType, GanttTask, GanttTaskHeight, ReadOnlyMode, ViewMode,
 };
 
 /// A production-ready Gantt chart component for task scheduling and project management.
@@ -53,11 +53,11 @@ pub fn GanttChart(
     _node_ref: NodeRef<leptos::html::Div>,
 
     /// Additional CSS classes
-    #[prop(optional, into, default="")]
+    #[prop(optional, into, default = "")]
     class: &'static str,
 
     /// Initial split ratio for task list panel (0.0-1.0, default 0.3 = 30%)
-    #[prop(optional, default=0.3)]
+    #[prop(optional, default = 0.3)]
     initial_split_ratio: f64,
 
     /// Read-only mode configuration
@@ -116,9 +116,10 @@ pub fn GanttChart(
     let is_edit_allowed = move |task_id: &str, edit_type: EditType| {
         // Check per-task read_only flag first
         if let Some(task) = tasks.get().iter().find(|t| t.id == task_id)
-            && task.read_only {
-                return false;
-            }
+            && task.read_only
+        {
+            return false;
+        }
 
         // Check global read-only mode
         let context = EditContext::new(task_id.to_string(), edit_type);
@@ -175,22 +176,23 @@ pub fn GanttChart(
 
     let on_container_mousemove = move |e: MouseEvent| {
         if is_dragging.get()
-            && let Some(container) = container_ref.get() {
-                let rect = container.get_bounding_client_rect();
-                let container_width = rect.width();
-                let mouse_x = e.client_x() as f64 - rect.left();
+            && let Some(container) = container_ref.get()
+        {
+            let rect = container.get_bounding_client_rect();
+            let container_width = rect.width();
+            let mouse_x = e.client_x() as f64 - rect.left();
 
-                // Calculate new ratio with constraints
-                let mut new_ratio = mouse_x / container_width;
+            // Calculate new ratio with constraints
+            let mut new_ratio = mouse_x / container_width;
 
-                // Apply minimum width constraints
-                let min_left_ratio = MIN_TASK_LIST_WIDTH / container_width;
-                let max_left_ratio = 1.0 - (MIN_TIMELINE_WIDTH / container_width);
+            // Apply minimum width constraints
+            let min_left_ratio = MIN_TASK_LIST_WIDTH / container_width;
+            let max_left_ratio = 1.0 - (MIN_TIMELINE_WIDTH / container_width);
 
-                new_ratio = new_ratio.clamp(min_left_ratio, max_left_ratio);
+            new_ratio = new_ratio.clamp(min_left_ratio, max_left_ratio);
 
-                set_split_ratio.set(new_ratio);
-            }
+            set_split_ratio.set(new_ratio);
+        }
     };
 
     let on_container_mouseup = move |_e: MouseEvent| {
@@ -285,34 +287,36 @@ pub fn GanttChart(
                 // Space key - select focused task
                 e.prevent_default();
                 if let Some(idx) = focused_task_index.get()
-                    && let Some(task) = task_list.get(idx) {
-                        let task_id = task.id.clone();
-                        set_selected_task_id.set(Some(task_id.clone()));
+                    && let Some(task) = task_list.get(idx)
+                {
+                    let task_id = task.id.clone();
+                    set_selected_task_id.set(Some(task_id.clone()));
 
-                        // Announce selection
-                        let message = format!("Selected task: {}", task.name);
-                        set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+                    // Announce selection
+                    let message = format!("Selected task: {}", task.name);
+                    set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
 
-                        if let Some(ref cb) = on_task_select {
-                            cb.run(task_id);
-                        }
+                    if let Some(ref cb) = on_task_select {
+                        cb.run(task_id);
                     }
+                }
             }
             "Enter" => {
                 // Enter key - trigger click callback on focused task
                 e.prevent_default();
                 if let Some(idx) = focused_task_index.get()
-                    && let Some(task) = task_list.get(idx) {
-                        let task_id = task.id.clone();
+                    && let Some(task) = task_list.get(idx)
+                {
+                    let task_id = task.id.clone();
 
-                        // Announce action
-                        let message = format!("Opening task: {}", task.name);
-                        set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
+                    // Announce action
+                    let message = format!("Opening task: {}", task.name);
+                    set_announcement.set(Some(AccessibleAnnouncement::polite(message)));
 
-                        if let Some(ref cb) = on_task_click {
-                            cb.run(task_id);
-                        }
+                    if let Some(ref cb) = on_task_click {
+                        cb.run(task_id);
                     }
+                }
             }
             "Escape" => {
                 // Escape key - deselect task
@@ -324,18 +328,19 @@ pub fn GanttChart(
                 // Delete key - remove focused task
                 e.prevent_default();
                 if let Some(idx) = focused_task_index.get()
-                    && let Some(task) = task_list.get(idx) {
-                        let task_id = task.id.clone();
-                        let task_name = task.name.clone();
+                    && let Some(task) = task_list.get(idx)
+                {
+                    let task_id = task.id.clone();
+                    let task_name = task.name.clone();
 
-                        // Announce deletion
-                        let message = format!("Deleting task: {}", task_name);
-                        set_announcement.set(Some(AccessibleAnnouncement::assertive(message)));
+                    // Announce deletion
+                    let message = format!("Deleting task: {}", task_name);
+                    set_announcement.set(Some(AccessibleAnnouncement::assertive(message)));
 
-                        if let Some(ref cb) = on_task_delete {
-                            cb.run(task_id);
-                        }
+                    if let Some(ref cb) = on_task_delete {
+                        cb.run(task_id);
                     }
+                }
             }
             _ => {}
         }

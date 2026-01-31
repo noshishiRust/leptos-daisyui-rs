@@ -55,10 +55,7 @@ pub fn save_theme_config(_config: &ThemeConfiguration) -> Result<(), String> {
 /// save_theme_config_with_key(&theme, "my-app-theme").unwrap();
 /// ```
 #[cfg(target_arch = "wasm32")]
-pub fn save_theme_config_with_key(
-    config: &ThemeConfiguration,
-    key: &str,
-) -> Result<(), String> {
+pub fn save_theme_config_with_key(config: &ThemeConfiguration, key: &str) -> Result<(), String> {
     use web_sys::window;
 
     let storage = window()
@@ -79,10 +76,7 @@ pub fn save_theme_config_with_key(
 
 /// Save theme configuration with custom key (non-WASM fallback)
 #[cfg(not(target_arch = "wasm32"))]
-pub fn save_theme_config_with_key(
-    _config: &ThemeConfiguration,
-    _key: &str,
-) -> Result<(), String> {
+pub fn save_theme_config_with_key(_config: &ThemeConfiguration, _key: &str) -> Result<(), String> {
     Ok(())
 }
 
@@ -152,7 +146,12 @@ pub fn load_theme_config_with_key(key: &str) -> Result<ThemeConfiguration, Strin
     let json = storage
         .get_item(key)
         .map_err(|e| format!("Failed to read from localStorage: {:?}", e))?
-        .ok_or_else(|| format!("No theme configuration found in localStorage (key: {})", key))?;
+        .ok_or_else(|| {
+            format!(
+                "No theme configuration found in localStorage (key: {})",
+                key
+            )
+        })?;
 
     serde_json::from_str(&json)
         .map_err(|e| format!("Failed to deserialize theme configuration: {}", e))

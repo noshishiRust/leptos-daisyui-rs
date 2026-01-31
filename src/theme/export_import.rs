@@ -6,7 +6,7 @@
 use crate::theme::ThemeConfiguration;
 use serde_json;
 use wasm_bindgen::JsCast;
-use web_sys::{window, Blob, BlobPropertyBag, Url, HtmlAnchorElement};
+use web_sys::{Blob, BlobPropertyBag, HtmlAnchorElement, Url, window};
 
 /// Export a theme configuration as a JSON string
 ///
@@ -29,8 +29,7 @@ pub fn export_theme_json(config: &ThemeConfiguration, pretty: bool) -> Result<St
         serde_json::to_string_pretty(config)
             .map_err(|e| format!("Failed to serialize theme: {}", e))
     } else {
-        serde_json::to_string(config)
-            .map_err(|e| format!("Failed to serialize theme: {}", e))
+        serde_json::to_string(config).map_err(|e| format!("Failed to serialize theme: {}", e))
     }
 }
 
@@ -52,18 +51,13 @@ pub fn export_theme_json(config: &ThemeConfiguration, pretty: bool) -> Result<St
 /// let config = ThemeConfiguration::new("dark");
 /// download_theme(&config, Some("my-dark-theme.json")).unwrap();
 /// ```
-pub fn download_theme(
-    config: &ThemeConfiguration,
-    filename: Option<&str>,
-) -> Result<(), String> {
+pub fn download_theme(config: &ThemeConfiguration, filename: Option<&str>) -> Result<(), String> {
     let json = export_theme_json(config, true)?;
     let filename = filename.unwrap_or("theme-config.json");
 
     // Get the window and document
     let window = window().ok_or("No window object available")?;
-    let document = window
-        .document()
-        .ok_or("No document object available")?;
+    let document = window.document().ok_or("No document object available")?;
 
     // Create a blob from the JSON string
     let array = js_sys::Array::new();
@@ -76,8 +70,7 @@ pub fn download_theme(
         .map_err(|_| "Failed to create blob")?;
 
     // Create an object URL for the blob
-    let url = Url::create_object_url_with_blob(&blob)
-        .map_err(|_| "Failed to create object URL")?;
+    let url = Url::create_object_url_with_blob(&blob).map_err(|_| "Failed to create object URL")?;
 
     // Create a temporary anchor element to trigger download
     let anchor = document
@@ -91,9 +84,7 @@ pub fn download_theme(
     anchor.style().set_property("display", "none").ok();
 
     // Append to body, click, and remove
-    let body = document
-        .body()
-        .ok_or("No body element available")?;
+    let body = document.body().ok_or("No body element available")?;
 
     body.append_child(&anchor)
         .map_err(|_| "Failed to append anchor to body")?;
@@ -104,8 +95,7 @@ pub fn download_theme(
         .map_err(|_| "Failed to remove anchor from body")?;
 
     // Revoke the object URL to free memory
-    Url::revoke_object_url(&url)
-        .map_err(|_| "Failed to revoke object URL")?;
+    Url::revoke_object_url(&url).map_err(|_| "Failed to revoke object URL")?;
 
     Ok(())
 }
@@ -125,8 +115,8 @@ mod tests {
 
     #[test]
     fn test_export_theme_json_pretty() {
-        let config = ThemeConfiguration::new("light")
-            .with_metadata(ThemeMetadata::new("Test Theme"));
+        let config =
+            ThemeConfiguration::new("light").with_metadata(ThemeMetadata::new("Test Theme"));
 
         let json = export_theme_json(&config, true).unwrap();
 
@@ -149,8 +139,8 @@ mod tests {
 
     #[test]
     fn test_roundtrip_serialization() {
-        let original = ThemeConfiguration::new("forest")
-            .with_metadata(ThemeMetadata::new("Forest Theme"));
+        let original =
+            ThemeConfiguration::new("forest").with_metadata(ThemeMetadata::new("Forest Theme"));
 
         let json = export_theme_json(&original, false).unwrap();
         let deserialized: ThemeConfiguration = serde_json::from_str(&json).unwrap();

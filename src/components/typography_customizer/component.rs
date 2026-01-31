@@ -1,5 +1,5 @@
+use crate::theme::{FontScale, TypographyOverrides, use_theme_context};
 use leptos::prelude::*;
-use crate::theme::{use_theme_context, FontScale, TypographyOverrides};
 
 /// Typography Customizer Component
 ///
@@ -78,7 +78,9 @@ pub fn TypographyCustomizer() -> impl IntoView {
 
     // Get current typography settings
     let current_typography = move || {
-        theme_ctx.config.get()
+        theme_ctx
+            .config
+            .get()
             .overrides
             .and_then(|o| o.typography)
             .unwrap_or_default()

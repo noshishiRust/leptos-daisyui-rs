@@ -3,8 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// Priority level for kanban cards
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum Priority {
     /// Low priority
     Low,
@@ -16,7 +15,6 @@ pub enum Priority {
     /// Critical priority
     Critical,
 }
-
 
 impl Priority {
     /// Get the string representation of the priority
@@ -193,7 +191,11 @@ impl KanbanCard {
         if let Some(ref query) = filters.search_query {
             let query_lower = query.to_lowercase();
             let matches = self.title.to_lowercase().contains(&query_lower)
-                || self.description.as_ref().map(|d| d.to_lowercase().contains(&query_lower)).unwrap_or(false);
+                || self
+                    .description
+                    .as_ref()
+                    .map(|d| d.to_lowercase().contains(&query_lower))
+                    .unwrap_or(false);
             conditions.push(matches);
         }
 
@@ -204,13 +206,19 @@ impl KanbanCard {
 
         // Assignee filter
         if !filters.assignee_ids.is_empty() {
-            let has_assignee = self.assignees.iter().any(|a| filters.assignee_ids.contains(&a.id));
+            let has_assignee = self
+                .assignees
+                .iter()
+                .any(|a| filters.assignee_ids.contains(&a.id));
             conditions.push(has_assignee);
         }
 
         // Label filter
         if !filters.label_ids.is_empty() {
-            let has_label = self.labels.iter().any(|l| filters.label_ids.contains(&l.id));
+            let has_label = self
+                .labels
+                .iter()
+                .any(|l| filters.label_ids.contains(&l.id));
             conditions.push(has_label);
         }
 
@@ -325,8 +333,7 @@ pub struct KanbanFilters {
 }
 
 /// Logic for combining multiple filters
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum FilterLogic {
     /// All filters must match (AND)
     #[default]
@@ -334,7 +341,6 @@ pub enum FilterLogic {
     /// Any filter can match (OR)
     Or,
 }
-
 
 impl KanbanFilters {
     /// Create a new empty filter set
@@ -367,10 +373,7 @@ impl KanbanFilters {
 
         // Label filter
         if !self.label_ids.is_empty() {
-            let has_label = card
-                .labels
-                .iter()
-                .any(|l| self.label_ids.contains(&l.id));
+            let has_label = card.labels.iter().any(|l| self.label_ids.contains(&l.id));
             matches.push(has_label);
         }
 
@@ -536,8 +539,7 @@ mod tests {
 
     #[test]
     fn test_filter_by_assignee() {
-        let card = KanbanCard::new("card-1", "Task")
-            .with_assignee(Assignee::new("user-1", "John"));
+        let card = KanbanCard::new("card-1", "Task").with_assignee(Assignee::new("user-1", "John"));
 
         let mut filters = KanbanFilters::new();
         filters.assignee_ids.push("user-1".to_string());

@@ -35,11 +35,7 @@ pub fn KanbanFilterBar(
     Effect::new(move || {
         let query = search_input.get();
         set_filters.update(|f| {
-            f.search_query = if query.is_empty() {
-                None
-            } else {
-                Some(query)
-            };
+            f.search_query = if query.is_empty() { None } else { Some(query) };
         });
     });
 

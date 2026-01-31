@@ -1,6 +1,5 @@
 use super::*;
 
-
 // CollapseModifier tests
 #[test]
 fn test_collapse_modifier_default() {

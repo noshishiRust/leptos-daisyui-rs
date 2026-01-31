@@ -26,16 +26,40 @@ fn test_icon_size_px_values() {
 
 #[test]
 fn test_icon_size_css_classes() {
-    assert_eq!(IconSize::XSmall.as_str(), "w-4 h-4", "XSmall should use w-4 h-4");
-    assert_eq!(IconSize::Small.as_str(), "w-5 h-5", "Small should use w-5 h-5");
-    assert_eq!(IconSize::Medium.as_str(), "w-6 h-6", "Medium should use w-6 h-6");
-    assert_eq!(IconSize::Large.as_str(), "w-8 h-8", "Large should use w-8 h-8");
-    assert_eq!(IconSize::XLarge.as_str(), "w-12 h-12", "XLarge should use w-12 h-12");
+    assert_eq!(
+        IconSize::XSmall.as_str(),
+        "w-4 h-4",
+        "XSmall should use w-4 h-4"
+    );
+    assert_eq!(
+        IconSize::Small.as_str(),
+        "w-5 h-5",
+        "Small should use w-5 h-5"
+    );
+    assert_eq!(
+        IconSize::Medium.as_str(),
+        "w-6 h-6",
+        "Medium should use w-6 h-6"
+    );
+    assert_eq!(
+        IconSize::Large.as_str(),
+        "w-8 h-8",
+        "Large should use w-8 h-8"
+    );
+    assert_eq!(
+        IconSize::XLarge.as_str(),
+        "w-12 h-12",
+        "XLarge should use w-12 h-12"
+    );
 }
 
 #[test]
 fn test_icon_size_default() {
-    assert_eq!(IconSize::default(), IconSize::Medium, "Default size should be Medium");
+    assert_eq!(
+        IconSize::default(),
+        IconSize::Medium,
+        "Default size should be Medium"
+    );
 }
 
 #[test]
@@ -49,7 +73,10 @@ fn test_icon_size_clone() {
 fn test_icon_size_debug() {
     let size = IconSize::Small;
     let debug_str = format!("{:?}", size);
-    assert!(debug_str.contains("Small"), "Debug output should contain size name");
+    assert!(
+        debug_str.contains("Small"),
+        "Debug output should contain size name"
+    );
 }
 
 #[test]

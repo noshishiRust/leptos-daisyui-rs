@@ -1,5 +1,5 @@
+use crate::theme::{hex_to_oklch, use_theme_context};
 use leptos::prelude::*;
-use crate::theme::{use_theme_context, hex_to_oklch};
 
 /// Color Customizer Component
 ///
@@ -60,7 +60,9 @@ pub fn ColorCustomizer() -> impl IntoView {
 
     // Helper to get current color value
     let get_color = move |key: &str| -> Option<String> {
-        theme_ctx.config.get()
+        theme_ctx
+            .config
+            .get()
             .overrides
             .as_ref()
             .and_then(|o| o.colors.as_ref())

@@ -70,12 +70,10 @@ pub fn Persona(
         }
     };
 
-    let gap_class = move || {
-        match size.get() {
-            PersonaSize::XSmall | PersonaSize::Small => "gap-2",
-            PersonaSize::Medium => "gap-3",
-            PersonaSize::Large | PersonaSize::XLarge => "gap-4",
-        }
+    let gap_class = move || match size.get() {
+        PersonaSize::XSmall | PersonaSize::Small => "gap-2",
+        PersonaSize::Medium => "gap-3",
+        PersonaSize::Large | PersonaSize::XLarge => "gap-4",
     };
 
     let container_class = move || {

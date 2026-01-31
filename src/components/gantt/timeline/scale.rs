@@ -263,7 +263,9 @@ fn next_month(dt: DateTime<Utc>) -> DateTime<Utc> {
 
 fn days_in_month(year: i32, month: u32) -> u32 {
     let next_month = if month == 12 {
-        chrono::Utc.with_ymd_and_hms(year + 1, 1, 1, 0, 0, 0).unwrap()
+        chrono::Utc
+            .with_ymd_and_hms(year + 1, 1, 1, 0, 0, 0)
+            .unwrap()
     } else {
         chrono::Utc
             .with_ymd_and_hms(year, month + 1, 1, 0, 0, 0)

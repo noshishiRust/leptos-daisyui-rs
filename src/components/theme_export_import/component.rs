@@ -1,10 +1,10 @@
-use leptos::prelude::*;
 use crate::theme::use_theme_context;
+use leptos::prelude::*;
 
 #[cfg(target_arch = "wasm32")]
 use {
-    wasm_bindgen::closure::Closure,
     wasm_bindgen::JsCast,
+    wasm_bindgen::closure::Closure,
     web_sys::{Event, HtmlInputElement},
 };
 
@@ -51,14 +51,17 @@ pub fn ThemeExportImport() -> impl IntoView {
                     use crate::theme::download_theme;
                     let config = theme_ctx.config.get();
                     match download_theme(&config, Some("my-theme.json")) {
-                        Ok(_) => set_export_status.set(Some("Theme exported successfully!".to_string())),
+                        Ok(_) => {
+                            set_export_status.set(Some("Theme exported successfully!".to_string()))
+                        }
                         Err(e) => set_export_status.set(Some(format!("Export failed: {}", e))),
                     }
                 }
                 #[cfg(not(target_arch = "wasm32"))]
                 {
                     let _ = json;
-                    set_export_status.set(Some("Export not available on this platform".to_string()));
+                    set_export_status
+                        .set(Some("Export not available on this platform".to_string()));
                 }
             }
             Err(e) => {
@@ -85,8 +88,11 @@ pub fn ThemeExportImport() -> impl IntoView {
                         let promise = clipboard.write_text(&json);
                         wasm_bindgen_futures::spawn_local(async move {
                             match wasm_bindgen_futures::JsFuture::from(promise).await {
-                                Ok(_) => set_export_status.set(Some("Copied to clipboard!".to_string())),
-                                Err(_) => set_export_status.set(Some("Failed to copy to clipboard".to_string())),
+                                Ok(_) => {
+                                    set_export_status.set(Some("Copied to clipboard!".to_string()))
+                                }
+                                Err(_) => set_export_status
+                                    .set(Some("Failed to copy to clipboard".to_string())),
                             }
                         });
                     }
@@ -94,7 +100,8 @@ pub fn ThemeExportImport() -> impl IntoView {
                 #[cfg(not(target_arch = "wasm32"))]
                 {
                     let _ = json;
-                    set_export_status.set(Some("Clipboard not available on this platform".to_string()));
+                    set_export_status
+                        .set(Some("Clipboard not available on this platform".to_string()));
                 }
             }
             Err(e) => {
@@ -121,7 +128,8 @@ pub fn ThemeExportImport() -> impl IntoView {
                         let file_reader = match web_sys::FileReader::new() {
                             Ok(reader) => reader,
                             Err(_) => {
-                                set_import_status.set(Some("Failed to create FileReader".to_string()));
+                                set_import_status
+                                    .set(Some("Failed to create FileReader".to_string()));
                                 return;
                             }
                         };
@@ -134,10 +142,13 @@ pub fn ThemeExportImport() -> impl IntoView {
                                 if let Some(text) = result.as_string() {
                                     match theme_ctx.import_theme(&text) {
                                         Ok(_) => {
-                                            set_status_clone.set(Some("Theme imported successfully!".to_string()));
+                                            set_status_clone.set(Some(
+                                                "Theme imported successfully!".to_string(),
+                                            ));
                                         }
                                         Err(e) => {
-                                            set_status_clone.set(Some(format!("Import failed: {}", e)));
+                                            set_status_clone
+                                                .set(Some(format!("Import failed: {}", e)));
                                         }
                                     }
 

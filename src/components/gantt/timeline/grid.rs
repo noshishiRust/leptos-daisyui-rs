@@ -1,7 +1,7 @@
 use chrono::{DateTime, Datelike, TimeZone, Timelike, Utc};
 use leptos::prelude::*;
 
-use crate::components::gantt::{utils::is_weekend, ViewMode};
+use crate::components::gantt::{ViewMode, utils::is_weekend};
 
 /// Timeline grid component that renders the background grid with time scales
 #[component]
@@ -219,9 +219,9 @@ fn generate_weekend_and_holiday_shading(
     let mut x = 0;
 
     while current <= end {
-        let is_holiday = holidays.iter().any(|h| {
-            h.date_naive() == current.date_naive()
-        });
+        let is_holiday = holidays
+            .iter()
+            .any(|h| h.date_naive() == current.date_naive());
 
         if is_weekend(current.weekday()) || is_holiday {
             shading.push(WeekendShade {
@@ -245,7 +245,6 @@ fn advance_by_view_mode(dt: DateTime<Utc>, mode: ViewMode) -> DateTime<Utc> {
         ViewMode::Day => dt + Duration::days(1),
         ViewMode::Week => dt + Duration::weeks(1),
         ViewMode::Month => {
-            
             if dt.month() == 12 {
                 chrono::Utc
                     .with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0)

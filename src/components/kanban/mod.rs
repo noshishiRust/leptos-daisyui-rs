@@ -33,18 +33,18 @@
 /// }
 /// ```
 mod board;
-mod column;
 mod card;
-mod types;
-mod filters;
+mod column;
 mod drag;
+mod filters;
+mod types;
 
 pub use board::*;
-pub use column::*;
 pub use card::*;
-pub use types::*;
-pub use filters::*;
+pub use column::*;
 pub use drag::*;
+pub use filters::*;
+pub use types::*;
 
 #[cfg(test)]
 mod tests;

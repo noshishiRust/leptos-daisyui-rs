@@ -1,9 +1,9 @@
 use leptos::prelude::*;
 
-use super::types::*;
 use super::column::KanbanColumnView;
 use super::drag::*;
 use super::filters::KanbanFilterBar;
+use super::types::*;
 
 /// Main Kanban board component with drag-and-drop support
 #[component]
@@ -41,7 +41,7 @@ pub fn KanbanBoard(
     node_ref: NodeRef<leptos::html::Div>,
 
     /// Additional CSS classes
-    #[prop(optional, into, default="")]
+    #[prop(optional, into, default = "")]
     class: &'static str,
 
     /// Callback when a column collapse state changes
@@ -98,10 +98,16 @@ pub fn KanbanBoard(
         }
 
         let current_filters = filters.get();
-        columns.get().into_iter().map(|mut column| {
-            column.cards.retain(|card| card.matches_filters(&current_filters));
-            column
-        }).collect()
+        columns
+            .get()
+            .into_iter()
+            .map(|mut column| {
+                column
+                    .cards
+                    .retain(|card| card.matches_filters(&current_filters));
+                column
+            })
+            .collect()
     });
     view! {
         <div

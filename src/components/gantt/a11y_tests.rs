@@ -72,14 +72,7 @@ mod tests {
     fn test_task_aria_label_generation() {
         use crate::components::gantt::utils::task_aria_label;
 
-        let label = task_aria_label(
-            "Test Task",
-            "2024-01-01",
-            "2024-01-05",
-            0.75,
-            true,
-            false,
-        );
+        let label = task_aria_label("Test Task", "2024-01-01", "2024-01-05", 0.75, true, false);
 
         assert!(label.contains("Test Task"));
         assert!(label.contains("2024-01-01"));

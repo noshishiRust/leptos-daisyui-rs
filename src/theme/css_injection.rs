@@ -100,41 +100,17 @@ fn inject_typography_overrides(
 
         // Font scale
         if let Some(scale) = &typography.font_scale {
-            set_css_var_if_some(
-                style,
-                "--text-xs",
-                &scale.xs.map(|v| format!("{}rem", v)),
-            )?;
-            set_css_var_if_some(
-                style,
-                "--text-sm",
-                &scale.sm.map(|v| format!("{}rem", v)),
-            )?;
+            set_css_var_if_some(style, "--text-xs", &scale.xs.map(|v| format!("{}rem", v)))?;
+            set_css_var_if_some(style, "--text-sm", &scale.sm.map(|v| format!("{}rem", v)))?;
             set_css_var_if_some(
                 style,
                 "--text-base",
                 &scale.base.map(|v| format!("{}rem", v)),
             )?;
-            set_css_var_if_some(
-                style,
-                "--text-lg",
-                &scale.lg.map(|v| format!("{}rem", v)),
-            )?;
-            set_css_var_if_some(
-                style,
-                "--text-xl",
-                &scale.xl.map(|v| format!("{}rem", v)),
-            )?;
-            set_css_var_if_some(
-                style,
-                "--text-2xl",
-                &scale.xl2.map(|v| format!("{}rem", v)),
-            )?;
-            set_css_var_if_some(
-                style,
-                "--text-3xl",
-                &scale.xl3.map(|v| format!("{}rem", v)),
-            )?;
+            set_css_var_if_some(style, "--text-lg", &scale.lg.map(|v| format!("{}rem", v)))?;
+            set_css_var_if_some(style, "--text-xl", &scale.xl.map(|v| format!("{}rem", v)))?;
+            set_css_var_if_some(style, "--text-2xl", &scale.xl2.map(|v| format!("{}rem", v)))?;
+            set_css_var_if_some(style, "--text-3xl", &scale.xl3.map(|v| format!("{}rem", v)))?;
         }
 
         // Base typography settings

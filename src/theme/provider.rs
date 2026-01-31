@@ -3,10 +3,10 @@
 //! Provides a reactive context for theme configuration that can be accessed
 //! throughout the component tree.
 
-use leptos::prelude::*;
 use crate::theme::css_injection::inject_css_variables;
 use crate::theme::storage::{load_theme_config_with_key, save_theme_config_with_key};
 use crate::theme::types::ThemeConfiguration;
+use leptos::prelude::*;
 
 /// Theme context that holds the current theme configuration
 ///
@@ -185,7 +185,6 @@ pub fn use_theme_context() -> ThemeContext {
 pub fn try_use_theme_context() -> Option<ThemeContext> {
     use_context::<ThemeContext>()
 }
-
 
 #[cfg(test)]
 mod tests {

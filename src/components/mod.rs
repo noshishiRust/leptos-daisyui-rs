@@ -17,8 +17,8 @@ mod checkbox;
 mod collapse;
 mod color_customizer;
 mod color_picker;
-mod config_provider;
 mod combobox;
+mod config_provider;
 mod countdown;
 mod data_table;
 mod date_picker;
@@ -29,14 +29,12 @@ mod drawer;
 mod dropdown;
 mod fab;
 mod field;
-/// Gantt chart component for project timeline visualization
-pub mod gantt;
-/// Kanban board component for task management
-pub mod kanban;
 mod fieldset;
 mod file_input;
 mod filter;
 mod footer;
+/// Gantt chart component for project timeline visualization
+pub mod gantt;
 mod hero;
 mod hover_3d;
 mod hover_gallery;
@@ -44,6 +42,8 @@ mod icon;
 mod indicator;
 mod input;
 mod join;
+/// Kanban board component for task management
+pub mod kanban;
 mod kbd;
 mod label;
 mod link;
@@ -110,8 +110,8 @@ pub use checkbox::*;
 pub use collapse::*;
 pub use color_customizer::*;
 pub use color_picker::*;
-pub use config_provider::*;
 pub use combobox::*;
+pub use config_provider::*;
 pub use countdown::*;
 pub use data_table::*;
 pub use date_picker::*;

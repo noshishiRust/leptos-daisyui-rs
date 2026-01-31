@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use crate::theme::use_theme_context;
+use leptos::prelude::*;
 
 /// Border and Spacing Customizer Component
 ///
@@ -9,7 +9,9 @@ pub fn BorderCustomizer() -> impl IntoView {
     let theme_ctx = use_theme_context();
 
     let current_borders = move || {
-        theme_ctx.config.get()
+        theme_ctx
+            .config
+            .get()
             .overrides
             .as_ref()
             .and_then(|o| o.borders.clone())

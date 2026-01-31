@@ -1,8 +1,7 @@
 use std::rc::Rc;
 
 /// Drag state for managing card dragging operations
-#[derive(Clone, Debug)]
-#[derive(Default)]
+#[derive(Clone, Debug, Default)]
 pub struct DragState {
     /// The card currently being dragged (card_id)
     pub dragged_card: Option<String>,
@@ -14,7 +13,6 @@ pub struct DragState {
     pub target_position: Option<usize>,
 }
 
-
 impl DragState {
     /// Check if a card is currently being dragged
     pub fn is_dragging(&self) -> bool {
@@ -23,7 +21,10 @@ impl DragState {
 
     /// Check if a specific column is the drop target
     pub fn is_drop_target(&self, column_id: &str) -> bool {
-        self.target_column.as_ref().map(|id| id == column_id).unwrap_or(false)
+        self.target_column
+            .as_ref()
+            .map(|id| id == column_id)
+            .unwrap_or(false)
     }
 
     /// Start dragging a card

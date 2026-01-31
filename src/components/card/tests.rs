@@ -1,6 +1,5 @@
 use super::*;
 
-
 // CardStyle tests
 #[test]
 fn test_card_style_default() {

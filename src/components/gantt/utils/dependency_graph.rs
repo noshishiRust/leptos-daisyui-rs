@@ -95,9 +95,10 @@ impl DependencyGraph {
 
         for node in self.graph.node_indices() {
             if !visited.get(&node).copied().unwrap_or(false)
-                && let Some(cycle) = self.dfs_find_cycle(node, &mut visited, &mut rec_stack) {
-                    cycles.push(cycle);
-                }
+                && let Some(cycle) = self.dfs_find_cycle(node, &mut visited, &mut rec_stack)
+            {
+                cycles.push(cycle);
+            }
         }
 
         cycles
@@ -193,11 +194,7 @@ impl DependencyGraph {
     /// Validate a potential new dependency
     ///
     /// Returns Ok if adding the dependency would not create a cycle.
-    pub fn validate_dependency(
-        &self,
-        source_id: &str,
-        target_id: &str,
-    ) -> GraphResult<()> {
+    pub fn validate_dependency(&self, source_id: &str, target_id: &str) -> GraphResult<()> {
         // Check if task depends on itself
         if source_id == target_id {
             return Err(DependencyGraphError::InvalidDependency(
@@ -232,11 +229,7 @@ impl DependencyGraph {
     }
 
     /// Get all tasks in dependency chain from start to end
-    pub fn get_dependency_chain(
-        &self,
-        start_id: &str,
-        end_id: &str,
-    ) -> GraphResult<Vec<String>> {
+    pub fn get_dependency_chain(&self, start_id: &str, end_id: &str) -> GraphResult<Vec<String>> {
         let start_idx = self
             .task_indices
             .get(start_id)
@@ -247,13 +240,7 @@ impl DependencyGraph {
             .ok_or_else(|| DependencyGraphError::TaskNotFound(end_id.to_string()))?;
 
         // Use BFS to find path
-        let path = petgraph::algo::astar(
-            &self.graph,
-            *start_idx,
-            |n| n == *end_idx,
-            |_| 1,
-            |_| 0,
-        );
+        let path = petgraph::algo::astar(&self.graph, *start_idx, |n| n == *end_idx, |_| 1, |_| 0);
 
         match path {
             Some((_cost, path)) => Ok(path

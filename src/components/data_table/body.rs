@@ -1,6 +1,6 @@
-use leptos::prelude::*;
 use crate::components::data_table::types::{Column, DataTableTexts, TableRow};
 use crate::merge_classes;
+use leptos::prelude::*;
 
 /// DataTable body component with loading and empty states
 #[component]

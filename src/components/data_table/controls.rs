@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use crate::components::data_table::types::DataTableTexts;
+use leptos::prelude::*;
 
 /// DataTable pagination controls
 #[component]

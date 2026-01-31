@@ -149,8 +149,8 @@ pub fn validate_hex_color(hex: &str) -> bool {
 /// This function only works on WASM targets with browser access.
 #[cfg(target_arch = "wasm32")]
 pub fn download_json(config: &ThemeConfiguration, filename: &str) -> Result<(), String> {
-    use web_sys::{window, Blob, BlobPropertyBag, HtmlAnchorElement, Url};
     use wasm_bindgen::JsValue;
+    use web_sys::{Blob, BlobPropertyBag, HtmlAnchorElement, Url, window};
 
     // Serialize to JSON
     let json = serde_json::to_string_pretty(config)
@@ -187,8 +187,7 @@ pub fn download_json(config: &ThemeConfiguration, filename: &str) -> Result<(), 
     anchor.click();
 
     // Cleanup
-    Url::revoke_object_url(&url)
-        .map_err(|e| format!("Failed to revoke object URL: {:?}", e))?;
+    Url::revoke_object_url(&url).map_err(|e| format!("Failed to revoke object URL: {:?}", e))?;
 
     Ok(())
 }

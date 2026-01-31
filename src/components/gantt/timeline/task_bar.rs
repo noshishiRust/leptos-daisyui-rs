@@ -48,9 +48,7 @@ pub fn TaskBar(
 
     let bar_color = Signal::derive(move || {
         let t = task.get();
-        t.color
-            .clone()
-            .unwrap_or_else(|| "#3b82f6".to_string()) // Default blue
+        t.color.clone().unwrap_or_else(|| "#3b82f6".to_string()) // Default blue
     });
 
     view! {
@@ -137,9 +135,7 @@ mod tests {
 
     #[test]
     fn test_calculate_bar_position() {
-        let timeline_start = chrono::Utc
-            .with_ymd_and_hms(2024, 1, 1, 0, 0, 0)
-            .unwrap();
+        let timeline_start = chrono::Utc.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
 
         let task = GanttTask {
             id: "task1".to_string(),
@@ -161,9 +157,7 @@ mod tests {
 
     #[test]
     fn test_calculate_bar_position_minimum_width() {
-        let timeline_start = chrono::Utc
-            .with_ymd_and_hms(2024, 1, 1, 0, 0, 0)
-            .unwrap();
+        let timeline_start = chrono::Utc.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
 
         let task = GanttTask {
             id: "task1".to_string(),

@@ -1,6 +1,6 @@
-use leptos::prelude::*;
-use crate::theme::use_theme_context;
 use super::presets::get_preset_themes;
+use crate::theme::use_theme_context;
+use leptos::prelude::*;
 
 /// Preset Themes Gallery Component
 ///

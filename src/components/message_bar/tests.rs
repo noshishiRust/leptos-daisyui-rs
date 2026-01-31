@@ -58,7 +58,10 @@ fn test_message_bar_type_clone() {
 fn test_message_bar_type_debug() {
     let msg_type = MessageBarType::Error;
     let debug_str = format!("{:?}", msg_type);
-    assert!(debug_str.contains("Error"), "Debug output should contain type name");
+    assert!(
+        debug_str.contains("Error"),
+        "Debug output should contain type name"
+    );
 }
 
 #[test]

@@ -84,14 +84,20 @@ fn test_loading_bar_size_clone() {
 fn test_loading_bar_color_debug() {
     let color = LoadingBarColor::Warning;
     let debug_str = format!("{:?}", color);
-    assert!(debug_str.contains("Warning"), "Debug output should contain color name");
+    assert!(
+        debug_str.contains("Warning"),
+        "Debug output should contain color name"
+    );
 }
 
 #[test]
 fn test_loading_bar_size_debug() {
     let size = LoadingBarSize::Small;
     let debug_str = format!("{:?}", size);
-    assert!(debug_str.contains("Small"), "Debug output should contain size name");
+    assert!(
+        debug_str.contains("Small"),
+        "Debug output should contain size name"
+    );
 }
 
 #[test]
@@ -117,11 +123,18 @@ fn test_loading_bar_colors_use_bg_prefix() {
 
 #[test]
 fn test_loading_bar_sizes_are_ascending() {
-    let extract_height = |class: &str| -> u32 {
-        class.trim_start_matches("h-").parse().unwrap()
-    };
+    let extract_height = |class: &str| -> u32 { class.trim_start_matches("h-").parse().unwrap() };
 
-    assert!(extract_height(LoadingBarSize::XSmall.as_str()) < extract_height(LoadingBarSize::Small.as_str()));
-    assert!(extract_height(LoadingBarSize::Small.as_str()) < extract_height(LoadingBarSize::Medium.as_str()));
-    assert!(extract_height(LoadingBarSize::Medium.as_str()) < extract_height(LoadingBarSize::Large.as_str()));
+    assert!(
+        extract_height(LoadingBarSize::XSmall.as_str())
+            < extract_height(LoadingBarSize::Small.as_str())
+    );
+    assert!(
+        extract_height(LoadingBarSize::Small.as_str())
+            < extract_height(LoadingBarSize::Medium.as_str())
+    );
+    assert!(
+        extract_height(LoadingBarSize::Medium.as_str())
+            < extract_height(LoadingBarSize::Large.as_str())
+    );
 }

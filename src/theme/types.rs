@@ -35,10 +35,7 @@ impl ThemeConfiguration {
     }
 
     /// Create a theme configuration with overrides
-    pub fn with_overrides(
-        base_theme: impl Into<String>,
-        overrides: ThemeOverrides,
-    ) -> Self {
+    pub fn with_overrides(base_theme: impl Into<String>, overrides: ThemeOverrides) -> Self {
         Self {
             base_theme: base_theme.into(),
             overrides: Some(overrides),

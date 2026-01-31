@@ -5,7 +5,7 @@ use leptos_daisyui_rs::components::gantt::*;
 #[component]
 pub fn GanttDemo() -> impl IntoView {
     // Create sample project data showcasing all features
-    let (tasks, set_tasks) = signal(create_sample_tasks());
+    let (tasks, _set_tasks) = signal(create_sample_tasks());
     let (view_mode, set_view_mode) = signal(ViewMode::Day);
 
     view! {

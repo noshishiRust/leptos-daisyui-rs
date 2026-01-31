@@ -1,9 +1,9 @@
+use crate::components::gantt::utils::{DependencyGraph, DependencyGraphError};
 /// Dependency validation logic for interactive dependency creation
 ///
 /// Uses the DependencyGraph to validate new dependencies before adding them
 /// to prevent circular dependencies and other invalid states.
 use crate::components::gantt::{DependencyType, GanttTask, TaskDependency};
-use crate::components::gantt::utils::{DependencyGraph, DependencyGraphError};
 
 /// Result of validating a potential new dependency
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -29,7 +29,11 @@ impl std::fmt::Display for ValidationResult {
         match self {
             ValidationResult::Valid => write!(f, "Valid"),
             ValidationResult::CircularDependency(tasks) => {
-                write!(f, "Would create circular dependency: {}", tasks.join(" -> "))
+                write!(
+                    f,
+                    "Would create circular dependency: {}",
+                    tasks.join(" -> ")
+                )
             }
             ValidationResult::TaskNotFound(id) => write!(f, "Task not found: {}", id),
             ValidationResult::SelfDependency => write!(f, "Task cannot depend on itself"),
@@ -71,9 +75,7 @@ pub fn validate_dependency(
 
     // Check for duplicate dependency
     if dependencies.iter().any(|dep| {
-        dep.source_id == source_id
-            && dep.target_id == target_id
-            && dep.dependency_type == dep_type
+        dep.source_id == source_id && dep.target_id == target_id && dep.dependency_type == dep_type
     }) {
         return ValidationResult::DuplicateDependency;
     }
@@ -165,7 +167,8 @@ mod tests {
         let tasks = vec![create_test_task("task1"), create_test_task("task2")];
         let dependencies = vec![];
 
-        let result = validate_dependency(&tasks, &dependencies, "task1", "task2", DependencyType::FS);
+        let result =
+            validate_dependency(&tasks, &dependencies, "task1", "task2", DependencyType::FS);
         assert_eq!(result, ValidationResult::Valid);
     }
 
@@ -174,7 +177,8 @@ mod tests {
         let tasks = vec![create_test_task("task1")];
         let dependencies = vec![];
 
-        let result = validate_dependency(&tasks, &dependencies, "task1", "task1", DependencyType::FS);
+        let result =
+            validate_dependency(&tasks, &dependencies, "task1", "task1", DependencyType::FS);
         assert_eq!(result, ValidationResult::SelfDependency);
     }
 
@@ -201,7 +205,8 @@ mod tests {
         let tasks = vec![create_test_task("task1"), create_test_task("task2")];
         let dependencies = vec![create_test_dependency("task1", "task2")];
 
-        let result = validate_dependency(&tasks, &dependencies, "task1", "task2", DependencyType::FS);
+        let result =
+            validate_dependency(&tasks, &dependencies, "task1", "task2", DependencyType::FS);
         assert_eq!(result, ValidationResult::DuplicateDependency);
     }
 
@@ -218,7 +223,8 @@ mod tests {
         ];
 
         // Trying to add task3 -> task1 would create a cycle
-        let result = validate_dependency(&tasks, &dependencies, "task3", "task1", DependencyType::FS);
+        let result =
+            validate_dependency(&tasks, &dependencies, "task3", "task1", DependencyType::FS);
         match result {
             ValidationResult::CircularDependency(_) => {}
             _ => panic!("Expected CircularDependency, got {:?}", result),

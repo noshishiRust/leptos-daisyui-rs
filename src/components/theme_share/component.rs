@@ -1,6 +1,6 @@
-use leptos::prelude::*;
 use crate::theme::use_theme_context;
 use base64::{Engine as _, engine::general_purpose::URL_SAFE_NO_PAD};
+use leptos::prelude::*;
 
 /// Theme Share Component
 ///
@@ -47,7 +47,8 @@ pub fn ThemeShare() -> impl IntoView {
                             let separator = if location.contains('?') { "&" } else { "?" };
                             let url = format!("{}{}theme={}", location, separator, encoded);
                             set_share_url.set(url.clone());
-                            set_share_status.set(Some(format!("Share URL generated ({} chars)", url.len())));
+                            set_share_status
+                                .set(Some(format!("Share URL generated ({} chars)", url.len())));
                         } else {
                             set_share_status.set(Some("Failed to get current URL".to_string()));
                         }
@@ -74,39 +75,42 @@ pub fn ThemeShare() -> impl IntoView {
     };
 
     // Copy share URL to clipboard
-    let copy_share_url = move |_| {
-        let url = share_url.get();
+    let copy_share_url =
+        move |_| {
+            let url = share_url.get();
 
-        if url.is_empty() {
-            set_share_status.set(Some("Please generate a share URL first".to_string()));
-            return;
-        }
-
-        #[cfg(target_arch = "wasm32")]
-        {
-            if let Some(window) = web_sys::window() {
-                let clipboard = window.navigator().clipboard();
-                let promise = clipboard.write_text(&url);
-                wasm_bindgen_futures::spawn_local(async move {
-                    match wasm_bindgen_futures::JsFuture::from(promise).await {
-                        Ok(_) => set_share_status.set(Some("Share URL copied to clipboard!".to_string())),
-                        Err(_) => set_share_status.set(Some("Failed to copy to clipboard".to_string())),
-                    }
-                });
+            if url.is_empty() {
+                set_share_status.set(Some("Please generate a share URL first".to_string()));
+                return;
             }
-        }
 
-        #[cfg(not(target_arch = "wasm32"))]
-        {
-            set_share_status.set(Some("Clipboard not available on this platform".to_string()));
-        }
+            #[cfg(target_arch = "wasm32")]
+            {
+                if let Some(window) = web_sys::window() {
+                    let clipboard = window.navigator().clipboard();
+                    let promise = clipboard.write_text(&url);
+                    wasm_bindgen_futures::spawn_local(async move {
+                        match wasm_bindgen_futures::JsFuture::from(promise).await {
+                            Ok(_) => set_share_status
+                                .set(Some("Share URL copied to clipboard!".to_string())),
+                            Err(_) => set_share_status
+                                .set(Some("Failed to copy to clipboard".to_string())),
+                        }
+                    });
+                }
+            }
 
-        // Clear status after 3 seconds
-        set_timeout(
-            move || set_share_status.set(None),
-            std::time::Duration::from_secs(3),
-        );
-    };
+            #[cfg(not(target_arch = "wasm32"))]
+            {
+                set_share_status.set(Some("Clipboard not available on this platform".to_string()));
+            }
+
+            // Clear status after 3 seconds
+            set_timeout(
+                move || set_share_status.set(None),
+                std::time::Duration::from_secs(3),
+            );
+        };
 
     view! {
         <div class="space-y-6">

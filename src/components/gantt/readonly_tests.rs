@@ -91,12 +91,12 @@ mod tests {
             ctx.user_role == Some("admin".to_string())
         });
 
-        let admin_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("admin".into());
+        let admin_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("admin".into());
         assert!(mode.is_edit_allowed(&admin_ctx));
 
-        let user_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("user".into());
+        let user_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("user".into());
         assert!(!mode.is_edit_allowed(&user_ctx));
 
         let no_role_ctx = EditContext::new("task1".into(), EditType::Timeline);
@@ -136,18 +136,16 @@ mod tests {
 
     #[test]
     fn test_read_only_builder_with_required_role() {
-        let mode = ReadOnlyBuilder::new()
-            .require_role("editor")
-            .build();
+        let mode = ReadOnlyBuilder::new().require_role("editor").build();
 
         // Editor role should be allowed
-        let editor_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("editor".into());
+        let editor_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("editor".into());
         assert!(mode.is_edit_allowed(&editor_ctx));
 
         // Viewer role should be blocked
-        let viewer_ctx = EditContext::new("task1".into(), EditType::Timeline)
-            .with_role("viewer".into());
+        let viewer_ctx =
+            EditContext::new("task1".into(), EditType::Timeline).with_role("viewer".into());
         assert!(!mode.is_edit_allowed(&viewer_ctx));
 
         // No role should be blocked
@@ -163,18 +161,18 @@ mod tests {
             .build();
 
         // Admin can edit properties
-        let admin_edit_ctx = EditContext::new("task1".into(), EditType::TaskProperties)
-            .with_role("admin".into());
+        let admin_edit_ctx =
+            EditContext::new("task1".into(), EditType::TaskProperties).with_role("admin".into());
         assert!(mode.is_edit_allowed(&admin_edit_ctx));
 
         // But admin cannot delete (explicitly disabled)
-        let admin_delete_ctx = EditContext::new("task1".into(), EditType::DeleteTask)
-            .with_role("admin".into());
+        let admin_delete_ctx =
+            EditContext::new("task1".into(), EditType::DeleteTask).with_role("admin".into());
         assert!(!mode.is_edit_allowed(&admin_delete_ctx));
 
         // Non-admin cannot do anything
-        let user_ctx = EditContext::new("task1".into(), EditType::TaskProperties)
-            .with_role("user".into());
+        let user_ctx =
+            EditContext::new("task1".into(), EditType::TaskProperties).with_role("user".into());
         assert!(!mode.is_edit_allowed(&user_ctx));
     }
 
@@ -228,26 +226,26 @@ mod tests {
         });
 
         // Admin tests
-        let admin_edit = EditContext::new("task1".into(), EditType::TaskProperties)
-            .with_role("admin".into());
+        let admin_edit =
+            EditContext::new("task1".into(), EditType::TaskProperties).with_role("admin".into());
         assert!(mode.is_edit_allowed(&admin_edit));
 
-        let admin_delete = EditContext::new("task1".into(), EditType::DeleteTask)
-            .with_role("admin".into());
+        let admin_delete =
+            EditContext::new("task1".into(), EditType::DeleteTask).with_role("admin".into());
         assert!(mode.is_edit_allowed(&admin_delete));
 
         // Editor tests
-        let editor_edit = EditContext::new("task1".into(), EditType::TaskProperties)
-            .with_role("editor".into());
+        let editor_edit =
+            EditContext::new("task1".into(), EditType::TaskProperties).with_role("editor".into());
         assert!(mode.is_edit_allowed(&editor_edit));
 
-        let editor_delete = EditContext::new("task1".into(), EditType::DeleteTask)
-            .with_role("editor".into());
+        let editor_delete =
+            EditContext::new("task1".into(), EditType::DeleteTask).with_role("editor".into());
         assert!(!mode.is_edit_allowed(&editor_delete));
 
         // Viewer tests
-        let viewer_edit = EditContext::new("task1".into(), EditType::TaskProperties)
-            .with_role("viewer".into());
+        let viewer_edit =
+            EditContext::new("task1".into(), EditType::TaskProperties).with_role("viewer".into());
         assert!(!mode.is_edit_allowed(&viewer_edit));
     }
 
@@ -269,7 +267,10 @@ mod tests {
 
         for edit_type in types {
             let ctx = EditContext::new("task1".into(), edit_type);
-            assert!(mode.is_edit_allowed(&ctx), "EditType should be allowed in Editable mode");
+            assert!(
+                mode.is_edit_allowed(&ctx),
+                "EditType should be allowed in Editable mode"
+            );
         }
     }
 }

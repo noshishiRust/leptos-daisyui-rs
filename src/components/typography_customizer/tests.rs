@@ -55,9 +55,18 @@ fn test_monospace_fonts_include_popular_choices() {
         "Inconsolata",
     ];
 
-    assert!(mono_fonts.contains(&"Fira Code"), "Should include Fira Code");
-    assert!(mono_fonts.contains(&"JetBrains Mono"), "Should include JetBrains Mono");
-    assert!(mono_fonts.contains(&"Source Code Pro"), "Should include Source Code Pro");
+    assert!(
+        mono_fonts.contains(&"Fira Code"),
+        "Should include Fira Code"
+    );
+    assert!(
+        mono_fonts.contains(&"JetBrains Mono"),
+        "Should include JetBrains Mono"
+    );
+    assert!(
+        mono_fonts.contains(&"Source Code Pro"),
+        "Should include Source Code Pro"
+    );
 }
 
 #[test]
@@ -78,9 +87,7 @@ fn test_type_scale_ratios_count() {
 
 #[test]
 fn test_type_scale_ratios_are_valid() {
-    let scale_ratios = [
-        1.125, 1.2, 1.25, 1.333, 1.414, 1.5, 1.618, 1.667,
-    ];
+    let scale_ratios = [1.125, 1.2, 1.25, 1.333, 1.414, 1.5, 1.618, 1.667];
 
     for ratio in scale_ratios {
         assert!(ratio > 1.0, "Type scale ratio should be greater than 1.0");

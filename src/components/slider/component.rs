@@ -59,29 +59,17 @@ pub fn Slider(
     // Default values
     let min = Signal::derive(move || {
         let m = min.get();
-        if m == 0.0 {
-            0.0
-        } else {
-            m
-        }
+        if m == 0.0 { 0.0 } else { m }
     });
 
     let max = Signal::derive(move || {
         let m = max.get();
-        if m == 0.0 {
-            100.0
-        } else {
-            m
-        }
+        if m == 0.0 { 100.0 } else { m }
     });
 
     let step = Signal::derive(move || {
         let s = step.get();
-        if s == 0.0 {
-            1.0
-        } else {
-            s
-        }
+        if s == 0.0 { 1.0 } else { s }
     });
 
     view! {

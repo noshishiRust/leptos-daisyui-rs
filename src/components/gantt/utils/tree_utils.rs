@@ -1,5 +1,5 @@
-use std::collections::HashMap;
 use chrono::{DateTime, Utc};
+use std::collections::HashMap;
 
 use crate::components::gantt::models::GanttTask;
 
@@ -74,13 +74,15 @@ impl TreeBuilder {
         let node_ids: Vec<String> = builder.nodes.keys().cloned().collect();
         for id in node_ids {
             if let Some(node) = builder.nodes.get(&id).cloned()
-                && let Some(parent_id) = &node.task.parent_id {
-                    // Add this task to parent's children
-                    if let Some(parent) = builder.nodes.get_mut(parent_id)
-                        && !parent.children.contains(&id) {
-                            parent.children.push(id.clone());
-                        }
+                && let Some(parent_id) = &node.task.parent_id
+            {
+                // Add this task to parent's children
+                if let Some(parent) = builder.nodes.get_mut(parent_id)
+                    && !parent.children.contains(&id)
+                {
+                    parent.children.push(id.clone());
                 }
+            }
         }
 
         // Third pass: Calculate depths
@@ -94,10 +96,8 @@ impl TreeBuilder {
 
     /// Calculate depth for all nodes using breadth-first traversal
     fn calculate_depths(&mut self) {
-        let mut to_process: Vec<(String, usize)> = self.root_ids
-            .iter()
-            .map(|id| (id.clone(), 0))
-            .collect();
+        let mut to_process: Vec<(String, usize)> =
+            self.root_ids.iter().map(|id| (id.clone(), 0)).collect();
 
         while let Some((id, depth)) = to_process.pop() {
             if let Some(node) = self.nodes.get_mut(&id) {
@@ -264,12 +264,11 @@ impl TaskTree {
         // Check if this node is expanded
         let is_expanded = expanded_state.get(id).copied().unwrap_or(true);
 
-        if is_expanded
-            && let Some(node) = self.nodes.get(id) {
-                for child_id in &node.children {
-                    self.add_to_display_order(child_id, result, expanded_state);
-                }
+        if is_expanded && let Some(node) = self.nodes.get(id) {
+            for child_id in &node.children {
+                self.add_to_display_order(child_id, result, expanded_state);
             }
+        }
     }
 
     /// Toggle expand/collapse state for a task
@@ -451,7 +450,7 @@ mod tests {
         assert!(updates.contains_key("parent"));
         let (start, end) = updates.get("parent").unwrap();
         assert_eq!(*start, start1); // Earliest child start
-        assert_eq!(*end, end2);     // Latest child end
+        assert_eq!(*end, end2); // Latest child end
     }
 
     #[test]

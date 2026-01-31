@@ -54,8 +54,7 @@ pub fn start_of_month(dt: DateTime<Utc>) -> DateTime<Utc> {
 /// Get the end of the month for a given date
 pub fn end_of_month(dt: DateTime<Utc>) -> DateTime<Utc> {
     let next_month = if dt.month() == 12 {
-        Utc.with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0)
-            .unwrap()
+        Utc.with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0).unwrap()
     } else {
         Utc.with_ymd_and_hms(dt.year(), dt.month() + 1, 1, 0, 0, 0)
             .unwrap()
@@ -76,8 +75,7 @@ pub fn end_of_quarter(dt: DateTime<Utc>) -> DateTime<Utc> {
     let quarter_end_month = quarter_start_month + 2;
 
     let next_quarter = if quarter_end_month == 12 {
-        Utc.with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0)
-            .unwrap()
+        Utc.with_ymd_and_hms(dt.year() + 1, 1, 1, 0, 0, 0).unwrap()
     } else {
         Utc.with_ymd_and_hms(dt.year(), quarter_end_month + 1, 1, 0, 0, 0)
             .unwrap()
@@ -92,8 +90,7 @@ pub fn start_of_year(dt: DateTime<Utc>) -> DateTime<Utc> {
 
 /// Get the end of the year for a given date
 pub fn end_of_year(dt: DateTime<Utc>) -> DateTime<Utc> {
-    Utc.with_ymd_and_hms(dt.year(), 12, 31, 23, 59, 59)
-        .unwrap()
+    Utc.with_ymd_and_hms(dt.year(), 12, 31, 23, 59, 59).unwrap()
 }
 
 /// Calculate the duration in days between two datetimes

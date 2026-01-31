@@ -1,3 +1,4 @@
+use super::types::*;
 /// Unit tests for Kanban board component
 ///
 /// Tests cover:
@@ -7,7 +8,6 @@
 /// - KanbanColumn WIP limits and card counting
 /// - Filter logic (AND/OR) with search, priority, assignee, and label filters
 use chrono::NaiveDate;
-use super::types::*;
 
 // Helper functions
 
@@ -84,9 +84,12 @@ fn test_assignee_initials_three_words() {
 
 #[test]
 fn test_assignee_with_avatar() {
-    let assignee = create_test_assignee("1", "John Doe")
-        .with_avatar("https://example.com/avatar.jpg");
-    assert_eq!(assignee.avatar_url, Some("https://example.com/avatar.jpg".to_string()));
+    let assignee =
+        create_test_assignee("1", "John Doe").with_avatar("https://example.com/avatar.jpg");
+    assert_eq!(
+        assignee.avatar_url,
+        Some("https://example.com/avatar.jpg".to_string())
+    );
 }
 
 // KanbanCard Tests
@@ -116,16 +119,14 @@ fn test_card_with_priority() {
 
 #[test]
 fn test_card_with_label() {
-    let card = create_test_card("1", "Task")
-        .with_label(create_test_label("bug", "Bug"));
+    let card = create_test_card("1", "Task").with_label(create_test_label("bug", "Bug"));
     assert_eq!(card.labels.len(), 1);
     assert_eq!(card.labels[0].id, "bug");
 }
 
 #[test]
 fn test_card_with_assignee() {
-    let card = create_test_card("1", "Task")
-        .with_assignee(create_test_assignee("u1", "Alice"));
+    let card = create_test_card("1", "Task").with_assignee(create_test_assignee("u1", "Alice"));
     assert_eq!(card.assignees.len(), 1);
     assert_eq!(card.assignees[0].id, "u1");
 }
@@ -186,8 +187,7 @@ fn test_column_with_card_limit() {
 
 #[test]
 fn test_column_with_card() {
-    let column = KanbanColumn::new("todo", "To Do")
-        .with_card(create_test_card("1", "Task 1"));
+    let column = KanbanColumn::new("todo", "To Do").with_card(create_test_card("1", "Task 1"));
     assert_eq!(column.cards.len(), 1);
 }
 
@@ -211,8 +211,7 @@ fn test_column_card_count() {
 
 #[test]
 fn test_column_is_over_limit_no_limit() {
-    let column = KanbanColumn::new("todo", "To Do")
-        .with_card(create_test_card("1", "Task 1"));
+    let column = KanbanColumn::new("todo", "To Do").with_card(create_test_card("1", "Task 1"));
     assert!(!column.is_over_limit());
 }
 
@@ -286,8 +285,7 @@ fn test_card_matches_filters_search_case_insensitive() {
 
 #[test]
 fn test_card_matches_filters_search_description() {
-    let card = create_test_card("1", "Task")
-        .with_description("Fix the authentication problem");
+    let card = create_test_card("1", "Task").with_description("Fix the authentication problem");
     let mut filters = KanbanFilters::new();
     filters.search_query = Some("authentication".to_string());
     assert!(card.matches_filters(&filters));
@@ -319,8 +317,7 @@ fn test_card_matches_filters_priority_no_match() {
 
 #[test]
 fn test_card_matches_filters_assignee_match() {
-    let card = create_test_card("1", "Task")
-        .with_assignee(create_test_assignee("u1", "Alice"));
+    let card = create_test_card("1", "Task").with_assignee(create_test_assignee("u1", "Alice"));
     let mut filters = KanbanFilters::new();
     filters.assignee_ids = vec!["u1".to_string()];
     assert!(card.matches_filters(&filters));
@@ -328,8 +325,7 @@ fn test_card_matches_filters_assignee_match() {
 
 #[test]
 fn test_card_matches_filters_assignee_no_match() {
-    let card = create_test_card("1", "Task")
-        .with_assignee(create_test_assignee("u1", "Alice"));
+    let card = create_test_card("1", "Task").with_assignee(create_test_assignee("u1", "Alice"));
     let mut filters = KanbanFilters::new();
     filters.assignee_ids = vec!["u2".to_string()];
     assert!(!card.matches_filters(&filters));
@@ -337,8 +333,7 @@ fn test_card_matches_filters_assignee_no_match() {
 
 #[test]
 fn test_card_matches_filters_label_match() {
-    let card = create_test_card("1", "Task")
-        .with_label(create_test_label("bug", "Bug"));
+    let card = create_test_card("1", "Task").with_label(create_test_label("bug", "Bug"));
     let mut filters = KanbanFilters::new();
     filters.label_ids = vec!["bug".to_string()];
     assert!(card.matches_filters(&filters));
@@ -346,8 +341,7 @@ fn test_card_matches_filters_label_match() {
 
 #[test]
 fn test_card_matches_filters_label_no_match() {
-    let card = create_test_card("1", "Task")
-        .with_label(create_test_label("bug", "Bug"));
+    let card = create_test_card("1", "Task").with_label(create_test_label("bug", "Bug"));
     let mut filters = KanbanFilters::new();
     filters.label_ids = vec!["feature".to_string()];
     assert!(!card.matches_filters(&filters));
@@ -446,7 +440,7 @@ fn test_kanban_filters_due_date_in_range() {
     let mut filters = KanbanFilters::new();
     filters.due_date_range = Some((
         Some(NaiveDate::from_ymd_opt(2024, 6, 1).unwrap()),
-        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap())
+        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap()),
     ));
 
     assert!(filters.matches_card(&card));
@@ -460,7 +454,7 @@ fn test_kanban_filters_due_date_out_of_range() {
     let mut filters = KanbanFilters::new();
     filters.due_date_range = Some((
         Some(NaiveDate::from_ymd_opt(2024, 6, 1).unwrap()),
-        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap())
+        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap()),
     ));
 
     assert!(!filters.matches_card(&card));
@@ -473,7 +467,7 @@ fn test_kanban_filters_no_due_date_with_range_filter() {
     let mut filters = KanbanFilters::new();
     filters.due_date_range = Some((
         Some(NaiveDate::from_ymd_opt(2024, 6, 1).unwrap()),
-        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap())
+        Some(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap()),
     ));
 
     assert!(!filters.matches_card(&card));
