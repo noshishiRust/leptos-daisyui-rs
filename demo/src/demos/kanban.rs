@@ -94,6 +94,43 @@ pub fn KanbanDemo() -> impl IntoView {
         });
     });
 
+    // Handle column toggle
+    let handle_column_toggle = Callback::new(move |column_id: String| {
+        logging::log!("Toggling column: {}", column_id);
+        set_columns.update(|cols| {
+            for col in cols.iter_mut() {
+                if col.column_id == column_id {
+                    col.collapsed = !col.collapsed;
+                    break;
+                }
+            }
+        });
+    });
+
+    // Handle card creation
+    let card_counter = RwSignal::new(6); // Start from card-6
+    let handle_card_create = Callback::new(move |column_id: String| {
+        let new_id = card_counter.get();
+        card_counter.update(|c| *c += 1);
+
+        logging::log!("Creating card in column: {}", column_id);
+        set_columns.update(|cols| {
+            for col in cols.iter_mut() {
+                if col.column_id == column_id {
+                    let new_card = KanbanCard::new(
+                        format!("card-{}", new_id),
+                        format!("New Task {}", new_id)
+                    )
+                    .with_description("Add description here")
+                    .with_priority(Priority::Medium);
+
+                    col.cards.push(new_card);
+                    break;
+                }
+            }
+        });
+    });
+
     view! {
         <div class="demo-section">
             <h2 class="text-2xl font-bold mb-4">"Kanban Board"</h2>
@@ -110,6 +147,8 @@ pub fn KanbanDemo() -> impl IntoView {
                         on_card_move=handle_card_move
                         on_card_click=handle_card_click
                         on_card_delete=handle_card_delete
+                        on_column_toggle=handle_column_toggle
+                        on_card_create=handle_card_create
                     />
                 </div>
             </div>

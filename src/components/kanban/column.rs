@@ -43,6 +43,10 @@ pub fn KanbanColumnView(
     /// Callback when a new card should be created in this column
     #[prop(into)]
     on_card_create: Option<Callback<String>>,
+
+    /// Callback when column collapse state should toggle
+    #[prop(into)]
+    on_toggle_collapse: Option<Callback<String>>,
 ) -> impl IntoView {
     let column_id = Signal::derive(move || column.get().column_id.clone());
     let is_collapsed = Signal::derive(move || column.get().collapsed);
@@ -82,6 +86,11 @@ pub fn KanbanColumnView(
                     <button
                         class="btn btn-ghost btn-sm btn-circle"
                         aria-label="Toggle column"
+                        on:click=move |_| {
+                            if let Some(ref cb) = on_toggle_collapse {
+                                cb.run(column_id.get());
+                            }
+                        }
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

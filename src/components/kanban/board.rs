@@ -42,6 +42,14 @@ pub fn KanbanBoard(
     /// Additional CSS classes
     #[prop(optional, into, default="")]
     class: &'static str,
+
+    /// Callback when a column collapse state changes
+    #[prop(optional)]
+    on_column_toggle: Option<Callback<String>>,
+
+    /// Callback when a new card should be created
+    #[prop(optional)]
+    on_card_create: Option<Callback<String>>,
 ) -> impl IntoView {
     // Drag state management
     let (drag_state, set_drag_state) = signal(DragState::default());
@@ -120,7 +128,8 @@ pub fn KanbanBoard(
                                 }))
                                 on_card_click=on_card_click.clone()
                                 on_card_delete=on_card_delete.clone()
-                                on_card_create=None
+                                on_card_create=on_card_create.clone()
+                                on_toggle_collapse=on_column_toggle.clone()
                             />
                         }
                     }
