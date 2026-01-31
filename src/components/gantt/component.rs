@@ -5,7 +5,7 @@ use web_sys::WheelEvent;
 
 use crate::components::gantt::{
     timeline::{TaskBar, TimelineGrid, TimelineScale},
-    GanttTask, GanttTaskHeight, ViewMode,
+    EditContext, EditType, GanttTask, GanttTaskHeight, ReadOnlyMode, ViewMode,
 };
 
 /// A production-ready Gantt chart component for task scheduling and project management.
@@ -58,6 +58,14 @@ pub fn GanttChart(
     /// Initial split ratio for task list panel (0.0-1.0, default 0.3 = 30%)
     #[prop(optional, default=0.3)]
     initial_split_ratio: f64,
+
+    /// Read-only mode configuration
+    #[prop(optional, into, default=Signal::derive(|| ReadOnlyMode::default()))]
+    read_only_mode: Signal<ReadOnlyMode>,
+
+    /// Simple boolean to enable full read-only mode (convenience prop)
+    #[prop(optional, into, default=Signal::derive(|| false))]
+    read_only: Signal<bool>,
 ) -> impl IntoView {
     // Calculate timeline date range from tasks
     let date_range = Signal::derive(move || {
@@ -90,6 +98,29 @@ pub fn GanttChart(
 
     // View mode state management
     let (view_mode, set_view_mode) = signal(initial_view_mode.get());
+
+    // Read-only mode state management
+    let effective_read_only_mode = Signal::derive(move || {
+        if read_only.get() {
+            ReadOnlyMode::Full
+        } else {
+            read_only_mode.get()
+        }
+    });
+
+    // Helper to check if a task edit is allowed
+    let is_edit_allowed = move |task_id: &str, edit_type: EditType| {
+        // Check per-task read_only flag first
+        if let Some(task) = tasks.get().iter().find(|t| t.id == task_id) {
+            if task.read_only {
+                return false;
+            }
+        }
+
+        // Check global read-only mode
+        let context = EditContext::new(task_id.to_string(), edit_type);
+        effective_read_only_mode.get().is_edit_allowed(&context)
+    };
 
     // Zoom controls
     let zoom_in = move |_| {
@@ -251,9 +282,11 @@ pub fn GanttChart(
         <div
             node_ref=container_ref
             class=format!("gantt-chart flex h-full w-full overflow-hidden select-none {}", class)
+            tabindex="0"
             on:mousemove=on_container_mousemove
             on:mouseup=on_container_mouseup
             on:mouseleave=on_container_mouseleave
+            on:keydown=on_keydown
         >
             // Task list panel (left side)
             <Show when=move || show_task_list.get()>
@@ -400,6 +433,11 @@ pub fn GanttChart(
                                             selected_task_id.get().as_ref() == Some(&task_id_for_check)
                                         });
 
+                                        let task_id_for_readonly = task_id.clone();
+                                        let is_task_read_only = Signal::derive(move || {
+                                            !is_edit_allowed(&task_id_for_readonly, EditType::Timeline)
+                                        });
+
                                         let on_click_cb = on_task_click;
                                         let on_select_cb = on_task_select;
 
@@ -409,6 +447,7 @@ pub fn GanttChart(
                                                 timeline_start=start_date
                                                 y_position=y_pos
                                                 is_selected=is_selected
+                                                is_read_only=is_task_read_only
                                                 on_click=Some(Callback::new(move |id: String| {
                                                     set_selected_task_id.set(Some(id.clone()));
                                                     if let Some(ref cb) = on_select_cb {

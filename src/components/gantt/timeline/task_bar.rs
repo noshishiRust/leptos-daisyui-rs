@@ -33,6 +33,10 @@ pub fn TaskBar(
     /// Whether this task is currently selected
     #[prop(into, default=Signal::derive(|| false))]
     is_selected: Signal<bool>,
+
+    /// Whether this task is read-only (non-editable)
+    #[prop(into, default=Signal::derive(|| false))]
+    is_read_only: Signal<bool>,
 ) -> impl IntoView {
     let position_width = Signal::derive(move || {
         let t = task.get();
@@ -51,7 +55,11 @@ pub fn TaskBar(
 
     view! {
         <div
-            class="task-bar absolute cursor-pointer rounded transition-all hover:shadow-lg"
+            class="task-bar absolute rounded transition-all"
+            class:cursor-pointer=move || !is_read_only.get()
+            class:cursor-not-allowed=move || is_read_only.get()
+            class:opacity-60=move || is_read_only.get()
+            class:hover:shadow-lg=move || !is_read_only.get()
             class:ring-2=move || is_selected.get()
             class:ring-primary=move || is_selected.get()
             class:ring-offset-2=move || is_selected.get()
@@ -61,9 +69,12 @@ pub fn TaskBar(
             style:top=move || format!("{}px", y_position.get())
             style:height=move || format!("{}px", bar_height.get())
             style:background-color=move || bar_color.get()
+            attr:aria-readonly=move || is_read_only.get().to_string()
             on:click=move |_| {
-                if let Some(ref cb) = on_click {
-                    cb.run(task.get().id.clone());
+                if !is_read_only.get() {
+                    if let Some(ref cb) = on_click {
+                        cb.run(task.get().id.clone());
+                    }
                 }
             }
         >
@@ -78,6 +89,26 @@ pub fn TaskBar(
                 <div class="task-label absolute left-0 top-0 flex h-full items-center px-2 text-xs font-medium text-white">
                     {move || task.get().name.clone()}
                 </div>
+
+                // Read-only lock icon indicator
+                <Show when=move || is_read_only.get()>
+                    <div class="absolute right-1 top-1/2 -translate-y-1/2 text-white/80">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                </Show>
             </div>
         </div>
     }
