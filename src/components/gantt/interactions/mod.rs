@@ -22,6 +22,9 @@ pub enum DragMode {
 
     /// Dragging progress indicator
     DragProgress,
+
+    /// Creating a dependency by dragging from one task to another
+    CreateDependency,
 }
 
 /// State tracking for drag operations
@@ -30,7 +33,7 @@ pub struct DragState {
     /// Whether a drag operation is currently active
     pub is_dragging: bool,
 
-    /// ID of the task being dragged
+    /// ID of the task being dragged (or source task for dependency creation)
     pub task_id: Option<String>,
 
     /// Type of drag operation
@@ -39,8 +42,17 @@ pub struct DragState {
     /// X position where drag started (pixels)
     pub start_x: f64,
 
+    /// Y position where drag started (pixels)
+    pub start_y: f64,
+
     /// Current X position during drag (pixels)
     pub current_x: f64,
+
+    /// Current Y position during drag (pixels)
+    pub current_y: f64,
+
+    /// Target task ID (for dependency creation)
+    pub target_task_id: Option<String>,
 
     /// Original task start date before drag
     pub original_start: Option<DateTime<Utc>>,
@@ -68,7 +80,10 @@ impl Default for DragState {
             task_id: None,
             drag_mode: None,
             start_x: 0.0,
+            start_y: 0.0,
             current_x: 0.0,
+            current_y: 0.0,
+            target_task_id: None,
             original_start: None,
             original_end: None,
             original_progress: None,
@@ -87,6 +102,7 @@ impl DragState {
         task_id: String,
         mode: DragMode,
         start_x: f64,
+        start_y: f64,
         original_start: DateTime<Utc>,
         original_end: DateTime<Utc>,
         original_progress: f32,
@@ -96,17 +112,48 @@ impl DragState {
         self.task_id = Some(task_id);
         self.drag_mode = Some(mode);
         self.start_x = start_x;
+        self.start_y = start_y;
         self.current_x = start_x;
+        self.current_y = start_y;
+        self.target_task_id = None;
         self.original_start = Some(original_start);
         self.original_end = Some(original_end);
         self.original_progress = Some(original_progress);
         self.column_width = column_width;
     }
 
+    /// Start a dependency creation drag
+    pub fn start_dependency_drag(
+        &mut self,
+        source_task_id: String,
+        start_x: f64,
+        start_y: f64,
+    ) {
+        self.is_dragging = true;
+        self.task_id = Some(source_task_id);
+        self.drag_mode = Some(DragMode::CreateDependency);
+        self.start_x = start_x;
+        self.start_y = start_y;
+        self.current_x = start_x;
+        self.current_y = start_y;
+        self.target_task_id = None;
+        self.original_start = None;
+        self.original_end = None;
+        self.original_progress = None;
+    }
+
     /// Update drag position
-    pub fn update_position(&mut self, current_x: f64) {
+    pub fn update_position(&mut self, current_x: f64, current_y: f64) {
         if self.is_dragging {
             self.current_x = current_x;
+            self.current_y = current_y;
+        }
+    }
+
+    /// Set the target task for dependency creation
+    pub fn set_target_task(&mut self, target_task_id: Option<String>) {
+        if self.drag_mode == Some(DragMode::CreateDependency) {
+            self.target_task_id = target_task_id;
         }
     }
 
@@ -116,7 +163,10 @@ impl DragState {
         self.task_id = None;
         self.drag_mode = None;
         self.start_x = 0.0;
+        self.start_y = 0.0;
         self.current_x = 0.0;
+        self.current_y = 0.0;
+        self.target_task_id = None;
         self.original_start = None;
         self.original_end = None;
         self.original_progress = None;
@@ -173,6 +223,10 @@ impl DragState {
             DragMode::DragProgress => {
                 // Progress drag doesn't change dates
                 Some((original_start, original_end))
+            }
+            DragMode::CreateDependency => {
+                // Dependency creation doesn't change dates
+                None
             }
         }
     }
@@ -468,6 +522,7 @@ mod tests {
             "task-1".to_string(),
             DragMode::Move,
             100.0,
+            0.0,
             start,
             end,
             0.5,
@@ -490,6 +545,7 @@ mod tests {
             "task-1".to_string(),
             DragMode::Move,
             0.0,
+            0.0,
             start,
             end,
             0.5,
@@ -497,7 +553,7 @@ mod tests {
         );
 
         // Move 2 days forward (120 pixels)
-        state.update_position(120.0);
+        state.update_position(120.0, 0.0);
 
         let (new_start, new_end) = state.calculate_new_dates().unwrap();
         assert_eq!(new_start, start + Duration::days(2));
@@ -514,6 +570,7 @@ mod tests {
             "task-1".to_string(),
             DragMode::ResizeStart,
             0.0,
+            0.0,
             start,
             end,
             0.5,
@@ -521,7 +578,7 @@ mod tests {
         );
 
         // Drag left edge 1 day later (60 pixels)
-        state.update_position(60.0);
+        state.update_position(60.0, 0.0);
 
         let (new_start, new_end) = state.calculate_new_dates().unwrap();
         assert_eq!(new_start, start + Duration::days(1));
@@ -603,6 +660,7 @@ mod tests {
             "task-1".to_string(),
             DragMode::Move,
             0.0,
+            0.0,
             start,
             end,
             0.5,
@@ -610,10 +668,49 @@ mod tests {
         );
 
         // Drag 75 pixels (should snap to 60 = 1 day)
-        state.update_position(75.0);
+        state.update_position(75.0, 0.0);
 
         let (new_start, new_end) = state.calculate_new_dates().unwrap();
         assert_eq!(new_start, start + Duration::days(1));
         assert_eq!(new_end, end + Duration::days(1));
+    }
+
+    #[test]
+    fn test_start_dependency_drag() {
+        let mut state = DragState::default();
+
+        state.start_dependency_drag("task-1".to_string(), 100.0, 50.0);
+
+        assert!(state.is_dragging);
+        assert_eq!(state.task_id, Some("task-1".to_string()));
+        assert_eq!(state.drag_mode, Some(DragMode::CreateDependency));
+        assert_eq!(state.start_x, 100.0);
+        assert_eq!(state.start_y, 50.0);
+        assert!(state.target_task_id.is_none());
+    }
+
+    #[test]
+    fn test_set_target_task() {
+        let mut state = DragState::default();
+
+        state.start_dependency_drag("task-1".to_string(), 100.0, 50.0);
+        state.set_target_task(Some("task-2".to_string()));
+
+        assert_eq!(state.target_task_id, Some("task-2".to_string()));
+
+        // Clear target
+        state.set_target_task(None);
+        assert!(state.target_task_id.is_none());
+    }
+
+    #[test]
+    fn test_dependency_drag_no_date_changes() {
+        let mut state = DragState::default();
+
+        state.start_dependency_drag("task-1".to_string(), 100.0, 50.0);
+        state.update_position(200.0, 100.0);
+
+        // Dependency creation doesn't change dates
+        assert!(state.calculate_new_dates().is_none());
     }
 }

@@ -2,7 +2,6 @@
 ///
 /// Provides cycle detection, topological sorting, and path finding
 /// algorithms for managing task dependencies in Gantt charts.
-
 use petgraph::algo::{is_cyclic_directed, toposort};
 use petgraph::graph::{DiGraph, NodeIndex};
 use petgraph::visit::EdgeRef;
@@ -95,11 +94,10 @@ impl DependencyGraph {
         let mut rec_stack = HashMap::new();
 
         for node in self.graph.node_indices() {
-            if !visited.get(&node).copied().unwrap_or(false) {
-                if let Some(cycle) = self.dfs_find_cycle(node, &mut visited, &mut rec_stack) {
+            if !visited.get(&node).copied().unwrap_or(false)
+                && let Some(cycle) = self.dfs_find_cycle(node, &mut visited, &mut rec_stack) {
                     cycles.push(cycle);
                 }
-            }
         }
 
         cycles
