@@ -21,6 +21,10 @@ pub mod utils;
 mod readonly_tests;
 
 pub use component::*;
+pub use interactions::{
+    DateValidator, DragConstraints, DragHistory, DragMode as InteractionDragMode,
+    DragResult as InteractionDragResult, DragState as InteractionDragState,
+};
 pub use models::*;
 pub use readonly::*;
 pub use style::*;

@@ -192,6 +192,9 @@ impl DragState {
     }
 }
 
+/// Custom validation function type for drag constraints
+pub type DateValidator = fn(&DateTime<Utc>, &DateTime<Utc>) -> Result<(), String>;
+
 /// Drag constraints and validation
 #[derive(Clone, Debug)]
 pub struct DragConstraints {
@@ -211,7 +214,7 @@ pub struct DragConstraints {
     pub max_date: Option<DateTime<Utc>>,
 
     /// Custom validation callback
-    pub custom_validator: Option<fn(&DateTime<Utc>, &DateTime<Utc>) -> Result<(), String>>,
+    pub custom_validator: Option<DateValidator>,
 }
 
 impl Default for DragConstraints {
@@ -359,6 +362,7 @@ impl Default for DragHistory {
 
 impl DragHistory {
     /// Record a drag operation
+    #[allow(clippy::too_many_arguments)]
     pub fn record(
         &mut self,
         task_id: String,
