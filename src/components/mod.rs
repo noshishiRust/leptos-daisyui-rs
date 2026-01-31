@@ -31,6 +31,8 @@ mod fab;
 mod field;
 /// Gantt chart component for project timeline visualization
 pub mod gantt;
+/// Kanban board component for task management
+pub mod kanban;
 mod fieldset;
 mod file_input;
 mod filter;
