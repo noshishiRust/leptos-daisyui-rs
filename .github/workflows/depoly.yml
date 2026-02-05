@@ -42,7 +42,7 @@ jobs:
           trunk build --release
 
       - name: Deploy
-        uses: amondnet/vercel-action@v41
+        uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
