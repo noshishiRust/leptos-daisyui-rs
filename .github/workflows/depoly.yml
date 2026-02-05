@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: demo
     permissions:
-        contents: write
-        pull-requests: write
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -26,12 +26,12 @@ jobs:
           tool: trunk
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: demo/package-lock.json
-    
+
       - name: Install npm dependencies
         working-directory: demo
         run: npm ci
@@ -42,11 +42,11 @@ jobs:
           trunk build --release
 
       - name: Deploy
-        uses: amondnet/vercel-action@v25
-        with: 
-            vercel-token: ${{ secrets.VERCEL_TOKEN }}
-            vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-            vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-            vercel-args: "--prod"
-            working-directory: demo/dist
-            vercel-project-name: thaw
+        uses: amondnet/vercel-action@v41
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: "--prod"
+          working-directory: demo/dist
+          vercel-project-name: leptos-daisyui-rs
