@@ -1090,7 +1090,7 @@ dependencies = [
 
 [[package]]
 name = "leptos-daisyui-rs"
-version = "0.0.2"
+version = "0.0.4"
 dependencies = [
  "leptos",
 ]
