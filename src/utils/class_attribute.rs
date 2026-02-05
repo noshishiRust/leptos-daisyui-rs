@@ -70,8 +70,8 @@ impl IntoClass for ClassAttributes {
         self.values.len()
     }
 
-    fn to_html(self, _class: &mut String) {
-        self.to_class();
+    fn to_html(self, class: &mut String) {
+        *class = self.to_class();
     }
 
     fn hydrate<const FROM_SERVER: bool>(self, el: &types::Element) -> Self::State {

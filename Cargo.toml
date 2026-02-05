@@ -1,7 +1,7 @@
 [package]
 name = "leptos-daisyui-rs"
 description = "daisyUI Components for Leptos"
-version = "0.0.3"
+version = "0.0.4"
 edition = "2024"
 license = "MIT"
 authors = ["noshishiRust <nopenoshishi@gmail.com>"]
