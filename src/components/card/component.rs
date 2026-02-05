@@ -117,7 +117,7 @@ pub fn CardTitle(
 /// # Card Actions Component
 ///
 /// ## Node References
-/// - `node_ref` - References the top `<div>` element ([HTMLDivElement
+/// - `node_ref` - References the top `<div>` element ([HTMLDivElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDivElement))
 #[component]
 pub fn CardActions(
     /// Additional CSS classes to apply to the card actions container.

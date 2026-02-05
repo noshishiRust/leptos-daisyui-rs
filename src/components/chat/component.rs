@@ -153,7 +153,7 @@ pub fn ChatFooter(
     #[prop(optional, into)]
     class: &'static str,
 
-    /// Node reference for the chat fotter container element
+    /// Node reference for the chat footer container element
     #[prop(optional)]
     node_ref: NodeRef<Div>,
 
