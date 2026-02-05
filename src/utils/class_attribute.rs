@@ -30,27 +30,25 @@ impl ClassAttributes {
 
     /// Build the class string from the attributes
     pub fn to_class(&self) -> String {
-        self.values
-            .iter()
-            .filter_map(|attr| match attr {
-                ClassAttribute::None => None,
-                ClassAttribute::Dynamic(s) => {
-                    if !s.is_empty() {
-                        Some(s.clone())
-                    } else {
-                        None
-                    }
-                }
-                ClassAttribute::Static(s) => {
-                    if !s.is_empty() {
-                        Some(s.to_string())
-                    } else {
-                        None
-                    }
-                }
-            })
-            .collect::<Vec<String>>()
-            .join(" ")
+        let mut result = String::new();
+        let mut first = true;
+
+        for attr in &self.values {
+            let s = match attr {
+                ClassAttribute::None => continue,
+                ClassAttribute::Dynamic(s) if !s.is_empty() => s.as_str(),
+                ClassAttribute::Static(s) if !s.is_empty() => s,
+                _ => continue,
+            };
+
+            if !first {
+                result.push(' ');
+            }
+            result.push_str(s);
+            first = false;
+        }
+
+        result
     }
 }
 
@@ -133,7 +131,21 @@ impl IntoClass for ClassAttributes {
                         (el, prev_class)
                     }
                 } else {
-                    unreachable!()
+                    // This should never happen in normal operation, but handle defensively
+                    #[cfg(debug_assertions)]
+                    panic!("ClassAttributes::rebuild called with None state - this is a bug");
+
+                    #[cfg(not(debug_assertions))]
+                    {
+                        leptos::logging::error!("ClassAttributes::rebuild: unexpected None state");
+                        // Return a dummy state to avoid panic in production
+                        // This will cause the attribute to not be updated, but won't crash
+                        prev.unwrap_or_else(|| {
+                            // Create minimal fallback - this path should never execute
+                            let el = Rndr::create_element(types::ElementTag::Html);
+                            (el, String::new())
+                        })
+                    }
                 }
             },
             prev,
@@ -162,7 +174,19 @@ impl IntoClass for ClassAttributes {
                     Rndr::remove_attribute(el, "class");
                     state
                 } else {
-                    unreachable!()
+                    // This should never happen in normal operation, but handle defensively
+                    #[cfg(debug_assertions)]
+                    panic!("ClassAttributes::reset called with None state - this is a bug");
+
+                    #[cfg(not(debug_assertions))]
+                    {
+                        leptos::logging::error!("ClassAttributes::reset: unexpected None state");
+                        // Return a dummy state to avoid panic in production
+                        prev.unwrap_or_else(|| {
+                            let el = Rndr::create_element(types::ElementTag::Html);
+                            (el, String::new())
+                        })
+                    }
                 }
             },
             state.take_value(),
