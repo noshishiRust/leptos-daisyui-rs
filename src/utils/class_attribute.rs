@@ -142,7 +142,7 @@ impl IntoClass for ClassAttributes {
                         // This will cause the attribute to not be updated, but won't crash
                         prev.unwrap_or_else(|| {
                             // Create minimal fallback - this path should never execute
-                            let el = Rndr::create_element(types::ElementTag::Html);
+                            let el = Rndr::create_element("html", None);
                             (el, String::new())
                         })
                     }
@@ -183,7 +183,7 @@ impl IntoClass for ClassAttributes {
                         leptos::logging::error!("ClassAttributes::reset: unexpected None state");
                         // Return a dummy state to avoid panic in production
                         prev.unwrap_or_else(|| {
-                            let el = Rndr::create_element(types::ElementTag::Html);
+                            let el = Rndr::create_element("html", None);
                             (el, String::new())
                         })
                     }
