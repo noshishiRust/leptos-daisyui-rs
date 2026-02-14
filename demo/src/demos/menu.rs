@@ -6,7 +6,7 @@ use leptos_icons::Icon;
 #[component]
 pub fn MenuDemo() -> impl IntoView {
     let selected = RwSignal::new(None::<String>);
-    let manual_selected = RwSignal::new(None::<String>);
+    let _manual_selected = RwSignal::new(None::<String>);
 
     view! {
         <ContentLayout

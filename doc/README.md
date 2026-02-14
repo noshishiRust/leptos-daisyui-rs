@@ -259,10 +259,20 @@ Brief description of the sub-component.
 > The Accordion component provides an organized way to display large amounts of content in a compact space. Users can expand sections they're interested in while keeping other sections collapsed, making it perfect for FAQs, settings panels, and content organization.
 
 ### 3. Examples Section
-- Use clear, descriptive section names (e.g., "Basic Accordion", "Modifiers")
-- Show realistic, copy-pasteable code
-- Demonstrate key features and variations
-- Include prop variations that show different behaviors
+
+**Maximum 3 examples per component**
+
+Limit each component documentation to maximum 3 example sections total. This ensures:
+- Focused documentation that highlights most important features
+- Faster page load times in the demo application
+- Consistent documentation across all components
+
+Choose examples that demonstrate:
+- Clear, descriptive section names (e.g., "Basic Accordion", "Modifiers")
+- Realistic, copy-pasteable code
+- Key features and variations
+- Prop variations that show different behaviors
+- Most common use cases and patterns
 
 **Example Code Style:**
 ```rust

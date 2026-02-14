@@ -43,6 +43,7 @@ pub fn Countdown(
 #[component]
 pub fn CountdownValue(
     /// Reactive signal containing the numeric value (0-99) to display
+    #[prop(optional, into)]
     value: Signal<u8>,
 
     /// Additional CSS classes to apply to the value element
