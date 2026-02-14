@@ -1,6 +1,7 @@
 ---
 name: check-style-guide
 description: Validates existing components against daisyUI style guide documentation
+disable-model-invocation: true
 ---
 
 Validates that existing component implementations match the official daisyUI style guide.
@@ -38,11 +39,11 @@ cat src/components/{component_name}/component.rs
 
 Create comparison table:
 
-| Category | daisyUI Classes | Implemented Enums | Coverage |
-|----------|------------------|-------------------|------------|
-| Colors | `btn-primary`, `btn-secondary`, ... | `ButtonColor::Primary`, `ButtonColor::Secondary`, ... | ✅/❌ |
-| Sizes | `btn-xs`, `btn-sm`, ... | `ButtonSize::Xs`, `ButtonSize::Sm`, ... | ✅/❌ |
-| Styles | `btn-outline`, `btn-ghost`, ... | `ButtonStyle::Outline`, `ButtonStyle::Ghost`, ... | ✅/❌ |
+| Category | daisyUI Classes                     | Implemented Enums                                     | Coverage |
+| -------- | ----------------------------------- | ----------------------------------------------------- | -------- |
+| Colors   | `btn-primary`, `btn-secondary`, ... | `ButtonColor::Primary`, `ButtonColor::Secondary`, ... | ✅/❌      |
+| Sizes    | `btn-xs`, `btn-sm`, ...             | `ButtonSize::Xs`, `ButtonSize::Sm`, ...               | ✅/❌      |
+| Styles   | `btn-outline`, `btn-ghost`, ...     | `ButtonStyle::Outline`, `ButtonStyle::Ghost`, ...     | ✅/❌      |
 
 ### 4. Check Implementation Quality
 

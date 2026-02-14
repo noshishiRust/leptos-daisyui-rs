@@ -1,6 +1,7 @@
 ---
 name: create-component-docs
 description: Generates component documentation from implementation for demo-macros parsing
+disable-model-invocation: true
 ---
 
 Creates markdown documentation for existing components to be parsed by demo-macros.

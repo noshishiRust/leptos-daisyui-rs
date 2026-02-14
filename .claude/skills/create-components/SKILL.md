@@ -1,6 +1,7 @@
 ---
 name: create-components
 description: Creates Leptos component implementations from daisyUI style guide documentation
+disable-model-invocation: true
 ---
 
 This skill creates Leptos components based on the daisyUI style guide in `.daisyui` directory.

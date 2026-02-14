@@ -1,6 +1,7 @@
 ---
 name: install-component-guide
 description: Fetches and splits the daisyUI style guide from the official LLM text file into organized sections
+disable-model-invocation: true
 ---
 
 The daisyUI style guide can be obtained from the official LLM text at https://daisyui.com/llms.txt.
