@@ -183,73 +183,73 @@ fn WrapperExample() -> impl IntoView {
 
 ## Implementation Status
 
-| Component | Status | Source Path | daisyUI Docs |
-|-----------|--------|-------------|--------------|
-| Accordion | ✅ | [src](src/components/accordion/) | [docs](https://daisyui.com/components/accordion/) |
-| Alert | ✅ | [src](src/components/alert/) | [docs](https://daisyui.com/components/alert/) |
-| Avatar | ✅ | [src](src/components/avatar/) | [docs](https://daisyui.com/components/avatar/) |
-| Badge | ✅ | [src](src/components/badge/) | [docs](https://daisyui.com/components/badge/) |
-| Breadcrumbs | ✅ | [src](src/components/breadcrumbs/) | [docs](https://daisyui.com/components/breadcrumbs/) |
-| Button | ✅ | [src](src/components/button/) | [docs](https://daisyui.com/components/button/) |
-| Calendar | ✅ | [src](src/components/calendar/) | [docs](https://daisyui.com/components/calendar/) |
-| Card | ✅ | [src](src/components/card/) | [docs](https://daisyui.com/components/card/) |
-| Carousel | ✅ | [src](src/components/carousel/)  | [docs](https://daisyui.com/components/carousel/) |
-| Chat | ✅ | [src](src/components/chat/) | [docs](https://daisyui.com/components/chat/) |
-| Checkbox | ✅ | [src](src/components/checkbox/) | [docs](https://daisyui.com/components/checkbox/) |
-| Collapse | ✅ | [src](src/components/collapse/) | [docs](https://daisyui.com/components/collapse/) |
-| Countdown | ✅ | [src](src/components/countdown/) | [docs](https://daisyui.com/components/countdown/) |
-| Diff | ✅ | [src](src/components/diff/) | [docs](https://daisyui.com/components/diff/) |
-| Divider | ✅ | [src](src/components/divider/) | [docs](https://daisyui.com/components/divider/) |
-| Dock | ✅ | [src](src/components/dock/) | [docs](https://daisyui.com/components/dock/) |
-| Drawer | ✅ | [src](src/components/drawer/) | [docs](https://daisyui.com/components/drawer/) |
-| Dropdown | ✅ | [src](src/components/dropdown/) | [docs](https://daisyui.com/components/dropdown/) |
-| FAB (Floating Action Button) | ✅ | [src](src/components/fab/) | [docs](https://daisyui.com/components/fab/) |
-| Fieldset | ✅ | [src](src/components/fieldset/) | [docs](https://daisyui.com/components/fieldset/) |
-| File Input | ✅ | [src](src/components/file_input/) | [docs](https://daisyui.com/components/file-input/) |
-| Filter | ✅ | [src](src/components/filter/) | [docs](https://daisyui.com/components/filter/) |
-| Footer | ✅ | [src](src/components/footer/) | [docs](https://daisyui.com/components/footer/) |
-| Hero | ✅ | [src](src/components/hero/) | [docs](https://daisyui.com/components/hero/) |
-| Hover 3D Card | ✅ | [src](src/components/hover_3d/) | [docs](https://daisyui.com/components/hover-3d/) |
-| Hover Gallery | ✅ | [src](src/components/hover_gallery/) | [docs](https://daisyui.com/components/hover-gallery/) |
-| Indicator | ✅ | [src](src/components/indicator/) | [docs](https://daisyui.com/components/indicator/) |
-| Input | ✅ | [src](src/components/input/) | [docs](https://daisyui.com/components/input/) |
-| Join | ✅ | [src](src/components/join/) | [docs](https://daisyui.com/components/join/) |
-| Kbd | ✅ | [src](src/components/kbd/) | [docs](https://daisyui.com/components/kbd/) |
-| Label | ✅ | [src](src/components/label/) | [docs](https://daisyui.com/components/label/) |
-| Link | ✅ | [src](src/components/link/) | [docs](https://daisyui.com/components/link/) |
-| List | ✅ | [src](src/components/list/) | [docs](https://daisyui.com/components/list/) |
-| Loading | ✅ | [src](src/components/loading/) | [docs](https://daisyui.com/components/loading/) |
-| Mask | ✅ | [src](src/components/mask/) | [docs](https://daisyui.com/components/mask/) |
-| Menu | ✅ | [src](src/components/menu/) | [docs](https://daisyui.com/components/menu/) |
-| Mockup Browser | ✅ | [src](src/components/mockup_browser/) | [docs](https://daisyui.com/components/mockup-browser/) |
-| Mockup Code | ✅ | [src](src/components/mockup_code/) | [docs](https://daisyui.com/components/mockup-code/) |
-| Mockup Phone | ✅ | [src](src/components/mockup_phone/) | [docs](https://daisyui.com/components/mockup-phone/) |
-| Mockup Window | ✅ | [src](src/components/mockup_window/) | [docs](https://daisyui.com/components/mockup-window/) |
-| Modal | ✅ | [src](src/components/modal/) | [docs](https://daisyui.com/components/modal/) |
-| Navbar | ✅ | [src](src/components/navbar/) | [docs](https://daisyui.com/components/navbar/) |
-| Pagination | ✅ | [src](src/components/pagination/) | [docs](https://daisyui.com/components/pagination/) |
-| Progress | ✅ | [src](src/components/progress/) | [docs](https://daisyui.com/components/progress/) |
-| Radial Progress | ✅ | [src](src/components/radial_progress/) | [docs](https://daisyui.com/components/radial-progress/) |
-| Radio | ✅ | [src](src/components/radio/) | [docs](https://daisyui.com/components/radio/) |
-| Range | ✅ | [src](src/components/range/) | [docs](https://daisyui.com/components/range/) |
-| Rating | ✅ | [src](src/components/rating/) | [docs](https://daisyui.com/components/rating/) |
-| Select | ✅ | [src](src/components/select/) | [docs](https://daisyui.com/components/select/) |
-| Skeleton | ✅ | [src](src/components/skeleton/) | [docs](https://daisyui.com/components/skeleton/) |
-| Stack | ✅ | [src](src/components/stack/) | [docs](https://daisyui.com/components/stack/) |
-| Stats | ✅ | [src](src/components/stats/) | [docs](https://daisyui.com/components/stat/) |
-| Status | ✅ | [src](src/components/status/) | [docs](https://daisyui.com/components/status/) |
-| Steps | ✅ | [src](src/components/steps/) | [docs](https://daisyui.com/components/steps/) |
-| Swap | ✅ | [src](src/components/swap/) | [docs](https://daisyui.com/components/swap/) |
-| Tab | ✅ | [src](src/components/tab/) | [docs](https://daisyui.com/components/tab/) |
-| Table | ✅ | [src](src/components/table/) | [docs](https://daisyui.com/components/table/) |
-| Text Rotate | ✅ | [src](src/components/text_rotate/) | [docs](https://daisyui.com/components/text-rotate/) |
-| Textarea | ✅ | [src](src/components/textarea/) | [docs](https://daisyui.com/components/textarea/) |
-| Theme Controller | ✅ | [src](src/components/theme_controller/) | [docs](https://daisyui.com/components/theme-controller/) |
-| Timeline | ✅ | [src](src/components/timeline/) | [docs](https://daisyui.com/components/timeline/) |
-| Toast | ✅ | [src](src/components/toast/) | [docs](https://daisyui.com/components/toast/) |
-| Toggle | ✅ | [src](src/components/toggle/) | [docs](https://daisyui.com/components/toggle/) |
-| Tooltip | ✅ | [src](src/components/tooltip/) | [docs](https://daisyui.com/components/tooltip/) |
-| Validator | ✅ | [src](src/components/validator/) | [docs](https://daisyui.com/components/validator/) |
+| Component                    | Status | Source Path                             | daisyUI Docs                                             |
+| ---------------------------- | ------ | --------------------------------------- | -------------------------------------------------------- |
+| Accordion                    | ✅      | [src](src/components/accordion/)        | [docs](https://daisyui.com/components/accordion/)        |
+| Alert                        | ✅      | [src](src/components/alert/)            | [docs](https://daisyui.com/components/alert/)            |
+| Avatar                       | ✅      | [src](src/components/avatar/)           | [docs](https://daisyui.com/components/avatar/)           |
+| Badge                        | ✅      | [src](src/components/badge/)            | [docs](https://daisyui.com/components/badge/)            |
+| Breadcrumbs                  | ✅      | [src](src/components/breadcrumbs/)      | [docs](https://daisyui.com/components/breadcrumbs/)      |
+| Button                       | ✅      | [src](src/components/button/)           | [docs](https://daisyui.com/components/button/)           |
+| Calendar                     | ✅      | [src](src/components/calendar/)         | [docs](https://daisyui.com/components/calendar/)         |
+| Card                         | ✅      | [src](src/components/card/)             | [docs](https://daisyui.com/components/card/)             |
+| Carousel                     | ✅      | [src](src/components/carousel/)         | [docs](https://daisyui.com/components/carousel/)         |
+| Chat                         | ✅      | [src](src/components/chat/)             | [docs](https://daisyui.com/components/chat/)             |
+| Checkbox                     | ✅      | [src](src/components/checkbox/)         | [docs](https://daisyui.com/components/checkbox/)         |
+| Collapse                     | ✅      | [src](src/components/collapse/)         | [docs](https://daisyui.com/components/collapse/)         |
+| Countdown                    | ✅      | [src](src/components/countdown/)        | [docs](https://daisyui.com/components/countdown/)        |
+| Diff                         | ✅      | [src](src/components/diff/)             | [docs](https://daisyui.com/components/diff/)             |
+| Divider                      | ✅      | [src](src/components/divider/)          | [docs](https://daisyui.com/components/divider/)          |
+| Dock                         | ✅      | [src](src/components/dock/)             | [docs](https://daisyui.com/components/dock/)             |
+| Drawer                       | ✅      | [src](src/components/drawer/)           | [docs](https://daisyui.com/components/drawer/)           |
+| Dropdown                     | ✅      | [src](src/components/dropdown/)         | [docs](https://daisyui.com/components/dropdown/)         |
+| FAB (Floating Action Button) | ✅      | [src](src/components/fab/)              | [docs](https://daisyui.com/components/fab/)              |
+| Fieldset                     | ✅      | [src](src/components/fieldset/)         | [docs](https://daisyui.com/components/fieldset/)         |
+| File Input                   | ✅      | [src](src/components/file_input/)       | [docs](https://daisyui.com/components/file-input/)       |
+| Filter                       | ✅      | [src](src/components/filter/)           | [docs](https://daisyui.com/components/filter/)           |
+| Footer                       | ✅      | [src](src/components/footer/)           | [docs](https://daisyui.com/components/footer/)           |
+| Hero                         | ✅      | [src](src/components/hero/)             | [docs](https://daisyui.com/components/hero/)             |
+| Hover 3D Card                | ✅      | [src](src/components/hover_3d/)         | [docs](https://daisyui.com/components/hover-3d/)         |
+| Hover Gallery                | ✅      | [src](src/components/hover_gallery/)    | [docs](https://daisyui.com/components/hover-gallery/)    |
+| Indicator                    | ✅      | [src](src/components/indicator/)        | [docs](https://daisyui.com/components/indicator/)        |
+| Input                        | ✅      | [src](src/components/input/)            | [docs](https://daisyui.com/components/input/)            |
+| Join                         | ✅      | [src](src/components/join/)             | [docs](https://daisyui.com/components/join/)             |
+| Kbd                          | ✅      | [src](src/components/kbd/)              | [docs](https://daisyui.com/components/kbd/)              |
+| Label                        | ✅      | [src](src/components/label/)            | [docs](https://daisyui.com/components/label/)            |
+| Link                         | ✅      | [src](src/components/link/)             | [docs](https://daisyui.com/components/link/)             |
+| List                         | ✅      | [src](src/components/list/)             | [docs](https://daisyui.com/components/list/)             |
+| Loading                      | ✅      | [src](src/components/loading/)          | [docs](https://daisyui.com/components/loading/)          |
+| Mask                         | ✅      | [src](src/components/mask/)             | [docs](https://daisyui.com/components/mask/)             |
+| Menu                         | ✅      | [src](src/components/menu/)             | [docs](https://daisyui.com/components/menu/)             |
+| Mockup Browser               | ✅      | [src](src/components/mockup_browser/)   | [docs](https://daisyui.com/components/mockup-browser/)   |
+| Mockup Code                  | ✅      | [src](src/components/mockup_code/)      | [docs](https://daisyui.com/components/mockup-code/)      |
+| Mockup Phone                 | ✅      | [src](src/components/mockup_phone/)     | [docs](https://daisyui.com/components/mockup-phone/)     |
+| Mockup Window                | ✅      | [src](src/components/mockup_window/)    | [docs](https://daisyui.com/components/mockup-window/)    |
+| Modal                        | ✅      | [src](src/components/modal/)            | [docs](https://daisyui.com/components/modal/)            |
+| Navbar                       | ✅      | [src](src/components/navbar/)           | [docs](https://daisyui.com/components/navbar/)           |
+| Pagination                   | ✅      | [src](src/components/pagination/)       | [docs](https://daisyui.com/components/pagination/)       |
+| Progress                     | ✅      | [src](src/components/progress/)         | [docs](https://daisyui.com/components/progress/)         |
+| Radial Progress              | ✅      | [src](src/components/radial_progress/)  | [docs](https://daisyui.com/components/radial-progress/)  |
+| Radio                        | ✅      | [src](src/components/radio/)            | [docs](https://daisyui.com/components/radio/)            |
+| Range                        | ✅      | [src](src/components/range/)            | [docs](https://daisyui.com/components/range/)            |
+| Rating                       | ✅      | [src](src/components/rating/)           | [docs](https://daisyui.com/components/rating/)           |
+| Select                       | ✅      | [src](src/components/select/)           | [docs](https://daisyui.com/components/select/)           |
+| Skeleton                     | ✅      | [src](src/components/skeleton/)         | [docs](https://daisyui.com/components/skeleton/)         |
+| Stack                        | ✅      | [src](src/components/stack/)            | [docs](https://daisyui.com/components/stack/)            |
+| Stats                        | ✅      | [src](src/components/stats/)            | [docs](https://daisyui.com/components/stat/)             |
+| Status                       | ✅      | [src](src/components/status/)           | [docs](https://daisyui.com/components/status/)           |
+| Steps                        | ✅      | [src](src/components/steps/)            | [docs](https://daisyui.com/components/steps/)            |
+| Swap                         | ✅      | [src](src/components/swap/)             | [docs](https://daisyui.com/components/swap/)             |
+| Tab                          | ✅      | [src](src/components/tab/)              | [docs](https://daisyui.com/components/tab/)              |
+| Table                        | ✅      | [src](src/components/table/)            | [docs](https://daisyui.com/components/table/)            |
+| Text Rotate                  | ✅      | [src](src/components/text_rotate/)      | [docs](https://daisyui.com/components/text-rotate/)      |
+| Textarea                     | ✅      | [src](src/components/textarea/)         | [docs](https://daisyui.com/components/textarea/)         |
+| Theme Controller             | ✅      | [src](src/components/theme_controller/) | [docs](https://daisyui.com/components/theme-controller/) |
+| Timeline                     | ✅      | [src](src/components/timeline/)         | [docs](https://daisyui.com/components/timeline/)         |
+| Toast                        | ✅      | [src](src/components/toast/)            | [docs](https://daisyui.com/components/toast/)            |
+| Toggle                       | ✅      | [src](src/components/toggle/)           | [docs](https://daisyui.com/components/toggle/)           |
+| Tooltip                      | ✅      | [src](src/components/tooltip/)          | [docs](https://daisyui.com/components/tooltip/)          |
+| Validator                    | ✅      | [src](src/components/validator/)        | [docs](https://daisyui.com/components/validator/)        |
 
 **Progress: 62/62 components implemented (100% coverage!)**
 
