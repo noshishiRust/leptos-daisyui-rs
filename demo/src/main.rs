@@ -3,7 +3,7 @@ use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_daisyui_showcase::core::Layout;
 use leptos_daisyui_showcase::demos::*;
-use leptos_daisyui_showcase::AccordionPage;
+use leptos_daisyui_showcase::*;
 use leptos_icons::Icon;
 use leptos_meta::*;
 use leptos_router::{
@@ -33,24 +33,24 @@ fn App() -> impl IntoView {
                 <ParentRoute path=path!("/components") view=Layout>
                     <Route path=path!("/") view={} />
                     <Route path=path!("/accordion") view=AccordionPage />
-                    <Route path=path!("/alert") view=AlertDemo />
-                    <Route path=path!("/avatar") view=AvatarDemo />
-                    <Route path=path!("/badge") view=BadgeDemo />
-                    <Route path=path!("/breadcrumbs") view=BreadcrumbsDemo />
-                    <Route path=path!("/button") view=ButtonDemo />
-                    <Route path=path!("/card") view=CardDemo />
-                    <Route path=path!("/carousel") view=CarouselDemo />
-                    <Route path=path!("/chat") view=ChatDemo />
-                    <Route path=path!("/checkbox") view=CheckboxDemo />
-                    <Route path=path!("/collapse") view=CollapseDemo />
-                    <Route path=path!("/countdown") view=CountdownDemo />
-                    <Route path=path!("/diff") view=DiffDemo />
-                    <Route path=path!("/divider") view=DividerDemo />
+                    <Route path=path!("/alert") view=AlertPage />
+                    <Route path=path!("/avatar") view=AvatarPage />
+                    <Route path=path!("/badge") view=BadgePage />
+                    <Route path=path!("/breadcrumbs") view=BreadcrumbsPage />
+                    <Route path=path!("/button") view=ButtonPage />
+                    <Route path=path!("/card") view=CardPage />
+                    <Route path=path!("/carousel") view=CarouselPage />
+                    <Route path=path!("/chat") view=ChatPage />
+                    <Route path=path!("/checkbox") view=CheckboxPage />
+                    <Route path=path!("/collapse") view=CollapsePage />
+                    <Route path=path!("/countdown") view=CountdownPage />
+                    <Route path=path!("/diff") view=DiffPage />
+                    <Route path=path!("/divider") view=DividerPage />
                     <Route path=path!("/drawer") view=DrawerDemo />
                     <Route path=path!("/dropdown") view=DropdownDemo />
                     <Route path=path!("/fieldset") view=FieldsetDemo />
                     <Route path=path!("/file_input") view=FileInputDemo />
-                    <Route path=path!("/filter") view=FilterDemo />
+                    // <Route path=path!("/filter") view=FilterDemo />
                     <Route path=path!("/footer") view=FooterDemo />
                     <Route path=path!("/hero") view=HeroDemo />
                     <Route path=path!("/indicator") view=IndicatorDemo />
@@ -75,7 +75,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/skeleton") view=SkeletonDemo />
                     <Route path=path!("/stack") view=StackDemo />
                     <Route path=path!("/stats") view=StatsDemo />
-                    <Route path=path!("/status") view=StatusDemo />
+                    // <Route path=path!("/status") view=StatusDemo />
                     <Route path=path!("/steps") view=StepsDemo />
                     <Route path=path!("/swap") view=SwapDemo />
                     <Route path=path!("/tab") view=TabDemo />
@@ -85,7 +85,7 @@ fn App() -> impl IntoView {
                     <Route path=path!("/timeline") view=TimelineDemo />
                     <Route path=path!("/toast") view=ToastDemo />
                     <Route path=path!("/toggle") view=ToggleDemo />
-                    <Route path=path!("/validator") view=ValidatorDemo />
+                // <Route path=path!("/validator") view=ValidatorDemo />
                 </ParentRoute>
             </Routes>
         </Router>

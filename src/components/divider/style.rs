@@ -51,10 +51,10 @@ impl DividerColor {
 #[derive(Clone, Debug, Default, PartialEq)]
 pub enum DividerDirection {
     /// Horizontal divider for separating content vertically (default)
-    #[default]
     Horizontal,
 
     /// Vertical divider for separating content horizontally
+    #[default]
     Vertical,
 }
 
