@@ -49,10 +49,15 @@ pub fn Layout() -> impl IntoView {
                 <DrawerToggle id="drawer-toggle" />
 
                 <div class="drawer-content">
+                    <div class="container mx-auto flex justify-center">
+                        <div class="p-6 w-2/3 justify-center">
 
-                    // Content area with padding
-                    <div class="p-6 w-full">
-                        <Outlet />
+                            <div class="space-y-6">
+                                <div class="space-y-4">
+                                    <Outlet />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
