@@ -1,6 +1,6 @@
+use crate::core::{ContentLayout, Section};
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
-use crate::core::{ContentLayout, Section};
 
 #[component]
 pub fn DiffDemo() -> impl IntoView {

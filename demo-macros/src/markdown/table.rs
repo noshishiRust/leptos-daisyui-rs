@@ -1,81 +1,95 @@
-use comrak::nodes::AstNode;
+use comrak::nodes::{AstNode, NodeValue};
 use proc_macro2::TokenStream;
 use quote::quote;
 
 pub fn token_stream_for_view<'a>(node: &'a AstNode<'a>) -> TokenStream {
-    quote! {
-        let children = node.children().collect::<Vec<_>>();
-        let header_row = children.first();
-        let body_rows = children.get(1..).unwrap_or(&[]);
+    let children = node.children().collect::<Vec<_>>();
+    let header_row = children.first();
+    let body_rows = children.get(1..).unwrap_or(&[]);
 
-        view! {
-            <div class="overflow-x-auto my-4">
-                <table class="table table-zebra">
-                    {if let Some(header) = header_row {
-                        let header_data = header.data.borrow();
-                        if let NodeValue::TableRow(_) = &header_data.value {
-                            let cells = header.children().collect::<Vec<_>>();
-                            let cell_views: Vec<AnyView> = cells
-                                .iter()
-                                .map(|cell| {
-                                    let cell_data = cell.data.borrow();
-                                    if matches!(cell_data.value, NodeValue::TableCell { .. }) {
-                                        let content = render_inline_nodes(
-                                            cell.children().collect::<Vec<_>>().as_slice(),
-                                            arena,
-                                        );
-                                        view! { <th class="px-4 py-2">{content}</th> }.into_any()
-                                    } else {
-                                        view! { <th></th> }.into_any()
-                                    }
-                                })
-                                .collect();
-                            Some(
-                                view! {
-                                    <thead>
-                                        <tr>{cell_views}</tr>
-                                    </thead>
-                                }
-                                    .into_any(),
-                            )
-                        } else {
-                            None
-                        }
+    let header_stream = match header_row {
+        Some(header) => {
+            let mut cells_stream = TokenStream::new();
+
+            let header_data = header.data.borrow();
+
+            if matches!(&header_data.value, NodeValue::TableRow(_)) {
+                let cells = header.children().collect::<Vec<_>>();
+
+                cells.into_iter().for_each(|cell| {
+                    let cell_data = cell.data.borrow();
+
+                    if matches!(cell_data.value, NodeValue::TableCell) {
+                        let cell_text_node = cell
+                            .children()
+                            .next()
+                            .expect("Not Found Column Header name");
+                        let cell_inline = inline_stream(&cell_text_node);
+                        cells_stream.extend(quote! { <TableHeader>#cell_inline</TableHeader> });
                     } else {
-                        None
-                    }}
-                    <tbody>
-                        {body_rows
-                            .iter()
-                            .map(|row| {
-                                let row_data = row.data.borrow();
-                                if let NodeValue::TableRow(_) = &row_data.value {
-                                    let cells = row.children().collect::<Vec<_>>();
-                                    let cell_views: Vec<AnyView> = cells
-                                        .iter()
-                                        .map(|cell| {
-                                            let cell_data = cell.data.borrow();
-                                            if matches!(cell_data.value, NodeValue::TableCell { .. }) {
-                                                let content = render_inline_nodes(
-                                                    cell.children().collect::<Vec<_>>().as_slice(),
-                                                    arena,
-                                                );
-                                                view! { <td class="px-4 py-2">{content}</td> }.into_any()
-                                            } else {
-                                                view! { <td></td> }.into_any()
-                                            }
-                                        })
-                                        .collect();
-                                    view! { <tr>{cell_views}</tr> }.into_any()
-                                } else {
-                                    view! { <tr></tr> }.into_any()
-                                }
-                            })
-                            .collect::<Vec<_>>()}
-                    </tbody>
-                </table>
-            </div>
+                        cells_stream.extend(quote! { <TableHeader></TableHeader> });
+                    }
+                });
+            } else {
+                unimplemented!("Not Found Table Header")
+            }
+
+            quote! {
+                <TableHead>
+                    <TableRow>
+                        #cells_stream
+                    </TableRow>
+                </TableHead>
+            }
         }
-        .into_any()
+        None => quote! {},
+    };
+
+    let mut rows_stream = TokenStream::new();
+    body_rows.into_iter().for_each(|row| {
+        let mut row_stream = TokenStream::new();
+
+        let row_data = row.data.borrow();
+        if matches!(&row_data.value, NodeValue::TableRow(_)) {
+            let cells = row.children().collect::<Vec<_>>();
+
+            cells.into_iter().for_each(|cell| {
+                let cell_data = cell.data.borrow();
+
+                if matches!(cell_data.value, NodeValue::TableCell) {
+                    let cell_text_node = cell.children().next().expect("Not Found Column value");
+                    let cell_inline = inline_stream(&cell_text_node);
+                    row_stream.extend(quote! { <TableCell>#cell_inline</TableCell> });
+                } else {
+                    row_stream.extend(quote! { <TableCell></TableCell> });
+                }
+            });
+        }
+
+        rows_stream.extend(quote! { <TableRow>#row_stream</TableRow> });
+    });
+
+    let body_stream = quote! {
+        <TableBody>
+            #rows_stream
+        </TableBody>
+    };
+
+    quote! {
+        <Table zebra=true>
+            #header_stream
+            #body_stream
+        </Table>
+    }
+}
+
+fn inline_stream<'a>(node: &'a AstNode<'a>) -> TokenStream {
+    match &node.data.borrow().value {
+        NodeValue::Text(text) => quote! { <span>#text</span> },
+        NodeValue::Code(code) => {
+            let code_str = code.literal.clone();
+            quote! { <code class="bg-base-300 px-1 py-0.5 rounded text-sm font-mono">#code_str</code> }
+        }
+        _ => quote! { <span></span> },
     }
 }

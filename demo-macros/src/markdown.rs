@@ -19,13 +19,11 @@ pub fn markdown_to_token_stream(markdown: &str) -> TokenStream {
 
     root_node.children().into_iter().for_each(|node| {
         let token = match &node.data.borrow().value {
-            NodeValue::Heading(h) => heading::token_stream_for_view(root_node, h),
-            NodeValue::Paragraph => paragraph::token_stream_for_view(root_node),
-            NodeValue::CodeBlock(c) => code_block::token_stream_for_view(root_node, c),
-            NodeValue::Table(t) => table::token_stream_for_view(root_node),
-            _ => {
-                quote! {}
-            }
+            NodeValue::Heading(h) => heading::token_stream_for_view(node, h),
+            NodeValue::Paragraph => paragraph::token_stream_for_view(node),
+            NodeValue::Table(_) => table::token_stream_for_view(node),
+            NodeValue::CodeBlock(c) => code_block::token_stream_for_view(node, c),
+            _ => quote! {}
         };
 
         view_token_stream.extend(token);
