@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 leptos-daisyui-rs = { path = "../" }
+demo-macros = { path = "../demo-macros" }
 
 leptos = { version = "0.8", features = ["csr"] }
 leptos_router = "0.8"
@@ -16,3 +17,8 @@ icondata = "0.6.0"
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
 log = "0.4.27"
+comrak = "0.31"
+pastey = "0.2.1"
+syn = { version = "2", features = ["full", "extra-traits"] }
+quote = "1"
+proc-macro2 = "1"

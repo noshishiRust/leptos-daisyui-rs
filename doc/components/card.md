@@ -8,15 +8,15 @@ The Card component provides a structured way to display related information. It 
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `style` | `Signal<CardStyle>` | `CardStyle::Default` | Visual style of the card |
-| `image_placement` | `Signal<CardImagePlacement>` | `CardImagePlacement::Default` | Where to place the card image |
-| `compact` | `Signal<bool>` | `false` | Whether card uses compact spacing |
-| `bordered` | `Signal<bool>` | `false` | Whether card has a border |
-| `side` | `Signal<bool>` | `false` | Whether card uses side layout |
-| `class` | `&'static str` | `""` | Additional CSS classes |
-| `children` | `Children` | - | Card content |
+| Prop              | Type                         | Default                       | Description                       |
+| ----------------- | ---------------------------- | ----------------------------- | --------------------------------- |
+| `style`           | `Signal<CardStyle>`          | `CardStyle::Default`          | Visual style of the card          |
+| `image_placement` | `Signal<CardImagePlacement>` | `CardImagePlacement::Default` | Where to place the card image     |
+| `compact`         | `Signal<bool>`               | `false`                       | Whether card uses compact spacing |
+| `bordered`        | `Signal<bool>`               | `false`                       | Whether card has a border         |
+| `side`            | `Signal<bool>`               | `false`                       | Whether card uses side layout     |
+| `class`           | `&'static str`               | `""`                          | Additional CSS classes            |
+| `children`        | `Children`                   | -                             | Card content                      |
 
 ## Style Variants
 
@@ -36,26 +36,26 @@ The Card component provides a structured way to display related information. It 
 ### CardTitle
 Title section of the card with appropriate typography.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `&'static str` | `""` | Additional CSS classes |
-| `children` | `Children` | - | Title content |
+| Prop       | Type           | Default | Description            |
+| ---------- | -------------- | ------- | ---------------------- |
+| `class`    | `&'static str` | `""`    | Additional CSS classes |
+| `children` | `Children`     | -       | Title content          |
 
 ### CardBody
 Main content area of the card with proper spacing.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `&'static str` | `""` | Additional CSS classes |
-| `children` | `Children` | - | Body content |
+| Prop       | Type           | Default | Description            |
+| ---------- | -------------- | ------- | ---------------------- |
+| `class`    | `&'static str` | `""`    | Additional CSS classes |
+| `children` | `Children`     | -       | Body content           |
 
 ### CardActions
 Action area typically containing buttons or interactive elements.
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `&'static str` | `""` | Additional CSS classes |
-| `children` | `Children` | - | Action elements |
+| Prop       | Type           | Default | Description            |
+| ---------- | -------------- | ------- | ---------------------- |
+| `class`    | `&'static str` | `""`    | Additional CSS classes |
+| `children` | `Children`     | -       | Action elements        |
 
 ## Examples
 

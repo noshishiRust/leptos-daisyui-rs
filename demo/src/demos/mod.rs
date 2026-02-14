@@ -1,4 +1,3 @@
-pub mod accordion;
 pub mod alert;
 pub mod avatar;
 pub mod badge;
@@ -58,7 +57,6 @@ pub mod toast;
 pub mod toggle;
 pub mod validator;
 
-pub use accordion::*;
 pub use alert::*;
 pub use avatar::*;
 pub use badge::*;

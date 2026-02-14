@@ -2,6 +2,49 @@
 @plugin "daisyui";
 @source "../src/**/*.rs";
 
+/* Demo Section Styles */
+@layer components {
+    .code-block-container {
+        @apply border border-base-300 rounded-lg overflow-hidden;
+    }
+
+    .code-block-content {
+        @apply bg-base-100 p-4 m-0 text-sm overflow-x-auto;
+    }
+
+    .code-block-content code {
+        @apply font-mono;
+        color: theme(colors.base-content);
+    }
+
+    .demo-section {
+        @apply mb-8;
+    }
+
+    .demo-preview {
+        @apply min-h-[100px] flex items-center justify-center;
+    }
+
+    .demo-subsection {
+        @apply mb-4;
+    }
+
+    .demo-subsection:last-child {
+        @apply mb-0;
+    }
+
+    /* Icon rotation transition */
+    .rotate-180 {
+        transform: rotate(180deg);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Smooth anchor scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 /* Accordion */
 @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
 /* Alert */

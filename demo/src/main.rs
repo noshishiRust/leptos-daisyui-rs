@@ -1,11 +1,9 @@
-mod core;
-mod demos;
-
-use core::Layout;
-use demos::*;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
+use leptos_daisyui_showcase::core::{Layout, MarkdownRenderer};
+use leptos_daisyui_showcase::demos::*;
+use leptos_daisyui_showcase::AccordionBasic;
 use leptos_icons::Icon;
 use leptos_meta::*;
 use leptos_router::{
@@ -33,8 +31,21 @@ fn App() -> impl IntoView {
             <Routes fallback=|| "Page not found">
                 <Route path=path!("/") view=Landing />
                 <ParentRoute path=path!("/components") view=Layout>
-                    <Route path=path!("/") view=AccordionDemo />
-                    <Route path=path!("/accordion") view=AccordionDemo />
+                    <Route path=path!("/") view={} />
+                    <Route
+                        path=path!("/accordion")
+                        view=move || {
+                            let mut component_map = std::collections::HashMap::new();
+                            component_map.insert("accordion#basic".into(), AccordionBasic);
+                            view! {
+                                <MarkdownRenderer
+                                    content=include_str!("../../doc/components/accordion/Sample.md")
+                                        .into()
+                                    examples=component_map
+                                />
+                            }
+                        }
+                    />
                     <Route path=path!("/alert") view=AlertDemo />
                     <Route path=path!("/avatar") view=AvatarDemo />
                     <Route path=path!("/badge") view=BadgeDemo />
