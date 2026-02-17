@@ -10,11 +10,7 @@ pub fn execute(all: bool, category: Option<String>) -> Result<()> {
     let registry = ComponentRegistry::load()?;
 
     // Detect installed components
-    let installed = if all {
-        detect_installed_components()?
-    } else {
-        HashSet::new()
-    };
+    let installed = detect_installed_components()?;
 
     if all {
         display_all_components(&registry, &installed, category.as_deref())?;
