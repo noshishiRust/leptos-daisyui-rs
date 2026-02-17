@@ -4,7 +4,7 @@
     {
       "name": "accordion",
       "display_name": "Accordion",
-      "description": "Collapsible content sections with expand/collapse functionality",
+      "description": "Collapsible content sections",
       "has_style_enums": true,
       "components": ["Accordion", "AccordionTitle", "AccordionContent"],
       "css_classes": "collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close",
@@ -14,7 +14,7 @@
     {
       "name": "alert",
       "display_name": "Alert",
-      "description": "Display important messages and notifications",
+      "description": "Display important messages",
       "has_style_enums": true,
       "components": ["Alert"],
       "css_classes": "alert alert-outline alert-dash alert-soft alert-info alert-success alert-warning alert-error alert-vertical alert-horizontal",
@@ -24,7 +24,7 @@
     {
       "name": "avatar",
       "display_name": "Avatar",
-      "description": "Display user profile images with various states",
+      "description": "User profile images with states",
       "has_style_enums": true,
       "components": ["Avatar", "AvatarGroup"],
       "css_classes": "avatar avatar-group avatar-online avatar-offline avatar-placeholder",
@@ -34,7 +34,7 @@
     {
       "name": "badge",
       "display_name": "Badge",
-      "description": "Small status indicators and labels",
+      "description": "Small status indicators",
       "has_style_enums": true,
       "components": ["Badge"],
       "css_classes": "badge badge-outline badge-dash badge-soft badge-ghost badge-neutral badge-primary badge-secondary badge-accent badge-info badge-success badge-warning badge-error badge-xs badge-sm badge-md badge-lg badge-xl",
@@ -54,7 +54,7 @@
     {
       "name": "button",
       "display_name": "Button",
-      "description": "Interactive button with comprehensive styling options",
+      "description": "Interactive button element",
       "has_style_enums": true,
       "components": ["Button", "LinkButton"],
       "css_classes": "btn btn-neutral btn-primary btn-secondary btn-accent btn-info btn-success btn-warning btn-error btn-outline btn-dash btn-soft btn-ghost btn-link btn-active btn-disabled btn-xs btn-sm btn-md btn-lg btn-xl btn-wide btn-block btn-square btn-circle",
@@ -64,7 +64,7 @@
     {
       "name": "card",
       "display_name": "Card",
-      "description": "Content container with optional image and actions",
+      "description": "Content container with actions",
       "has_style_enums": true,
       "components": ["Card", "CardTitle", "CardBody", "CardActions"],
       "css_classes": "card card-title card-body card-actions card-border card-dash card-side image-full card-xs card-sm card-md card-lg card-xl",
@@ -84,7 +84,7 @@
     {
       "name": "chat",
       "display_name": "Chat",
-      "description": "Message bubbles for chat interfaces",
+      "description": "Message bubbles for chat",
       "has_style_enums": true,
       "components": ["Chat", "ChatImage", "ChatHeader", "ChatFooter", "ChatBubble"],
       "css_classes": "chat chat-image chat-header chat-footer chat-bubble chat-start chat-end chat-bubble-neutral chat-bubble-primary chat-bubble-secondary chat-bubble-accent chat-bubble-info chat-bubble-success chat-bubble-warning chat-bubble-error",
@@ -94,7 +94,7 @@
     {
       "name": "checkbox",
       "display_name": "Checkbox",
-      "description": "Checkbox input with color variants",
+      "description": "Checkbox input with colors",
       "has_style_enums": true,
       "components": ["Checkbox"],
       "css_classes": "checkbox checkbox-primary checkbox-secondary checkbox-accent checkbox-neutral checkbox-success checkbox-warning checkbox-info checkbox-error checkbox-xs checkbox-sm checkbox-md checkbox-lg checkbox-xl",
@@ -102,9 +102,139 @@
       "category": "data-input"
     },
     {
+      "name": "collapse",
+      "display_name": "Collapse",
+      "description": "Collapsible content section",
+      "has_style_enums": true,
+      "components": ["Collapse", "CollapseTitle", "CollapseContent"],
+      "css_classes": "collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close",
+      "daisyui_url": "https://daisyui.com/components/collapse/",
+      "category": "data-display"
+    },
+    {
+      "name": "countdown",
+      "display_name": "Countdown",
+      "description": "Countdown timer display",
+      "has_style_enums": false,
+      "components": ["Countdown"],
+      "css_classes": "countdown",
+      "daisyui_url": "https://daisyui.com/components/countdown/",
+      "category": "data-display"
+    },
+    {
+      "name": "diff",
+      "display_name": "Diff",
+      "description": "Side-by-side comparison",
+      "has_style_enums": false,
+      "components": ["Diff", "DiffItem1", "DiffItem2", "DiffResizer"],
+      "css_classes": "diff diff-item-1 diff-item-2 diff-resizer",
+      "daisyui_url": "https://daisyui.com/components/diff/",
+      "category": "data-display"
+    },
+    {
+      "name": "divider",
+      "display_name": "Divider",
+      "description": "Visual separator line",
+      "has_style_enums": true,
+      "components": ["Divider"],
+      "css_classes": "divider divider-start divider-end divider-horizontal divider-vertical divider-neutral divider-primary divider-secondary divider-accent divider-success divider-warning divider-info divider-error checkbox-xs checkbox-sm checkbox-md checkbox-lg checkbox-xl",
+      "daisyui_url": "https://daisyui.com/components/divider/",
+      "category": "layout"
+    },
+    {
+      "name": "dock",
+      "display_name": "Dock",
+      "description": "MacOS-style dock menu",
+      "has_style_enums": true,
+      "components": ["Dock", "DockLabel"],
+      "css_classes": "dock dock-label dock-active dock-xs dock-sm dock-md dock-lg dock-xl",
+      "daisyui_url": "https://daisyui.com/components/dock/",
+      "category": "navigation"
+    },
+    {
+      "name": "drawer",
+      "display_name": "Drawer",
+      "description": "Side panel overlay",
+      "has_style_enums": true,
+      "components": ["Drawer", "DrawerToggle", "DrawerContent", "DrawerSide", "DrawerOverlay"],
+      "css_classes": "drawer drawer-toggle drawer-content drawer-side drawer-overlay drawer-end drawer-open",
+      "daisyui_url": "https://daisyui.com/components/drawer/",
+      "category": "navigation"
+    },
+    {
+      "name": "dropdown",
+      "display_name": "Dropdown",
+      "description": "Dropdown menu container",
+      "has_style_enums": true,
+      "components": ["Dropdown", "DropdownContent", "DropdownDetails"],
+      "css_classes": "dropdown dropdown-content dropdown-start dropdown-center dropdown-end dropdown-top dropdown-bottom dropdown-left dropdown-right dropdown-hover dropdown-open",
+      "daisyui_url": "https://daisyui.com/components/dropdown/",
+      "category": "actions"
+    },
+    {
+      "name": "fieldset",
+      "display_name": "Fieldset",
+      "description": "Form field grouping",
+      "has_style_enums": false,
+      "components": ["Fieldset", "FieldsetLegend"],
+      "css_classes": "fieldset label fieldset-legend",
+      "daisyui_url": "https://daisyui.com/components/fieldset/",
+      "category": "data-input"
+    },
+    {
+      "name": "file_input",
+      "display_name": "File Input",
+      "description": "File upload input",
+      "has_style_enums": true,
+      "components": ["FileInput"],
+      "css_classes": "file-input file-input-ghost file-input-neutral file-input-primary file-input-secondary file-input-accent file-input-info file-input-success file-input-warning file-input-error file-input-xs file-input-sm file-input-md file-input-lg file-input-xl",
+      "daisyui_url": "https://daisyui.com/components/file-input/",
+      "category": "data-input"
+    },
+    {
+      "name": "filter",
+      "display_name": "Filter",
+      "description": "Content filter controls",
+      "has_style_enums": false,
+      "components": ["Filter", "FilterReset"],
+      "css_classes": "filter filter-reset",
+      "daisyui_url": "https://daisyui.com/components/filter/",
+      "category": "actions"
+    },
+    {
+      "name": "footer",
+      "display_name": "Footer",
+      "description": "Page footer section",
+      "has_style_enums": true,
+      "components": ["Footer", "FooterTitle"],
+      "css_classes": "footer footer-title footer-center footer-horizontal footer-vertical",
+      "daisyui_url": "https://daisyui.com/components/footer/",
+      "category": "layout"
+    },
+    {
+      "name": "hero",
+      "display_name": "Hero",
+      "description": "Large banner section",
+      "has_style_enums": false,
+      "components": ["Hero", "HeroContent", "HeroOverlay"],
+      "css_classes": "hero hero-content hero-overlay",
+      "daisyui_url": "https://daisyui.com/components/hero/",
+      "category": "layout"
+    },
+    {
+      "name": "indicator",
+      "display_name": "Indicator",
+      "description": "Badge indicator overlay",
+      "has_style_enums": true,
+      "components": ["Indicator", "IndicatorItem"],
+      "css_classes": "indicator indicator-item indicator-start indicator-center indicator-end indicator-top indicator-middle indicator-bottom",
+      "daisyui_url": "https://daisyui.com/components/indicator/",
+      "category": "data-display"
+    },
+    {
       "name": "input",
       "display_name": "Input",
-      "description": "Text input field with styling options",
+      "description": "Text input field",
       "has_style_enums": true,
       "components": ["Input"],
       "css_classes": "input input-ghost input-neutral input-primary input-secondary input-accent input-info input-success input-warning input-error input-xs input-sm input-md input-lg input-xl",
@@ -112,9 +242,129 @@
       "category": "data-input"
     },
     {
+      "name": "join",
+      "display_name": "Join",
+      "description": "Group elements together",
+      "has_style_enums": true,
+      "components": ["Join", "JoinItem"],
+      "css_classes": "join join-item join-vertical join-horizontal",
+      "daisyui_url": "https://daisyui.com/components/join/",
+      "category": "layout"
+    },
+    {
+      "name": "kbd",
+      "display_name": "Kbd",
+      "description": "Keyboard key display",
+      "has_style_enums": true,
+      "components": ["Kbd"],
+      "css_classes": "kbd kbd-xs kbd-sm kbd-md kbd-lg kbd-xl",
+      "daisyui_url": "https://daisyui.com/components/kbd/",
+      "category": "data-display"
+    },
+    {
+      "name": "label",
+      "display_name": "Label",
+      "description": "Form label element",
+      "has_style_enums": false,
+      "components": ["Label"],
+      "css_classes": "label floating-label",
+      "daisyui_url": "https://daisyui.com/components/label/",
+      "category": "data-input"
+    },
+    {
+      "name": "link",
+      "display_name": "Link",
+      "description": "Styled anchor link",
+      "has_style_enums": true,
+      "components": ["Link"],
+      "css_classes": "link link-hover link-neutral link-primary link-secondary link-accent link-success link-info link-warning link-error",
+      "daisyui_url": "https://daisyui.com/components/link/",
+      "category": "navigation"
+    },
+    {
+      "name": "list",
+      "display_name": "List",
+      "description": "Styled list container",
+      "has_style_enums": false,
+      "components": ["List"],
+      "css_classes": "list list-row list-col-wrap list-col-grow",
+      "daisyui_url": "https://daisyui.com/components/list/",
+      "category": "data-display"
+    },
+    {
+      "name": "loading",
+      "display_name": "Loading",
+      "description": "Loading spinner indicators",
+      "has_style_enums": true,
+      "components": ["Loading"],
+      "css_classes": "loading loading-spinner loading-dots loading-ring loading-ball loading-bars loading-infinity loading-xs loading-sm loading-md loading-lg loading-xl text-primary text-secondary text-accent text-success text-info text-warning text-error",
+      "daisyui_url": "https://daisyui.com/components/loading/",
+      "category": "feedback"
+    },
+    {
+      "name": "mask",
+      "display_name": "Mask",
+      "description": "Image masking shapes",
+      "has_style_enums": true,
+      "components": ["Mask"],
+      "css_classes": "mask mask-squircle mask-heart mask-hexagon mask-hexagon-2 mask-decagon mask-pentagon mask-diamond mask-square mask-circle mask-star mask-star-2 mask-triangle mask-triangle-2 mask-triangle-3 mask-triangle-4 mask-half-1 mask-half-2",
+      "daisyui_url": "https://daisyui.com/components/mask/",
+      "category": "layout"
+    },
+    {
+      "name": "menu",
+      "display_name": "Menu",
+      "description": "Navigation menu list",
+      "has_style_enums": true,
+      "components": ["Menu", "MenuTitle", "MenuDropdown", "MenuDropdownToggle"],
+      "css_classes": "menu menu-title menu-dropdown menu-dropdown-toggle menu-disabled menu-active menu-focus menu-dropdown-show menu-xs menu-sm menu-md menu-lg menu-xl menu-vertical menu-horizontal",
+      "daisyui_url": "https://daisyui.com/components/menu/",
+      "category": "navigation"
+    },
+    {
+      "name": "mockup_browser",
+      "display_name": "Mockup Browser",
+      "description": "Browser window mockup",
+      "has_style_enums": false,
+      "components": ["MockupBrowser", "MockupBrowserToolbar"],
+      "css_classes": "mockup-browser mockup-browser-toolbar",
+      "daisyui_url": "https://daisyui.com/components/mockup-browser/",
+      "category": "mockup"
+    },
+    {
+      "name": "mockup_code",
+      "display_name": "Mockup Code",
+      "description": "Code editor mockup",
+      "has_style_enums": false,
+      "components": ["MockupCode"],
+      "css_classes": "mockup-code",
+      "daisyui_url": "https://daisyui.com/components/mockup-code/",
+      "category": "mockup"
+    },
+    {
+      "name": "mockup_phone",
+      "display_name": "Mockup Phone",
+      "description": "Mobile device mockup",
+      "has_style_enums": false,
+      "components": ["MockupPhone", "MockupPhoneCamera", "MockupPhoneDisplay"],
+      "css_classes": "mockup-phone mockup-phone-camera mockup-phone-display",
+      "daisyui_url": "https://daisyui.com/components/mockup-phone/",
+      "category": "mockup"
+    },
+    {
+      "name": "mockup_window",
+      "display_name": "Mockup Window",
+      "description": "OS window mockup",
+      "has_style_enums": false,
+      "components": ["MockupWindow"],
+      "css_classes": "mockup-window",
+      "daisyui_url": "https://daisyui.com/components/mockup-window/",
+      "category": "mockup"
+    },
+    {
       "name": "modal",
       "display_name": "Modal",
-      "description": "Dialog overlay for focused content",
+      "description": "Dialog overlay",
       "has_style_enums": false,
       "components": ["Modal", "ModalBox", "ModalAction", "ModalBackdrop"],
       "css_classes": "modal modal-box modal-action modal-backdrop modal-toggle modal-open modal-top modal-middle modal-bottom modal-start modal-end",
@@ -124,12 +374,72 @@
     {
       "name": "navbar",
       "display_name": "Navbar",
-      "description": "Navigation bar for site header",
+      "description": "Navigation bar",
       "has_style_enums": false,
       "components": ["Navbar", "NavbarStart", "NavbarCenter", "NavbarEnd"],
       "css_classes": "navbar navbar-start navbar-center navbar-end",
       "daisyui_url": "https://daisyui.com/components/navbar/",
       "category": "navigation"
+    },
+    {
+      "name": "pagination",
+      "display_name": "Pagination",
+      "description": "Page navigation controls",
+      "has_style_enums": true,
+      "components": ["Pagination"],
+      "css_classes": "join join-item join-vertical join-horizontal",
+      "daisyui_url": "https://daisyui.com/components/pagination/",
+      "category": "navigation"
+    },
+    {
+      "name": "progress",
+      "display_name": "Progress",
+      "description": "Progress bar indicator",
+      "has_style_enums": true,
+      "components": ["Progress"],
+      "css_classes": "progress progress-neutral progress-primary progress-secondary progress-accent progress-info progress-success progress-warning progress-error",
+      "daisyui_url": "https://daisyui.com/components/progress/",
+      "category": "feedback"
+    },
+    {
+      "name": "radial_progress",
+      "display_name": "Radial Progress",
+      "description": "Circular progress indicator",
+      "has_style_enums": true,
+      "components": ["RadialProgress"],
+      "css_classes": "radial-progress text-primary text-secondary text-accent text-success text-info text-warning text-error",
+      "daisyui_url": "https://daisyui.com/components/radial-progress/",
+      "category": "feedback"
+    },
+    {
+      "name": "radio",
+      "display_name": "Radio",
+      "description": "Radio button input",
+      "has_style_enums": true,
+      "components": ["Radio"],
+      "css_classes": "radio radio-neutral radio-primary radio-secondary radio-accent radio-success radio-warning radio-info radio-error radio-xs radio-sm radio-md radio-lg radio-xl",
+      "daisyui_url": "https://daisyui.com/components/radio/",
+      "category": "data-input"
+    },
+    {
+      "name": "range",
+      "display_name": "Range",
+      "description": "Range slider input",
+      "has_style_enums": true,
+      "components": ["Range"],
+      "css_classes": "range range-neutral range-primary range-secondary range-accent range-success range-warning range-info range-error range-xs range-sm range-md range-lg range-xl",
+      "daisyui_url": "https://daisyui.com/components/range/",
+      "category": "data-input"
+    },
+    {
+      "name": "rating",
+      "display_name": "Rating",
+      "description": "Star rating display",
+      "has_style_enums": true,
+      "components": ["Rating"],
+      "css_classes": "rating rating-half rating-hidden rating-xs rating-sm rating-md rating-lg rating-xl",
+      "daisyui_url": "https://daisyui.com/components/rating/",
+      "category": "data-input"
     },
     {
       "name": "select",
@@ -142,9 +452,79 @@
       "category": "data-input"
     },
     {
+      "name": "skeleton",
+      "display_name": "Skeleton",
+      "description": "Loading placeholder",
+      "has_style_enums": false,
+      "components": ["Skeleton"],
+      "css_classes": "skeleton",
+      "daisyui_url": "https://daisyui.com/components/skeleton/",
+      "category": "feedback"
+    },
+    {
+      "name": "stack",
+      "display_name": "Stack",
+      "description": "Stacked element layout",
+      "has_style_enums": true,
+      "components": ["Stack"],
+      "css_classes": "stack stack-top stack-bottom stack-start stack-end",
+      "daisyui_url": "https://daisyui.com/components/stack/",
+      "category": "layout"
+    },
+    {
+      "name": "stats",
+      "display_name": "Stats",
+      "description": "Statistics display",
+      "has_style_enums": true,
+      "components": ["Stats", "Stat", "StatTitle", "StatValue", "StatDesc", "StatFigure", "StatActions"],
+      "css_classes": "stats stat stat-title stat-value stat-desc stat-figure stat-actions stats-horizontal stats-vertical",
+      "daisyui_url": "https://daisyui.com/components/stat/",
+      "category": "data-display"
+    },
+    {
+      "name": "status",
+      "display_name": "Status",
+      "description": "Status indicator badge",
+      "has_style_enums": true,
+      "components": ["Status"],
+      "css_classes": "status status-neutral status-primary status-secondary status-accent status-info status-success status-warning status-error status-xs status-sm status-md status-lg status-xl",
+      "daisyui_url": "https://daisyui.com/components/status/",
+      "category": "data-display"
+    },
+    {
+      "name": "steps",
+      "display_name": "Steps",
+      "description": "Step progress indicator",
+      "has_style_enums": true,
+      "components": ["Steps", "Step", "StepIcon"],
+      "css_classes": "steps step step-icon step-neutral step-primary step-secondary step-accent step-info step-success step-warning step-error steps-vertical steps-horizontal",
+      "daisyui_url": "https://daisyui.com/components/steps/",
+      "category": "navigation"
+    },
+    {
+      "name": "swap",
+      "display_name": "Swap",
+      "description": "Toggle between two states",
+      "has_style_enums": true,
+      "components": ["Swap", "SwapOn", "SwapOff", "SwapIndeterminate"],
+      "css_classes": "swap swap-on swap-off swap-indeterminate swap-active swap-rotate swap-flip",
+      "daisyui_url": "https://daisyui.com/components/swap/",
+      "category": "actions"
+    },
+    {
+      "name": "tab",
+      "display_name": "Tab",
+      "description": "Tab navigation",
+      "has_style_enums": true,
+      "components": ["Tabs", "Tab", "TabContent"],
+      "css_classes": "tabs tab tab-content tabs-box tabs-border tabs-lift tab-active tab-disabled tabs-top tabs-bottom",
+      "daisyui_url": "https://daisyui.com/components/tabs/",
+      "category": "navigation"
+    },
+    {
       "name": "table",
       "display_name": "Table",
-      "description": "Data table with zebra striping and sizing",
+      "description": "Data table",
       "has_style_enums": true,
       "components": ["Table", "TableHead", "TableBody", "TableFoot", "TableRow", "TableCell"],
       "css_classes": "table table-zebra table-pin-rows table-pin-cols table-xs table-sm table-md table-lg table-xl",
@@ -159,6 +539,56 @@
       "components": ["Textarea"],
       "css_classes": "textarea textarea-ghost textarea-neutral textarea-primary textarea-secondary textarea-accent textarea-info textarea-success textarea-warning textarea-error textarea-xs textarea-sm textarea-md textarea-lg textarea-xl",
       "daisyui_url": "https://daisyui.com/components/textarea/",
+      "category": "data-input"
+    },
+    {
+      "name": "theme_controller",
+      "display_name": "Theme Controller",
+      "description": "Theme switcher control",
+      "has_style_enums": false,
+      "components": ["ThemeController"],
+      "css_classes": "theme-controller",
+      "daisyui_url": "https://daisyui.com/components/theme-controller/",
+      "category": "actions"
+    },
+    {
+      "name": "timeline",
+      "display_name": "Timeline",
+      "description": "Timeline event display",
+      "has_style_enums": true,
+      "components": ["Timeline"],
+      "css_classes": "timeline timeline-start timeline-middle timeline-end timeline-snap-icon timeline-box timeline-compact timeline-vertical timeline-horizontal",
+      "daisyui_url": "https://daisyui.com/components/timeline/",
+      "category": "data-display"
+    },
+    {
+      "name": "toast",
+      "display_name": "Toast",
+      "description": "Toast notification container",
+      "has_style_enums": true,
+      "components": ["Toast"],
+      "css_classes": "toast toast-start toast-center toast-end toast-top toast-middle toast-bottom",
+      "daisyui_url": "https://daisyui.com/components/toast/",
+      "category": "feedback"
+    },
+    {
+      "name": "toggle",
+      "display_name": "Toggle",
+      "description": "Toggle switch input",
+      "has_style_enums": true,
+      "components": ["Toggle"],
+      "css_classes": "toggle toggle-primary toggle-secondary toggle-accent toggle-neutral toggle-success toggle-warning toggle-info toggle-error toggle-xs toggle-sm toggle-md toggle-lg toggle-xl",
+      "daisyui_url": "https://daisyui.com/components/toggle/",
+      "category": "data-input"
+    },
+    {
+      "name": "validator",
+      "display_name": "Validator",
+      "description": "Form validation display",
+      "has_style_enums": false,
+      "components": ["Validator", "ValidatorHint"],
+      "css_classes": "validator validator-hint",
+      "daisyui_url": "https://daisyui.com/components/validator/",
       "category": "data-input"
     }
   ],
