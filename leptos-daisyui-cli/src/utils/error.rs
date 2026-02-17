@@ -1,5 +1,6 @@
 use thiserror::Error;
 
+#[allow(dead_code)]
 #[derive(Error, Debug)]
 pub enum CliError {
     #[error("Not a Rust project")]
@@ -21,4 +22,5 @@ pub enum CliError {
     Custom(String),
 }
 
+#[allow(dead_code)]
 pub type Result<T> = std::result::Result<T, CliError>;

@@ -18,6 +18,7 @@ pub enum ProjectStructure {
     },
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub struct WorkspaceMember {
     pub name: String,
@@ -37,6 +38,7 @@ impl ProjectStructure {
     }
 
     /// Get the main Cargo.toml path
+    #[allow(dead_code)]
     pub fn cargo_toml(&self) -> &Path {
         match self {
             ProjectStructure::Monorepo { cargo_toml, .. } => cargo_toml,

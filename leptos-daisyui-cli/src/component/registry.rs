@@ -47,6 +47,7 @@ impl ComponentRegistry {
     }
 
     /// Get all category names
+    #[allow(dead_code)]
     pub fn categories(&self) -> &[String] {
         &self.categories
     }

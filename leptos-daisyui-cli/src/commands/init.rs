@@ -1,10 +1,9 @@
+use crate::install::{LeptosInstaller, TailwindInstaller, TrunkInstaller};
 use crate::project::ProjectDetector;
-use crate::utils::Prompt;
 use anyhow::{Context, Result};
 use colored::Colorize;
 use std::env;
 use std::fs;
-use std::path::PathBuf;
 
 pub fn execute() -> Result<()> {
     println!("{}", "Initializing leptos-daisyui-rs...".bold().green());
@@ -41,52 +40,20 @@ pub fn execute() -> Result<()> {
 }
 
 fn check_leptos_dependency(project: &crate::project::ProjectStructure) -> Result<()> {
-    let cargo_toml_path = match project {
-        crate::project::ProjectStructure::Monorepo { cargo_toml, .. } => cargo_toml,
-        crate::project::ProjectStructure::Workspace { workspace_toml, .. } => {
-            // For workspace, we need to check the binary crate
-            // For now, just check the workspace root
-            workspace_toml
-        }
-    };
-
-    let content = fs::read_to_string(cargo_toml_path)
-        .with_context(|| format!("Failed to read {}", cargo_toml_path.display()))?;
-
-    if content.contains("leptos") {
+    if LeptosInstaller::check_installed(project)? {
         println!("{} leptos dependency found", "✓".green());
     } else {
-        println!("{} leptos not found in dependencies", "!".yellow());
-
-        if Prompt::confirm("Add leptos to dependencies?", true)? {
-            println!("{}", "  Please add leptos manually to your Cargo.toml:".dimmed());
-            println!("{}", r#"    leptos = { version = "0.8", features = ["csr"] }"#.cyan());
-        }
+        LeptosInstaller::install()?;
     }
 
     Ok(())
 }
 
 fn check_trunk_installation() -> Result<()> {
-    if which::which("trunk").is_ok() {
+    if TrunkInstaller::check_installed() {
         println!("{} trunk is installed", "✓".green());
     } else {
-        println!("{} trunk not installed", "!".yellow());
-
-        if Prompt::confirm("Install trunk via cargo install?", true)? {
-            println!("Installing trunk...");
-            let output = std::process::Command::new("cargo")
-                .args(&["install", "trunk"])
-                .output()
-                .context("Failed to run cargo install trunk")?;
-
-            if output.status.success() {
-                println!("{} trunk installed successfully", "✓".green());
-            } else {
-                println!("{} Failed to install trunk", "✗".red());
-                println!("Please install manually: {}", "cargo install trunk".cyan());
-            }
-        }
+        TrunkInstaller::install()?;
     }
 
     Ok(())
@@ -94,57 +61,12 @@ fn check_trunk_installation() -> Result<()> {
 
 fn check_tailwindcss_setup(project: &crate::project::ProjectStructure) -> Result<()> {
     let root = project.root();
-    let package_json = root.join("package.json");
 
-    if package_json.exists() {
-        let content = fs::read_to_string(&package_json)?;
-        if content.contains("tailwindcss") && content.contains("daisyui") {
-            println!("{} Tailwind CSS and daisyUI found in package.json", "✓".green());
-            return Ok(());
-        }
+    if TailwindInstaller::check_installed(root) {
+        println!("{} Tailwind CSS and daisyUI found in package.json", "✓".green());
+    } else {
+        TailwindInstaller::setup(root)?;
     }
-
-    println!("{} Tailwind CSS not fully configured", "!".yellow());
-
-    if Prompt::confirm("Set up Tailwind CSS and daisyUI?", true)? {
-        setup_tailwindcss(root)?;
-    }
-
-    Ok(())
-}
-
-fn setup_tailwindcss(root: &std::path::Path) -> Result<()> {
-    // Create package.json if it doesn't exist
-    let package_json = root.join("package.json");
-    if !package_json.exists() {
-        let content = r#"{
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.1.18",
-    "tailwindcss": "^4.1.18",
-    "daisyui": "^5.5.18"
-  }
-}
-"#;
-        fs::write(&package_json, content)?;
-        println!("{} Created package.json", "✓".green());
-    }
-
-    // Create input.css if it doesn't exist
-    let input_css = root.join("input.css");
-    if !input_css.exists() {
-        let content = r#"@import "tailwindcss";
-@plugin "daisyui";
-@source "../src/**/*.rs";
-
-/* === leptos-daisyui-cli managed - do not edit manually === */
-/* === end leptos-daisyui-cli managed === */
-"#;
-        fs::write(&input_css, content)?;
-        println!("{} Created input.css", "✓".green());
-    }
-
-    println!();
-    println!("Please run: {}", "npm install".cyan());
 
     Ok(())
 }

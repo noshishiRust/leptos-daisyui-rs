@@ -1,4 +1,5 @@
 use crate::component::{ComponentGenerator, ComponentRegistry};
+use crate::css::CssManager;
 use crate::project::ProjectDetector;
 use anyhow::{Context, Result};
 use colored::Colorize;
@@ -154,21 +155,6 @@ fn add_css_classes(
 }
 
 fn find_input_css(root: &std::path::Path) -> Result<std::path::PathBuf> {
-    // Common locations
-    let candidates = vec![
-        root.join("input.css"),
-        root.join("src/input.css"),
-        root.join("styles/input.css"),
-        root.join("assets/input.css"),
-    ];
-
-    for candidate in candidates {
-        if candidate.exists() {
-            return Ok(candidate);
-        }
-    }
-
-    // If not found, use default location
-    Ok(root.join("input.css"))
+    CssManager::find_input_css_in(root)
 }
 
