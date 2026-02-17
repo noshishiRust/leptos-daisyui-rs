@@ -1,0 +1,174 @@
+{
+  "version": "0.0.4",
+  "components": [
+    {
+      "name": "accordion",
+      "display_name": "Accordion",
+      "description": "Collapsible content sections with expand/collapse functionality",
+      "has_style_enums": true,
+      "components": ["Accordion", "AccordionTitle", "AccordionContent"],
+      "css_classes": "collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close",
+      "daisyui_url": "https://daisyui.com/components/accordion/",
+      "category": "data-display"
+    },
+    {
+      "name": "alert",
+      "display_name": "Alert",
+      "description": "Display important messages and notifications",
+      "has_style_enums": true,
+      "components": ["Alert"],
+      "css_classes": "alert alert-outline alert-dash alert-soft alert-info alert-success alert-warning alert-error alert-vertical alert-horizontal",
+      "daisyui_url": "https://daisyui.com/components/alert/",
+      "category": "feedback"
+    },
+    {
+      "name": "avatar",
+      "display_name": "Avatar",
+      "description": "Display user profile images with various states",
+      "has_style_enums": true,
+      "components": ["Avatar", "AvatarGroup"],
+      "css_classes": "avatar avatar-group avatar-online avatar-offline avatar-placeholder",
+      "daisyui_url": "https://daisyui.com/components/avatar/",
+      "category": "data-display"
+    },
+    {
+      "name": "badge",
+      "display_name": "Badge",
+      "description": "Small status indicators and labels",
+      "has_style_enums": true,
+      "components": ["Badge"],
+      "css_classes": "badge badge-outline badge-dash badge-soft badge-ghost badge-neutral badge-primary badge-secondary badge-accent badge-info badge-success badge-warning badge-error badge-xs badge-sm badge-md badge-lg badge-xl",
+      "daisyui_url": "https://daisyui.com/components/badge/",
+      "category": "data-display"
+    },
+    {
+      "name": "breadcrumbs",
+      "display_name": "Breadcrumbs",
+      "description": "Navigation path indicator",
+      "has_style_enums": false,
+      "components": ["Breadcrumbs"],
+      "css_classes": "breadcrumbs",
+      "daisyui_url": "https://daisyui.com/components/breadcrumbs/",
+      "category": "navigation"
+    },
+    {
+      "name": "button",
+      "display_name": "Button",
+      "description": "Interactive button with comprehensive styling options",
+      "has_style_enums": true,
+      "components": ["Button", "LinkButton"],
+      "css_classes": "btn btn-neutral btn-primary btn-secondary btn-accent btn-info btn-success btn-warning btn-error btn-outline btn-dash btn-soft btn-ghost btn-link btn-active btn-disabled btn-xs btn-sm btn-md btn-lg btn-xl btn-wide btn-block btn-square btn-circle",
+      "daisyui_url": "https://daisyui.com/components/button/",
+      "category": "actions"
+    },
+    {
+      "name": "card",
+      "display_name": "Card",
+      "description": "Content container with optional image and actions",
+      "has_style_enums": true,
+      "components": ["Card", "CardTitle", "CardBody", "CardActions"],
+      "css_classes": "card card-title card-body card-actions card-border card-dash card-side image-full card-xs card-sm card-md card-lg card-xl",
+      "daisyui_url": "https://daisyui.com/components/card/",
+      "category": "data-display"
+    },
+    {
+      "name": "carousel",
+      "display_name": "Carousel",
+      "description": "Scrollable content slider",
+      "has_style_enums": true,
+      "components": ["Carousel", "CarouselItem"],
+      "css_classes": "carousel carousel-item carousel-start carousel-center carousel-end carousel-horizontal carousel-vertical",
+      "daisyui_url": "https://daisyui.com/components/carousel/",
+      "category": "data-display"
+    },
+    {
+      "name": "chat",
+      "display_name": "Chat",
+      "description": "Message bubbles for chat interfaces",
+      "has_style_enums": true,
+      "components": ["Chat", "ChatImage", "ChatHeader", "ChatFooter", "ChatBubble"],
+      "css_classes": "chat chat-image chat-header chat-footer chat-bubble chat-start chat-end chat-bubble-neutral chat-bubble-primary chat-bubble-secondary chat-bubble-accent chat-bubble-info chat-bubble-success chat-bubble-warning chat-bubble-error",
+      "daisyui_url": "https://daisyui.com/components/chat/",
+      "category": "data-display"
+    },
+    {
+      "name": "checkbox",
+      "display_name": "Checkbox",
+      "description": "Checkbox input with color variants",
+      "has_style_enums": true,
+      "components": ["Checkbox"],
+      "css_classes": "checkbox checkbox-primary checkbox-secondary checkbox-accent checkbox-neutral checkbox-success checkbox-warning checkbox-info checkbox-error checkbox-xs checkbox-sm checkbox-md checkbox-lg checkbox-xl",
+      "daisyui_url": "https://daisyui.com/components/checkbox/",
+      "category": "data-input"
+    },
+    {
+      "name": "input",
+      "display_name": "Input",
+      "description": "Text input field with styling options",
+      "has_style_enums": true,
+      "components": ["Input"],
+      "css_classes": "input input-ghost input-neutral input-primary input-secondary input-accent input-info input-success input-warning input-error input-xs input-sm input-md input-lg input-xl",
+      "daisyui_url": "https://daisyui.com/components/input/",
+      "category": "data-input"
+    },
+    {
+      "name": "modal",
+      "display_name": "Modal",
+      "description": "Dialog overlay for focused content",
+      "has_style_enums": false,
+      "components": ["Modal", "ModalBox", "ModalAction", "ModalBackdrop"],
+      "css_classes": "modal modal-box modal-action modal-backdrop modal-toggle modal-open modal-top modal-middle modal-bottom modal-start modal-end",
+      "daisyui_url": "https://daisyui.com/components/modal/",
+      "category": "actions"
+    },
+    {
+      "name": "navbar",
+      "display_name": "Navbar",
+      "description": "Navigation bar for site header",
+      "has_style_enums": false,
+      "components": ["Navbar", "NavbarStart", "NavbarCenter", "NavbarEnd"],
+      "css_classes": "navbar navbar-start navbar-center navbar-end",
+      "daisyui_url": "https://daisyui.com/components/navbar/",
+      "category": "navigation"
+    },
+    {
+      "name": "select",
+      "display_name": "Select",
+      "description": "Dropdown select input",
+      "has_style_enums": true,
+      "components": ["Select"],
+      "css_classes": "select select-ghost select-neutral select-primary select-secondary select-accent select-info select-success select-warning select-error select-xs select-sm select-md select-lg select-xl",
+      "daisyui_url": "https://daisyui.com/components/select/",
+      "category": "data-input"
+    },
+    {
+      "name": "table",
+      "display_name": "Table",
+      "description": "Data table with zebra striping and sizing",
+      "has_style_enums": true,
+      "components": ["Table", "TableHead", "TableBody", "TableFoot", "TableRow", "TableCell"],
+      "css_classes": "table table-zebra table-pin-rows table-pin-cols table-xs table-sm table-md table-lg table-xl",
+      "daisyui_url": "https://daisyui.com/components/table/",
+      "category": "data-display"
+    },
+    {
+      "name": "textarea",
+      "display_name": "Textarea",
+      "description": "Multi-line text input",
+      "has_style_enums": true,
+      "components": ["Textarea"],
+      "css_classes": "textarea textarea-ghost textarea-neutral textarea-primary textarea-secondary textarea-accent textarea-info textarea-success textarea-warning textarea-error textarea-xs textarea-sm textarea-md textarea-lg textarea-xl",
+      "daisyui_url": "https://daisyui.com/components/textarea/",
+      "category": "data-input"
+    }
+  ],
+  "categories": [
+    "actions",
+    "data-display",
+    "data-input",
+    "feedback",
+    "layout",
+    "navigation",
+    "mockup"
+  ]
+}

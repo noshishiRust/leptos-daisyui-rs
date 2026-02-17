@@ -10,6 +10,10 @@ description = "CLI tool for leptos-daisyui-rs - simplify component setup and man
 name = "leptos-daisyui"
 path = "src/main.rs"
 
+[[bin]]
+name = "test-registry"
+path = "src/bin/test_registry.rs"
+
 [dependencies]
 # CLI framework
 clap = { version = "4", features = ["derive", "cargo"] }
