@@ -58,7 +58,7 @@ impl ComponentGenerator {
         // Write mod.rs
         std::fs::write(component_dir.join("mod.rs"), files.mod_rs)?;
 
-        // Write component.rs
+        // Write component.rs (no path fix needed - macro is exported at crate root)
         std::fs::write(component_dir.join("component.rs"), files.component_rs)?;
 
         // Write style.rs if present
