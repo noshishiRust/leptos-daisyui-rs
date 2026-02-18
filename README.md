@@ -11,18 +11,87 @@ This crate is a daisyUI 5 components library for Leptos, providing type-safe, re
 
 ## How to use
 
-### Install
+There are two ways to use this library:
 
-Include this crate in your dependencies.
+- **Method A: CLI (Recommended)** — Use the `leptos-daisyui` CLI to scaffold components directly into your project
+- **Method B: Library** — Add as a Cargo dependency and import components directly
+
+---
+
+### Method A: CLI
+
+The CLI copies selected components into your project's `src/generated/` directory. This makes it easy to get started and lets you customize generated code as needed.
+
+#### 1. Install the CLI
+
+```sh
+cargo install leptos-daisyui-cli
+```
+
+#### 2. Initialize your project
+
+Run inside a Leptos project (created with `cargo new` or `cargo leptos new`):
+
+```sh
+leptos-daisyui init
+```
+
+This will:
+- Verify leptos and trunk are installed
+- Create `package.json` with Tailwind CSS and daisyUI dependencies
+- Create `input.css` with the required CSS imports
+- Create `src/generated/` with the `merge_classes` utility
+
+Then install CSS dependencies:
+
+```sh
+npm install
+```
+
+#### 3. Add components
+
+```sh
+# Browse all available components
+leptos-daisyui list --all
+
+# Add one or more components
+leptos-daisyui add button card alert
+```
+
+#### 4. Register the generated module
+
+Add to your `main.rs` or `lib.rs`:
+
+```rust,ignore
+pub mod generated;
+```
+
+#### 5. Use in your app
+
+```rust,ignore
+use crate::generated::{Button, ButtonColor};
+
+#[component]
+fn Demo() -> impl IntoView {
+    view! {
+        <Button color=ButtonColor::Primary>"Click me"</Button>
+    }
+}
+```
+
+---
+
+### Method B: Library
+
+Add this crate directly as a Cargo dependency.
+
+#### 1. Add the dependency
 
 ```sh
 cargo add leptos-daisyui-rs
 ```
 
-### Code
-
-You can use components as follows: Tailwind CSS (v4) is used, so you can insert additional classes.
-
+#### 2. Use components
 
 ```rust,ignore
 use leptos_daisyui_rs as daisyui;
@@ -42,11 +111,11 @@ fn Demo() -> impl IntoView {
 }
 ```
 
-### CSS Install
+#### 3. CSS setup
 
-As a note at build time, since the class names included in daisyUI are included in the crate, please refer to each component you use inline as follows.
+Add CSS classes for each component you use to your `input.css`:
 
-```css input.css
+```css
 @import "tailwindcss";
 @plugin "daisyui";
 @source "../src/**/*.rs";
@@ -55,10 +124,9 @@ As a note at build time, since the class names included in daisyUI are included 
 @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
 ```
 
-If you want to include everything first [daisyui-components.css](. /stytles/daisyui-components.css).
+To include all daisyUI classes at once, see [daisyui-components.css](./stytles/daisyui-components.css).
 
-> 🚧 **There is room for optimization** 
-> I still refer to class names by force in this area, so in the future I would like to include only the classes used in the build.
+> Note: Including all classes increases CSS bundle size. The `@source inline()` approach is recommended for production.
 
 ## How to Code
 
