@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result, anyhow};
 use std::fs;
 use std::path::{Path, PathBuf};
 
@@ -94,37 +94,35 @@ impl ProjectDetector {
         let workspace_toml = root.join("Cargo.toml");
         let mut members = Vec::new();
 
-        if let Some(workspace) = manifest.get("workspace") {
-            if let Some(member_paths) = workspace.get("members").and_then(|m| m.as_array()) {
-                for member_path in member_paths {
-                    if let Some(path_str) = member_path.as_str() {
-                        let member_root = root.join(path_str);
-                        let member_cargo = member_root.join("Cargo.toml");
+        if let Some(workspace) = manifest.get("workspace")
+            && let Some(member_paths) = workspace.get("members").and_then(|m| m.as_array())
+        {
+            for member_path in member_paths {
+                if let Some(path_str) = member_path.as_str() {
+                    let member_root = root.join(path_str);
+                    let member_cargo = member_root.join("Cargo.toml");
 
-                        if member_cargo.exists() {
-                            let member_content = fs::read_to_string(&member_cargo)?;
-                            let member_manifest: toml::Value = toml::from_str(&member_content)?;
+                    if member_cargo.exists() {
+                        let member_content = fs::read_to_string(&member_cargo)?;
+                        let member_manifest: toml::Value = toml::from_str(&member_content)?;
 
-                            let name = member_manifest
-                                .get("package")
-                                .and_then(|p| p.get("name"))
-                                .and_then(|n| n.as_str())
-                                .unwrap_or(path_str)
-                                .to_string();
+                        let name = member_manifest
+                            .get("package")
+                            .and_then(|p| p.get("name"))
+                            .and_then(|n| n.as_str())
+                            .unwrap_or(path_str)
+                            .to_string();
 
-                            let is_binary = member_manifest
-                                .get("bin")
-                                .is_some()
-                                || member_root.join("src/main.rs").exists();
+                        let is_binary = member_manifest.get("bin").is_some()
+                            || member_root.join("src/main.rs").exists();
 
-                            members.push(WorkspaceMember {
-                                name,
-                                path: member_root.clone(),
-                                cargo_toml: member_cargo,
-                                src_dir: member_root.join("src"),
-                                is_binary,
-                            });
-                        }
+                        members.push(WorkspaceMember {
+                            name,
+                            path: member_root.clone(),
+                            cargo_toml: member_cargo,
+                            src_dir: member_root.join("src"),
+                            is_binary,
+                        });
                     }
                 }
             }

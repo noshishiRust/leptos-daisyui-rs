@@ -14,7 +14,11 @@ pub fn execute() -> Result<()> {
     let project = ProjectDetector::detect(&current_dir)
         .context("Failed to detect project structure. Are you in a Rust project?")?;
 
-    println!("{} Detected project at: {}", "✓".green(), project.root().display());
+    println!(
+        "{} Detected project at: {}",
+        "✓".green(),
+        project.root().display()
+    );
     println!();
 
     // 2. Check leptos dependency
@@ -33,8 +37,14 @@ pub fn execute() -> Result<()> {
     println!("{}", "✓ Initialization complete!".bold().green());
     println!();
     println!("Next steps:");
-    println!("  1. Run {} to see available components", "leptos-daisyui list --all".cyan());
-    println!("  2. Run {} to add components", "leptos-daisyui add <component>".cyan());
+    println!(
+        "  1. Run {} to see available components",
+        "leptos-daisyui list --all".cyan()
+    );
+    println!(
+        "  2. Run {} to add components",
+        "leptos-daisyui add <component>".cyan()
+    );
 
     Ok(())
 }
@@ -63,7 +73,10 @@ fn check_tailwindcss_setup(project: &crate::project::ProjectStructure) -> Result
     let root = project.root();
 
     if TailwindInstaller::check_installed(root) {
-        println!("{} Tailwind CSS and daisyUI found in package.json", "✓".green());
+        println!(
+            "{} Tailwind CSS and daisyUI found in package.json",
+            "✓".green()
+        );
     } else {
         TailwindInstaller::setup(root)?;
     }
@@ -126,7 +139,10 @@ pub use utils::*;
     create_utils_file(&utils_rs)?;
 
     println!("{} Created src/generated/ directory", "✓".green());
-    println!("{}", "  Don't forget to add to your lib.rs or main.rs:".dimmed());
+    println!(
+        "{}",
+        "  Don't forget to add to your lib.rs or main.rs:".dimmed()
+    );
     println!("{}", "    pub mod generated;".cyan());
 
     Ok(())
@@ -134,8 +150,6 @@ pub use utils::*;
 
 fn create_utils_file(path: &std::path::Path) -> Result<()> {
     let content = include_str!("../../assets/utils.rs");
-    fs::write(path, content)
-        .with_context(|| format!("Failed to write {}", path.display()))?;
+    fs::write(path, content).with_context(|| format!("Failed to write {}", path.display()))?;
     Ok(())
 }
-

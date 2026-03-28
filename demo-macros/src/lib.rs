@@ -55,7 +55,7 @@ mod markdown;
 use heck::AsUpperCamelCase;
 use quote::{format_ident, quote};
 use std::fs::read_to_string;
-use syn::{parse_macro_input, LitStr};
+use syn::{LitStr, parse_macro_input};
 
 /// Procedural macro that generates a Leptos component page from markdown documentation.
 ///

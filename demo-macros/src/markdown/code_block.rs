@@ -97,7 +97,9 @@ pub fn token_stream_for_view<'a>(
     //   "Failed to convert stream from string"
     // Better:
     //   "Failed to parse Rust code in markdown: {code}\nError: {error}"
-    let code_raw_stream = code.parse::<TokenStream>().expect("Failed to convert stream from string");
+    let code_raw_stream = code
+        .parse::<TokenStream>()
+        .expect("Failed to convert stream from string");
 
     // Wrap code in a div for container
     // **TODO**: Consider adding classes for styling:

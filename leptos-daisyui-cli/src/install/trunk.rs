@@ -17,7 +17,7 @@ impl TrunkInstaller {
         if Prompt::confirm("Install trunk via cargo install?", true)? {
             println!("Installing trunk...");
             let output = std::process::Command::new("cargo")
-                .args(&["install", "trunk"])
+                .args(["install", "trunk"])
                 .output()
                 .context("Failed to run cargo install trunk")?;
 

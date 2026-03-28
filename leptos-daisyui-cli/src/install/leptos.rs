@@ -28,8 +28,14 @@ impl LeptosInstaller {
         println!("{} leptos not found in dependencies", "!".yellow());
 
         if Prompt::confirm("Add leptos to dependencies?", true)? {
-            println!("{}", "  Please add leptos manually to your Cargo.toml:".dimmed());
-            println!("{}", r#"    leptos = { version = "0.8", features = ["csr"] }"#.cyan());
+            println!(
+                "{}",
+                "  Please add leptos manually to your Cargo.toml:".dimmed()
+            );
+            println!(
+                "{}",
+                r#"    leptos = { version = "0.8", features = ["csr"] }"#.cyan()
+            );
         }
 
         Ok(())

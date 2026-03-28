@@ -44,10 +44,7 @@ impl ComponentGenerator {
     }
 
     /// Write component files to target directory
-    pub fn write_component(
-        component_name: &str,
-        target_dir: &Path,
-    ) -> Result<()> {
+    pub fn write_component(component_name: &str, target_dir: &Path) -> Result<()> {
         let files = Self::get_component_files(component_name)?;
         let component_dir = target_dir.join(component_name);
 

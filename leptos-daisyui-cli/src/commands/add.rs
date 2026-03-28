@@ -32,9 +32,18 @@ pub fn execute(components: Vec<String>, force: bool, _interactive: bool) -> Resu
     println!("{}", "✓ Components added successfully!".bold().green());
     println!();
     println!("Next steps:");
-    println!("  1. Add to your lib.rs or main.rs: {}", "pub mod generated;".cyan());
-    println!("  2. Import components: {}", "use crate::generated::Button;".cyan());
-    println!("  3. Run {} to install CSS dependencies", "npm install".cyan());
+    println!(
+        "  1. Add to your lib.rs or main.rs: {}",
+        "pub mod generated;".cyan()
+    );
+    println!(
+        "  2. Import components: {}",
+        "use crate::generated::Button;".cyan()
+    );
+    println!(
+        "  3. Run {} to install CSS dependencies",
+        "npm install".cyan()
+    );
 
     Ok(())
 }
@@ -98,8 +107,7 @@ fn update_generated_mod(generated_dir: &std::path::Path, component_name: &str) -
     // Add mod and use declarations
     content.push_str(&format!("\n{}\n{}\n", mod_line, use_line));
 
-    fs::write(&mod_rs, content)
-        .with_context(|| format!("Failed to write {}", mod_rs.display()))?;
+    fs::write(&mod_rs, content).with_context(|| format!("Failed to write {}", mod_rs.display()))?;
 
     Ok(())
 }
@@ -157,4 +165,3 @@ fn add_css_classes(
 fn find_input_css(root: &std::path::Path) -> Result<std::path::PathBuf> {
     CssManager::find_input_css_in(root)
 }
-

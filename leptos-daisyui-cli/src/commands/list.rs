@@ -25,21 +25,20 @@ fn detect_installed_components() -> Result<HashSet<String>> {
     let mut installed = HashSet::new();
 
     // Try to detect project and check src/generated
-    if let Ok(current_dir) = env::current_dir() {
-        if let Ok(project) = ProjectDetector::detect(&current_dir) {
-            if let Ok(src_dir) = ProjectDetector::find_main_binary_crate(&project) {
-                let generated_dir = src_dir.join("generated");
+    if let Ok(current_dir) = env::current_dir()
+        && let Ok(project) = ProjectDetector::detect(&current_dir)
+        && let Ok(src_dir) = ProjectDetector::find_main_binary_crate(&project)
+    {
+        let generated_dir = src_dir.join("generated");
 
-                if generated_dir.exists() {
-                    // Read all subdirectories in generated/
-                    if let Ok(entries) = fs::read_dir(&generated_dir) {
-                        for entry in entries.flatten() {
-                            if entry.path().is_dir() {
-                                if let Some(name) = entry.file_name().to_str() {
-                                    installed.insert(name.to_string());
-                                }
-                            }
-                        }
+        if generated_dir.exists() {
+            // Read all subdirectories in generated/
+            if let Ok(entries) = fs::read_dir(&generated_dir) {
+                for entry in entries.flatten() {
+                    if entry.path().is_dir()
+                        && let Some(name) = entry.file_name().to_str()
+                    {
+                        installed.insert(name.to_string());
                     }
                 }
             }
@@ -66,8 +65,7 @@ fn display_all_components(
     println!();
 
     // Group by category
-    let mut by_category: std::collections::HashMap<&str, Vec<_>> =
-        std::collections::HashMap::new();
+    let mut by_category: std::collections::HashMap<&str, Vec<_>> = std::collections::HashMap::new();
     for component in &components {
         by_category
             .entry(&component.category as &str)
@@ -127,8 +125,14 @@ fn display_installed_components(
         println!();
         println!("{}", "No components installed yet.".yellow());
         println!();
-        println!("Run {} to see available components", "leptos-daisyui list --all".cyan());
-        println!("Run {} to add components", "leptos-daisyui add <component>".cyan());
+        println!(
+            "Run {} to see available components",
+            "leptos-daisyui list --all".cyan()
+        );
+        println!(
+            "Run {} to add components",
+            "leptos-daisyui add <component>".cyan()
+        );
         println!();
         return Ok(());
     }
@@ -149,9 +153,11 @@ fn display_installed_components(
     }
 
     println!();
-    println!("{} components installed", installed.len().to_string().bold());
+    println!(
+        "{} components installed",
+        installed.len().to_string().bold()
+    );
     println!();
 
     Ok(())
 }
-

@@ -11,10 +11,10 @@ impl TailwindInstaller {
     pub fn check_installed(project_root: &Path) -> bool {
         let package_json = project_root.join("package.json");
 
-        if package_json.exists() {
-            if let Ok(content) = fs::read_to_string(&package_json) {
-                return content.contains("tailwindcss") && content.contains("daisyui");
-            }
+        if package_json.exists()
+            && let Ok(content) = fs::read_to_string(&package_json)
+        {
+            return content.contains("tailwindcss") && content.contains("daisyui");
         }
 
         false
