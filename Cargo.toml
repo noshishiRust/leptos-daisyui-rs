@@ -1,12 +1,14 @@
-[package]
-name = "leptos-daisyui-rs"
-description = "daisyUI Components for Leptos"
+[workspace]
+members = [
+    "leptos-daisyui-rs",
+    "leptos-daisyui-cli",
+    "demo",
+    "demo-macros",
+]
+resolver = "2"
+
+[workspace.package]
 version = "0.0.4"
 edition = "2024"
 license = "MIT"
-authors = ["noshishiRust <nopenoshishi@gmail.com>"]
-readme = "README.md"
 repository = "https://github.com/noshishiRust/leptos-daisyui-rs"
-
-[dependencies]
-leptos = { version = "0.8" }

@@ -1,0 +1,41 @@
+[package]
+name = "leptos-daisyui-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "CLI tool for leptos-daisyui-rs - simplify component setup and management"
+
+[[bin]]
+name = "leptos-daisyui"
+path = "src/main.rs"
+
+[[bin]]
+name = "test-registry"
+path = "src/bin/test_registry.rs"
+
+[dependencies]
+# CLI framework
+clap = { version = "4", features = ["derive", "cargo"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# User interaction
+inquire = "0.9"
+
+# Error handling
+anyhow = "1"
+thiserror = "2"
+
+# File system and utilities
+which = "8"
+walkdir = "2"
+
+# Terminal output
+colored = "3"
+
+# Component source embedding
+rust-embed = { version = "8", features = ["debug-embed"] }

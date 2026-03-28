@@ -127,7 +127,7 @@ pub fn token_stream_for_view<'a>(node: &'a AstNode<'a>) -> TokenStream {
                             .children()
                             .next()
                             .expect("Not Found Column Header name");
-                        let cell_inline = inline_stream(&cell_text_node);
+                        let cell_inline = inline_stream(cell_text_node);
                         cells_stream.extend(quote! { <TableHeader>#cell_inline</TableHeader> });
                     } else {
                         // **TODO**: Handle non-table-cell nodes
@@ -153,7 +153,7 @@ pub fn token_stream_for_view<'a>(node: &'a AstNode<'a>) -> TokenStream {
 
     // Generate table body from remaining rows
     let mut rows_stream = TokenStream::new();
-    body_rows.into_iter().for_each(|row| {
+    body_rows.iter().for_each(|row| {
         let mut row_stream = TokenStream::new();
 
         let row_data = row.data.borrow();
@@ -168,7 +168,7 @@ pub fn token_stream_for_view<'a>(node: &'a AstNode<'a>) -> TokenStream {
                 if matches!(cell_data.value, NodeValue::TableCell) {
                     // Get first child (should be text or code)
                     let cell_text_node = cell.children().next().expect("Not Found Column value");
-                    let cell_inline = inline_stream(&cell_text_node);
+                    let cell_inline = inline_stream(cell_text_node);
                     row_stream.extend(quote! { <TableCell>#cell_inline</TableCell> });
                 } else {
                     // **TODO**: Handle non-table-cell nodes

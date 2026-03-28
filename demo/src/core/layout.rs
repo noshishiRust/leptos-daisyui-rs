@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use leptos_daisyui_rs::components::*;
 use leptos_icons::Icon;
 use leptos_router::{components::Outlet, hooks::use_location};
-use leptos_use::{breakpoints_tailwind, use_breakpoints, BreakpointsTailwind};
+use leptos_use::{BreakpointsTailwind, breakpoints_tailwind, use_breakpoints};
 
 /// Layout component for the demos
 #[component]

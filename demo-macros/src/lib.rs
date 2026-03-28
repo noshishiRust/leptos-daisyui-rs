@@ -55,7 +55,7 @@ mod markdown;
 use heck::AsUpperCamelCase;
 use quote::{format_ident, quote};
 use std::fs::read_to_string;
-use syn::{parse_macro_input, LitStr};
+use syn::{LitStr, parse_macro_input};
 
 /// Procedural macro that generates a Leptos component page from markdown documentation.
 ///
@@ -103,9 +103,9 @@ pub fn create_demo_component(stream: proc_macro::TokenStream) -> proc_macro::Tok
     let input = parse_macro_input!(stream as LitStr);
     let component = input.value();
 
-    // **TODO**: Make this path configurable. Currently hardcoded relative path assumes
-    // specific crate structure. Should use environment variables or macro attributes.
-    let file = format!("../doc/components/{component}.md");
+    // In a workspace, use the workspace root as base path
+    // proc macro execution happens from workspace root, so use relative path from there
+    let file = format!("doc/components/{component}.md");
 
     // **TODO**: Add proper error handling with custom error types and useful messages.
     // Currently panics with generic message if file not found.

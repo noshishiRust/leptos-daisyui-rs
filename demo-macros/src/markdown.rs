@@ -117,7 +117,7 @@ pub fn markdown_to_token_stream(markdown: &str) -> TokenStream {
     let root_node = parse_document(&arena, markdown, &options);
 
     // Iterate over top-level nodes and convert each to view tokens
-    root_node.children().into_iter().for_each(|node| {
+    root_node.children().for_each(|node| {
         let token = match &node.data.borrow().value {
             // Dispatch to specialized handlers based on node type
             NodeValue::Heading(h) => heading::token_stream_for_view(node, h),
@@ -135,7 +135,7 @@ pub fn markdown_to_token_stream(markdown: &str) -> TokenStream {
 
             // Silently ignore unsupported nodes by generating empty tokens
             // **TODO**: This should probably log a warning at compile time
-            _ => quote! {}
+            _ => quote! {},
         };
 
         view_token_stream.extend(token);
