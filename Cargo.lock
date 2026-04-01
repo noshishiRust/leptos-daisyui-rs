@@ -1674,9 +1674,9 @@ dependencies = [
 
 [[package]]
 name = "leptos_icons"
-version = "0.6.1"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d2b4b2336bb146d3436c72ed885ac17c96164c54e53e8120137e722bf27d99ab"
+checksum = "274959df1a852fc431b03f27d9cd3129fb0f8cca9c8d383e4d668f62543cbec9"
 dependencies = [
  "icondata_core",
  "leptos",
