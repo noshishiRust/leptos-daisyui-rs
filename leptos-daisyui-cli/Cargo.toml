@@ -21,7 +21,7 @@ clap = { version = "4", features = ["derive", "cargo"] }
 # Serialization
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-toml = "0.8"
+toml = "1.1"
 
 # User interaction
 inquire = "0.9"
