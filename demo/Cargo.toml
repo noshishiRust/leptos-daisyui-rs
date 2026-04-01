@@ -12,7 +12,7 @@ leptos_router = "0.8"
 leptos_icons = "0.6.1"
 leptos-use = "0.16.2"
 leptos_meta = "0.8.4"
-icondata = "0.6.0"
+icondata = "0.7.0"
 
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
