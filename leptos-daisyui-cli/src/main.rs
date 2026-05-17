@@ -46,6 +46,16 @@ enum Commands {
         #[arg(short, long)]
         interactive: bool,
     },
+
+    /// Manage CSS @source inline() directives
+    Css {
+        /// Component names to add CSS for
+        components: Vec<String>,
+
+        /// Add CSS for all components
+        #[arg(long)]
+        all: bool,
+    },
 }
 
 fn main() -> anyhow::Result<()> {
@@ -64,6 +74,9 @@ fn main() -> anyhow::Result<()> {
             interactive,
         } => {
             commands::add::execute(components, force, interactive)?;
+        }
+        Commands::Css { components, all } => {
+            commands::css::execute(components, all)?;
         }
     }
 

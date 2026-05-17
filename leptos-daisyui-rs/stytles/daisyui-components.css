@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* === leptos-daisyui-rs @source directives === */
 /* Accordion */
 @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
 /* Alert */

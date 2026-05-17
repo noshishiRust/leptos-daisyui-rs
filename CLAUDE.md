@@ -118,6 +118,24 @@ The library uses Tailwind CSS v4 with daisyUI plugin. CSS classes are inlined us
 
 All daisyUI classes are available in `stytles/daisyui-components.css` for full inclusion.
 
+### CSS Auto-Setup
+
+The library exposes a `css` module (`src/css.rs`) providing programmatic access to `@source inline()` directives:
+
+- `FULL_CSS` — Complete CSS file content (header + all directives)
+- `source_directives_only()` — Directives only, excluding the `@import`/`@plugin` header
+
+The `stytles/daisyui-components.css` file uses a `/* === leptos-daisyui-rs @source directives === */` marker to separate the header from directives. The `source_directives_only()` function locates this marker to split content.
+
+The CLI provides a `css` command for managing directives in user projects:
+
+```bash
+leptos-daisyui css --all          # All components
+leptos-daisyui css button card    # Specific components
+```
+
+**Important**: `@source inline()` is a Tailwind CSS build-time directive. It must be in a CSS file processed by Tailwind at build time. Runtime `<style>` tag injection does NOT work.
+
 ## Documentation System
 
 Component documentation in `doc/components/` follows a structured format:
@@ -149,6 +167,8 @@ When adding a new daisyUI component:
 2. Implement `mod.rs`, `component.rs`, `style.rs` following existing patterns
 3. Export from `src/components/mod.rs`
 4. Add CSS classes to documentation comment
-5. Add markdown documentation in `doc/components/{component_name}.md`
-6. Run `leptosfmt .` to format
-7. Update `README.md` implementation table
+5. Add `@source inline()` directive to `stytles/daisyui-components.css` (after the marker)
+6. Update `component_metadata.json` in the CLI with the new component's CSS classes
+7. Add markdown documentation in `doc/components/{component_name}.md`
+8. Run `leptosfmt .` to format
+9. Update `README.md` implementation table

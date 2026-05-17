@@ -54,8 +54,18 @@ npm install
 # Browse all available components
 leptos-daisyui list --all
 
-# Add one or more components
+# Add one or more components (copies source files + updates CSS)
 leptos-daisyui add button card alert
+```
+
+If you only need CSS directives without copying component source files:
+
+```sh
+# Add CSS for specific components
+leptos-daisyui css button card
+
+# Or add CSS for all components at once
+leptos-daisyui css --all
 ```
 
 #### 4. Register the generated module
@@ -124,7 +134,17 @@ Add CSS classes for each component you use to your `input.css`:
 @source inline("collapse collapse-title collapse-content collapse-arrow collapse-plus collapse-open collapse-close");
 ```
 
-To include all daisyUI classes at once, see [daisyui-components.css](./stytles/daisyui-components.css).
+To include all daisyUI classes at once, use the library's `css` module in your `build.rs`:
+
+```rust,ignore
+// build.rs
+fn main() {
+    let css = leptos_daisyui_rs::css::source_directives_only();
+    std::fs::write("daisyui-classes.css", css).unwrap();
+}
+```
+
+Or see the complete list in [daisyui-components.css](./stytles/daisyui-components.css).
 
 > Note: Including all classes increases CSS bundle size. The `@source inline()` approach is recommended for production.
 

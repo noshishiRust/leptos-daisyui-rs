@@ -85,7 +85,8 @@ fn add_component(
     println!("  {} Updated generated/mod.rs", "✓".green());
 
     // Add CSS classes to input.css
-    add_css_classes(project, metadata)?;
+    let input_css = CssManager::find_input_css_in(project.root())?;
+    CssManager::append_directive(&input_css, &metadata.display_name, &metadata.css_classes)?;
     println!("  {} Added CSS classes to input.css", "✓".green());
 
     Ok(())
@@ -110,58 +111,4 @@ fn update_generated_mod(generated_dir: &std::path::Path, component_name: &str) -
     fs::write(&mod_rs, content).with_context(|| format!("Failed to write {}", mod_rs.display()))?;
 
     Ok(())
-}
-
-fn add_css_classes(
-    project: &crate::project::ProjectStructure,
-    metadata: &crate::component::ComponentMetadata,
-) -> Result<()> {
-    let root = project.root();
-    let input_css = find_input_css(root)?;
-
-    let mut content = fs::read_to_string(&input_css)
-        .with_context(|| format!("Failed to read {}", input_css.display()))?;
-
-    // Define markers
-    let marker_start = "/* === leptos-daisyui-cli managed - do not edit manually === */";
-    let marker_end = "/* === end leptos-daisyui-cli managed === */";
-
-    // Component CSS entry
-    let component_css = format!(
-        "/* {} */\n@source inline(\"{}\");",
-        metadata.display_name, metadata.css_classes
-    );
-
-    // Check if component already added
-    if content.contains(&format!("/* {} */", metadata.display_name)) {
-        return Ok(());
-    }
-
-    // Find managed section
-    if let Some(start_idx) = content.find(marker_start) {
-        if let Some(end_idx) = content.find(marker_end) {
-            // Insert before end marker
-            let insert_pos = end_idx;
-            content.insert_str(insert_pos, &format!("{}\n", component_css));
-        } else {
-            // Start marker exists but no end marker - append after start
-            let insert_pos = start_idx + marker_start.len();
-            content.insert_str(insert_pos, &format!("\n{}\n{}", component_css, marker_end));
-        }
-    } else {
-        // No managed section - create one at the end
-        content.push_str(&format!(
-            "\n{}\n{}\n{}\n",
-            marker_start, component_css, marker_end
-        ));
-    }
-
-    fs::write(&input_css, content)
-        .with_context(|| format!("Failed to write {}", input_css.display()))?;
-
-    Ok(())
-}
-
-fn find_input_css(root: &std::path::Path) -> Result<std::path::PathBuf> {
-    CssManager::find_input_css_in(root)
 }
