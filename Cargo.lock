@@ -364,27 +364,6 @@ dependencies = [
 
 [[package]]
 name = "comrak"
-version = "0.31.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "453dcb42e33f7b474d7e0db12e0b8d82802c88f35cf5a1d8c297d0dfcecb154f"
-dependencies = [
- "bon",
- "caseless",
- "clap",
- "entities",
- "memchr",
- "once_cell",
- "regex",
- "shell-words",
- "slug",
- "syntect",
- "typed-arena",
- "unicode_categories",
- "xdg 2.5.2",
-]
-
-[[package]]
-name = "comrak"
 version = "0.51.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f07383e7799d964bf7ffa6fc4457d177c54a44614661c7458bb0bd91b108e32"
@@ -404,7 +383,7 @@ dependencies = [
  "smallvec",
  "syntect",
  "typed-arena",
- "xdg 3.0.0",
+ "xdg",
 ]
 
 [[package]]
@@ -681,7 +660,7 @@ dependencies = [
 name = "demo-macros"
 version = "0.1.0"
 dependencies = [
- "comrak 0.31.0",
+ "comrak",
  "heck",
  "pastey",
  "proc-macro2",
@@ -730,12 +709,6 @@ dependencies = [
  "rustc_version",
  "syn",
 ]
-
-[[package]]
-name = "deunicode"
-version = "1.6.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "abd57806937c9cc163efc8ea3910e00a62e2aeb0b8119f1793a978088f8f6b04"
 
 [[package]]
 name = "digest"
@@ -1657,7 +1630,7 @@ dependencies = [
 name = "leptos-daisyui-showcase"
 version = "0.1.0"
 dependencies = [
- "comrak 0.51.0",
+ "comrak",
  "console_error_panic_hook",
  "console_log",
  "demo-macros",
@@ -2689,16 +2662,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "slug"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "882a80f72ee45de3cc9a5afeb2da0331d58df69e4e7d8eeb5d3c7784ae67e724"
-dependencies = [
- "deunicode",
- "wasm-bindgen",
-]
-
-[[package]]
 name = "smallvec"
 version = "1.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3050,12 +3013,6 @@ name = "unicode-xid"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853"
-
-[[package]]
-name = "unicode_categories"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "39ec24b3121d976906ece63c9daad25b85969647682eee313cb5779fdd69e14e"
 
 [[package]]
 name = "url"
@@ -3488,12 +3445,6 @@ name = "writeable"
 version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ffae5123b2d3fc086436f8834ae3ab053a283cfac8fe0a0b8eaae044768a4c4"
-
-[[package]]
-name = "xdg"
-version = "2.5.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "213b7324336b53d2414b2db8537e56544d981803139155afa84f76eeebb7a546"
 
 [[package]]
 name = "xdg"

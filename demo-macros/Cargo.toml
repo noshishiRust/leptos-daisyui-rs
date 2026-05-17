@@ -7,9 +7,9 @@ edition = "2024"
 proc-macro = true
 
 [dependencies]
-syn = "2.0.74"
-quote = "1.0.36"
-pastey = "0.2.1"
-proc-macro2 = "1.0.86"
+syn = "2.0.117"
+quote = "1.0.45"
+pastey = "0.2.2"
+proc-macro2 = "1.0.106"
 heck = "0.5"
-comrak = "0.31"
+comrak = "0.51"

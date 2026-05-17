@@ -11,14 +11,14 @@ leptos = { version = "0.8", features = ["csr"] }
 leptos_router = "0.8"
 leptos_icons = "0.7.1"
 leptos-use = "0.18.3"
-leptos_meta = "0.8.4"
+leptos_meta = "0.8.6"
 icondata = "0.7.0"
 
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
-log = "0.4.27"
+log = "0.4.29"
 comrak = "0.51"
-pastey = "0.2.1"
+pastey = "0.2.2"
 syn = { version = "2", features = ["full", "extra-traits"] }
 quote = "1"
 proc-macro2 = "1"
