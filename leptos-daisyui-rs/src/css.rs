@@ -20,6 +20,9 @@
 /// header followed by per-component directives.
 pub const FULL_CSS: &str = include_str!("../stytles/daisyui-components.css");
 
+/// Marker comment that precedes the @source directives in daisyui-components.css.
+const SOURCE_DIRECTIVES_MARKER: &str = "/* === leptos-daisyui-rs @source directives === */";
+
 /// Returns only the per-component `@source inline()` directives,
 /// without the `@import "tailwindcss"` and `@plugin "daisyui"` header.
 ///
@@ -36,13 +39,7 @@ pub const FULL_CSS: &str = include_str!("../stytles/daisyui-components.css");
 /// ```
 pub fn source_directives_only() -> &'static str {
     const FULL: &str = include_str!("../stytles/daisyui-components.css");
-    // The file starts with:
-    //   @import "tailwindcss";     (line 1)
-    //   @plugin "daisyui";         (line 2)
-    //   <blank>                    (line 3)
-    //   /* Accordion */            (line 4)
-    // We return everything from the first component comment onward.
-    match FULL.find("/* Accordion */") {
+    match FULL.find(SOURCE_DIRECTIVES_MARKER) {
         Some(idx) => &FULL[idx..],
         None => FULL,
     }
@@ -75,6 +72,7 @@ mod tests {
     #[test]
     fn source_directives_contains_components() {
         let directives = source_directives_only();
+        assert!(directives.contains(SOURCE_DIRECTIVES_MARKER));
         assert!(directives.contains("/* Accordion */"));
         assert!(directives.contains("@source inline(\"btn"));
         assert!(directives.contains("@source inline(\"card"));
