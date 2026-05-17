@@ -10,3 +10,4 @@ repository = "https://github.com/noshishiRust/leptos-daisyui-rs"
 
 [dependencies]
 leptos = { version = "0.8" }
+web-sys = { version = "0.3", features = ["Window", "Document", "Element", "Storage", "HtmlDialogElement", "HtmlInputElement", "EventTarget", "MouseEvent"] }

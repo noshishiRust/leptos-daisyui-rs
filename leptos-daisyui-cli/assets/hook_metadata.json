@@ -1,0 +1,47 @@
+{
+  "version": "0.0.4",
+  "hooks": [
+    {
+      "name": "theme",
+      "display_name": "ThemeProvider + use_theme",
+      "description": "Global theme state with data-theme and localStorage persistence",
+      "exports": ["ThemeProvider", "use_theme", "ThemeContext"],
+      "depends_on": []
+    },
+    {
+      "name": "toast",
+      "display_name": "ToastProvider + use_toast",
+      "description": "Notification queue with auto-dismiss timers",
+      "exports": ["ToastProvider", "use_toast", "ToastContext", "ToastEntry", "ToastType"],
+      "depends_on": ["toast"]
+    },
+    {
+      "name": "modal",
+      "display_name": "use_modal",
+      "description": "Modal open/close state with dialog element management",
+      "exports": ["use_modal", "ModalState"],
+      "depends_on": ["modal"]
+    },
+    {
+      "name": "toggle",
+      "display_name": "use_toggle",
+      "description": "Boolean toggle state with input element management",
+      "exports": ["use_toggle", "ToggleState"],
+      "depends_on": ["toggle"]
+    },
+    {
+      "name": "validator",
+      "display_name": "use_field",
+      "description": "Form field validation with error state management",
+      "exports": ["use_field", "FieldState", "ValidationFn"],
+      "depends_on": ["validator"]
+    },
+    {
+      "name": "popover",
+      "display_name": "use_popover",
+      "description": "Show/hide state with click-outside detection for dropdowns",
+      "exports": ["use_popover", "PopoverState"],
+      "depends_on": ["dropdown"]
+    }
+  ]
+}

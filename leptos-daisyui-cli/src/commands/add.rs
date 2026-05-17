@@ -1,4 +1,4 @@
-use crate::component::{ComponentGenerator, ComponentRegistry};
+use crate::component::{ComponentGenerator, ComponentRegistry, HookGenerator, HookRegistry};
 use crate::css::CssManager;
 use crate::project::ProjectDetector;
 use anyhow::{Context, Result};
@@ -8,6 +8,7 @@ use std::fs;
 
 pub fn execute(components: Vec<String>, force: bool, _interactive: bool) -> Result<()> {
     let registry = ComponentRegistry::load()?;
+    let hook_registry = HookRegistry::load()?;
     let current_dir = env::current_dir()?;
     let project = ProjectDetector::detect(&current_dir)
         .context("Failed to detect project. Run 'leptos-daisyui init' first.")?;
@@ -23,13 +24,31 @@ pub fn execute(components: Vec<String>, force: bool, _interactive: bool) -> Resu
         );
     }
 
-    // Process each component
-    for component_name in &components {
-        add_component(&registry, &generated_dir, &project, component_name, force)?;
+    // Process each name (could be component or hook)
+    for name in &components {
+        // Try component first, then hook
+        if registry.get(name).is_some() {
+            add_component(&registry, &generated_dir, &project, name, force)?;
+        } else if hook_registry.get(name).is_some() {
+            add_hook(
+                &hook_registry,
+                &registry,
+                &generated_dir,
+                &project,
+                name,
+                force,
+            )?;
+        } else {
+            anyhow::bail!(
+                "'{}' not found as a component or hook. Run '{}' to see available options.",
+                name,
+                "leptos-daisyui list --all".cyan()
+            );
+        }
     }
 
     println!();
-    println!("{}", "✓ Components added successfully!".bold().green());
+    println!("{}", "✓ Added successfully!".bold().green());
     println!();
     println!("Next steps:");
     println!(
@@ -37,8 +56,8 @@ pub fn execute(components: Vec<String>, force: bool, _interactive: bool) -> Resu
         "pub mod generated;".cyan()
     );
     println!(
-        "  2. Import components: {}",
-        "use crate::generated::Button;".cyan()
+        "  2. Import: {}",
+        "use crate::generated::Button; // component".cyan()
     );
     println!(
         "  3. Run {} to install CSS dependencies",
@@ -55,7 +74,6 @@ fn add_component(
     component_name: &str,
     force: bool,
 ) -> Result<()> {
-    // Get component metadata
     let metadata = registry
         .get(component_name)
         .ok_or_else(|| anyhow::anyhow!("Component '{}' not found", component_name))?;
@@ -87,6 +105,103 @@ fn add_component(
     // Add CSS classes to input.css
     add_css_classes(project, metadata)?;
     println!("  {} Added CSS classes to input.css", "✓".green());
+
+    Ok(())
+}
+
+fn add_hook(
+    hook_registry: &HookRegistry,
+    component_registry: &ComponentRegistry,
+    generated_dir: &std::path::Path,
+    project: &crate::project::ProjectStructure,
+    hook_name: &str,
+    force: bool,
+) -> Result<()> {
+    let metadata = hook_registry
+        .get(hook_name)
+        .ok_or_else(|| anyhow::anyhow!("Hook '{}' not found", hook_name))?;
+
+    println!("Adding hook: {}", metadata.display_name.bold());
+
+    // Check if hook file already exists
+    let hook_file = generated_dir.join("hooks").join(format!("{}.rs", metadata.name));
+    if hook_file.exists() && !force {
+        println!(
+            "  {} Hook already exists. Use {} to overwrite.",
+            "!".yellow(),
+            "--force".bold()
+        );
+        return Ok(());
+    }
+
+    // Auto-add dependent components
+    for dep in &metadata.depends_on {
+        if !generated_dir.join(dep).exists() {
+            println!(
+                "  {} Auto-adding dependency: {}",
+                "→".cyan(),
+                dep.bold()
+            );
+            add_component(component_registry, generated_dir, project, dep, false)?;
+        } else {
+            println!("  {} Dependency already installed: {}", "✓".green(), dep);
+        }
+    }
+
+    // Generate hook file
+    HookGenerator::write_hook(&metadata.name, generated_dir)
+        .with_context(|| format!("Failed to generate hook '{}'", metadata.name))?;
+
+    println!("  {} Created hook file", "✓".green());
+
+    // Update generated/hooks/mod.rs
+    update_hooks_mod(generated_dir, &metadata.name)?;
+    // Ensure generated/mod.rs includes hooks module
+    ensure_hooks_in_mod(generated_dir)?;
+    println!("  {} Updated module exports", "✓".green());
+
+    Ok(())
+}
+
+fn update_hooks_mod(generated_dir: &std::path::Path, hook_name: &str) -> Result<()> {
+    let hooks_dir = generated_dir.join("hooks");
+    let mod_rs = hooks_dir.join("mod.rs");
+
+    let mut content = if mod_rs.exists() {
+        fs::read_to_string(&mod_rs).with_context(|| format!("Failed to read {}", mod_rs.display()))?
+    } else {
+        "//! Generated daisyUI hooks\n".to_string()
+    };
+
+    let mod_line = format!("pub mod {};", hook_name);
+    let use_line = format!("pub use {}::*;", hook_name);
+
+    if content.contains(&mod_line) {
+        return Ok(());
+    }
+
+    content.push_str(&format!("\n{}\n{}\n", mod_line, use_line));
+
+    fs::write(&mod_rs, content).with_context(|| format!("Failed to write {}", mod_rs.display()))?;
+
+    Ok(())
+}
+
+fn ensure_hooks_in_mod(generated_dir: &std::path::Path) -> Result<()> {
+    let mod_rs = generated_dir.join("mod.rs");
+    let mut content = fs::read_to_string(&mod_rs)
+        .with_context(|| format!("Failed to read {}", mod_rs.display()))?;
+
+    let hooks_mod = "pub mod hooks;";
+    let hooks_use = "pub use hooks::*;";
+
+    if content.contains(hooks_mod) {
+        return Ok(());
+    }
+
+    content.push_str(&format!("\n{}\n{}\n", hooks_mod, hooks_use));
+
+    fs::write(&mod_rs, content).with_context(|| format!("Failed to write {}", mod_rs.display()))?;
 
     Ok(())
 }
