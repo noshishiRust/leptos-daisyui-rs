@@ -38,15 +38,13 @@
 //! ## Architecture
 //!
 //! 1. **Macro Entry Point**: `create_demo_component!` receives component name as string literal
-//! 2. **File Reading**: Reads markdown from `../doc/components/{name}.md` (relative to compilation dir)
+//! 2. **File Reading**: Uses `CARGO_MANIFEST_DIR` to resolve an absolute path to `doc/components/{name}.md`
 //! 3. **Parsing**: Uses `comrak` to parse markdown into an AST
 //! 4. **Code Generation**: Each AST node type is converted to Leptos view code
 //! 5. **Component Generation**: Wraps everything in a Leptos component function
 //!
 //! ## Limitations
 //!
-//! - **TODO**: Hardcoded relative path `../doc/components/` - should be configurable or use Cargo environment variables
-//! - **TODO**: No error recovery on parse failures - panics with `expect()` calls
 //! - **TODO**: Component naming assumes ASCII input - may break with non-ASCII component names
 //! - **TODO**: No caching mechanism - re-parses markdown on every build
 
@@ -54,7 +52,7 @@ mod markdown;
 
 use heck::AsUpperCamelCase;
 use quote::{format_ident, quote};
-use std::fs::read_to_string;
+use std::path::Path;
 use syn::{LitStr, parse_macro_input};
 
 /// Procedural macro that generates a Leptos component page from markdown documentation.
@@ -83,33 +81,44 @@ use syn::{LitStr, parse_macro_input};
 /// }
 /// ```
 ///
-/// # Panics
+/// # Errors
 ///
-/// - Panics if the markdown file cannot be found at `../doc/components/{name}.md`
+/// - Returns a compile error if the markdown file cannot be found at the resolved path
 /// - Panics if the markdown contains unsupported syntax that causes parsing to fail
 /// - Panics if code blocks contain invalid Rust syntax
 ///
 /// # File Location
 ///
-/// **TODO**: The file path is currently hardcoded as `../doc/components/{name}.md`.
-/// This assumes the macro is invoked from a specific location in the crate structure.
-/// Future versions should:
-/// - Use `CARGO_MANIFEST_DIR` environment variable for path resolution
-/// - Allow path configuration via macro attributes
-/// - Support absolute paths or custom relative paths
+/// The file path is resolved using `CARGO_MANIFEST_DIR` environment variable.
+/// Markdown files are expected at `{CARGO_MANIFEST_DIR}/../doc/components/{name}.md`.
 #[proc_macro]
 pub fn create_demo_component(stream: proc_macro::TokenStream) -> proc_macro::TokenStream {
     // Parse the macro input as a string literal (e.g., "accordion")
     let input = parse_macro_input!(stream as LitStr);
     let component = input.value();
 
-    // In a workspace, use the workspace root as base path
-    // proc macro execution happens from workspace root, so use relative path from there
-    let file = format!("doc/components/{component}.md");
+    // Resolve path deterministically using CARGO_MANIFEST_DIR
+    // demo-macros/ is at workspace root level, doc/ is one directory up
+    let manifest_dir = std::env::var("CARGO_MANIFEST_DIR")
+        .expect("CARGO_MANIFEST_DIR not set");
+    let file = Path::new(&manifest_dir)
+        .join("..")
+        .join("doc")
+        .join("components")
+        .join(format!("{component}.md"));
 
-    // **TODO**: Add proper error handling with custom error types and useful messages.
-    // Currently panics with generic message if file not found.
-    let markdown = read_to_string(file).expect("Failed to read component documentation file");
+    let markdown = match std::fs::read_to_string(&file) {
+        Ok(content) => content,
+        Err(e) => {
+            let msg = format!(
+                "failed to read component documentation file `{}`: {e}",
+                file.display()
+            );
+            return syn::Error::new(input.span(), msg)
+                .to_compile_error()
+                .into();
+        }
+    };
 
     // Parse markdown and convert to Leptos view tokens
     let view_stream = markdown::markdown_to_token_stream(&markdown);
