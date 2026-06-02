@@ -17,7 +17,7 @@ icondata = "0.7.0"
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
 log = "0.4.29"
-comrak = "0.51"
+comrak = "0.52"
 pastey = "0.2.2"
 syn = { version = "2", features = ["full", "extra-traits"] }
 quote = "1"
