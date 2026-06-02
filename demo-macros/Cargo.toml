@@ -9,7 +9,7 @@ proc-macro = true
 [dependencies]
 syn = "2.0.117"
 quote = "1.0.45"
-pastey = "0.2.2"
+pastey = "0.2.3"
 proc-macro2 = "1.0.106"
 heck = "0.5"
 comrak = "0.51"
